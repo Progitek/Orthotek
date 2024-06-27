@@ -1,0 +1,61 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_srvmultitable.sru
+$PBExportComments$(PRO) DataWindow Property - The Multitable service tabpage
+forward
+global type pro_u_tabpg_dwproperty_srvmultitable from pfc_u_tabpg_dwproperty_srvmultitable
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_srvmultitable from pfc_u_tabpg_dwproperty_srvmultitable
+end type
+global pro_u_tabpg_dwproperty_srvmultitable pro_u_tabpg_dwproperty_srvmultitable
+
+on pro_u_tabpg_dwproperty_srvmultitable.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_srvmultitable.destroy
+call super::destroy
+end on
+
+type ddlb_table from pfc_u_tabpg_dwproperty_srvmultitable`ddlb_table within pro_u_tabpg_dwproperty_srvmultitable
+end type
+
+type st_table from pfc_u_tabpg_dwproperty_srvmultitable`st_table within pro_u_tabpg_dwproperty_srvmultitable
+end type
+
+type lb_keycolumns from pfc_u_tabpg_dwproperty_srvmultitable`lb_keycolumns within pro_u_tabpg_dwproperty_srvmultitable
+end type
+
+type st_keycolumns from pfc_u_tabpg_dwproperty_srvmultitable`st_keycolumns within pro_u_tabpg_dwproperty_srvmultitable
+end type
+
+type lb_updatecolumns from pfc_u_tabpg_dwproperty_srvmultitable`lb_updatecolumns within pro_u_tabpg_dwproperty_srvmultitable
+end type
+
+type st_updatecolumns from pfc_u_tabpg_dwproperty_srvmultitable`st_updatecolumns within pro_u_tabpg_dwproperty_srvmultitable
+end type
+
+type cbx_register from pfc_u_tabpg_dwproperty_srvmultitable`cbx_register within pro_u_tabpg_dwproperty_srvmultitable
+end type
+
+type rb_wherekey from pfc_u_tabpg_dwproperty_srvmultitable`rb_wherekey within pro_u_tabpg_dwproperty_srvmultitable
+end type
+
+type rb_wherekeyandupd from pfc_u_tabpg_dwproperty_srvmultitable`rb_wherekeyandupd within pro_u_tabpg_dwproperty_srvmultitable
+end type
+
+type rb_wherekeyandmod from pfc_u_tabpg_dwproperty_srvmultitable`rb_wherekeyandmod within pro_u_tabpg_dwproperty_srvmultitable
+end type
+
+type rb_keydelthenins from pfc_u_tabpg_dwproperty_srvmultitable`rb_keydelthenins within pro_u_tabpg_dwproperty_srvmultitable
+end type
+
+type rb_keyupdate from pfc_u_tabpg_dwproperty_srvmultitable`rb_keyupdate within pro_u_tabpg_dwproperty_srvmultitable
+end type
+
+type gb_1 from pfc_u_tabpg_dwproperty_srvmultitable`gb_1 within pro_u_tabpg_dwproperty_srvmultitable
+end type
+
+type gb_2 from pfc_u_tabpg_dwproperty_srvmultitable`gb_2 within pro_u_tabpg_dwproperty_srvmultitable
+end type
+

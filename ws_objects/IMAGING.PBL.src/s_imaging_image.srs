@@ -1,0 +1,16 @@
+﻿$PBExportHeader$s_imaging_image.srs
+global type s_imaging_image from structure
+	string		front_smile
+	string		lateral
+	string		frontal
+	string		leftoccl
+	string		rightoccl
+	string		anterioroccl
+	string		upperoccl
+	string		loweroccl
+	string		xray3_1
+	string		logo
+	string		imagesupp
+	string		xray3_2
+end type
+

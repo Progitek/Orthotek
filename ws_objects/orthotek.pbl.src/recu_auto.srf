@@ -1,0 +1,158 @@
+﻿$PBExportHeader$recu_auto.srf
+global type recu_auto from function_object
+end type
+
+forward prototypes
+global subroutine recu_auto (date a_datedebutrecu, date a_datefinrecu)
+end prototypes
+
+global subroutine recu_auto (date a_datedebutrecu, date a_datefinrecu);long v_paiement_id, nb_row, i, v_print, ll_chquespost_id
+int li_recutype
+
+//printsetup()
+SetPointer(HourGlass!)
+select recuimpnue into :li_recutype from t_options where ortho_id = :v_no_ortho;
+datastore ds_recutot
+ds_recutot = create datastore
+
+choose case li_recutype
+	case 1
+		ds_recutot.dataobject = "d_recunueimptot"
+	case 2
+		ds_recutot.dataobject = "d_recuimptot"
+	case else
+		ds_recutot.dataobject = "d_recuimptot"
+end choose
+ds_recutot.SetTransObject(SQLCA)
+// recuparortho = 1 filtre
+ds_recutot.retrieve(v_no_ortho,a_datedebutrecu,a_datefinrecu)
+nb_row = ds_recutot.rowcount()
+if nb_row > 0 then
+	SetPointer(HourGlass!)
+	for i = 1 to nb_row
+		ds_recutot.setitem(i,'paiement_recu','1')
+	next
+	if li_recutype = 2 then
+		// Début - Format Orthocom pour Sheldon
+		
+		long j, ll_traitid, ll_patid, ll_idcont, ll_job, ll_paieid
+		string ls_langue
+		n_ds ds_invoice
+		
+		ds_invoice = create n_ds
+		ds_invoice.dataobject = 'd_invoice'
+		ds_invoice.setTransObject(SQLCA)
+		
+		gb_imp = false
+		gb_datawindow = false
+		openwithparm(w_print_options,ds_invoice)
+
+		if isvalid(ds_invoice) then
+			ll_job = PrintOpen("Receipt")
+			
+			for j = 1 to ds_recutot.rowcount()
+				ll_paieid = ds_recutot.getItemNumber(j,'paiement_paiement_id')
+				ls_langue = ds_recutot.getItemString(j,'patient_langue')
+				ll_patid = ds_recutot.getItemNumber(j,'patient_patient_id')
+				ll_idcont = ds_recutot.getItemNumber(j,'paiement_id_contact')
+				select traitement_patient_id into :ll_traitid from paiement where paiement_id = :ll_paieid;
+				gf_recuautoimporthocom(ds_invoice,ll_traitid,ls_langue,ll_patid,ll_idcont,a_datedebutrecu,a_datefinrecu,false)
+				Printdatawindow(ll_job,ds_invoice)
+			next
+			
+			PrintClose(ll_job)
+		end if
+
+		destroy ds_invoice
+		
+		// Fin - Format Orthocom pour Sheldon
+	else
+		gb_datawindow = false
+		openwithparm(w_print_options,ds_recutot)
+	end if
+	
+	if error_type(205) = 1 then
+		if ds_recutot.update() = 1 then
+			commit using SQLCA;
+		else
+			error_type(50)
+			rollback using SQLCA;
+		end if
+	end if
+end if
+destroy ds_recutot
+/***********************************************************/
+datastore ds_recuposttot
+ds_recuposttot = create datastore
+
+choose case li_recutype
+	case 1
+		ds_recuposttot.dataobject = "d_recunueposttot"
+	case 2
+		ds_recuposttot.dataobject = "d_recuposttot"
+	case else
+		ds_recuposttot.dataobject = "d_recuposttot"
+end choose
+
+ds_recuposttot.SetTransObject(SQLCA)
+// recuparortho = 1 filtre
+ds_recuposttot.retrieve(v_no_ortho,a_datedebutrecu, a_datefinrecu)
+nb_row = ds_recuposttot.rowcount()
+	if nb_row > 0 then
+		SetPointer(HourGlass!)
+		for i = 1 to nb_row
+			ds_recuposttot.setitem(i,'cheques_postdates_recu','1')
+		next
+		
+		if li_recutype = 2 then
+			// Début - Format Orthocom pour Sheldon
+			
+			setnull(j)
+			
+			ds_invoice = create n_ds
+			ds_invoice.dataobject = 'd_invoice'
+			ds_invoice.setTransObject(SQLCA)
+			
+			gb_imp = false
+			gb_datawindow = false
+			openwithparm(w_print_options,ds_invoice)
+	
+			if isvalid(ds_invoice) then
+				ll_job = PrintOpen("Postdated Receipt")
+				
+				for j = 1 to ds_recuposttot.rowcount()
+					ll_paieid = ds_recuposttot.getItemNumber(j,'cheques_postdates_cheques_postdates_id')
+					ls_langue = ds_recuposttot.getItemString(j,'patient_langue')
+					ll_patid = ds_recuposttot.getItemNumber(j,'patient_patient_id')
+					ll_idcont = ds_recuposttot.getItemNumber(j,'cheques_postdates_id_contact')
+					select traitement_patient_id into :ll_traitid from cheques_postdates where cheques_postdates_id = :ll_paieid;
+					gf_recuautoimporthocom(ds_invoice,ll_traitid,ls_langue,ll_patid,ll_idcont,a_datedebutrecu,a_datefinrecu,false)
+					Printdatawindow(ll_job,ds_invoice)
+				next
+				
+				PrintClose(ll_job)
+			end if
+	
+			destroy ds_invoice
+			
+			// Fin - Format Orthocom pour Sheldon
+			
+		else
+			gb_datawindow = false
+			openwithparm(w_print_options,ds_recuposttot)
+		end if
+		if error_type(209) = 1 then
+			if ds_recuposttot.update() = 1 then
+				commit;
+			else
+				error_type(50)
+				rollback;
+			end if
+		end if
+	end if
+destroy ds_recuposttot
+
+
+
+end subroutine
+

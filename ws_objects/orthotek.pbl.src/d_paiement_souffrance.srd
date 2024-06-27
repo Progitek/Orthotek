@@ -1,0 +1,54 @@
+﻿$PBExportHeader$d_paiement_souffrance.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="Payment due report" print.orientation = 0 print.margin.left = 0 print.margin.right = 0 print.margin.top = 0 print.margin.bottom = 0 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=416 color="536870912" )
+summary(height=164 color="536870912" )
+footer(height=60 color="536870912" )
+detail(height=96 color="536870912" )
+table(column=(type=char(50) updatewhereclause=yes name=patient_nom dbname="patient.patient_nom" dbalias=".patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_prenom dbname="patient.patient_prenom" dbalias=".patient_prenom" )
+ column=(type=char(100) updatewhereclause=yes name=dr_nom_complet dbname="ortho_id.dr_nom_complet" dbalias=".dr_nom_complet" )
+ column=(type=long updatewhereclause=yes identity=yes name=trait dbname="traitements.trait" dbalias=".trait" )
+ column=(type=decimal(2) updatewhereclause=yes name=montantpaye dbname="montantpaye" )
+ column=(type=decimal(2) updatewhereclause=yes name=montantfacture dbname="montantfacture" )
+ retrieve="SELECT  patient.patient_nom ,
+        patient.patient_prenom ,
+        ortho_id.dr_nom_complet ,
+        traitements.traitement_id as trait ,
+        (select isnull(sum(isnull(montant_recu,0)),0) FROM paiement WHERE traitement_patient_id = trait) as montantpaye,
+        (select isnull(sum(isnull(montant,0)),0) FROM factures_traitements WHERE traitement_id = trait and date_facture <= today())as montantfacture   
+FROM    ortho_id INNER JOIN patient ON ortho_id.ortho_id = patient.no_ortho
+	              INNER JOIN traitements ON patient.patient_id = traitements.patient_id
+
+WHERE   ortho_id.ortho_id = :ra_orthoid AND 
+	     (isnull(montantfacture,0) - isnull(montantpaye,0)) > 0
+ORDER BY patient.patient_nom          ASC,
+	      patient.patient_prenom       ASC" arguments=(("ra_orthoid", number)) )
+text(band=header alignment="2" text="Rapport de paiement en souffrance" border="0" color="0" x="46" y="0" height="80" width="3099" html.valueishtml="0"  name=t_titre visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=3 alignment="2" tabsequence=32766 border="0" color="0" x="46" y="100" height="76" width="3099" format="[general]" html.valueishtml="0"  name=dr_nom_complet visible="1" edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Montant facturé" border="0" color="0" x="1614" y="316" height="88" width="411" html.valueishtml="0"  name=t_montantfact visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Montant payé" border="0" color="0" x="2158" y="316" height="88" width="411" html.valueishtml="0"  name=t_montantpaye visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Montant dû" border="0" color="0" x="2715" y="312" height="88" width="411" html.valueishtml="0"  name=t_montantdu visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Nom" border="0" color="0" x="46" y="316" height="88" width="1495" html.valueishtml="0"  name=t_nom visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="9" y1="412" x2="3168" y2="412"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=detail alignment="1" expression=" montantfacture - montantpaye "border="0" color="0" x="2715" y="12" height="76" width="411" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=montant_du visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="0" x="2158" y="12" height="76" width="411" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=montantpaye visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="0" x="1614" y="12" height="76" width="411" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=montantfacture visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" patient_nom + ' ' + patient_prenom "border="0" color="0" x="50" y="8" height="76" width="1495" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum( montantfacture - montantpaye  for all)"border="0" color="0" x="2606" y="28" height="76" width="521" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(montantpaye for all)"border="0" color="0" x="2053" y="28" height="76" width="517" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(montantfacture for all)"border="0" color="0" x="1545" y="28" height="76" width="480" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="1573" y1="8" x2="3141" y2="8"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2441" y="4" height="56" width="686" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="279" y="4" height="56" width="343" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Imprimé le" border="0" color="0" x="23" y="4" height="56" width="247" html.valueishtml="0"  name=t_printedon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

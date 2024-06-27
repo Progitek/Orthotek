@@ -1,0 +1,59 @@
+﻿$PBExportHeader$recupaiementimpfr.srf
+global type recupaiementimpfr from function_object
+end type
+
+forward prototypes
+global subroutine recupaiementimpfr ()
+end prototypes
+
+global subroutine recupaiementimpfr ();/*ds_recu_auto_rapport = create datastore
+ds_recu_auto_rapport.dataobject = "d_recu_auto_rapport"
+ds_recu_auto_rapport.SetTransObject(SQLCA)
+do while test = 0
+//if error_type(204) = 1 then
+	ds_recu_auto.retrieve(a_datefinrecu,a_datedebutrecu)
+	nb_row = ds_recu_auto.rowcount()
+	if nb_row > 0 then
+		printsetup()
+		for i = 1 to nb_row
+			v_paiement_id = ds_recu_auto.getitemnumber(i,"paiement_paiement_id")
+			ds_recu_auto_rapport.retrieve(v_paiement_id)
+			ldt_date = ds_recu_auto_rapport.getitemdate(ds_recu_auto_rapport.getrow(),"paiement_date_paiement")
+			ls_date = datefr(ldt_date)
+			ds_recu_auto_rapport.object.t_date1.text = ls_date
+			ds_recu_auto_rapport.object.t_date2.text = ls_date
+			ds_recu_auto_rapport.object.t_date3.text = ls_date
+			/*
+			ds_recu_auto_rapport.object.rr_1.visible = true
+			ds_recu_auto_rapport.object.t_date1.visible = true
+			ds_recu_auto_rapport.object.rr_5.visible = true
+			ds_recu_auto_rapport.object.t_recu1.visible = true
+			ds_recu_auto_rapport.object.paiement_paiement_id.visible = true
+			debut = ds_recu_auto_rapport.getitemdate(ds_recu_auto_rapport.getrow(),"paiement_date_paiement")
+			somme = ds_recu_auto_rapport.getitemnumber(ds_recu_auto_rapport.getrow(),"paiement_montant_recu")
+			ls_date = datefr(debut)
+			ds_recu_auto_rapport.object.t_date1.text = ls_date
+			ds_recu_auto_rapport.object.t_date2.text = ls_date
+			ds_recu_auto_rapport.object.t_date3.text = ls_date
+			ds_recu_auto_rapport.setitem(ds_recu_auto_rapport.getrow(),"paiement_somme_recu",somme)
+			*/
+			v_print = ds_recu_auto_rapport.print()
+			if v_print <> 1 then
+				error_type(52)
+			else
+				ds_recu_auto.setitem(i,'paiement_recu','1')
+			end if
+		next
+//		if error_type(205) = 1 then
+			
+		test = 1
+//		end if
+	else
+		test = 1
+	end if
+//	else
+		test = 1
+//end if
+loop*/
+end subroutine
+

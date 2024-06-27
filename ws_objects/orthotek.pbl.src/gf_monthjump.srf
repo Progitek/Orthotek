@@ -1,0 +1,31 @@
+﻿$PBExportHeader$gf_monthjump.srf
+global type gf_monthjump from function_object
+end type
+
+forward prototypes
+global function date gf_monthjump (date ad_date, integer ai_jump)
+end prototypes
+
+global function date gf_monthjump (date ad_date, integer ai_jump);integer jour,jour1,mois,annee
+date ldt_date
+
+jour1 = day(ad_date)
+annee = year(ad_date)
+mois = month(ad_date) + ai_jump
+
+do while (mois / 12) > 1 or (mois / 12) <= 0
+	if (mois / 12) > 1 then
+		annee = annee + 1
+		mois = mois - 12
+	else
+		annee = annee - 1
+		mois = mois + 12
+	end if
+loop
+
+jour = correction_jour(jour1,mois,annee)
+ldt_date = date(annee,mois,jour)
+
+return ldt_date
+end function
+

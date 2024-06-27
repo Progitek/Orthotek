@@ -1,0 +1,41 @@
+﻿$PBExportHeader$d_plantrait1save.srd
+release 11.5;
+datawindow(units=0 timer_interval=0 color=67108864 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=68 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" height.autosize=yes )
+table(column=(type=char(32766) update=yes updatewhereclause=yes name=description dbname="t_plantrait.description" )
+ column=(type=number update=yes updatewhereclause=yes name=present dbname="t_plantrait.present" values="	1/	0" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=id_plan dbname="t_plantrait.id_plan" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=patient_id dbname="t_plantrait.patient_id" )
+ column=(type=date update=yes updatewhereclause=yes name=t_plantrait_dateplan dbname="t_plantrait.dateplan" )
+ column=(type=time update=yes updatewhereclause=yes name=t_plantrait_heureplan dbname="t_plantrait.heureplan" )
+ column=(type=long update=yes updatewhereclause=yes name=t_plantrait_id_introconcl1 dbname="t_plantrait.id_introconcl1" )
+ column=(type=long update=yes updatewhereclause=yes name=t_plantrait_id_introconcl2 dbname="t_plantrait.id_introconcl2" )
+ retrieve="  SELECT t_plantrait.description,   
+         t_plantrait.present,   
+         t_plantrait.id_plan,   
+         t_plantrait.patient_id,
+         t_plantrait.dateplan,
+         t_plantrait.heureplan,
+         t_plantrait.id_introconcl1,
+         t_plantrait.id_introconcl2
+    FROM t_plantrait INNER JOIN t_plans ON t_plantrait.id_plan = t_plans.id_plan
+	WHERE t_plantrait.patient_id = :ra_patid and
+         t_plans.id_catplan = :ra_plan
+ORDER BY t_plans.ordre ASC" update="t_plantrait" updatewhere=0 updatekeyinplace=no arguments=(("ra_patid", number),("ra_plan", number)) )
+column(band=detail id=2 alignment="2" tabsequence=10 border="0" color="33554432" x="9" y="0" height="64" width="142" format="[general]" html.valueishtml="0"  name=present visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif ( present = 1 , rgb ( 150,150,255 ) , rgb(255, 255, 255) )" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="155" y="0" height="64" width="1815" format="[general]" html.valueishtml="0"  name=id_plan visible="1" height.autosize=yes dddw.name=dddw_plans dddw.displaycolumn=descrip dddw.datacolumn=id_plan dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif (  present = 1 , rgb ( 150,150,255 ) , rgb ( 255,255,255 ) )" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=1 alignment="0" tabsequence=20 border="0" color="33554432" x="1975" y="0" height="64" width="1600" format="[general]" html.valueishtml="0"  name=description visible="1" height.autosize=yes edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.nilisnull=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif (  present = 1 , rgb ( 150,150,255 ) , rgb ( 255,255,255 ) )" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

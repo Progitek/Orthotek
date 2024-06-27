@@ -1,0 +1,49 @@
+﻿$PBExportHeader$d_cpd_sommaire.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=100 color="536870912" )
+summary(height=84 color="536870912" )
+footer(height=72 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=date updatewhereclause=yes name=date_cheque dbname="cheques_postdates.date_cheque" dbalias=".date_cheque" )
+ column=(type=decimal(2) updatewhereclause=yes name=paiement dbname="cheques_postdates.paiement" dbalias=".paiement" )
+ column=(type=char(1) updatewhereclause=yes name=indicateur dbname="cheques_postdates.indicateur" dbalias=".indicateur" values="	1/	0" )
+ column=(type=char(1) updatewhereclause=yes name=recu dbname="cheques_postdates.recu" dbalias=".recu" values="	1/	0" )
+ column=(type=char(20) updatewhereclause=yes name=modalite dbname="cheques_postdates.modalite" dbalias=".modalite" )
+ column=(type=long updatewhereclause=yes name=id_contact dbname="cheques_postdates.id_contact" dbalias=".id_contact" )
+ retrieve="  SELECT cheques_postdates.date_cheque,   
+         cheques_postdates.paiement,   
+         cheques_postdates.indicateur,   
+         cheques_postdates.recu,
+			cheques_postdates.modalite,
+			cheques_postdates.id_contact
+    FROM cheques_postdates  
+   WHERE cheques_postdates.traitement_patient_id = :ra_traitement_id AND
+			(cheques_postdates.indicateur <> 1 or cheques_postdates.indicateur is null)
+ORDER BY cheques_postdates.date_cheque ASC   
+" arguments=(("ra_traitement_id", number)) )
+text(band=header alignment="2" text="Date" border="0" color="0" x="0" y="0" height="64" width="343" html.valueishtml="0"  name=date_facture_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+rectangle(band=header x="0" y="72" height="4" width="3177"  name=r_1 visible="1" brush.hatch="6" brush.color="0" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+text(band=header alignment="2" text="Reçu" border="0" color="0" x="969" y="0" height="64" width="215" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Ind" border="0" color="0" x="750" y="0" height="64" width="215" html.valueishtml="0"  name=status_id_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Montant" border="0" color="0" x="343" y="0" height="64" width="343" html.valueishtml="0"  name=montant_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="0" color="0~tif(currentrow()=getrow(),rgb(50,50,255), if (  indicateur = '1' , rgb(0,0,255), rgb(0,0,0) ) )" x="0" y="4" height="68" width="343" format="[general]" html.valueishtml="0"  name=date_cheque visible="1" editmask.mask="[date]" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0~tif(currentrow()=getrow(),rgb(50,50,255), if (  indicateur = '1' , rgb(0,0,255), rgb(0,0,0) ) )" x="343" y="4" height="68" width="837" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=paiement visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0~tif(currentrow()=getrow(),rgb(50,50,255), if (  indicateur = '1' , rgb(0,0,255), rgb(0,0,0) ) )" x="832" y="4" height="52" width="59" format="[general]" html.valueishtml="0"  name=indicateur visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0~tif(currentrow()=getrow(),rgb(50,50,255), if (  indicateur = '1' , rgb(0,0,255), rgb(0,0,0) ) )" x="1047" y="4" height="48" width="55" format="[general]" html.valueishtml="0"  name=recu visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0~tif(currentrow()=getrow(),rgb(50,50,255), if (  indicateur = '1' , rgb(0,0,255), rgb(0,0,0) ) )" x="1179" y="4" height="68" width="704" format="[general]" html.valueishtml="0"  name=modalite visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+rectangle(band=footer x="0" y="0" height="4" width="3177"  name=r_2 visible="1" brush.hatch="6" brush.color="0" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+text(band=footer alignment="2" text="Total:" border="0" color="0" x="0" y="8" height="64" width="384" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="80269524" )
+text(band=footer alignment="2" text="Qte:" border="0" color="0" x="901" y="8" height="64" width="288" html.valueishtml="0"  name=t_qte visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="80269524" )
+compute(band=footer alignment="1" expression=" sum(  paiement for all) "border="0" color="0" x="384" y="8" height="76" width="498" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="80269524" )
+compute(band=footer alignment="1" expression="count(paiement for all)"border="0" color="0" x="1193" y="8" height="68" width="201" format="" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

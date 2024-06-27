@@ -1,0 +1,66 @@
+﻿$PBExportHeader$d_cincoutreg.srd
+release 11.5;
+datawindow(units=0 timer_interval=0 color=15780518 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=192 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=long updatewhereclause=yes name=patient_id dbname="t_rdv.patient_id" dbalias=".patient_id" )
+ column=(type=char(102) updatewhereclause=yes name=nom dbname="nom" )
+ column=(type=time updatewhereclause=yes name=heure dbname="t_rdv.rdvheure" dbalias=".rdvheure" )
+ column=(type=long updatewhereclause=yes name=duree dbname="t_rdv.duree" dbalias=".duree" )
+ column=(type=char(40) updatewhereclause=yes name=traitement dbname="type_de_traitement.nom_traitement" dbalias=".nom_traitement" )
+ column=(type=long updatewhereclause=yes name=id_personnel dbname="t_rdv.id_personnel" dbalias=".id_personnel" )
+ column=(type=long updatewhereclause=yes name=chaise dbname="t_rdv.colonne" dbalias=".colonne" )
+ column=(type=datetime updatewhereclause=yes name=heuremanque dbname="heuremanque" )
+ column=(type=datetime updatewhereclause=yes name=heureretard dbname="heureretard" )
+ column=(type=char(1) updatewhereclause=yes name=flags dbname="flags" )
+ column=(type=datetime updatewhereclause=yes name=rdvdt dbname="rdvdt" )
+ column=(type=decimal(0) updatewhereclause=yes name=person_personid dbname="person.personid" dbalias=".personid" )
+ retrieve="SELECT 	t_rdv.patient_id,
+			patient.patient_nom || ', ' || patient.patient_prenom as nom,
+			t_rdv.rdvheure,
+			t_rdv.duree,
+			type_de_traitement.nom_traitement,
+			t_rdv.id_personnel,
+			t_rdv.colonne,
+	      seconds(now(),temporvm * -60) as heuremanque,
+         seconds(now(),temporet * -60) as heureretard,
+         if rdvdt < heuremanque then
+				'm'
+			else if rdvdt < heureretard then
+				'l'
+			else if rdvdt < seconds(now(), 300) then
+ 				'o'
+ 			else
+				'e'
+ 			endif endif endif as flags,
+			datetime(dateformat(t_rdv.rdvdate,'yyyy-mm-dd ') || dateformat(t_rdv.rdvheure,'hh:nn:ss')) as rdvdt,
+			PERSON.PERSONID
+FROM 		t_rdv INNER JOIN patient ON t_rdv.patient_id = patient.patient_id
+					INNER JOIN type_de_traitement ON type_de_traitement.type_traitement_id = t_rdv.typetraitid and type_de_traitement.ortho_id = (select horshareid from t_options where ortho_id = t_rdv.ortho_id)
+                    INNER JOIN t_options ON t_rdv.ortho_id = t_options.ortho_id
+					LEFT OUTER JOIN PERSON ON patient.patient_id = PERSON.IDPATIENT
+WHERE 	t_rdv.rdvdate = today() and
+         t_rdv.rdvheure >= :ra_heure and
+			(t_rdv.ortho_id = :ra_orthoid or :ra_orthoid is null) and
+			t_rdv.heurearr is null and
+			isnull(t_rdv.rdvetat,'') not in ('m','c') and
+			isnull(type_de_traitement.cincouthide,0) = 0
+ORDER BY t_rdv.rdvheure ASC" arguments=(("ra_heure", time),("ra_orthoid", number)) )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432~tcase(flags when 'm' then rgb(255, 0, 0) when 'o' then rgb(224, 224, 0) else rgb(0, 128, 0))" x="539" y="4" height="180" width="2299" format="[general]" html.valueishtml="0"  name=nom visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-20" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="114" y="4" height="180" width="329" format="[time]" html.valueishtml="0"  name=heure visible="1" editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-20" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="-" border="0" color="0" x="466" y="4" height="180" width="50" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-20" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+bitmap(band=detail filename="C:\ii4net\orthotek\images\bioPluginico.bmp" x="3479" y="36" height="120" width="137" border="0" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0"  name=p_1 visible="1~tif(isNull( person_personid ), 0, 1)" transparency="0" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="33554432" x="1157" y="420" height="132" width="302" format="[general]" html.valueishtml="0"  name=person_personid visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-20" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

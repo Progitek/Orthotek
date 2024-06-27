@@ -1,0 +1,9 @@
+﻿$PBExportHeader$s_logoninfo.srs
+global type s_logoninfo from structure
+	unsignedlong		structsize
+	string		servername
+	string		databasename
+	string		userid
+	string		password
+end type
+

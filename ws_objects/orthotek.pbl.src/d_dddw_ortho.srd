@@ -1,0 +1,16 @@
+﻿$PBExportHeader$d_dddw_ortho.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=88 color="536870912" )
+table(column=(type=char(30) updatewhereclause=yes name=dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=long updatewhereclause=yes key=yes identity=yes name=ortho_id dbname="ortho_id.ortho_id" )
+ retrieve="SELECT  ~"ortho_id~".~"dr_nom_complet~" ,
+           ~"ortho_id~".~"ortho_id~"     
+        FROM ~"ortho_id~"    " update="ortho_id" updatewhere=0 updatekeyinplace=no )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="2793" y="16" height="64" width="1202" format="[General]"  name=ortho_id edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=0 border="0" color="0" x="3995" y="0" height="64" width="809"  name=dr_nom_complet  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=0 border="0" color="0" x="14" y="4" height="76" width="1001"  name=dr_nom_complet_1  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

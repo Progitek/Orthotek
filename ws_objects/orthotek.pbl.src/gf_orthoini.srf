@@ -1,0 +1,65 @@
+﻿$PBExportHeader$gf_orthoini.srf
+global type gf_orthoini from function_object
+end type
+
+forward prototypes
+global function string gf_orthoini (string as_section, string as_key, string as_wrtdft, boolean ab_write)
+end prototypes
+
+global function string gf_orthoini (string as_section, string as_key, string as_wrtdft, boolean ab_write);///////////////////////////////////////////////////////
+//
+// Créé par: Eric Vezina ing
+// Date: 4 décembre 2004
+// Modifié par: Sébastien Tremblay
+// Date: 2007-02-27
+// Description: Le fichier ortho.ini est situé ds le répertoire orthotek.
+// les informations sont séparés par des espaces.
+// Informations: 1) numero de serie unique du poste sur le reseau.
+//
+///////////////////////////////////////////////////////
+
+//integer li_fnum, li_bytes, li_len
+//string ls_rw,ls_text, ls_info
+
+// lecture du fichier
+//li_fnum = FileOpen("C:\ii4net\orthotek\ortho.ini",LineMode!,Read!,Shared!,Replace!)
+//li_bytes = FileRead(li_fnum, ls_text)
+
+// memoriser les positions
+//li_len = len(ls_text)
+
+// Si le fichier ini n'existe pas, on le crée
+if not fileExists(gnv_app.of_getAppIniFile()) then
+	integer li_file
+	
+	li_file = fileOpen(gnv_app.of_getAppIniFile(), LineMode!, Write!, LockReadWrite!, Replace!)
+	if li_file = -1 then
+		error_type(67)
+		return ""
+	end if
+	fileClose(li_file)
+end if
+
+if ab_write then
+	setProfileString(gnv_app.of_getAppIniFile(), as_section, as_key, as_wrtdft)
+	return ""
+else
+	return ProfileString(gnv_app.of_getAppIniFile(), as_section, as_key, as_wrtdft)
+end if
+
+// algo r/w
+//choose case as_section
+//	case 'printer'
+//		if ls_rw = 'r' then
+//			li_bytes = FileRead(li_fnum, ls_text)
+//			ls_info = mid(ls_text,0,li_len)
+////			messagebox('ls_text',ls_info)
+//		elseif ls_rw = 'w' then
+//			FileWrite(li_fnum, as_write)
+//		end if
+//end choose
+//FileClose(li_fnum)
+//return ls_text
+
+end function
+

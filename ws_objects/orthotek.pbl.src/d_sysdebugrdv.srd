@@ -1,0 +1,195 @@
+﻿$PBExportHeader$d_sysdebugrdv.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=1 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no grid.lines=0 )
+header(height=72 color="536870912" )
+summary(height=92 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=date updatewhereclause=yes name=datecal dbname="horaire.datecal" )
+ column=(type=time updatewhereclause=yes name=heure dbname="horaire.heure" )
+ column=(type=long updatewhereclause=yes name=patient_id_1 dbname="horaire.patient_id_1" )
+ column=(type=long updatewhereclause=yes name=patient_id_2 dbname="horaire.patient_id_2" )
+ column=(type=long updatewhereclause=yes name=patient_id_3 dbname="horaire.patient_id_3" )
+ column=(type=long updatewhereclause=yes name=patient_id_4 dbname="horaire.patient_id_4" )
+ column=(type=long updatewhereclause=yes name=patient_id_5 dbname="horaire.patient_id_5" )
+ column=(type=long updatewhereclause=yes name=patient_id_6 dbname="horaire.patient_id_6" )
+ column=(type=long updatewhereclause=yes name=patient_id_7 dbname="horaire.patient_id_7" )
+ column=(type=long updatewhereclause=yes name=patient_id_8 dbname="horaire.patient_id_8" )
+ column=(type=long updatewhereclause=yes name=patient_id_9 dbname="horaire.patient_id_9" )
+ column=(type=long updatewhereclause=yes name=patient_id_10 dbname="horaire.patient_id_10" )
+ column=(type=char(101) updatewhereclause=yes name=patnom1 dbname="patnom1" )
+ column=(type=char(101) updatewhereclause=yes name=patnom2 dbname="patnom2" )
+ column=(type=char(101) updatewhereclause=yes name=patnom3 dbname="patnom3" )
+ column=(type=char(101) updatewhereclause=yes name=patnom4 dbname="patnom4" )
+ column=(type=char(101) updatewhereclause=yes name=patnom5 dbname="patnom5" )
+ column=(type=char(101) updatewhereclause=yes name=patnom6 dbname="patnom6" )
+ column=(type=char(101) updatewhereclause=yes name=patnom7 dbname="patnom7" )
+ column=(type=char(101) updatewhereclause=yes name=patnom8 dbname="patnom8" )
+ column=(type=char(101) updatewhereclause=yes name=patnom9 dbname="patnom9" )
+ column=(type=char(101) updatewhereclause=yes name=patnom10 dbname="patnom10" )
+ column=(type=long updatewhereclause=yes name=duree1 dbname="horaire.duree1" )
+ column=(type=long updatewhereclause=yes name=duree2 dbname="horaire.duree2" )
+ column=(type=long updatewhereclause=yes name=duree3 dbname="horaire.duree3" )
+ column=(type=long updatewhereclause=yes name=duree4 dbname="horaire.duree4" )
+ column=(type=long updatewhereclause=yes name=duree5 dbname="horaire.duree5" )
+ column=(type=long updatewhereclause=yes name=duree6 dbname="horaire.duree6" )
+ column=(type=long updatewhereclause=yes name=duree7 dbname="horaire.duree7" )
+ column=(type=long updatewhereclause=yes name=duree8 dbname="horaire.duree8" )
+ column=(type=long updatewhereclause=yes name=duree9 dbname="horaire.duree9" )
+ column=(type=long updatewhereclause=yes name=duree10 dbname="horaire.duree10" )
+ column=(type=long updatewhereclause=yes name=traitementid1 dbname="horaire.traitementid1" )
+ column=(type=long updatewhereclause=yes name=traitementid2 dbname="horaire.traitementid2" )
+ column=(type=long updatewhereclause=yes name=traitementid3 dbname="horaire.traitementid3" )
+ column=(type=long updatewhereclause=yes name=traitementid4 dbname="horaire.traitementid4" )
+ column=(type=long updatewhereclause=yes name=traitementid5 dbname="horaire.traitementid5" )
+ column=(type=long updatewhereclause=yes name=traitementid6 dbname="horaire.traitementid6" )
+ column=(type=long updatewhereclause=yes name=traitementid7 dbname="horaire.traitementid7" )
+ column=(type=long updatewhereclause=yes name=traitementid8 dbname="horaire.traitementid8" )
+ column=(type=long updatewhereclause=yes name=traitementid9 dbname="horaire.traitementid9" )
+ column=(type=long updatewhereclause=yes name=traitementid10 dbname="horaire.traitementid10" )
+ column=(type=long updatewhereclause=yes name=count1 dbname="count1" )
+ column=(type=long updatewhereclause=yes name=count2 dbname="count2" )
+ column=(type=long updatewhereclause=yes name=count3 dbname="count3" )
+ column=(type=long updatewhereclause=yes name=count4 dbname="count4" )
+ column=(type=long updatewhereclause=yes name=count5 dbname="count5" )
+ column=(type=long updatewhereclause=yes name=count6 dbname="count6" )
+ column=(type=long updatewhereclause=yes name=count7 dbname="count7" )
+ column=(type=long updatewhereclause=yes name=count8 dbname="count8" )
+ column=(type=long updatewhereclause=yes name=count9 dbname="count9" )
+ column=(type=long updatewhereclause=yes name=count10 dbname="count10" )
+ retrieve="  SELECT horaire.datecal,   
+         horaire.heure,   
+         horaire.patient_id_1,   
+         horaire.patient_id_2,   
+         horaire.patient_id_3,   
+         horaire.patient_id_4,   
+         horaire.patient_id_5,
+			horaire.patient_id_6,   
+         horaire.patient_id_7,   
+         horaire.patient_id_8,   
+         horaire.patient_id_9,   
+         horaire.patient_id_10,
+			(select patient_nom + ' ' + patient_prenom from patient where patient_id = horaire.patient_id_1) as patnom1,
+			(select patient_nom + ' ' + patient_prenom from patient where patient_id = horaire.patient_id_2) as patnom2,
+			(select patient_nom + ' ' + patient_prenom from patient where patient_id = horaire.patient_id_3) as patnom3,
+			(select patient_nom + ' ' + patient_prenom from patient where patient_id = horaire.patient_id_4) as patnom4,
+			(select patient_nom + ' ' + patient_prenom from patient where patient_id = horaire.patient_id_5) as patnom5,
+			(select patient_nom + ' ' + patient_prenom from patient where patient_id = horaire.patient_id_6) as patnom6,
+			(select patient_nom + ' ' + patient_prenom from patient where patient_id = horaire.patient_id_7) as patnom7,
+			(select patient_nom + ' ' + patient_prenom from patient where patient_id = horaire.patient_id_8) as patnom8,
+			(select patient_nom + ' ' + patient_prenom from patient where patient_id = horaire.patient_id_9) as patnom9,
+			(select patient_nom + ' ' + patient_prenom from patient where patient_id = horaire.patient_id_10) as patnom10,
+         horaire.duree1,   
+         horaire.duree2,   
+         horaire.duree3,   
+         horaire.duree4,   
+         horaire.duree5,   
+         horaire.duree6,   
+         horaire.duree7,   
+         horaire.duree8,   
+         horaire.duree9,   
+         horaire.duree10,   
+         horaire.traitementid1,   
+         horaire.traitementid2,   
+         horaire.traitementid3,   
+         horaire.traitementid4,   
+         horaire.traitementid5,
+         horaire.traitementid6,   
+         horaire.traitementid7,   
+         horaire.traitementid8,   
+         horaire.traitementid9,   
+         horaire.traitementid10,
+			(select count(*) from t_rdv where rdvdate = horaire.datecal and rdvheure = horaire.heure and patient_id = horaire.patient_id_1) as count1,
+    		(select count(*) from t_rdv where rdvdate = horaire.datecal and rdvheure = horaire.heure and patient_id = horaire.patient_id_2) as count2,
+			(select count(*) from t_rdv where rdvdate = horaire.datecal and rdvheure = horaire.heure and patient_id = horaire.patient_id_3) as count3,
+			(select count(*) from t_rdv where rdvdate = horaire.datecal and rdvheure = horaire.heure and patient_id = horaire.patient_id_4) as count4,
+			(select count(*) from t_rdv where rdvdate = horaire.datecal and rdvheure = horaire.heure and patient_id = horaire.patient_id_5) as count5,
+			(select count(*) from t_rdv where rdvdate = horaire.datecal and rdvheure = horaire.heure and patient_id = horaire.patient_id_6) as count6,
+			(select count(*) from t_rdv where rdvdate = horaire.datecal and rdvheure = horaire.heure and patient_id = horaire.patient_id_7) as count7,
+			(select count(*) from t_rdv where rdvdate = horaire.datecal and rdvheure = horaire.heure and patient_id = horaire.patient_id_8) as count8,
+			(select count(*) from t_rdv where rdvdate = horaire.datecal and rdvheure = horaire.heure and patient_id = horaire.patient_id_9) as count9,
+			(select count(*) from t_rdv where rdvdate = horaire.datecal and rdvheure = horaire.heure and patient_id = horaire.patient_id_10) as count10
+	 FROM horaire
+	WHERE (horaire.patient_id_1 > 0 and horaire.duree1 > 0 and (count1 = 0 or count1 > 1)) or
+			(horaire.patient_id_2 > 0 and horaire.duree2 > 0 and (count2 = 0 or count1 > 1)) or
+			(horaire.patient_id_3 > 0 and horaire.duree3 > 0 and (count3 = 0 or count1 > 1)) or
+			(horaire.patient_id_4 > 0 and horaire.duree4 > 0 and (count4 = 0 or count1 > 1)) or
+			(horaire.patient_id_5 > 0 and horaire.duree5 > 0 and (count5 = 0 or count1 > 1)) or
+			(horaire.patient_id_6 > 0 and horaire.duree6 > 0 and (count6 = 0 or count1 > 1)) or
+			(horaire.patient_id_7 > 0 and horaire.duree7 > 0 and (count7 = 0 or count1 > 1)) or
+			(horaire.patient_id_8 > 0 and horaire.duree8 > 0 and (count8 = 0 or count1 > 1)) or
+			(horaire.patient_id_9 > 0 and horaire.duree9 > 0 and (count9 = 0 or count1 > 1)) or
+			(horaire.patient_id_10 > 0 and horaire.duree10 > 0 and count10 = 0)" )
+text(band=header alignment="2" text="Datecal" border="0" color="33554432" x="9" y="8" height="64" width="329" html.valueishtml="0"  name=datecal_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Heure" border="0" color="33554432" x="347" y="8" height="64" width="274" html.valueishtml="0"  name=heure_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Nom du patient" border="0" color="33554432" x="631" y="8" height="64" width="1385" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Count1" border="0" color="0" x="2025" y="4" height="64" width="192" html.valueishtml="0"  name=count1_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Count2" border="0" color="0" x="2226" y="4" height="64" width="197" html.valueishtml="0"  name=count2_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Count3" border="0" color="0" x="2432" y="4" height="64" width="197" html.valueishtml="0"  name=count3_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Count4" border="0" color="0" x="2638" y="4" height="64" width="197" html.valueishtml="0"  name=count4_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Count5" border="0" color="0" x="2843" y="4" height="64" width="197" html.valueishtml="0"  name=count5_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Count6" border="0" color="0" x="3049" y="4" height="64" width="197" html.valueishtml="0"  name=count6_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Count7" border="0" color="0" x="3255" y="4" height="64" width="224" html.valueishtml="0"  name=count7_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Count8" border="0" color="0" x="3488" y="4" height="64" width="219" html.valueishtml="0"  name=count8_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Count9" border="0" color="0" x="3717" y="4" height="64" width="210" html.valueishtml="0"  name=count9_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Count10" border="0" color="0" x="3936" y="4" height="64" width="215" html.valueishtml="0"  name=count10_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Patient Id 1" border="0" color="0" x="4160" y="4" height="64" width="288" html.valueishtml="0"  name=patient_id_1_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Patient Id 2" border="0" color="0" x="4457" y="4" height="64" width="288" html.valueishtml="0"  name=patient_id_2_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Patient Id 3" border="0" color="0" x="4754" y="4" height="64" width="293" html.valueishtml="0"  name=patient_id_3_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Patient Id 4" border="0" color="0" x="5056" y="4" height="64" width="343" html.valueishtml="0"  name=patient_id_4_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Patient Id 5" border="0" color="0" x="5408" y="4" height="64" width="329" html.valueishtml="0"  name=patient_id_5_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Patient Id 6" border="0" color="0" x="5746" y="4" height="64" width="338" html.valueishtml="0"  name=patient_id_6_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Patient Id 7" border="0" color="0" x="6094" y="4" height="64" width="334" html.valueishtml="0"  name=patient_id_7_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Patient Id 8" border="0" color="0" x="6437" y="4" height="64" width="347" html.valueishtml="0"  name=patient_id_8_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Patient Id 9" border="0" color="0" x="6793" y="4" height="64" width="334" html.valueishtml="0"  name=patient_id_9_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Patient Id 10" border="0" color="0" x="7136" y="4" height="64" width="352" html.valueishtml="0"  name=patient_id_10_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Duree1" border="0" color="0" x="7497" y="4" height="64" width="215" html.valueishtml="0"  name=duree1_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Duree2" border="0" color="0" x="7721" y="4" height="64" width="229" html.valueishtml="0"  name=duree2_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Duree3" border="0" color="0" x="7959" y="4" height="64" width="224" html.valueishtml="0"  name=duree3_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Duree4" border="0" color="0" x="8192" y="4" height="64" width="197" html.valueishtml="0"  name=duree4_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Duree5" border="0" color="0" x="8398" y="4" height="64" width="215" html.valueishtml="0"  name=duree5_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Duree6" border="0" color="0" x="8622" y="4" height="64" width="206" html.valueishtml="0"  name=duree6_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Duree7" border="0" color="0" x="8837" y="4" height="64" width="206" html.valueishtml="0"  name=duree7_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Duree8" border="0" color="0" x="9051" y="4" height="64" width="215" html.valueishtml="0"  name=duree8_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Duree9" border="0" color="0" x="9275" y="4" height="64" width="206" html.valueishtml="0"  name=duree9_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Duree10" border="0" color="0" x="9490" y="4" height="64" width="238" html.valueishtml="0"  name=duree10_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="9" y="8" height="76" width="329" format="[general]" html.valueishtml="0"  name=datecal visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="347" y="8" height="76" width="274" format="[time]" html.valueishtml="0"  name=heure visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if ( patient_id_1 > 0 and duree1 > 0 and (count1 = 0 or count1 > 1) , patnom1 , ''  ) + if ( patient_id_2 > 0 and duree2 > 0 and (count2 = 0 or count2 > 1) , patnom2 , ''  ) + if ( patient_id_3 > 0 and duree3 > 0 and (count3 = 0 or count3 > 1) , patnom3 , ''  ) + if ( patient_id_4 > 0 and duree4 > 0 and (count4 = 0 or count4 > 1) , patnom4 , ''  ) + if ( patient_id_5 > 0 and duree5 > 0 and (count5 = 0 or count5 > 1) , patnom5 , ''  ) + if ( patient_id_6 > 0 and duree6 > 0 and (count6 = 0 or count6 > 1) , patnom6 , ''  ) + if ( patient_id_7 > 0 and duree7 > 0 and (count7 = 0 or count7 > 1) , patnom7 , ''  ) + if ( patient_id_8 > 0 and duree8 > 0 and (count8 = 0 or count8 > 1) , patnom8 , ''  ) + if ( patient_id_9 > 0 and duree9 > 0 and (count9 = 0 or count9 > 1) , patnom9 , ''  ) + if ( patient_id_10 > 0 and duree10 > 0 and (count10 = 0 or count10 > 1) , patnom10 , ''  )"border="0" color="0" x="631" y="8" height="76" width="1385" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=43 alignment="0" tabsequence=32766 border="0" color="0" x="2025" y="8" height="76" width="192" format="[general]" html.valueishtml="0"  name=count1 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=44 alignment="0" tabsequence=32766 border="0" color="0" x="2226" y="8" height="76" width="197" format="[general]" html.valueishtml="0"  name=count2 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=45 alignment="0" tabsequence=32766 border="0" color="0" x="2432" y="8" height="76" width="197" format="[general]" html.valueishtml="0"  name=count3 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=46 alignment="0" tabsequence=32766 border="0" color="0" x="2638" y="8" height="76" width="197" format="[general]" html.valueishtml="0"  name=count4 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=47 alignment="0" tabsequence=32766 border="0" color="0" x="2843" y="8" height="76" width="197" format="[general]" html.valueishtml="0"  name=count5 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=48 alignment="0" tabsequence=32766 border="0" color="0" x="3049" y="8" height="76" width="197" format="[general]" html.valueishtml="0"  name=count6 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=49 alignment="0" tabsequence=32766 border="0" color="0" x="3255" y="8" height="76" width="224" format="[general]" html.valueishtml="0"  name=count7 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=50 alignment="0" tabsequence=32766 border="0" color="0" x="3488" y="8" height="76" width="219" format="[general]" html.valueishtml="0"  name=count8 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=51 alignment="0" tabsequence=32766 border="0" color="0" x="3717" y="8" height="76" width="210" format="[general]" html.valueishtml="0"  name=count9 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=52 alignment="0" tabsequence=32766 border="0" color="0" x="3936" y="8" height="76" width="215" format="[general]" html.valueishtml="0"  name=count10 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="4160" y="0" height="64" width="288" format="[general]" html.valueishtml="0"  name=patient_id_1 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="4457" y="0" height="64" width="288" format="[general]" html.valueishtml="0"  name=patient_id_2 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="4754" y="0" height="64" width="293" format="[general]" html.valueishtml="0"  name=patient_id_3 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="5056" y="0" height="64" width="343" format="[general]" html.valueishtml="0"  name=patient_id_4 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="5408" y="0" height="64" width="329" format="[general]" html.valueishtml="0"  name=patient_id_5 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="5746" y="0" height="64" width="338" format="[general]" html.valueishtml="0"  name=patient_id_6 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="6094" y="0" height="64" width="334" format="[general]" html.valueishtml="0"  name=patient_id_7 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="6437" y="0" height="64" width="347" format="[general]" html.valueishtml="0"  name=patient_id_8 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="33554432" x="6793" y="0" height="64" width="334" format="[general]" html.valueishtml="0"  name=patient_id_9 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="33554432" x="7136" y="0" height="64" width="352" format="[general]" html.valueishtml="0"  name=patient_id_10 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=23 alignment="0" tabsequence=32766 border="0" color="33554432" x="7497" y="0" height="64" width="215" format="[general]" html.valueishtml="0"  name=duree1 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=24 alignment="0" tabsequence=32766 border="0" color="33554432" x="7721" y="0" height="64" width="229" format="[general]" html.valueishtml="0"  name=duree2 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=25 alignment="0" tabsequence=32766 border="0" color="33554432" x="7959" y="0" height="64" width="224" format="[general]" html.valueishtml="0"  name=duree3 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=26 alignment="0" tabsequence=32766 border="0" color="33554432" x="8192" y="0" height="64" width="197" format="[general]" html.valueishtml="0"  name=duree4 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=27 alignment="0" tabsequence=32766 border="0" color="33554432" x="8398" y="0" height="64" width="215" format="[general]" html.valueishtml="0"  name=duree5 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=28 alignment="0" tabsequence=32766 border="0" color="33554432" x="8622" y="0" height="64" width="206" format="[general]" html.valueishtml="0"  name=duree6 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=29 alignment="0" tabsequence=32766 border="0" color="33554432" x="8837" y="0" height="64" width="206" format="[general]" html.valueishtml="0"  name=duree7 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=30 alignment="0" tabsequence=32766 border="0" color="33554432" x="9051" y="0" height="64" width="215" format="[general]" html.valueishtml="0"  name=duree8 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=31 alignment="0" tabsequence=32766 border="0" color="33554432" x="9275" y="0" height="64" width="206" format="[general]" html.valueishtml="0"  name=duree9 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=32 alignment="0" tabsequence=32766 border="0" color="33554432" x="9490" y="0" height="64" width="238" format="[general]" html.valueishtml="0"  name=duree10 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="count(heure for all)"border="0" color="33554432" x="347" y="4" height="64" width="274" format="[time]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="2" text="Qté :" border="0" color="33554432" x="9" y="4" height="64" width="329" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

@@ -1,0 +1,88 @@
+﻿$PBExportHeader$d_referents.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=2504 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=id dbname="t_referents.id" dbalias=".id" )
+ column=(type=long update=yes updatewhereclause=yes name=id_sal dbname="t_referents.id_sal" dbalias=".id_sal" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=ref_adresse dbname="t_referents.ref_adresse" dbalias=".ref_adresse" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=ref_ville dbname="t_referents.ref_ville" dbalias=".ref_ville" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=ref_sexe dbname="t_referents.ref_sexe" dbalias=".ref_sexe" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=ref_province dbname="t_referents.ref_province" dbalias=".ref_province" values="Québec	QC/USA	USA/Ontario	Ontario/Nouveau-Brunswick	NB/" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=ref_zip dbname="t_referents.ref_zip" dbalias=".ref_zip" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=ref_langue dbname="t_referents.ref_langue" dbalias=".ref_langue" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=ref_tel_bur dbname="t_referents.ref_tel_bur" dbalias=".ref_tel_bur" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=ref_tel_fax dbname="t_referents.ref_tel_fax" dbalias=".ref_tel_fax" )
+ column=(type=char(350) update=yes updatewhereclause=yes name=ref_note dbname="t_referents.ref_note" dbalias=".ref_note" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=ref_email dbname="t_referents.ref_email" dbalias=".ref_email" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=ref_nom_complet dbname="t_referents.ref_nom_complet" dbalias=".ref_nom_complet" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=ref_suffix dbname="t_referents.ref_suffix" dbalias=".ref_suffix" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=ref_nom dbname="t_referents.ref_nom" dbalias=".ref_nom" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=ref_prenom dbname="t_referents.ref_prenom" dbalias=".ref_prenom" )
+ column=(type=long update=yes updatewhereclause=yes name=ortho_id dbname="t_referents.ortho_id" dbalias=".ortho_id" )
+ column=(type=number update=yes updatewhereclause=yes name=actif dbname="t_referents.actif" dbalias=".actif" values="Actif	1/Actif	0" )
+ column=(type=number update=yes updatewhereclause=yes name=inclist dbname="t_referents.inclist" dbalias=".inclist" values="Inclure dans listes	1/Inclure dans listes	0" )
+ retrieve="SELECT   t_referents.id,
+			t_referents.id_sal,
+		   t_referents.ref_adresse,
+		   t_referents.ref_ville,
+		   t_referents.ref_sexe,
+		   t_referents.ref_province,
+		   t_referents.ref_zip,
+		   t_referents.ref_langue,
+		   t_referents.ref_tel_bur,
+		   t_referents.ref_tel_fax,
+		   t_referents.ref_note,
+		   t_referents.ref_email,
+		   t_referents.ref_nom_complet,
+		   t_referents.ref_suffix,
+		   t_referents.ref_nom,
+		   t_referents.ref_prenom,
+		   t_referents.ortho_id,
+			t_referents.actif,
+			t_referents.inclist
+  FROM   t_referents      
+ WHERE   t_referents.id = :ra_id" update="t_referents" updatewhere=1 updatekeyinplace=no arguments=(("ra_id", number)) )
+text(band=detail alignment="1" text="Code postal:" border="0" color="0" x="0" y="732" height="64" width="407" html.valueishtml="0"  name=zip_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Prénom:" border="0" color="0" x="1143" y="168" height="64" width="302" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=110 border="5" color="0" x="425" y="732" height="64" width="539" format="[general]" html.valueishtml="0"  name=ref_zip visible="1" editmask.autoskip=yes editmask.mask="!#! #!#" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=60 border="5" color="0" x="366" y="304" height="64" width="1774" format="[general]" html.valueishtml="0"  name=ref_adresse visible="1" edit.limit=50 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="0" tabsequence=70 border="5" color="0" x="366" y="448" height="64" width="1216" format="[general]" html.valueishtml="0"  name=ref_ville visible="1" edit.limit=50 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=6 alignment="0" tabsequence=90 border="5" color="0" x="366" y="588" height="64" width="878" format="[general]" html.valueishtml="0"  name=ref_province visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=9 alignment="0" tabsequence=130 border="5" color="0" x="366" y="864" height="64" width="539" format="[general]" html.valueishtml="0"  name=ref_tel_bur visible="1" editmask.autoskip=yes editmask.mask="(###) ###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=12 alignment="0" tabsequence=150 border="5" color="0" x="366" y="1000" height="64" width="1783" format="[general]" html.valueishtml="0"  name=ref_email visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=11 alignment="0" tabsequence=160 border="5" color="0" x="366" y="1144" height="328" width="1787" format="[general]" html.valueishtml="0"  name=ref_note visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=16 alignment="0" tabsequence=50 border="5" color="0" x="1454" y="168" height="64" width="681" format="[general]" html.valueishtml="0"  name=ref_prenom visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="0" tabsequence=120 border="5" color="0" x="1481" y="740" height="64" width="539" format="[general]" html.valueishtml="0"  name=ref_langue visible="1" ddlb.limit=3 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=10 alignment="0" tabsequence=140 border="5" color="0" x="1481" y="864" height="64" width="539" format="[general]" html.valueishtml="0"  name=ref_tel_fax visible="1" editmask.autoskip=yes editmask.mask="(###) ###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="1" text="Langue:" border="0" color="0" x="978" y="736" height="64" width="475" html.valueishtml="0"  name=langue_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Télécopieur:" border="0" color="0" x="928" y="864" height="64" width="526" html.valueishtml="0"  name=telfax_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Sexe:" border="0" color="0" x="1600" y="448" height="64" width="201" html.valueishtml="0"  name=sexe_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=80 border="5" color="0" x="1815" y="448" height="64" width="320" format="[general]" html.valueishtml="0"  name=ref_sexe visible="1" ddlb.limit=2 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="1" text="Nom:" border="0" color="0" x="9" y="168" height="64" width="343" html.valueishtml="0"  name=nom_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Adresse:" border="0" color="0" x="9" y="304" height="64" width="343" html.valueishtml="0"  name=adresse_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Ville:" border="0" color="0" x="9" y="448" height="64" width="343" html.valueishtml="0"  name=ville_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Province:" border="0" color="0" x="9" y="592" height="64" width="343" html.valueishtml="0"  name=province_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Tél. (bur.):" border="0" color="0" x="9" y="864" height="64" width="343" html.valueishtml="0"  name=tel_bur_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Email:" border="0" color="0" x="9" y="996" height="64" width="343" html.valueishtml="0"  name=email_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Note:" border="0" color="0" x="9" y="1144" height="64" width="343" html.valueishtml="0"  name=note_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Salutation:" border="0" color="0" x="9" y="32" height="64" width="343" html.valueishtml="0"  name=t_sal visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=40 border="5" color="0" x="366" y="168" height="64" width="759" format="[general]" html.valueishtml="0"  name=ref_nom visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=10 border="5" color="0" x="366" y="32" height="64" width="759" format="[general]" html.valueishtml="0"  name=id_sal visible="1" dddw.name=dddw_salutation dddw.displaycolumn=salutation dddw.datacolumn=id_sal dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="1" text="Titre:" border="0" color="0" x="1573" y="592" height="64" width="224" html.valueishtml="0"  name=t_2 visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=100 border="5" color="0" x="1815" y="592" height="64" width="320" format="[general]" html.valueishtml="0"  name=ref_suffix visible="0" ddlb.limit=5 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=18 alignment="0" tabsequence=30 border="0" color="0" x="1911" y="40" height="64" width="224" format="[general]" html.valueishtml="0"  name=actif visible="1" checkbox.text="Actif" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=19 alignment="0" tabsequence=20 border="0" color="0" x="1289" y="40" height="64" width="581" html.valueishtml="0"  name=inclist visible="1" checkbox.text="Inclure dans listes" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

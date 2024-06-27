@@ -1,0 +1,14 @@
+﻿$PBExportHeader$dddw_ligne.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=id_ligne dbname="t_lignes.id_ligne" )
+ column=(type=char(1000) update=yes updatewhereclause=yes name=texte dbname="t_lignes.texte" )
+ column=(type=long update=yes updatewhereclause=yes name=pos dbname="t_lignes.pos" )
+ column=(type=char(50) updatewhereclause=yes name=titre dbname="t_lignes.titre" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"t_lignes~" ) COLUMN(NAME=~"t_lignes.id_ligne~") COLUMN(NAME=~"t_lignes.texte~") COLUMN(NAME=~"t_lignes.pos~") COLUMN(NAME=~"t_lignes.titre~")) " update="t_lignes" updatewhere=1 updatekeyinplace=no )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="18" y="4" height="76" width="1586" format="[general]" html.valueishtml="0"  name=titre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

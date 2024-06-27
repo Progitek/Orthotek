@@ -1,0 +1,64 @@
+﻿$PBExportHeader$d_compteapercevoir.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no pointer="Arrow!" )
+header(height=224 color="536870912" )
+summary(height=92 color="536870912" )
+footer(height=56 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long updatewhereclause=yes identity=yes name=traitements_trait dbname="traitements.trait" )
+ column=(type=long updatewhereclause=yes identity=yes name=patient_patient_id dbname="patient.patient_id" )
+ column=(type=char(50) updatewhereclause=yes name=patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_nom dbname="patient.patient_nom" )
+ column=(type=decimal(2) updatewhereclause=yes name=frais1 dbname="frais1" )
+ column=(type=decimal(2) updatewhereclause=yes name=frais dbname="frais" )
+ column=(type=decimal(2) updatewhereclause=yes name=totpaye1 dbname="totpaye1" )
+ column=(type=decimal(2) updatewhereclause=yes name=totpaye dbname="totpaye" )
+ column=(type=decimal(2) updatewhereclause=yes name=totcpd1 dbname="totcpd1" )
+ column=(type=decimal(2) updatewhereclause=yes name=totcpd dbname="totcpd" )
+ column=(type=long updatewhereclause=yes name=countcpd dbname="countcpd" )
+ column=(type=decimal(2) updatewhereclause=yes name=apercevoir dbname="apercevoir" )
+ retrieve="  SELECT traitements.traitement_id as trait,
+			patient.patient_id,
+			patient.patient_prenom,   
+         patient.patient_nom,
+			(select sum(montant) from factures_traitements where traitement_id = trait ) as frais1,
+			(if frais1 is null then 0 else frais1 endif) as frais, 
+ 			(select sum(montant_recu) from paiement where traitement_patient_id = trait ) as totpaye1,
+			(if totpaye1 is null then 0 else totpaye1 endif) as totpaye,
+			(select sum(paiement) from cheques_postdates where traitement_patient_id = trait and indicateur <> '1') as totcpd1,
+			(if totcpd1 is null then 0 else totcpd1 endif) as totcpd,
+			(select count(*) from cheques_postdates where traitement_patient_id = trait and indicateur <> '1') as countcpd,
+			(frais - totpaye - totcpd) as apercevoir
+    FROM traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id 
+	WHERE patient.no_ortho = :ra_ortho AND
+			apercevoir > 0
+ORDER BY patient.patient_nom ASC,   
+         patient.patient_prenom ASC" arguments=(("ra_ortho", number)) )
+text(band=header alignment="0" text="Nom du patient" border="4" color="33554432" x="0" y="152" height="64" width="1399" html.valueishtml="0"  name=t_pat visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="À percevoir" border="4" color="33554432" x="1399" y="152" height="64" width="672" html.valueishtml="0"  name=t_percevoir visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Qté CPD" border="4" color="33554432" x="2071" y="152" height="64" width="672" html.valueishtml="0"  name=t_qtycpd visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Total CPD" border="4" color="33554432" x="2743" y="152" height="64" width="672" html.valueishtml="0"  name=t_totcpd visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Comptes à perçevoir" border="0" color="8388608" x="5" y="0" height="92" width="3406" html.valueishtml="0"  name=t_title visible="1"  font.face="Arial" font.height="-14" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" patient_prenom + ' ' +  patient_nom "border="0" color="33554432" x="0" y="4" height="64" width="1399" format="[GENERAL]" html.valueishtml="0"  name=compute_1 pointer="HyperLink!" visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="33554432" x="1399" y="4" height="64" width="672" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=apercevoir pointer="Arrow!" visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="33554432" x="2071" y="4" height="64" width="672" format="[general]" html.valueishtml="0"  name=countcpd pointer="Arrow!" visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="2743" y="4" height="64" width="672" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=totcpd pointer="Arrow!" visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="count( patient_prenom + ' ' +  patient_nom  for all)"border="0" color="33554432" x="160" y="20" height="64" width="805" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Qté:" border="0" color="33554432" x="0" y="20" height="64" width="155" html.valueishtml="0"  name=t_qty visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="sum(totcpd for all)"border="0" color="33554432" x="2743" y="20" height="64" width="672" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Total:" border="0" color="33554432" x="1207" y="20" height="64" width="187" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Total:" border="0" color="33554432" x="2551" y="20" height="64" width="187" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="sum(apercevoir for all)"border="0" color="33554432" x="1399" y="20" height="64" width="672" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="1399" y1="0" x2="2071" y2="0"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=summary x1="1399" y1="8" x2="2071" y2="8"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=summary x1="2738" y1="0" x2="3410" y2="0"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=summary x1="2738" y1="8" x2="3410" y2="8"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=footer alignment="0" text="© Orthotek" border="0" color="33554432" x="1618" y="0" height="56" width="242" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="33554432" x="2688" y="0" height="56" width="727" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Imprimé le " border="0" color="33554432" x="14" y="0" height="56" width="229" html.valueishtml="0"  name=t_printedon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="today()"border="0" color="33554432" x="247" y="0" height="56" width="320" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

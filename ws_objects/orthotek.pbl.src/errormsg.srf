@@ -1,0 +1,104 @@
+﻿$PBExportHeader$errormsg.srf
+global type errormsg from function_object
+end type
+
+forward prototypes
+global subroutine errormsg (integer errornum)
+end prototypes
+
+global subroutine errormsg (integer errornum);//choose case errornum
+//	case 1
+//		messagebox()
+//1 Divide by zero 
+//2 Null object reference 
+//3 Array boundary exceeded 
+//4 Enumerated value is out of range for function 
+//5 Negative value encountered in function 
+//6 Invalid DataWindow row/column specified 
+//7 Unresolvable external when linking reference 
+//8 Reference of array with null subscript 
+//9 DLL function not found in current application 
+//10 Unsupported argument type in DLL function 
+//11 Object file is out of date and must be converted to current version 
+//12 DataWindow column type does not match GetItem type 
+//13 Unresolved property reference 
+//14 Error opening DLL library for external function 
+//15 Error calling external function name 
+//16 Maximum string size exceeded 
+//17 DataWindow referenced in DataWindow object does not exist 
+//18 Function doesn't return value 
+//19 Cannot convert name in Any variable to name 
+//20 Database command has not been successfully prepared 
+//21 Bad runtime function reference 
+//22 Unknown object type 
+//23 Cannot assign object of type name to variable of type name 
+//24 Function call doesn't match its definition 
+//25 Double or Real expression has overflowed 
+//26 Field name assignment not supported 
+//27 Cannot take a negative to a noninteger power 
+//28 VBX Error: name 
+//29 Nonarray expected in ANY variable 
+//30 External object does not support data type name 
+//31 External object data type namenot supported 
+//32 Name not found calling external object function name 
+//33 Invalid parameter type calling external object function name 
+//34 Incorrect number of parameters calling external object function name 
+//35 Error calling external object function name 
+//36 Name not found accessing external object property name 
+//37 Type mismatch accessing external object property name 
+//38 Incorrect number of subscripts accessing external object property name 
+//39 Error accessing external object property name 
+//40 Mismatched ANY data types in expression 
+//41 Illegal ANY data type in expression 
+//42 Specified argument type differs from required argument type at runtime in DLL function name 
+//43 Parent object doesn't exist 
+//44 Function has conflicting argument or return type in ancestor 
+//45 Internal table overflow; maximum number of objects exceeded 
+//46 Null object reference cannot be assigned or passed to a variable of this type 
+//47 Array expected in ANY variable 
+//48 Size mismatch in array to object conversion 
+//49 Type mismatch in array to object conversion 
+//50 Distributed Service Error 
+//51 Bad argument list for function/event 
+//52 Distributed Communications Error 
+//53 Requested server not active 
+//54 Server not accepting requests 
+//55 Request terminated abnormally 
+//56 Response to request incomplete 
+//57 Not connected 
+//58 Object instance does not exist 
+//59 Invalid column range 
+//60 Invalid row range 
+//61 Invalid conversion of number dimensional array to object 
+//62 Server busy 
+//63 Function/event with no return value used in expression 
+//64 Object array expected in left side of assignment 
+//65 Dynamic function not found. Possible causes include:\npass by value/reference mismatch 
+//66 Invalid subscript for array index operation 
+//67 NULL object reference cannot be assigned or passed to an autoinstantiate 
+//68 NULL object reference cannot be passed to external DLL function name 
+//69 Function name cannot be called from a secured runtime session 
+//70 External DLL function name cannot be called from a secured runtime session 
+//71 General protection fault occurred 
+//72 Name failed with an operating system error code of number 
+//73 Reference parameters cannot be passed to an asynchronous shared/remote object method 
+//74 Reference parameters cannot be passed to a shared object method 
+//75 The server has forced the client to disconnect 
+//76 Passing NULL as a parameter to external function name 
+//77 Object passed to shared/remote object method is not a nonvisual user object 
+//78 Listen can only be done in Enterprise version of PowerBuilder 
+//79 The argument to name must be an array 
+//80 The server has timed out the client connection 
+//81 Function argument file creator must be a four character string 
+//82 Function argument file type must be a four character string 
+//83 Attempt to invoke a function or event that is not accessible 
+//84 Wrong number of arguments passed to function/event call 
+//85 Error in reference argument passed in function/event call 
+//86 Ambiguous function/event reference 
+//87 The connection to the server has been lost 
+//88 Cannot ask for ClassDefinition Information on open painter: name 
+//89 5.0 style proxy objects are not supported. Copy the new style proxy that was generated at migration time 
+//90 Cannot assign array of type name to variable of type array of name 
+
+end subroutine
+

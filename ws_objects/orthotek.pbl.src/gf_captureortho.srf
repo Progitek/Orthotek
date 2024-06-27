@@ -1,0 +1,141 @@
+﻿$PBExportHeader$gf_captureortho.srf
+global type gf_captureortho from function_object
+end type
+
+forward prototypes
+global subroutine gf_captureortho (long al_patid)
+end prototypes
+
+global subroutine gf_captureortho (long al_patid);string ls_path, ls_info, ls_imgfolder
+integer li_typeimaging,li_res,li_xray,li_dimaxisnomdocteur
+long img
+string ls_patnom,ls_patprenom,ls_datenais,ls_nodoss,ls_ortho, ls_chemphoto, ls_pathdolphincadi,ls_sex,ls_ss
+date ldt_nais
+
+ls_ss = ''
+
+select xray,chemcaplink,imgfolder,cheminxray,dimaxis_add_nom_ortho into :li_xray,:ls_path,:ls_imgfolder,:ls_pathdolphincadi,:li_dimaxisnomdocteur from t_options where ortho_id = :v_no_ortho;
+
+choose case li_xray
+	case 1 // Cliniview
+		select isnull(patient_prenom,''),isnull(patient_nom,''),isnull(sex,''),isnull(date_naissance,'1900-01-01')
+		into :ls_patprenom,:ls_patnom,:ls_sex,:ldt_nais
+		from patient where patient_id = :al_patid;
+		ls_pathdolphincadi += " ~"-p " + ls_patnom + "," + ls_patprenom + "::" + ls_ss + "::" + string(al_patid) + "::" + string(ldt_nais) + "::" + ls_sex + "~""
+		run(ls_pathdolphincadi)
+	case 2
+	//	if error_type(250) = 1 then
+			select isnull(patient_prenom,''),isnull(patient_nom,''),isnull(date_naissance,'1900-01-01')
+			into :ls_patprenom,:ls_patnom,:ldt_nais
+			from patient where patient_id = :al_patid;
+			select dr_nom_complet into :ls_ortho from ortho_id where ortho_id = :v_no_ortho;
+			ls_datenais = string(ldt_nais)
+			
+			if ls_patnom = '' or &
+				ls_patprenom = '' or &
+				ldt_nais = date('1900-01-01') or &
+				ls_ortho = '' then
+				error_type(1009)
+				return
+			end if
+			
+
+
+			if li_dimaxisnomdocteur = 1 then
+				//messagebox('planmeca','DxStart.exe "'+ls_nodoss+'" "'+ls_patnom+'" "'+ls_patprenom+'" "'+ls_datenais+'")
+				li_res = run('DxStart.exe "'+string(al_patid)+'" "'+ls_patnom+'" "'+ls_patprenom+'" "'+ls_datenais+'" " "',Maximized!)
+			else
+//				messagebox('planmeca','DxStart.exe "'+ls_nodoss+'" "'+ls_patnom+'" "'+ls_patprenom+'" "'+ls_datenais+'" "'+ls_ortho+'"')
+				li_res = run('DxStart.exe "'+string(al_patid)+'" "'+ls_patnom+'" "'+ls_patprenom+'" "'+ls_datenais+'" "'+ls_ortho+'"',Maximized!)
+			end if
+			if li_res <> 1 then messagebox('Erreur!','La création du dossier dans Dimaxis a échoué.',stopsign!)
+		
+	case 3
+		select patient_nom + ', ' + patient_prenom into :ls_info from patient where patient_id = :al_patid;
+		Clipboard(ls_info + ' ' + string(al_patid))
+		run(ls_path, Maximized!)
+	case 4
+
+	//	if error_type(261) = 1 then
+			select isnull(patient_prenom,'') + ' ' + isnull(patient_nom,''),date_naissance,new_dossier
+			into :ls_patnom,:ldt_nais,:ls_nodoss
+			from patient where patient_id = :al_patid;
+			select dr_nom_complet into :ls_ortho from ortho_id where ortho_id = :v_no_ortho;
+			ldt_nais = date(year(ldt_nais),month(ldt_nais),day(ldt_nais))
+			ls_datenais = string(ldt_nais,'ddmmyyyy')
+//			select chemphoto into :ls_chemphoto from t_options where ortho_id = :v_no_ortho;
+			if ls_imgfolder = 'd' then
+				ls_chemphoto = ls_pathdolphincadi + '\' + ls_nodoss
+			else
+				ls_chemphoto = ls_pathdolphincadi + '\' + string(al_patid) 
+			end if
+//			messagebox("CADI","C:\CADI.exe /P"+ls_patnom+" /D"+ls_ortho+" /L1 /F"+ls_chemphoto+" /B"+ls_datenais)
+			li_res = run("C:\CADI\CADI.exe /P"+ls_patnom+" /D"+ls_ortho+" /L1 /F"+ls_chemphoto+"/B"+ls_datenais,Maximized!)
+			if li_res <> 1 then messagebox('Erreur!','La création du dossier dans CADI a échoué.',stopsign!)
+			
+	case 5 // Sidexis /M
+		
+		string ls_sdxfile, ls_req, ls_station, ls_specnom
+		integer li_file
+		long ll_tailleN, ll_tailleA, ll_pos, ll_posSl
+		blob lbl_info
+		n_cst_platformwin32 lnv_win32
+		
+		select isnull(patient_prenom,''),isnull(patient_nom,''),isnull(sex,''),isnull(date_naissance,'1900-01-01')
+		into :ls_patprenom,:ls_patnom,:ls_sex,:ldt_nais
+		from patient where patient_id = :al_patid; 
+		
+		select dr_nom_complet into :ls_specnom from ortho_id where ortho_id = :v_no_ortho;
+		
+		ll_posSl = lastpos(ls_pathdolphincadi, '\')
+		if ll_posSl <= 0 then
+			error_type(68)
+			return
+		end if
+				
+		ls_sdxfile = profileString(left(ls_pathdolphincadi, ll_posSl) + "sifiledb.ini", "FromStation0", "File", "")
+		ls_req = profileString(left(ls_pathdolphincadi, ll_posSl) + "sifiledb.ini", "MultiStations", "GetRequest", "0")
+		
+		if ls_req = "1" then ls_req = '' else ls_req = '0'
+		
+		if isNull(ls_sex) then ls_sex = ''
+		lnv_win32 = create n_cst_platformwin32
+		ls_station = lnv_win32.of_getComputerName()
+		destroy lnv_win32
+						
+		ls_info = " |N|"+left(ls_patnom, 32)+"|"+left(ls_patprenom, 32)+"|"+string(ldt_nais, 'dd.mm.yyyy')+"|"+&
+					 string(al_patid)+"|"+ls_sex+"|"+left(ls_specnom, 12)+"|\\"+ls_station+"\Orthotek|\\*\Sidexis|~r~n"
+					 
+		ll_tailleN = len(ls_info)
+		
+		ls_info += " |A|"+left(ls_patnom, 32)+"|"+left(ls_patprenom, 32)+"|"+string(ldt_nais, 'dd.mm.yyyy')+"|"+&
+					   string(al_patid)+"|"+ls_station+"|"+string(today(), 'dd.mm.yyyy')+"|"+&
+					  string(now(), 'hh:mm:ss')+"|\\"+ls_station+"\Orthotek|\\*\Sidexis|"+ls_req+"|~r~n"
+					  		
+		ll_tailleA = len(ls_info) - ll_tailleN
+		
+		lbl_info = blob(ls_info, EncodingANSI!)
+		ll_pos = blobEdit(lbl_info, 1, byte(ll_tailleN))
+		ll_pos = blobEdit(lbl_info, ll_tailleN + 1, byte(ll_tailleA))
+		
+		ll_pos = pos(ls_info, '|')
+		
+		do while ll_pos > 0
+			blobEdit(lbl_info, ll_pos, byte(0))
+			
+			ll_pos = pos(ls_info, '|', ll_pos + 1)
+		loop
+		 
+		li_file = fileOpen(ls_sdxfile, StreamMode!, Write!, LockReadWrite!, Append!)
+		fileWriteEx(li_file, lbl_info)
+		
+		fileClose(li_file)
+		
+		setProfileString(left(ls_pathdolphincadi, ll_posSl) + "sifiledb.ini", "OfficeManagement", "OffManConnected", "1")
+		run(ls_pathdolphincadi)
+
+	case else
+		error_type(1001)
+end choose
+end subroutine
+

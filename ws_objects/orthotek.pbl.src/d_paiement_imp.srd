@@ -1,0 +1,95 @@
+﻿$PBExportHeader$d_paiement_imp.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=908 color="536870912" )
+summary(height=96 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=date updatewhereclause=yes name=paiement_date_paiement dbname="paiement.date_paiement" )
+ column=(type=long updatewhereclause=yes name=paiement_paiement_id dbname="paiement.paiement_id" )
+ column=(type=decimal(2) updatewhereclause=yes name=paiement_montant_recu dbname="paiement.montant_recu" )
+ column=(type=char(20) updatewhereclause=yes name=paiement_paiement dbname="paiement.paiement" values="Comptant	$/Chèque	C/R.A.M.Q.	R/Visa	Visa/MasterCard	MC/Paiement direct	PD/N.S.F.	N.S.F./Crédit	Crédit/Transfert	trans/Perte	perte/Postdaté	P/" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_ville_province_code_postale dbname="ortho_id.dr_ville_province_code_postale" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_adresse dbname="ortho_id.dr_adresse" )
+ column=(type=char(15) updatewhereclause=yes name=ortho_id_dr_tel_bur dbname="ortho_id.dr_tel_bur" )
+ column=(type=char(50) updatewhereclause=yes name=patient_nomresp1 dbname="patient.nomresp1" )
+ column=(type=char(35) updatewhereclause=yes name=patient_addresp1 dbname="patient.addresp1" )
+ column=(type=char(25) updatewhereclause=yes name=patient_cityresp1 dbname="patient.cityresp1" )
+ column=(type=char(10) updatewhereclause=yes name=patient_zipresp1 dbname="patient.zipresp1" )
+ column=(type=char(15) updatewhereclause=yes name=patient_telresp1 dbname="patient.telresp1" )
+ column=(type=char(50) updatewhereclause=yes name=patient_nomresp2 dbname="patient.nomresp2" )
+ column=(type=char(35) updatewhereclause=yes name=patient_addresp2 dbname="patient.addresp2" )
+ column=(type=char(25) updatewhereclause=yes name=patient_cityresp2 dbname="patient.cityresp2" )
+ column=(type=char(10) updatewhereclause=yes name=patient_zipresp2 dbname="patient.zipresp2" )
+ column=(type=char(15) updatewhereclause=yes name=patient_telresp2 dbname="patient.telresp2" )
+ column=(type=char(50) updatewhereclause=yes name=patient_nomresp3 dbname="patient.nomresp3" )
+ column=(type=char(35) updatewhereclause=yes name=patient_addresp3 dbname="patient.addresp3" )
+ column=(type=char(25) updatewhereclause=yes name=patient_cityresp3 dbname="patient.cityresp3" )
+ column=(type=char(10) updatewhereclause=yes name=patient_zipresp3 dbname="patient.zipresp3" )
+ column=(type=char(15) updatewhereclause=yes name=patient_telresp3 dbname="patient.telresp3" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(36) updatewhereclause=yes name=patient_adresse dbname="patient.adresse" )
+ column=(type=char(25) updatewhereclause=yes name=patient_ville dbname="patient.ville" )
+ column=(type=char(10) updatewhereclause=yes name=patient_code_postale dbname="patient.code_postale" )
+ column=(type=char(25) updatewhereclause=yes name=patient_province dbname="patient.province" )
+ column=(type=char(15) updatewhereclause=yes name=patient_tel_maison dbname="patient.tel_maison" )
+ retrieve="SELECT	paiement.date_paiement ,
+    		paiement.paiement_id ,
+ 			paiement.montant_recu ,
+         paiement.paiement,
+         ortho_id.dr_nom_complet ,
+         ortho_id.dr_ville_province_code_postale ,
+         ortho_id.dr_adresse ,
+         ortho_id.dr_tel_bur ,
+         patient.nomresp1,
+         patient.addresp1, 
+         patient.cityresp1,
+         patient.zipresp1, 
+         patient.telresp1,
+         patient.nomresp2,
+         patient.addresp2, 
+         patient.cityresp2, 
+         patient.zipresp2,
+         patient.telresp2,
+			patient.nomresp3,
+         patient.addresp3, 
+         patient.cityresp3,
+         patient.zipresp3,
+         patient.telresp3,
+         patient.patient_nom,
+         patient.patient_prenom,
+         patient.adresse,
+         patient.ville,
+         patient.code_postale,
+         patient.province,
+         patient.tel_maison         
+FROM		traitements INNER JOIN paiement ON paiement.traitement_patient_id = traitement_id
+                     INNER JOIN patient ON patient.patient_id = traitements.patient_id,
+         patient     INNER JOIN ortho_id ON patient.no_ortho = ortho_id.ortho_id
+WHERE 	paiement.nomresp like :ra_resp " arguments=(("ra_resp", string)) )
+roundrectangle(band=header ellipseheight="36" ellipsewidth="41"x="0" y="0" height="396" width="3488"  name=rr_1 brush.hatch="6" brush.color="16777215" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Honoraire" border="0" color="0" x="2674" y="836" height="64" width="434"  name=t_7  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Modalité de paiement" border="0" color="0" x="1024" y="836" height="64" width="869"  name=t_6  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="# du reçu" border="0" color="0" x="443" y="840" height="64" width="251"  name=t_5  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Date" border="0" color="0" x="105" y="840" height="64" width="123"  name=t_4  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+line(band=header x1="0" y1="904" x2="3488" y2="904"  name=l_1 pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=header id=8 alignment="0" tabsequence=32766 border="0" color="0" x="197" y="308" height="64" width="791" format="[general]"  name=ortho_id_dr_tel_bur edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="tél.:" border="0" color="0" x="55" y="308" height="64" width="119"  name=t_1  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=6 alignment="0" tabsequence=32766 border="0" color="0" x="55" y="220" height="64" width="2418" format="[general]"  name=ortho_id_dr_ville_province_code_postale edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=7 alignment="0" tabsequence=32766 border="0" color="0" x="55" y="132" height="64" width="2418" format="[general]"  name=ortho_id_dr_adresse edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=5 alignment="0" tabsequence=32766 border="0" color="0" x="55" y="48" height="64" width="2418" format="[general]"  name=ortho_id_dr_nom_complet edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="case( ra_resp when patient_nomresp1 then patient_nomresp1  when patient_nomresp2  then patient_nomresp2  when patient_nomresp3 then patient_nomresp3 when  (patient_patient_nom  + ' ' + patient_patient_prenom )  then (patient_patient_nom  + ' ' + patient_patient_prenom ) )"border="0" color="0" x="50" y="456" height="64" width="1947" format="[GENERAL]"  name=compute_4  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="case( ra_resp when patient_nomresp1 then patient_telresp1 when patient_nomresp2  then patient_telresp2 when patient_nomresp3 then patient_telresp3 when (patient_patient_nom  + ' ' + patient_patient_prenom ) then  patient_tel_maison )   "border="0" color="0" x="50" y="660" height="64" width="1947" format="[GENERAL]"  name=compute_5  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="case( ra_resp when patient_nomresp1 then patient_addresp1 when patient_nomresp2  then patient_addresp2 when patient_nomresp3 then patient_addresp3 when (patient_patient_nom  + ' ' + patient_patient_prenom )  then  patient_adresse )  "border="0" color="0" x="50" y="524" height="64" width="1947" format="[GENERAL]"  name=compute_1  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="case( ra_resp when patient_nomresp1 then patient_cityresp1 when patient_nomresp2  then patient_cityresp2 when patient_nomresp3 then patient_cityresp3 when (patient_patient_nom  + ' ' + patient_patient_prenom )  then   patient_ville )   + ' ' + case( ra_resp when patient_nomresp1 then patient_zipresp1  when patient_nomresp2  then patient_zipresp2 when patient_nomresp3 then patient_zipresp3 when (patient_patient_nom  + ' ' + patient_patient_prenom ) then patient_code_postale  )      "border="0" color="0" x="50" y="592" height="64" width="1947" format="[GENERAL]"  name=compute_2  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="8" height="64" width="334" format="[general]"  name=paiement_date_paiement edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="443" y="8" height="64" width="370" format="[general]"  name=paiement_paiement_id edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="0" x="2610" y="8" height="64" width="507" format="#,##0.00 $; (#,##0.00 $)"  name=paiement_montant_recu edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1120" y="8" height="64" width="731" format="[general]"  name=paiement_paiement ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(paiement_montant_recu  for all)"border="0" color="0" x="2674" y="20" height="64" width="434" format="#,##0.00 $; (#,##0.00 $)"  name=compute_3  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Total" border="0" color="0" x="2505" y="20" height="64" width="146"  name=t_3  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+line(band=summary x1="2647" y1="8" x2="3150" y2="8"  name=l_2 pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

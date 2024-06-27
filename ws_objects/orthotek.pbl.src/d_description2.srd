@@ -1,0 +1,18 @@
+﻿$PBExportHeader$d_description2.srd
+release 6;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=char(100) updatewhereclause=yes name=description_description dbname="description.description" )
+ column=(type=char(1) updatewhereclause=yes name=description_patient_case_a_coche dbname="description_patient.case_a_coche" values="	o/	n" )
+ column=(type=char(20) updatewhereclause=yes name=description_patient_entre dbname="description_patient.entre" )
+ column=(type=long updatewhereclause=yes name=description_patient_patient_id dbname="description_patient.patient_id" )
+ column=(type=long updatewhereclause=yes name=description_patient_description_id dbname="description_patient.description_id" )
+ column=(type=char(20) updatewhereclause=yes name=description_categorie dbname="description.categorie" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"description~" )  TABLE(NAME=~"description_patient~" ) COLUMN(NAME=~"description.description~") COLUMN(NAME=~"description_patient.case_a_coche~") COLUMN(NAME=~"description_patient.entre~") COLUMN(NAME=~"description_patient.patient_id~") COLUMN(NAME=~"description_patient.description_id~") COLUMN(NAME=~"description.categorie~")    JOIN (LEFT=~"description_patient.description_id~"    OP =~"=~"RIGHT=~"description.id~" )WHERE(    EXP1 =~"( ( ~~~"description_patient~~~".~~~"patient_id~~~"~"   OP =~"=~"    EXP2 =~":id ) )~" ) ) ORDER(NAME=~"description.description~" ASC=yes ) ARG(NAME = ~"id~" TYPE = number) " arguments=(("id", number)) )
+column(band=detail id=2 alignment="0" tabsequence=10 border="0" color="0" x="174" y="16" height="52" width="59" format="[general]"  name=description_patient_case_a_coche checkbox.text="" checkbox.on="o" checkbox.off="n" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="5" color="0" x="279" y="8" height="64" width="1879" format="[general]"  name=description_description edit.limit=100 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=20 border="5" color="0" x="2181" y="8" height="64" width="1257" format="[general]"  name=description_patient_entre edit.limit=20 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="3438" y="0" height="64" width="539" format="[general]"  name=description_categorie edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

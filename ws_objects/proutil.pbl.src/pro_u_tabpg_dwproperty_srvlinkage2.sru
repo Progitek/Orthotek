@@ -1,0 +1,61 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_srvlinkage2.sru
+$PBExportComments$(PRO) DataWindow Property - The Linkage service tabpage 2
+forward
+global type pro_u_tabpg_dwproperty_srvlinkage2 from pfc_u_tabpg_dwproperty_srvlinkage2
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_srvlinkage2 from pfc_u_tabpg_dwproperty_srvlinkage2
+end type
+global pro_u_tabpg_dwproperty_srvlinkage2 pro_u_tabpg_dwproperty_srvlinkage2
+
+on pro_u_tabpg_dwproperty_srvlinkage2.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_srvlinkage2.destroy
+call super::destroy
+end on
+
+type cbx_confirmondelete from pfc_u_tabpg_dwproperty_srvlinkage2`cbx_confirmondelete within pro_u_tabpg_dwproperty_srvlinkage2
+end type
+
+type cbx_confirmonrowchange from pfc_u_tabpg_dwproperty_srvlinkage2`cbx_confirmonrowchange within pro_u_tabpg_dwproperty_srvlinkage2
+end type
+
+type cbx_synconkeychange from pfc_u_tabpg_dwproperty_srvlinkage2`cbx_synconkeychange within pro_u_tabpg_dwproperty_srvlinkage2
+end type
+
+type st_label_deletestyle from pfc_u_tabpg_dwproperty_srvlinkage2`st_label_deletestyle within pro_u_tabpg_dwproperty_srvlinkage2
+end type
+
+type st_label_savesound from pfc_u_tabpg_dwproperty_srvlinkage2`st_label_savesound within pro_u_tabpg_dwproperty_srvlinkage2
+end type
+
+type sle_savesound from pfc_u_tabpg_dwproperty_srvlinkage2`sle_savesound within pro_u_tabpg_dwproperty_srvlinkage2
+end type
+
+type st_label_updatestyle from pfc_u_tabpg_dwproperty_srvlinkage2`st_label_updatestyle within pro_u_tabpg_dwproperty_srvlinkage2
+end type
+
+type ddlb_updatestyle from pfc_u_tabpg_dwproperty_srvlinkage2`ddlb_updatestyle within pro_u_tabpg_dwproperty_srvlinkage2
+end type
+
+type ddlb_deletestyle from pfc_u_tabpg_dwproperty_srvlinkage2`ddlb_deletestyle within pro_u_tabpg_dwproperty_srvlinkage2
+end type
+
+type gb_updateonrowchange from pfc_u_tabpg_dwproperty_srvlinkage2`gb_updateonrowchange within pro_u_tabpg_dwproperty_srvlinkage2
+end type
+
+type gb_retrievestyleoptions from pfc_u_tabpg_dwproperty_srvlinkage2`gb_retrievestyleoptions within pro_u_tabpg_dwproperty_srvlinkage2
+end type
+
+type ddlb_customupdate from pfc_u_tabpg_dwproperty_srvlinkage2`ddlb_customupdate within pro_u_tabpg_dwproperty_srvlinkage2
+end type
+
+type st_customupdate from pfc_u_tabpg_dwproperty_srvlinkage2`st_customupdate within pro_u_tabpg_dwproperty_srvlinkage2
+end type
+
+type cbx_updateonrowchange from pfc_u_tabpg_dwproperty_srvlinkage2`cbx_updateonrowchange within pro_u_tabpg_dwproperty_srvlinkage2
+end type
+

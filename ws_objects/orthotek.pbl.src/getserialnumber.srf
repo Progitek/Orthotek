@@ -1,0 +1,22 @@
+﻿$PBExportHeader$getserialnumber.srf
+global type getSerialNumber from function_object
+end type
+
+forward prototypes
+global function long getserialnumber (string as_strracine)
+end prototypes
+
+global function long getserialnumber (string as_strracine);boolean lb_ret
+String  ls_VolName
+uLong   ll_VolSerial
+uLong   ll_MCompLen
+uLong   ll_VolFlgs
+String  ls_VolFileSys
+
+ls_VolName = Space(256)
+ls_VolFileSys = Space(256)
+lb_ret = GetVolumeInformationA(as_strracine, ls_VolName, Len(ls_VolName), ll_VolSerial, ll_MCompLen, ll_VolFlgs, ls_VolFileSys, Len(ls_VolFileSys))
+
+return ll_VolSerial
+end function
+

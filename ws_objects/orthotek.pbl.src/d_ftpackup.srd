@@ -1,0 +1,32 @@
+﻿$PBExportHeader$d_ftpackup.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no pointer="Arrow!" )
+header(height=88 color="536870912" )
+summary(height=68 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=id_file dbname="t_ftpfiles.id_file" )
+ column=(type=char(500) updatewhereclause=yes name=filename dbname="t_ftpfiles.filename" )
+ column=(type=datetime updatewhereclause=yes name=moddate dbname="t_ftpfiles.moddate" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=statut dbname="t_ftpfiles.statut" values="Existe	E/Modifié	M/Nouveau	N/Effacer	D/" )
+ retrieve="  SELECT t_ftpfiles.id_file,   
+         t_ftpfiles.filename,   
+         t_ftpfiles.moddate,   
+         t_ftpfiles.statut  
+    FROM t_ftpfiles  
+ORDER BY t_ftpfiles.moddate DESC   
+" update="t_ftpfiles" updatewhere=1 updatekeyinplace=no )
+line(band=header x1="0" y1="84" x2="3493" y2="84"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Nom des fichiers" border="6" color="33554432" x="14" y="4" height="64" width="2386" html.valueishtml="0"  name=filename_t pointer="HyperLink!" visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Date de modification" border="6" color="33554432" x="2414" y="4" height="64" width="667" html.valueishtml="0"  name=moddate_t pointer="HyperLink!" visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="État" border="6" color="33554432" x="3095" y="4" height="64" width="389" html.valueishtml="0"  name=statut_t pointer="HyperLink!" visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=10 border="0" color="33554432~tcase(  statut  when 'N' then RGB(0,255,0) when 'E' then RGB(255,255,0) when 'M' then RGB(0,0,255) when 'D' then RGB(255,0,0) else RGB(0,0,0))" x="3095" y="4" height="64" width="389" format="[general]" html.valueishtml="0"  name=statut visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="2414" y="4" height="64" width="677" format="[shortdate] [time]" html.valueishtml="0"  name=moddate visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="18" y="4" height="64" width="2391" format="[general]" html.valueishtml="0"  name=filename visible="1" edit.limit=500 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Qté.:" border="0" color="33554432" x="23" y="8" height="56" width="137" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="count(filename for all)"border="0" color="33554432" x="192" y="8" height="56" width="699" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

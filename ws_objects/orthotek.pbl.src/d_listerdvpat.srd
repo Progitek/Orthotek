@@ -1,0 +1,49 @@
+﻿$PBExportHeader$d_listerdvpat.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=388 color="536870912" )
+summary(height=124 color="536870912" )
+footer(height=52 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=date updatewhereclause=yes name=rdvdate dbname="t_rdv.rdvdate" )
+ column=(type=time updatewhereclause=yes name=rdvheure dbname="t_rdv.rdvheure" )
+ column=(type=char(1) updatewhereclause=yes name=rdvetat dbname="t_rdv.rdvetat" )
+ column=(type=char(40) updatewhereclause=yes name=traitnom dbname="traitnom" )
+ column=(type=char(102) updatewhereclause=yes name=patnom dbname="patnom" )
+ column=(type=long updatewhereclause=yes name=orthoid dbname="orthoid" )
+ retrieve="  SELECT t_rdv.rdvdate,
+			t_rdv.rdvheure,
+			t_rdv.rdvetat,
+			(select nom_traitement from type_de_traitement where type_traitement_id = typetraitid and ortho_id = :ra_ortho) as traitnom,
+			(select patient_nom + ', ' + patient_prenom from patient where patient.patient_id = t_rdv.patient_id) as patnom,
+			(select no_ortho from patient where patient.patient_id = t_rdv.patient_id) as orthoid
+    FROM t_rdv
+	WHERE orthoid = :ra_ortho AND
+			t_rdv.rdvdate BETWEEN :ra_start AND :ra_end
+ORDER BY t_rdv.rdvdate ASC,
+			t_rdv.rdvheure ASC" arguments=(("ra_ortho", number),("ra_start", date),("ra_end", date)) )
+line(band=header x1="0" y1="376" x2="3287" y2="376"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="État" border="0" color="33554432" x="2606" y="300" height="64" width="681" html.valueishtml="0"  name=t_etat visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Rendez-vous" border="0" color="33554432" x="1915" y="300" height="64" width="690" html.valueishtml="0"  name=t_rdv visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+button(band=header text="Rendez-vous" filename="" enabled=yes action="0" border="0" color="0" x="1915" y="288" height="80" width="686" vtextalign="0" htextalign="0"  name=b_rdv visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=header text="État" filename="" enabled=yes action="0" border="0" color="0" x="2601" y="288" height="80" width="690" vtextalign="0" htextalign="0"  name=b_etat visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Liste des rendez-vous patients" border="0" color="8388608" x="0" y="36" height="80" width="3282" html.valueishtml="0"  name=t_title visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Nom du patient" border="0" color="33554432" x="0" y="300" height="64" width="1061" html.valueishtml="0"  name=t_patnom visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Traitement" border="0" color="33554432" x="1070" y="300" height="64" width="837" html.valueishtml="0"  name=t_trait visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+button(band=header text="Traitement" filename="" enabled=yes action="0" border="0" color="0" x="1070" y="288" height="80" width="846" vtextalign="0" htextalign="0"  name=b_trait visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=header text="Nom du patient" filename="" enabled=yes action="0" border="0" color="0" x="5" y="288" height="80" width="1065" vtextalign="0" htextalign="0"  name=b_patnom visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=detail alignment="0" expression=" rdvdate + ' ' +  rdvheure "border="0" color="0" x="1915" y="4" height="64" width="690" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="2606" y="4" height="64" width="681" format="[general]" html.valueishtml="0"  name=rdvetat visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1074" y="4" height="64" width="841" format="[general]" html.valueishtml="0"  name=traitnom visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="0" y="4" height="64" width="1074" format="[general]" html.valueishtml="0"  name=patnom visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+compute(band=summary alignment="0" expression="count ( patnom  for all )"border="0" color="33554432" x="169" y="56" height="64" width="658" format="[General]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Qté:" border="0" color="33554432" x="0" y="56" height="64" width="165" html.valueishtml="0"  name=t_qty visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Imprimé le" border="0" color="0" x="0" y="0" height="56" width="242" html.valueishtml="0"  name=t_printedon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="247" y="0" height="56" width="302" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="© Orthotek" border="0" color="0" x="1605" y="0" height="56" width="270" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2459" y="0" height="56" width="823" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

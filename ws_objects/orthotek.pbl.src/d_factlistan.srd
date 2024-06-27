@@ -1,0 +1,52 @@
+﻿$PBExportHeader$d_factlistan.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="Formulaire normalisé" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=104 color="536870912" )
+summary(height=156 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=t_factest_id_fact dbname="t_factest.id_fact" )
+ column=(type=date updatewhereclause=yes name=t_factest_factdate dbname="t_factest.factdate" )
+ column=(type=decimal(2) updatewhereclause=yes name=t_factest_prixlab dbname="t_factest.prixlab" )
+ column=(type=long updatewhereclause=yes name=t_factest_patient_id dbname="t_factest.patient_id" )
+ column=(type=decimal(2) updatewhereclause=yes name=prix dbname="t_factest.prix" )
+ column=(type=char(100) updatewhereclause=yes name=descrip dbname="t_factest.descrip" )
+ column=(type=long updatewhereclause=yes name=status_id dbname="t_factest.status_id" )
+ column=(type=char(10) updatewhereclause=yes name=t_factest_dent dbname="t_factest.dent" )
+ column=(type=char(1) updatewhereclause=yes name=t_estime_typetrait dbname="t_estime.typetrait" )
+ retrieve="  SELECT DISTINCT t_factest.id_fact,   
+         t_factest.factdate,   
+         t_factest.prixlab,
+         t_factest.patient_id,   
+         t_factest.prix,
+         t_factest.descrip,
+         t_factest.status_id,
+         t_factest.dent,
+         t_estime.typetrait
+    FROM t_factest INNER JOIN t_estime ON t_factest.id_estime = t_factest.id_estime            
+   WHERE t_factest.id_estime = :ra_idestime and
+         t_factest.imprimer = 1 and
+         t_estime.typetrait = :ra_type" arguments=(("ra_idestime", number),("ra_type", string)) )
+text(band=header alignment="2" text="DATE" border="2" color="0" x="5" y="4" height="96" width="329" html.valueishtml="0"  name=factures_traitements_date_facture_t visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Teeth" border="2" color="0" x="338" y="4" height="96" width="279" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Laboratory" border="2" color="0" x="2235" y="4" height="96" width="334" html.valueishtml="0"  name=t_status_code_t visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Fees" border="2" color="0" x="2574" y="4" height="96" width="379" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Total" border="2" color="0" x="2958" y="4" height="96" width="379" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Description" border="2" color="0" x="1006" y="4" height="96" width="1225" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Acte Code" border="2" color="0" x="622" y="4" height="96" width="379" html.valueishtml="0"  name=factures_traitements_montant_t visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="2" color="0" x="2235" y="0" height="76" width="334" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=t_factest_prixlab visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="2" color="0" x="2574" y="0" height="76" width="379" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=prix visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="1" expression="t_factest_prixlab +  prix"border="2" color="0" x="2958" y="0" height="76" width="379" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-7" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="2" color="0" x="1006" y="0" height="76" width="1225" format="[general]" html.valueishtml="0"  name=descrip visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=7 alignment="2" tabsequence=32766 border="2" color="0" x="622" y="0" height="76" width="379" format="[general]" html.valueishtml="0"  name=status_id visible="1" dddw.name=dddw_status dddw.displaycolumn=code dddw.datacolumn=status_id dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="if( t_estime_typetrait = 'p', 'Estimated',string( t_factest_factdate ))"border="2" color="0" x="5" y="0" height="76" width="329" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="2" color="0" x="338" y="0" height="76" width="279" format="[general]" html.valueishtml="0"  name=t_factest_dent visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=summary alignment="0" text="This is an accurate statement of services performed" border="0" color="0" x="0" y="0" height="44" width="1065" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-7" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="and the total fee due" border="0" color="0" x="9" y="48" height="44" width="1029" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-7" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="1102" y1="0" x2="1102" y2="148"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+line(band=summary x1="0" y1="0" x2="3337" y2="0"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=summary x1="0" y1="148" x2="1106" y2="148"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+text(band=summary alignment="1" text="TOTAL FEES" border="0" color="0" x="2578" y="40" height="56" width="325" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(   prix +  t_factest_prixlab for all) "border="0" color="0" x="2935" y="32" height="76" width="393" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-7" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

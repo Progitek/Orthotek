@@ -1,0 +1,18 @@
+﻿$PBExportHeader$gf_refresh.srf
+global type gf_refresh from function_object
+end type
+
+forward prototypes
+global subroutine gf_refresh (string fs_do, ref datawindow fdw_dw, ref datastore fds_ds)
+end prototypes
+
+global subroutine gf_refresh (string fs_do, ref datawindow fdw_dw, ref datastore fds_ds);long ll_nbrow
+fds_ds = create datastore
+fds_ds.dataobject = fs_do
+fds_ds.SetTransObject(SQLCA)
+fds_ds.retrieve(v_no_ortho)
+fds_ds.ShareData(fdw_dw)
+
+
+end subroutine
+

@@ -1,0 +1,380 @@
+﻿$PBExportHeader$gf_pat2excel.srf
+global type gf_pat2excel from function_object
+end type
+
+forward prototypes
+global subroutine gf_pat2excel (long al_patid[], long al_contactid[], long al_phase[])
+end prototypes
+
+global subroutine gf_pat2excel (long al_patid[], long al_contactid[], long al_phase[]);n_ds ds_patientcorr
+int i, li_ret
+string ls_patid, ls_contactid, ls_phase
+
+ls_patid = unsplit(al_patid,',')
+ls_contactid = unsplit(al_contactid,',')
+ls_phase = unsplit(al_phase,',')
+ds_patientcorr = create n_ds
+ds_patientcorr.dataobject = 'd_exportpat'
+ds_patientcorr.setTransObject(SQLCA)
+li_ret = ds_patientcorr.retrieve(ls_patid,ls_contactid,ls_phase)
+ds_patientcorr.saveas('c:\ii4net\orthotek\pat.xls',excel5!,true)
+
+destroy ds_patientcorr
+
+/*
+if al_patid > 0 then
+	
+	
+	select hor_step, pourcapp into :ll_step, :ld_pourc from t_options where ortho_id = :v_no_ortho;
+	
+	if ab_ajout = false then
+		li_patdat = FileOpen("C:\ii4net\orthotek\pat.dat",LineMode!, Write!, LockWrite!, Replace!)
+		li_pattxt = FileOpen("C:\ii4net\orthotek\pat.txt",LineMode!, Write!, LockWrite!, Replace!)
+	else
+		li_patdat = FileOpen("C:\ii4net\orthotek\pat.dat",LineMode!, Write!, LockWrite!, Append!)
+		li_pattxt = FileOpen("C:\ii4net\orthotek\pat.txt",LineMode!, Write!, LockWrite!, Append!)
+	end if
+	if li_patdat > 0 and li_pattxt > 0 then
+		//patient
+		select salutation,patient_nom,patient_prenom,adresse,ville,province,code_postale,sex,new_dossier,no_dossier,
+		no_boite,tel_maison,tel_bureau,date_naissance,nom_pere,no_tel_pere,nom_mere,no_tel_mere, langue, 
+		(select det_langue from t_dentists where t_dentists.id_dentist = patient.id_dentist)
+		into :ls_patsal,:ls_patnom,:ls_patprenom,:ls_patadresse,:ls_patville,:ls_patprovince,:ls_patcodepostal,
+		:ls_patgenre,:ls_patnodoss,:ls_patnopatient,:ls_patnoboite,:ls_pattelres,:ls_pattelbur,:ldt_patnais,
+		:ls_patnompere,:ls_pattelpere,:ls_patnommere,:ls_pattelmere, :ls_langue, :ls_dentistelangue
+		from patient left outer join t_salutation on patient.id_sal = t_salutation.id_sal 
+		where patient.patient_id = :al_patid;
+		
+		if isnull(ls_dentistelangue) then ls_dentistelangue = 'fr'
+		if isnull(ls_patsal) then ls_patsal = ''
+		if isnull(ls_patprenom) then ls_patprenom = ''
+		if isnull(ls_patnom) then ls_patnom = ''
+		if isnull(ls_patadresse) then ls_patadresse = ''
+		if isnull(ls_patville) then ls_patville = ''
+		if isnull(ls_patprovince) then ls_patprovince = ''
+		if isnull(ls_patcodepostal) then 
+			ls_patcodepostal = ''
+		else
+			ls_patcodepostal = string(ls_patcodepostal,'@@@ @@@')
+		end if
+		if isnull(ls_patgenre) then 
+			ls_patgenre = ''
+		else
+			if v_langue = 'an' then
+				choose case ls_patgenre
+					case 'F'
+						ls_patgenre = 'Woman'
+					case 'M'
+						ls_patgenre = 'Man'
+				end choose
+			else
+				choose case ls_patgenre
+					case 'F'
+						ls_patgenre = 'Femme'
+					case 'M'
+						ls_patgenre = 'Homme'
+				end choose
+			end if
+		end if
+		if isnull(ls_patnodoss) then ls_patnodoss = ''
+		if isnull(ls_patnopatient) then ls_patnopatient = ''
+		if isnull(ls_patnoboite) then ls_patnoboite = ''
+		if isnull(ls_pattelres) then 
+			ls_pattelres = ''
+		else
+			ls_pattelres = string(ls_pattelres,'(@@@) @@@-@@@@')
+		end if
+		if isnull(ls_pattelbur) then 
+			ls_pattelbur = ''
+		else
+			ls_pattelbur = string(ls_pattelbur,'(@@@) @@@-@@@@')
+		end if
+		ls_patdatenaiss = string(ldt_patnais)
+		if isnull(ls_patdatenaiss) then 
+			ls_patdatenaiss = ''
+			ls_patage = ''
+			ls_patagean = ''
+		else
+			ls_patage = calculagefr(ldt_patnais)	
+			ls_patagean = calculagean(ldt_patnais)
+		end if
+		if isnull(ls_patnompere) then ls_patnompere = ''
+		if isnull(ls_pattelpere) then 
+			ls_pattelpere = ''
+		else
+			ls_pattelpere = string(ls_pattelpere,'(@@@) @@@-@@@@')
+		end if
+		if isnull(ls_patnommere) then ls_patnommere = ''
+		if isnull(ls_pattelmere) then 
+			ls_pattelmere = ''
+		else
+			ls_pattelmere = string(ls_pattelmere,'(@@@) @@@-@@@@')
+		end if
+		
+		//Responsable
+		select salutation,prenom,nom,adresse,ville,province,zip,telres
+		into :ls_respsal,:ls_respprenom,:ls_respnom,:ls_respadresse,:ls_respville,:ls_respprovince,:ls_respcodepostal,:ls_resptelres
+		from t_contact left outer join t_salutation on t_salutation.id_sal = t_contact.id_sal 
+		where t_contact.id_contact = :al_contactid;
+//		error_type(-1)
+		if isnull(ls_respsal) then ls_respsal = ''
+		if isnull(ls_respprenom) then ls_respprenom = ''
+		if isnull(ls_respnom) then ls_respnom = ''
+		if isnull(ls_respadresse) then ls_respadresse = ''
+		if isnull(ls_respville) then ls_respville = ''
+		if isnull(ls_respprovince) then ls_respprovince = ''
+		if isnull(ls_respcodepostal) then 
+			ls_respcodepostal = ''
+		else
+			ls_respcodepostal = string(ls_respcodepostal,'@@@ @@@')
+		end if
+		if isnull(ls_resptelres) then 
+			ls_resptelres = ''
+		else
+			ls_resptelres = string(ls_resptelres,'(@@@) @@@-@@@@')
+		end if
+		
+		// Contrat
+		
+		select description,date1,pourcentage,couttrait,initial,cons,diag,meb,retfee,mdate1,mmontant,mqty,paiefinal,duree1,duree2, cons2
+		into :ls_description,:ldt_date1,:ls_pourcentage,:ls_couttrait,:ls_initial,:ls_cons,:ls_diag,:ls_meb,:ls_retfee,:ldt_mdate1,:ls_mmens,:ls_mqty,:ls_paiefinal,:ls_duree1,:ls_duree2, :ls_cons2
+		from t_contrats 
+		where id_contact = :al_contactid and id_phase = :al_phase and patient_id = :al_patid;
+
+		if isnull(ls_description) then ls_description = ''
+		if isnull(ldt_date1) then ls_date1 = '' else ls_date1 = string(ldt_date1,'dd-mm-yyyy')
+		
+		ls_coutapp = string(ls_couttrait)
+		if isnull(ls_coutapp) then ls_coutapp = ""
+		
+		if isnull(ls_couttrait) then 
+			ls_couttrait = ''
+		else
+			ls_couttrait = ls_couttrait + '$'
+		end if
+		if isnull(ls_initial) then 
+			ls_initial = ''
+		else
+			ls_initial = ls_initial + '$'
+		end if
+		if isnull(ls_cons) then 
+			ls_cons = ''
+		else
+			ls_cons = ls_cons + '$'
+		end if
+		if isnull(ls_cons2) then 
+			ls_cons2 = ''
+		else
+			ls_cons2 = ls_cons2 + '$'
+		end if
+		if isnull(ls_diag) then 
+			ls_diag = ''
+		else
+			ls_diag = ls_diag + '$'
+		end if
+		if isnull(ls_meb) then 
+			ls_meb = ''
+		else
+			ls_meb = ls_meb + '$'
+		end if
+		if isnull(ls_retfee) then 
+			ls_retfee = ''
+		else
+			ls_retfee = ls_retfee + '$'
+		end if
+		if isnull(ldt_mdate1) then ls_mdate1 = '' else ls_mdate1 = string(ldt_mdate1)
+		ls_mtot = string(dec(ls_mqty) * dec(ls_mmens) + dec(ls_paiefinal),'0.00') + '$'
+		if isnull(ls_mtot) then ls_mtot = ''
+		if isnull(ls_mmens) then 
+			ls_mmens = ''
+		else
+			ls_mmens = ls_mmens + '$'
+		end if
+		if isnull(ls_mqty) then ls_mqty = ''
+		
+		if isnull(ls_paiefinal) then 
+			ls_paiefinal = ''
+		else
+			ls_paiefinal = ls_paiefinal + '$'
+		end if
+		
+		// Calcul de la date de fin des mensualités
+		ll_nbmois = long(ls_mqty)
+		SELECT dateadd( month, :ll_nbmois, :ldt_mdate1) into :ldt_dernpaie from Lock_cheques;
+		ls_dernpaie = string(ldt_dernpaie)
+		if isnull(ls_dernpaie) then ls_dernpaie = ""
+		
+		if isnull(ls_pourcentage) then 
+			ls_pourcentage = ''
+		else
+			ls_pourcentage = ls_pourcentage + ' %'
+		end if
+		if isnull(ls_duree1) then ls_duree1 = ''
+		if isnull(ls_duree2) then ls_duree2 = ''
+		
+		// Dentiste
+		select salutation,det_prenom,det_nom,det_add,det_ville,det_prov,det_zip
+		into :ls_detsalutation,:ls_detprenom,:ls_detnom,:ls_detadd,:ls_detville,:ls_detprov,:ls_detzip
+		from t_dentists left outer join t_salutation on t_dentists.id_sal = t_salutation.id_sal
+							 inner join patient on t_dentists.id_dentist = patient.id_dentist 
+		where patient.patient_id = :al_patid;
+//		error_type(-1)
+		if isnull(ls_detsalutation) then ls_detsalutation = ''
+		if isnull(ls_detprenom) then ls_detprenom = ''
+		if isnull(ls_detnom) then ls_detnom = ''
+		if isnull(ls_detadd) then ls_detadd = ''
+		if isnull(ls_detville) then ls_detville = ''
+		if isnull(ls_detprov) then ls_detprov = ''
+		if isnull(ls_detzip) then 
+			ls_detzip = ''
+		else
+			ls_detzip = string(ls_detzip,'@@@ @@@')
+		end if
+	
+		//référent
+		select salutation,ref_prenom,ref_nom,ref_adresse,ref_ville,ref_province,ref_zip
+		into :ls_refsalutation,:ls_refprenom,:ls_refnom,:ls_refadresse,:ls_refville,:ls_refprovince,:ls_refzip
+		from t_referents left outer join t_salutation on t_referents.id_sal = t_salutation.id_sal
+							  left outer join patient on t_referents.id = patient.referant_nom where patient_id = :al_patid;
+
+		if isnull(ls_refsalutation) then ls_refsalutation = ''
+		if isnull(ls_refprenom) then ls_refprenom = ''
+		if isnull(ls_refnom) then ls_refnom = ''
+		if isnull(ls_refadresse) then ls_refadresse = ''
+		if isnull(ls_refville) then ls_refville = ''
+		if isnull(ls_refprovince) then ls_refprovince = ''
+		if isnull(ls_refzip) then 
+			ls_refzip = ''
+		else
+			ls_refzip = string(ls_refzip,'@@@ @@@')
+		end if
+		
+		// Rendez-vous
+		
+		select (select min(rdvdate) from t_rdv where rdvdate > today() and patient_id = patient.patient_id), 
+		       (select max(rdvdate) from t_rdv where rdvdate < today() and patient_id = patient.patient_id) 
+		into :ldt_nextrdv, :ldt_dernrdv 
+		from patient 
+		where patient_id = :al_patid;
+	
+		select duree, rdvheure, (select nom_traitement from type_de_traitement where type_traitement_id = t_rdv.typetraitid)
+		into :ll_duree, :lt_rdvheure, :ls_traitnom 
+		from t_rdv 
+		where rdvdate = :ldt_nextrdv and patient_id = :al_patid;
+		
+		if isnull(ll_duree) then 
+			ls_duree = ""
+		else
+			ls_duree = string(ll_duree)
+		end if
+		if isnull(lt_rdvheure) then 
+			ls_rdvheure = "" 
+		else 
+			ls_rdvheure = string(lt_rdvheure,"hh:mm")
+		end if
+		if isnull(ls_traitnom) then ls_traitnom = ""
+		
+		ll_duree = ll_duree * ll_step
+		
+	//	if ls_dentistelangue = 'fr' then
+		ls_dateprevrdvfr = datefrcr(ldt_dernrdv)
+		ls_datenextrdvfr = datefrcr(ldt_nextrdv)
+	//	else
+		ls_dateprevrdvan = dateancr(ldt_dernrdv)
+		ls_datenextrdvan = dateancr(ldt_nextrdv)
+	//	end if
+		
+		if isnull(ls_dateprevrdvfr) then ls_dateprevrdvfr = ""
+		if isnull(ls_datenextrdvfr) then ls_datenextrdvfr = ""
+		if isnull(ls_dateprevrdvan) then ls_dateprevrdvan = ""
+		if isnull(ls_datenextrdvan) then ls_datenextrdvan = ""
+		
+		// Derniere de consultation
+		
+		select max(date_facture) into :ldt_dateconsult
+		from t_status INNER JOIN factures_traitements ON t_status.status_id = factures_traitements.status_id
+						  INNER JOIN traitements ON factures_traitements.traitement_id = traitements.traitement_id
+		where ordrepaie = 1 AND
+				patient_id = :al_patid AND
+				date_facture < today();
+				
+		if isnull(ldt_dateconsult) then 
+			ls_consultdatefr = ""
+			ls_consultdatean = ""
+		else
+			ls_consultdatefr = datefrcr(ldt_dateconsult)
+			ls_consultdatean = dateancr(ldt_dateconsult)
+		end if
+		
+		// Dernier diagnotic
+		
+		select max(date_facture) into :ldt_datederndiag
+		from t_status INNER JOIN factures_traitements ON t_status.status_id = factures_traitements.status_id
+						  INNER JOIN traitements ON factures_traitements.traitement_id = traitements.traitement_id
+		where ordrepaie = 2 AND
+				patient_id = :al_patid AND
+				date_facture < today();
+				
+		if isnull(ldt_datederndiag) then 
+			ls_diagdatefr = ""
+			ls_diagdatean = ""
+		else
+			ls_diagdatefr = datefrcr(ldt_datederndiag)
+			ls_diagdatean = dateancr(ldt_datederndiag)
+		end if
+				
+		// Date de la journée
+		
+		ls_datefr = datefrcr(today())
+		ls_datean = dateancr(today())
+		if isnull(ls_datean) then ls_datean = ""
+		if isnull(ls_datefr) then ls_datefr = ""
+		
+		if ab_word2k3 then
+			ls_ligne = '"'
+			ls_sep = '","'
+		else
+			ls_ligne = ''
+			ls_sep = '~t'
+		end if
+		
+//		ls_textecons = as_textecons
+//		if isnull(ls_textecons) then ls_textecons = ""
+
+		if ab_ajout = false then
+			ls_ligne += "pat_sal"+ls_sep+"pat_prenom"+ls_sep+"pat_nom"+ls_sep+"pat_adresse"+ls_sep+"pat_ville"+ls_sep+"pat_province"+ls_sep+"pat_codepostal"+ls_sep+"pat_genre"+ls_sep+"pat_nodossier"+ls_sep+"pat_nopatient"+ls_sep+"pat_noboite"+ls_sep+"pat_telres"+ls_sep+"pat_telbur"+ls_sep+"pat_datenaissance"+ls_sep+"pat_age"+ls_sep+"pat_nompere"+ls_sep+"pat_telpere"+ls_sep+"pat_nommere"+ls_sep+"pat_telmere"+ls_sep+"resp_sal"+ls_sep+"resp_prenom"+ls_sep+"resp_nom"+ls_sep+"resp_adresse"+ls_sep+"resp_ville"+ls_sep+"resp_province"+ls_sep+"resp_codepostal"+ls_sep+"resp_telres"+ls_sep+"c_description"+ls_sep+"c_date1"+ls_sep+"c_pourcentage"+ls_sep+"c_couttrait"+ls_sep+"c_initial"+ls_sep+"c_cons"+ls_sep+"c_cons2"+ls_sep+"c_diag"+ls_sep+"c_meb"+ls_sep+"c_retfee"+ls_sep+"c_mdate1"+ls_sep+"c_mmontant"+ls_sep+"c_mqty"+ls_sep+"c_mtot"+ls_sep+"c_paiefinal"+ls_sep+"c_datepaiefinal"+ls_sep+"c_duree1"+ls_sep+"c_duree2"+ls_sep+"c_coutapp"+ls_sep+"det_sal"+ls_sep+"det_prenom"+ls_sep+"det_nom"+ls_sep+"det_add"+ls_sep+"det_ville"+ls_sep+"det_prov"+ls_sep+"det_zip"+ls_sep+"ref_sal"+ls_sep+"ref_prenom"+ls_sep+"ref_nom"+ls_sep+"ref_adresse"+ls_sep+"ref_ville"+ls_sep+"ref_province"+ls_sep+"ref_codepostal"+ls_sep+"dernier_rdv(fr)"+ls_sep+"prochain_rdv(fr)"+ls_sep+"dernier_rdv(an)"+ls_sep+"prochain_rdv(an)"+ls_sep+"heureprochainrdv"+ls_sep+"dureeprochainrdv"+ls_sep+"traitementprochainrdv"+ls_sep+"datefr"+ls_sep+"datean"+ls_sep+"consdatefr"+ls_sep+"consdatean"+ls_sep+"pat_agean"+ls_sep+"diagdate"+ls_sep+"recdate"
+			if ab_word2k3 then ls_ligne += '"~r~n"' else ls_ligne += '~r~n'
+			ls_ligne += ls_patsal+ls_sep+ls_patprenom+ls_sep+ls_patnom+ls_sep+ls_patadresse+ls_sep+ls_patville+ls_sep+ls_patprovince+ls_sep+ls_patcodepostal+ls_sep+ls_patgenre+ls_sep+ls_patnodoss+ls_sep+ls_patnopatient+ls_sep+ls_patnoboite+ls_sep+ls_pattelres+ls_sep+ls_pattelbur+ls_sep+ls_patdatenaiss+ls_sep+ls_patage+ls_sep+ls_patnompere+ls_sep+ls_pattelpere+ls_sep+ls_patnommere+ls_sep+ls_pattelmere+ls_sep+ls_respsal+ls_sep+ls_respprenom+ls_sep+ls_respnom+ls_sep+ls_respadresse+ls_sep+ls_respville+ls_sep+ls_respprovince+ls_sep+ls_respcodepostal+ls_sep+ls_resptelres+ls_sep+ls_description+ls_sep+ls_date1+ls_sep+ls_pourcentage+ls_sep+ls_couttrait+ls_sep+ls_initial+ls_sep+ls_cons+ls_sep+ls_cons2+ls_sep+ls_diag+ls_sep+ls_meb+ls_sep+ls_retfee+ls_sep+ls_mdate1+ls_sep+ls_mmens+ls_sep+ls_mqty+ls_sep+ls_mtot+ls_sep+ls_paiefinal+ls_sep+ls_dernpaie+ls_sep+ls_duree1+ls_sep+ls_duree2+ls_sep+ls_coutapp+ls_sep+ls_detsalutation+ls_sep+ls_detprenom+ls_sep+ls_detnom+ls_sep+ls_detadd+ls_sep+ls_detville+ls_sep+ls_detprov+ls_sep+ls_detzip+ls_sep+ls_refsalutation+ls_sep+ls_refprenom+ls_sep+ls_refnom+ls_sep+ls_refadresse+ls_sep+ls_refville+ls_sep+ls_refprovince+ls_sep+ls_refzip+ls_sep+ls_dateprevrdvfr+ls_sep+ls_datenextrdvfr+ls_sep+ls_dateprevrdvan+ls_sep+ls_datenextrdvan+ls_sep+ls_rdvheure+ls_sep+ls_duree+ls_sep+ls_traitnom+ls_sep+ls_datefr+ls_sep+ls_datean+ls_sep+ls_consultdatefr+ls_sep+ls_consultdatean+ls_sep+ls_patagean+ls_sep+ls_diagdatefr+ls_sep+ls_diagdatean
+			if ab_word2k3 then ls_ligne += '"'
+		else
+			ls_ligne += ls_patsal+ls_sep+ls_patprenom+ls_sep+ls_patnom+ls_sep+ls_patadresse+ls_sep+ls_patville+ls_sep+ls_patprovince+ls_sep+ls_patcodepostal+ls_sep+ls_patgenre+ls_sep+ls_patnodoss+ls_sep+ls_patnopatient+ls_sep+ls_patnoboite+ls_sep+ls_pattelres+ls_sep+ls_pattelbur+ls_sep+ls_patdatenaiss+ls_sep+ls_patage+ls_sep+ls_patnompere+ls_sep+ls_pattelpere+ls_sep+ls_patnommere+ls_sep+ls_pattelmere+ls_sep+ls_respsal+ls_sep+ls_respprenom+ls_sep+ls_respnom+ls_sep+ls_respadresse+ls_sep+ls_respville+ls_sep+ls_respprovince+ls_sep+ls_respcodepostal+ls_sep+ls_resptelres+ls_sep+ls_description+ls_sep+ls_date1+ls_sep+ls_pourcentage+ls_sep+ls_couttrait+ls_sep+ls_initial+ls_sep+ls_cons+ls_sep+ls_cons2+ls_sep+ls_diag+ls_sep+ls_meb+ls_sep+ls_retfee+ls_sep+ls_mdate1+ls_sep+ls_mmens+ls_sep+ls_mqty+ls_sep+ls_mtot+ls_sep+ls_paiefinal+ls_sep+ls_dernpaie+ls_sep+ls_duree1+ls_sep+ls_duree2+ls_sep+ls_coutapp+ls_sep+ls_detsalutation+ls_sep+ls_detprenom+ls_sep+ls_detnom+ls_sep+ls_detadd+ls_sep+ls_detville+ls_sep+ls_detprov+ls_sep+ls_detzip+ls_sep+ls_refsalutation+ls_sep+ls_refprenom+ls_sep+ls_refnom+ls_sep+ls_refadresse+ls_sep+ls_refville+ls_sep+ls_refprovince+ls_sep+ls_refzip+ls_sep+ls_dateprevrdvfr+ls_sep+ls_datenextrdvfr+ls_sep+ls_dateprevrdvan+ls_sep+ls_datenextrdvan+ls_sep+ls_rdvheure+ls_sep+ls_duree+ls_sep+ls_traitnom+ls_sep+ls_datefr+ls_sep+ls_datean+ls_sep+ls_consultdatefr+ls_sep+ls_consultdatean+ls_sep+ls_patagean+ls_sep+ls_diagdatefr+ls_sep+ls_diagdatean
+			if ab_word2k3 then ls_ligne += '"'
+		end if
+		
+		ll_result = FileWrite(li_patdat, ls_ligne)
+		if not ll_result > 0 then
+			if isnull(ll_result) then
+				messagebox('Erreur!','ll_result = null')
+			else
+				messagebox('Erreur!',string(ll_result))
+			end if
+		end if
+		ll_result = FileWrite(li_pattxt, ls_ligne)
+		if not ll_result > 0 then
+			if isnull(ll_result) then
+				messagebox('Erreur!','ll_result = null')
+			else
+				messagebox('Erreur!',string(ll_result))
+			end if
+		end if
+	else
+		error_type(64)
+	end if
+	FileClose(li_patdat)
+	FileClose(li_pattxt)
+end if
+//messagebox('stop','')
+
+*/
+end subroutine
+

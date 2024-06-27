@@ -1,0 +1,11 @@
+﻿$PBExportHeader$gf_getlangue.srf
+global type gf_getlangue from function_object
+end type
+
+forward prototypes
+global function string gf_getlangue ()
+end prototypes
+
+global function string gf_getlangue ();RETURN v_langue
+end function
+

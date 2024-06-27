@@ -1,0 +1,105 @@
+﻿$PBExportHeader$d_patproc.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 0 print.margin.right = 0 print.margin.top = 0 print.margin.bottom = 0 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=392 color="536870912" )
+summary(height=92 color="536870912" )
+footer(height=64 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes identity=yes name=id_rdv dbname="t_rdv.id_rdv" )
+ column=(type=date update=yes updatewhereclause=yes name=rdvdate dbname="t_rdv.rdvdate" )
+ column=(type=time update=yes updatewhereclause=yes name=rdvheure dbname="t_rdv.rdvheure" )
+ column=(type=long update=yes updatewhereclause=yes name=typetraitid dbname="t_rdv.typetraitid" )
+ column=(type=long update=yes updatewhereclause=yes name=patient_id dbname="t_rdv.patient_id" )
+ column=(type=long update=yes updatewhereclause=yes name=duree dbname="t_rdv.duree" )
+ column=(type=time update=yes updatewhereclause=yes name=heurearr dbname="t_rdv.heurearr" )
+ column=(type=time update=yes updatewhereclause=yes name=heuredep dbname="t_rdv.heuredep" )
+ column=(type=long update=yes updatewhereclause=yes name=id_personnel dbname="t_rdv.id_personnel" )
+ column=(type=char(26000) update=yes updatewhereclause=yes name=rdvnote dbname="t_rdv.rdvnote" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=rdvetat dbname="t_rdv.rdvetat" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=station dbname="t_rdv.station" )
+ column=(type=time update=yes updatewhereclause=yes name=seated dbname="t_rdv.seated" )
+ column=(type=time update=yes updatewhereclause=yes name=ready dbname="t_rdv.ready" )
+ column=(type=long update=yes updatewhereclause=yes name=colonne dbname="t_rdv.colonne" )
+ column=(type=time update=yes updatewhereclause=yes name=released dbname="t_rdv.released" )
+ column=(type=long update=yes updatewhereclause=yes name=nostation dbname="t_rdv.nostation" )
+ column=(type=long update=yes updatewhereclause=yes name=color dbname="t_rdv.color" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=cincoutnote dbname="t_rdv.cincoutnote" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=cincoutnote1 dbname="t_rdv.cincoutnote1" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=charge dbname="t_rdv.charge" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=chrgduree dbname="t_rdv.chrgduree" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=chrgarrdep dbname="t_rdv.chrgarrdep" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=chrgasslib dbname="t_rdv.chrgasslib" )
+ column=(type=long update=yes updatewhereclause=yes name=ortho_id dbname="t_rdv.ortho_id" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=long updatewhereclause=yes name=hor_step dbname="hor_step" )
+ retrieve="  SELECT t_rdv.id_rdv,   
+         t_rdv.rdvdate,   
+         t_rdv.rdvheure,   
+         t_rdv.typetraitid,   
+         t_rdv.patient_id,   
+         t_rdv.duree,   
+         t_rdv.heurearr,   
+         t_rdv.heuredep,   
+         t_rdv.id_personnel,   
+         t_rdv.rdvnote,   
+         t_rdv.rdvetat,   
+         t_rdv.station,   
+         t_rdv.seated,   
+         t_rdv.ready,   
+         t_rdv.colonne,   
+         t_rdv.released,   
+         t_rdv.nostation,   
+         t_rdv.color,   
+         t_rdv.cincoutnote,   
+         t_rdv.cincoutnote1,   
+         t_rdv.charge,   
+         t_rdv.chrgduree,   
+         t_rdv.chrgarrdep,   
+         t_rdv.chrgasslib,   
+         t_rdv.ortho_id,
+			patient.patient_nom,
+			patient.patient_prenom,
+			(select hor_step from t_options where ortho_id = t_rdv.ortho_id)  
+    FROM t_rdv INNER JOIN patient ON t_rdv.patient_id = patient.patient_id
+WHERE 	(t_rdv.typetraitid = :ra_typetrait or :ra_typetrait is null) AND
+			t_rdv.rdvdate BETWEEN :ra_debut AND :ra_fin AND
+			patient.no_ortho = :ra_orthoid
+ORDER BY patient.patient_nom ASC,
+			patient.patient_prenom ASC
+" arguments=(("ra_typetrait", number),("ra_debut", date),("ra_fin", date),("ra_orthoid", number)) )
+text(band=header alignment="2" text="Liste des patients par procédure" border="0" color="8388608" x="9" y="24" height="92" width="3429" html.valueishtml="0"  name=t_title visible="1"  font.face="Arial" font.height="-14" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="5" y1="388" x2="3451" y2="388"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=detail alignment="2" expression=" duree *  hor_step "border="0" color="33554432" x="2647" y="4" height="76" width="329" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=30 border="0" color="33554432" x="1659" y="4" height="76" width="974" format="[general]" html.valueishtml="0"  name=typetraitid visible="1" dddw.name=dddw_typetraitnom dddw.displaycolumn=nom_traitement dddw.datacolumn=type_traitement_id dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=20 border="0" color="33554432" x="1371" y="4" height="76" width="274" format="[time]" html.valueishtml="0"  name=rdvheure visible="1" editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="2" tabsequence=10 border="0" color="33554432" x="974" y="4" height="76" width="384" format="[general]" html.valueishtml="0"  name=rdvdate visible="1" editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="2" tabsequence=100 border="0" color="33554432" x="2990" y="4" height="76" width="443" format="[general]" html.valueishtml="0"  name=rdvetat visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="count( patient_patient_nom + ' ' +  patient_patient_prenom  for all)"border="0" color="33554432" x="133" y="8" height="56" width="471" format="[GENERAL]" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="343" y="4" height="56" width="343" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=footer alignment="2" text="© Orthotek" border="0" color="0" x="1550" y="4" height="56" width="599" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=footer alignment="0" text="Imprimé le: " border="0" color="0" x="9" y="4" height="56" width="320" html.valueishtml="0"  name=t_printon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2747" y="4" height="56" width="686" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression=" patient_patient_nom + ' ' +  patient_patient_prenom "border="0" color="33554432" x="9" y="4" height="76" width="951" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Qté:" border="0" color="0" x="9" y="8" height="56" width="91" html.valueishtml="0"  name=t_qty visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Patient" border="0" color="33554432" x="9" y="304" height="64" width="951" html.valueishtml="0"  name=t_patient visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Durée" border="0" color="33554432" x="2647" y="308" height="64" width="329" html.valueishtml="0"  name=t_duree visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Traitement" border="0" color="33554432" x="1659" y="304" height="64" width="974" html.valueishtml="0"  name=t_trait visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Heure" border="0" color="33554432" x="1371" y="304" height="64" width="274" html.valueishtml="0"  name=t_heure visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Date" border="0" color="33554432" x="974" y="304" height="64" width="384" html.valueishtml="0"  name=t_date visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="État" border="0" color="33554432" x="2990" y="308" height="64" width="443" html.valueishtml="0"  name=t_etat visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Du" border="0" color="8388608" x="14" y="188" height="64" width="101" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=header alignment="0" expression=" ra_debut "border="0" color="8388608" x="137" y="188" height="64" width="338" format="[SHORTDATE]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="au" border="0" color="8388608" x="521" y="188" height="64" width="101" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=header alignment="0" expression=" ra_debut "border="0" color="8388608" x="635" y="188" height="64" width="338" format="[SHORTDATE]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

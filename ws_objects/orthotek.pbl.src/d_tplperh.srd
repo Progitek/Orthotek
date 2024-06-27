@@ -1,0 +1,72 @@
+﻿$PBExportHeader$d_tplperh.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=624 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=id_tplperiode dbname="t_tplperiode.id_tplperiode" )
+ column=(type=long update=yes updatewhereclause=yes name=qnbjour dbname="t_tplperiode.qnbjour" )
+ column=(type=number update=yes updatewhereclause=yes name=qjourouv dbname="t_tplperiode.qjourouv" )
+ column=(type=long update=yes updatewhereclause=yes name=hnbsem dbname="t_tplperiode.hnbsem" )
+ column=(type=number update=yes updatewhereclause=yes name=hdim dbname="t_tplperiode.hdim" values="Dimanche	1/Dimanche	0" )
+ column=(type=number update=yes updatewhereclause=yes name=hlun dbname="t_tplperiode.hlun" values="Lundi	1/Lundi	0" )
+ column=(type=number update=yes updatewhereclause=yes name=hmar dbname="t_tplperiode.hmar" values="Mardi	1/Mardi	0" )
+ column=(type=number update=yes updatewhereclause=yes name=hmer dbname="t_tplperiode.hmer" values="Mercredi	1/Mercredi	0" )
+ column=(type=number update=yes updatewhereclause=yes name=hjeu dbname="t_tplperiode.hjeu" values="Jeudi	1/Jeudi	0" )
+ column=(type=number update=yes updatewhereclause=yes name=hven dbname="t_tplperiode.hven" values="Vendredi	1/Vendredi	0" )
+ column=(type=number update=yes updatewhereclause=yes name=hsam dbname="t_tplperiode.hsam" values="Samedi	1/Samedi	0" )
+ column=(type=long update=yes updatewhereclause=yes name=mnbmois1 dbname="t_tplperiode.mnbmois1" )
+ column=(type=long update=yes updatewhereclause=yes name=mnbmois2 dbname="t_tplperiode.mnbmois2" )
+ column=(type=long update=yes updatewhereclause=yes name=mdatechiffre dbname="t_tplperiode.mdatechiffre" )
+ column=(type=long update=yes updatewhereclause=yes name=mdatelettre dbname="t_tplperiode.mdatelettre" )
+ column=(type=long update=yes updatewhereclause=yes name=mjoursem dbname="t_tplperiode.mjoursem" )
+ column=(type=number update=yes updatewhereclause=yes name=mchoix dbname="t_tplperiode.mchoix" )
+ column=(type=number update=yes updatewhereclause=yes name=achoix dbname="t_tplperiode.achoix" )
+ column=(type=long update=yes updatewhereclause=yes name=anbjour dbname="t_tplperiode.anbjour" )
+ column=(type=long update=yes updatewhereclause=yes name=ajourlettre dbname="t_tplperiode.ajourlettre" )
+ column=(type=long update=yes updatewhereclause=yes name=adatelettre dbname="t_tplperiode.adatelettre" )
+ column=(type=long update=yes updatewhereclause=yes name=amoislettre1 dbname="t_tplperiode.amoislettre1" )
+ column=(type=long update=yes updatewhereclause=yes name=amoislettre2 dbname="t_tplperiode.amoislettre2" )
+ column=(type=long update=yes updatewhereclause=yes name=ajoursem dbname="t_tplperiode.ajoursem" )
+ column=(type=long update=yes updatewhereclause=yes name=typeperiod dbname="t_tplperiode.typeperiod" )
+ column=(type=long update=yes updatewhereclause=yes name=id_template dbname="t_tplperiode.id_template" )
+ retrieve="SELECT     t_tplperiode.id_tplperiode ,
+           t_tplperiode.qnbjour ,
+           t_tplperiode.qjourouv ,
+           t_tplperiode.hnbsem ,
+           t_tplperiode.hdim ,
+           t_tplperiode.hlun ,
+           t_tplperiode.hmar ,
+           t_tplperiode.hmer ,
+           t_tplperiode.hjeu ,
+           t_tplperiode.hven ,
+           t_tplperiode.hsam ,
+           t_tplperiode.mnbmois1 ,
+           t_tplperiode.mnbmois2 ,
+           t_tplperiode.mdatechiffre ,
+           t_tplperiode.mdatelettre ,
+           t_tplperiode.mjoursem ,
+           t_tplperiode.mchoix ,
+           t_tplperiode.achoix ,
+           t_tplperiode.anbjour ,
+           t_tplperiode.ajourlettre ,
+           t_tplperiode.adatelettre ,
+           t_tplperiode.amoislettre1 ,
+           t_tplperiode.amoislettre2 ,
+           t_tplperiode.ajoursem ,
+     		  t_tplperiode.typeperiod ,
+           t_tplperiode.id_template     
+    FROM   t_tplperiode      
+   WHERE   t_tplperiode.id_template = :ra_idtpl  " update="t_tplperiode" updatewhere=0 updatekeyinplace=no arguments=(("ra_idtpl", number)) )
+column(band=detail id=8 alignment="1" tabsequence=70 border="0" color="33554432" x="55" y="516" height="76" width="329" format="[general]" html.valueishtml="0"  name=hmer visible="1" checkbox.text="Mercredi" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=40 border="0" color="33554432" x="55" y="216" height="76" width="521" format="[general]" html.valueishtml="0"  name=hdim visible="1" checkbox.text="Dimanche" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=50 border="0" color="33554432" x="55" y="316" height="76" width="325" format="[general]" html.valueishtml="0"  name=hlun visible="1" checkbox.text="Lundi" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=60 border="0" color="33554432" x="55" y="416" height="76" width="329" format="[general]" html.valueishtml="0"  name=hmar visible="1" checkbox.text="Mardi" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=80 border="0" color="33554432" x="818" y="216" height="76" width="329" format="[general]" html.valueishtml="0"  name=hjeu visible="1" checkbox.text="Jeudi" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="1" tabsequence=90 border="0" color="33554432" x="818" y="316" height="76" width="329" format="[general]" html.valueishtml="0"  name=hven visible="1" checkbox.text="Vendredi" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="1" tabsequence=100 border="0" color="33554432" x="818" y="416" height="76" width="329" format="[general]" html.valueishtml="0"  name=hsam visible="1" checkbox.text="Samedi" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=30 border="5" color="33554432" x="297" y="56" height="76" width="155" format="[general]" html.valueishtml="0"  name=hnbsem visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Tous les" border="0" color="33554432" x="46" y="64" height="64" width="224" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="semaine(s) le" border="0" color="33554432" x="489" y="60" height="64" width="357" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

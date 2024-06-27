@@ -1,0 +1,2 @@
+﻿$PBExportHeader$q_impo_descr.srq
+PBSELECT( VERSION(400) DISTINCT ()TABLE(NAME="description" )  TABLE(NAME="description_patient" ) COLUMN(NAME="description.description") COLUMN(NAME="description.categorie")    JOIN (LEFT="description_patient.description_id"    OP ="="RIGHT="description.id" )WHERE(    EXP1 ="( ( ~"description_patient~".~"patient_id~""   OP ="="    EXP2 =":id ) )" ) ) ARG(NAME = "id" TYPE = number)

@@ -1,0 +1,31 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_srvprintpreview.sru
+$PBExportComments$(PRO) DataWindow Property - The PrintPreview service tabpage
+forward
+global type pro_u_tabpg_dwproperty_srvprintpreview from pfc_u_tabpg_dwproperty_srvprintpreview
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_srvprintpreview from pfc_u_tabpg_dwproperty_srvprintpreview
+end type
+global pro_u_tabpg_dwproperty_srvprintpreview pro_u_tabpg_dwproperty_srvprintpreview
+
+on pro_u_tabpg_dwproperty_srvprintpreview.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_srvprintpreview.destroy
+call super::destroy
+end on
+
+type cbx_enabled from pfc_u_tabpg_dwproperty_srvprintpreview`cbx_enabled within pro_u_tabpg_dwproperty_srvprintpreview
+end type
+
+type cbx_ruler from pfc_u_tabpg_dwproperty_srvprintpreview`cbx_ruler within pro_u_tabpg_dwproperty_srvprintpreview
+end type
+
+type st_zoom from pfc_u_tabpg_dwproperty_srvprintpreview`st_zoom within pro_u_tabpg_dwproperty_srvprintpreview
+end type
+
+type em_zoom from pfc_u_tabpg_dwproperty_srvprintpreview`em_zoom within pro_u_tabpg_dwproperty_srvprintpreview
+end type
+

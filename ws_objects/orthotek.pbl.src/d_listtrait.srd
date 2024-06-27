@@ -1,0 +1,44 @@
+﻿$PBExportHeader$d_listtrait.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=644 color="536870912" )
+summary(height=84 color="536870912" )
+footer(height=64 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=decimal(2) updatewhereclause=yes name=traitements_montant_original dbname="traitements.montant_original" )
+ column=(type=date updatewhereclause=yes name=traitements_debut_traitement dbname="traitements.debut_traitement" )
+ retrieve="SELECT patient_nom,
+		 patient_prenom,
+		 traitements.montant_original,
+		 traitements.debut_traitement
+FROM   traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id
+WHERE  no_ortho = :ra_ortho AND
+		 traitements.debut_traitement BETWEEN :ra_debut AND :ra_fin AND
+		 traitements.montant_original is not null
+" arguments=(("ra_ortho", number),("ra_debut", date),("ra_fin", date)) )
+text(band=header alignment="0" text="Liste des traitements débutés" border="0" color="8388608" x="965" y="16" height="92" width="1367" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text=" Nom" border="0" color="33554432" x="9" y="536" height="64" width="1381" html.valueishtml="0"  name=patient_patient_nom_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="5" y1="612" x2="3269" y2="612"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Date de début" border="0" color="33554432" x="2811" y="536" height="64" width="453" html.valueishtml="0"  name=traitements_debut_traitement_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Coût du traitement" border="0" color="33554432" x="1801" y="536" height="64" width="539" html.valueishtml="0"  name=traitements_montant_original_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" patient_patient_nom + ' ' +  patient_patient_prenom "border="0" color="33554432" x="9" y="4" height="68" width="1381" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=32766 border="0" color="33554432" x="2811" y="4" height="68" width="453" format="[general]" html.valueishtml="0"  name=traitements_debut_traitement visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="1801" y="4" height="68" width="539" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=traitements_montant_original visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(traitements_montant_original for all)"border="0" color="33554432" x="1801" y="12" height="68" width="539" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Total:" border="0" color="33554432" x="1595" y="12" height="68" width="197" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="1783" y1="0" x2="2354" y2="0"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=footer alignment="0" text="Imprimé le: " border="0" color="33554432" x="5" y="4" height="56" width="325" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="today()"border="0" color="33554432" x="347" y="4" height="56" width="366" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="© Orthotek" border="0" color="33554432" x="1577" y="4" height="56" width="293" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="33554432" x="2592" y="4" height="56" width="686" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Entre  " border="0" color="8388608" x="1006" y="284" height="64" width="178" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="et" border="0" color="8388608" x="1627" y="284" height="64" width="178" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression=" ra_debut "border="0" color="8388608" x="1211" y="284" height="64" width="393" format="[SHORTDATE]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression=" ra_fin "border="0" color="8388608" x="1829" y="284" height="64" width="393" format="[SHORTDATE]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

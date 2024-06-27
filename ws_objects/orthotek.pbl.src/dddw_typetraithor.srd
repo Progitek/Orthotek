@@ -1,0 +1,32 @@
+﻿$PBExportHeader$dddw_typetraithor.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes identity=yes name=type_traitement_id dbname="type_de_traitement.type_traitement_id" dbalias=".type_traitement_id" )
+ column=(type=char(40) updatewhereclause=yes name=nom_traitement dbname="type_de_traitement.nom_traitement" dbalias=".nom_traitement" )
+ column=(type=long updatewhereclause=yes name=ortho_id dbname="type_de_traitement.ortho_id" dbalias=".ortho_id" )
+ column=(type=long updatewhereclause=yes name=t_color_color dbname="t_color.color" dbalias=".color" )
+ retrieve="  SELECT type_de_traitement.type_traitement_id,   
+         type_de_traitement.nom_traitement,
+			type_de_traitement.ortho_id,
+			t_color.color
+    FROM type_de_traitement LEFT OUTER JOIN t_color ON type_de_traitement.color_id = t_color.color_id
+	WHERE type_de_traitement.ortho_id = :ra_orthoid and
+			isnull(type_de_traitement.rap,0) = 1
+ORDER BY type_de_traitement.orderapp asc,
+			type_de_traitement.type_traitement_id asc" arguments=(("ra_orthoid", number)) )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="76" width="1157" format="[general]" html.valueishtml="0"  name=nom_traitement visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tt_color_color" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

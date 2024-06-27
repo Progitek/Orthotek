@@ -1,0 +1,76 @@
+﻿$PBExportHeader$d_horrdvmeb.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="MEB" print.orientation = 1 print.margin.left = 0 print.margin.right = 0 print.margin.top = 0 print.margin.bottom = 0 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no pointer="Arrow!" )
+header(height=412 color="536870912" )
+summary(height=80 color="536870912" )
+footer(height=72 color="536870912" )
+detail(height=176 color="536870912" )
+table(column=(type=char(102) updatewhereclause=yes name=patnom dbname="patnom" )
+ column=(type=long updatewhereclause=yes name=ortho dbname="ortho" )
+ column=(type=char(100) updatewhereclause=yes name=specnom dbname="specnom" )
+ column=(type=date updatewhereclause=yes name=rdvdate dbname="t_rdv.rdvdate" )
+ column=(type=time updatewhereclause=yes name=rdvheure dbname="t_rdv.rdvheure" )
+ column=(type=long updatewhereclause=yes name=typetrait dbname="typetrait" )
+ column=(type=char(40) updatewhereclause=yes name=nom_traitement dbname="nom_traitement" )
+ column=(type=char(15) updatewhereclause=yes name=telres dbname="telres" )
+ column=(type=char(100) updatewhereclause=yes name=text1 dbname="text1" )
+ column=(type=char(15) updatewhereclause=yes name=telbur dbname="telbur" )
+ column=(type=char(100) updatewhereclause=yes name=text2 dbname="text2" )
+ column=(type=date updatewhereclause=yes name=date_naissance dbname="date_naissance" )
+ retrieve="  SELECT (select patient.patient_nom + ', ' + patient.patient_prenom from patient where patient.patient_id = t_rdv.patient_id) as patnom,
+			(select patient.no_ortho from patient where patient.patient_id = t_rdv.patient_id) as ortho,
+			(select dr_nom_complet from ortho_id where ortho_id.ortho_id = ortho) as specnom,
+			t_rdv.rdvdate,
+         t_rdv.rdvheure,
+			(select typetrait from type_de_traitement where type_traitement_id = t_rdv.typetraitid and ortho_id = ortho) as typetrait,
+			(select nom_traitement from type_de_traitement where type_traitement_id = t_rdv.typetraitid and ortho_id = ortho) as nom_traitement,
+			(select patient.tel_maison from patient where patient.patient_id = t_rdv.patient_id) as telres,
+			(select patient.text1 from patient where patient.patient_id = t_rdv.patient_id) as text1,
+			(select patient.tel_bureau from patient where patient.patient_id = t_rdv.patient_id) as telbur,
+			(select patient.text2 from patient where patient.patient_id = t_rdv.patient_id) as text2,
+			(select patient.date_naissance from patient where patient.patient_id = t_rdv.patient_id) as date_naissance
+    FROM t_rdv
+WHERE ortho = :ra_ortho AND
+			t_rdv.rdvdate BETWEEN :ra_start AND :ra_end AND
+			typetrait = 3
+ORDER BY t_rdv.rdvdate ASC,
+			patnom ASC" arguments=(("ra_ortho", number),("ra_start", date),("ra_end", date)) )
+rectangle(band=detail x="0" y="0" height="176" width="4407"  name=r_1 visible="1" brush.hatch="6" brush.color="16777215" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Liste des mises en bouches" border="0" color="8388608" x="5" y="0" height="92" width="4389" html.valueishtml="0"  name=t_titile visible="1"  font.face="Arial" font.height="-14" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=3 alignment="2" tabsequence=32766 border="0" color="8388608" x="5" y="112" height="80" width="4389" format="[general]" html.valueishtml="0"  name=specnom visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="" border="0" color="8388608" x="5" y="212" height="64" width="4389" html.valueishtml="0"  name=t_date visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="Heure" border="6" color="33554432" x="2693" y="360" height="64" width="590" html.valueishtml="0"  name=t_rdvheure pointer="HyperLink!" visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="33554432" x="1961" y="356" height="64" width="594" format="[time]" html.valueishtml="0"  name=rdvheure visible="0" editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=32766 border="0" color="33554432" x="1353" y="356" height="64" width="608" format="[general]" html.valueishtml="0"  name=rdvdate visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="517" y="280" height="64" width="1070" format="[general]" html.valueishtml="0"  name=typetrait visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Qté:" border="0" color="0" x="9" y="20" height="56" width="110" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="count(patnom for all)"border="0" color="33554432" x="123" y="20" height="56" width="352" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Imprimer le " border="0" color="0" x="9" y="4" height="56" width="247" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="today()"border="0" color="33554432" x="270" y="4" height="56" width="338" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="© Orthotek" border="0" color="0" x="1966" y="4" height="56" width="238" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="33554432" x="3831" y="4" height="56" width="562" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Date nais." border="6" color="8388608" x="4055" y="344" height="56" width="334" html.valueishtml="0"  name=t_date_naissance pointer="HyperLink!" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="2" tabsequence=32766 border="0" color="0" x="4055" y="12" height="64" width="334" format="[shortdate]" html.valueishtml="0"  name=date_naissance visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Tél. (bur.)" border="6" color="8388608" x="3031" y="344" height="56" width="1006" html.valueishtml="0"  name=t_telbur pointer="HyperLink!" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Tél. (rés.)" border="6" color="8388608" x="2002" y="344" height="56" width="1006" html.valueishtml="0"  name=t_telres pointer="HyperLink!" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Patient" border="6" color="8388608" x="23" y="344" height="56" width="800" html.valueishtml="0"  name=t_patnom pointer="HyperLink!" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="23" y="12" height="64" width="800" format="[general]" html.valueishtml="0"  name=patnom visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="850" y="12" height="64" width="681" format="[general]" html.valueishtml="0"  name=nom_traitement visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Traitement" border="6" color="8388608" x="850" y="344" height="56" width="681" html.valueishtml="0"  name=nom_traitement_t pointer="HyperLink!" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Date" border="6" color="8388608" x="1554" y="344" height="56" width="416" html.valueishtml="0"  name=t_rdvdate pointer="HyperLink!" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if(isnull( rdvdate ), ~"~",  lookupdisplay(rdvdate )) + ~" ~" + if(isnull(  rdvheure ), ~"~",  string( rdvheure,'hh:mm' ))"border="0" color="0" x="1554" y="12" height="64" width="416" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="2002" y="12" height="64" width="352" format="[general]" html.valueishtml="0"  name=telres visible="1" editmask.mask="(XXX) XXX-XXXX" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="3022" y="12" height="64" width="352" format="[general]" html.valueishtml="0"  name=telbur visible="1" editmask.mask="(XXX) XXX-XXXX" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="2373" y="12" height="64" width="626" format="[general]" html.valueishtml="0"  name=text1 visible="1" height.autosize=yes edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="3392" y="12" height="64" width="645" format="[general]" html.valueishtml="0"  name=text2 visible="1" height.autosize=yes edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

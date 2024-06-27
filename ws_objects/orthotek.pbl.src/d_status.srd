@@ -1,0 +1,51 @@
+﻿$PBExportHeader$d_status.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=15793151 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=92 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=status_id dbname="t_status.status_id" )
+ column=(type=long update=yes updatewhereclause=yes name=ortho_id dbname="t_status.ortho_id" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=code dbname="t_status.code" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=description dbname="t_status.description" )
+ column=(type=number update=yes updatewhereclause=yes name=affect dbname="t_status.affect" values="	1/	0" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=prixsugg dbname="t_status.prixsugg" )
+ column=(type=long update=yes updatewhereclause=yes name=ordrepaie dbname="t_status.ordrepaie" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=plancompte dbname="t_status.plancompte" )
+ retrieve="  SELECT t_status.status_id, 
+			t_status.ortho_id,
+         t_status.code,   
+         t_status.description,   
+         t_status.affect,   
+         t_status.prixsugg,
+			t_status.ordrepaie,
+			t_status.plancompte
+    FROM t_status
+	WHERE t_status.ortho_id = :ra_orthoid
+ORDER BY t_status.code ASC,   
+         t_status.description ASC   
+" update="t_status" updatewhere=1 updatekeyinplace=no arguments=(("ra_orthoid", number)) )
+text(band=header alignment="2" text="Code d'acte" border="0" color="0" x="119" y="4" height="64" width="311" html.valueishtml="0"  name=code_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Description" border="0" color="0" x="475" y="4" height="64" width="1093" html.valueishtml="0"  name=description_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="76" x2="3525" y2="76"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Compte" border="0" color="0" x="3072" y="4" height="64" width="448" html.valueishtml="0"  name=t_2  tag="" visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Type d'acte" border="0" color="0" x="2446" y="4" height="64" width="613" html.valueishtml="0"  name=t_typeactes  tag="" visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Affecte" border="0" color="0" x="2144" y="4" height="64" width="274" html.valueishtml="0"  name=t_affect  tag="" visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Prix suggéré" border="0" color="0" x="1682" y="4" height="64" width="457" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="2" tabsequence=30 border="5" color="0" x="1755" y="4" height="64" width="302" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=prixsugg visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="0" tabsequence=20 border="5" color="0" x="475" y="4" height="64" width="1216" format="[general]" html.valueishtml="0"  name=description visible="1" edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0"font.italic="0~tif ( description = 'mensualité' , 1 , 0 )"  background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="2" tabsequence=10 border="5" color="0" x="119" y="4" height="64" width="302" format="[general]" html.valueishtml="0"  name=code  tag="" visible="1" edit.limit=10 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0"font.italic="0~tif ( code = 'mens' , 1 , 0 )"  background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="2" tabsequence=40 border="0" color="0" x="2144" y="4" height="64" width="274" format="[general]" html.valueishtml="0"  name=affect visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=50 border="5" color="0" x="2446" y="4" height="64" width="613" format="[general]" html.valueishtml="0"  name=ordrepaie visible="1" ddlb.limit=0 ddlb.allowedit=yes ddlb.case=any ddlb.nilisnull=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="2" tabsequence=60 border="5" color="0" x="3072" y="4" height="64" width="448" format="[general]" html.valueishtml="0"  name=plancompte visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

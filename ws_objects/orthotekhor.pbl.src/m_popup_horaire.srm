@@ -1,0 +1,1952 @@
+﻿$PBExportHeader$m_popup_horaire.srm
+forward
+global type m_popup_horaire from menu
+end type
+type m_choix from menu within m_popup_horaire
+end type
+type m_modrdv from menu within m_choix
+end type
+type m_transfert from menu within m_choix
+end type
+type m_conf from menu within m_choix
+end type
+type m_memo from menu within m_choix
+end type
+type m_cin from menu within m_choix
+end type
+type m_cout from menu within m_choix
+end type
+type m_delrdv from menu within m_choix
+end type
+type m_delconf from menu within m_choix
+end type
+type m_delmemo from menu within m_choix
+end type
+type m_annulercin from menu within m_choix
+end type
+type m_traitdispo from menu within m_choix
+end type
+type m_-0 from menu within m_choix
+end type
+type m_dosspat from menu within m_choix
+end type
+type m_dossfin from menu within m_choix
+end type
+type m_fact from menu within m_choix
+end type
+type m_paie from menu within m_choix
+end type
+type m_cpd from menu within m_choix
+end type
+type m_xray from menu within m_choix
+end type
+type m_-1 from menu within m_choix
+end type
+type m_rap from menu within m_choix
+end type
+type m_rvm from menu within m_choix
+end type
+type m_rva from menu within m_choix
+end type
+type m_retard from menu within m_choix
+end type
+type m_labelrdv from menu within m_choix
+end type
+type m_caba from menu within m_choix
+end type
+type m_corr from menu within m_choix
+end type
+type m_séquencerdv from menu within m_choix
+end type
+type m_choix from menu within m_popup_horaire
+m_modrdv m_modrdv
+m_transfert m_transfert
+m_conf m_conf
+m_memo m_memo
+m_cin m_cin
+m_cout m_cout
+m_delrdv m_delrdv
+m_delconf m_delconf
+m_delmemo m_delmemo
+m_annulercin m_annulercin
+m_traitdispo m_traitdispo
+m_-0 m_-0
+m_dosspat m_dosspat
+m_dossfin m_dossfin
+m_fact m_fact
+m_paie m_paie
+m_cpd m_cpd
+m_xray m_xray
+m_-1 m_-1
+m_rap m_rap
+m_rvm m_rvm
+m_rva m_rva
+m_retard m_retard
+m_labelrdv m_labelrdv
+m_caba m_caba
+m_corr m_corr
+m_séquencerdv m_séquencerdv
+end type
+global type m_popup_horaire from menu
+m_choix m_choix
+end type
+end forward
+
+global type m_popup_horaire from menu
+m_choix m_choix
+end type
+global m_popup_horaire m_popup_horaire
+
+type variables
+
+end variables
+
+forward prototypes
+public subroutine del_rap_ret ()
+public subroutine deleterdv (long al_patid, time at_rdv, date adt_rdv)
+public function boolean if_rappel ()
+end prototypes
+
+public subroutine del_rap_ret ();w_liste_des_rappels_retentions.dw_rappel_retention.deleterow(message.doubleparm)
+if w_liste_des_rappels_retentions.dw_rappel_retention.update() = 1 then	
+	commit using SQLCA;
+else
+	rollback using SQLCA;
+end if		
+end subroutine
+
+public subroutine deleterdv (long al_patid, time at_rdv, date adt_rdv);delete from t_rdv where patient_id = :al_patid and rdvheure = :at_rdv and rdvdate = :adt_rdv;
+commit using sqlca;
+f_logs('del',string(adt_rdv)+ ', ' +string(at_rdv),0,al_patid,today(),'0') //log
+error_type(-1)
+if isvalid(w_patient) then
+	w_patient.dw_detailsrdv.retrieve(w_patient.il_patid,v_no_ortho,v_langue)
+end if
+
+end subroutine
+
+public function boolean if_rappel ();long ll_idpat,nb
+integer li_col
+string ls_col
+
+ls_col = mid(w_horaire.dw_hor.getcolumnname(), 13)
+li_col = long(ls_col)
+ll_idpat = w_horaire.dw_hor.getitemnumber(w_horaire.dw_hor.getrow(),'patient_id_'+ls_col)
+if ll_idpat > 0 then
+	Select count(*) into :nb from rendezvous where patient_id = :ll_idpat and id_rdv is null;
+	if nb >= 1 then
+		choose case error_type(206)
+			case 1
+				delete from rendezvous where patient_id = :ll_idpat;
+				if isvalid(w_liste_des_rappels_retentions) then
+					w_liste_des_rappels_retentions.event ue_post_open()
+				end if
+			case 3
+				return false
+		end choose
+	end if
+	return true
+else
+	return false
+end if
+end function
+
+on m_popup_horaire.create
+m_popup_horaire=this
+call super::create
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_choix=create m_choix
+this.Item[UpperBound(this.Item)+1]=this.m_choix
+end on
+
+on m_popup_horaire.destroy
+call super::destroy
+destroy(this.m_choix)
+end on
+
+type m_choix from menu within m_popup_horaire
+m_modrdv m_modrdv
+m_transfert m_transfert
+m_conf m_conf
+m_memo m_memo
+m_cin m_cin
+m_cout m_cout
+m_delrdv m_delrdv
+m_delconf m_delconf
+m_delmemo m_delmemo
+m_annulercin m_annulercin
+m_traitdispo m_traitdispo
+m_-0 m_-0
+m_dosspat m_dosspat
+m_dossfin m_dossfin
+m_fact m_fact
+m_paie m_paie
+m_cpd m_cpd
+m_xray m_xray
+m_-1 m_-1
+m_rap m_rap
+m_rvm m_rvm
+m_rva m_rva
+m_retard m_retard
+m_labelrdv m_labelrdv
+m_caba m_caba
+m_corr m_corr
+m_séquencerdv m_séquencerdv
+end type
+
+on m_choix.create
+call super::create
+this.text = "Choix"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_modrdv=create m_modrdv
+this.m_transfert=create m_transfert
+this.m_conf=create m_conf
+this.m_memo=create m_memo
+this.m_cin=create m_cin
+this.m_cout=create m_cout
+this.m_delrdv=create m_delrdv
+this.m_delconf=create m_delconf
+this.m_delmemo=create m_delmemo
+this.m_annulercin=create m_annulercin
+this.m_traitdispo=create m_traitdispo
+this.m_-0=create m_-0
+this.m_dosspat=create m_dosspat
+this.m_dossfin=create m_dossfin
+this.m_fact=create m_fact
+this.m_paie=create m_paie
+this.m_cpd=create m_cpd
+this.m_xray=create m_xray
+this.m_-1=create m_-1
+this.m_rap=create m_rap
+this.m_rvm=create m_rvm
+this.m_rva=create m_rva
+this.m_retard=create m_retard
+this.m_labelrdv=create m_labelrdv
+this.m_caba=create m_caba
+this.m_corr=create m_corr
+this.m_séquencerdv=create m_séquencerdv
+this.Item[UpperBound(this.Item)+1]=this.m_modrdv
+this.Item[UpperBound(this.Item)+1]=this.m_transfert
+this.Item[UpperBound(this.Item)+1]=this.m_conf
+this.Item[UpperBound(this.Item)+1]=this.m_memo
+this.Item[UpperBound(this.Item)+1]=this.m_cin
+this.Item[UpperBound(this.Item)+1]=this.m_cout
+this.Item[UpperBound(this.Item)+1]=this.m_delrdv
+this.Item[UpperBound(this.Item)+1]=this.m_delconf
+this.Item[UpperBound(this.Item)+1]=this.m_delmemo
+this.Item[UpperBound(this.Item)+1]=this.m_annulercin
+this.Item[UpperBound(this.Item)+1]=this.m_traitdispo
+this.Item[UpperBound(this.Item)+1]=this.m_-0
+this.Item[UpperBound(this.Item)+1]=this.m_dosspat
+this.Item[UpperBound(this.Item)+1]=this.m_dossfin
+this.Item[UpperBound(this.Item)+1]=this.m_fact
+this.Item[UpperBound(this.Item)+1]=this.m_paie
+this.Item[UpperBound(this.Item)+1]=this.m_cpd
+this.Item[UpperBound(this.Item)+1]=this.m_xray
+this.Item[UpperBound(this.Item)+1]=this.m_-1
+this.Item[UpperBound(this.Item)+1]=this.m_rap
+this.Item[UpperBound(this.Item)+1]=this.m_rvm
+this.Item[UpperBound(this.Item)+1]=this.m_rva
+this.Item[UpperBound(this.Item)+1]=this.m_retard
+this.Item[UpperBound(this.Item)+1]=this.m_labelrdv
+this.Item[UpperBound(this.Item)+1]=this.m_caba
+this.Item[UpperBound(this.Item)+1]=this.m_corr
+this.Item[UpperBound(this.Item)+1]=this.m_séquencerdv
+end on
+
+on m_choix.destroy
+call super::destroy
+destroy(this.m_modrdv)
+destroy(this.m_transfert)
+destroy(this.m_conf)
+destroy(this.m_memo)
+destroy(this.m_cin)
+destroy(this.m_cout)
+destroy(this.m_delrdv)
+destroy(this.m_delconf)
+destroy(this.m_delmemo)
+destroy(this.m_annulercin)
+destroy(this.m_traitdispo)
+destroy(this.m_-0)
+destroy(this.m_dosspat)
+destroy(this.m_dossfin)
+destroy(this.m_fact)
+destroy(this.m_paie)
+destroy(this.m_cpd)
+destroy(this.m_xray)
+destroy(this.m_-1)
+destroy(this.m_rap)
+destroy(this.m_rvm)
+destroy(this.m_rva)
+destroy(this.m_retard)
+destroy(this.m_labelrdv)
+destroy(this.m_caba)
+destroy(this.m_corr)
+destroy(this.m_séquencerdv)
+end on
+
+type m_modrdv from menu within m_choix
+end type
+
+on m_modrdv.create
+call super::create
+this.text = "Modifier rendez-vous~tF1"
+this.shortcut = 112
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_modrdv.destroy
+call super::destroy
+end on
+
+event clicked;long row, i
+integer li_col
+string ls_col, ls_iduser,ls_tmp
+s_pat lstr_pat
+
+row = w_horaire.dw_hor.getrow()
+w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),lstr_pat.col,ls_col)
+lstr_pat.datecal = w_horaire.dw_hor.getitemdate(row,'datecal')
+lstr_pat.heure = w_horaire.dw_hor.getitemtime(row,'heure')
+lstr_pat.duree = w_horaire.dw_hor.getitemnumber(row,'duree'+ls_col)
+lstr_pat.traitid = w_horaire.dw_hor.getitemnumber(row,'traitementid'+ls_col)
+lstr_pat.patid = w_horaire.dw_hor.getitemnumber(row,'patient_id_'+ls_col)
+lstr_pat.backcolor = w_horaire.dw_hor.getitemnumber(row,'couleur_text_'+ls_col)
+lstr_pat.memo = rep(w_horaire.dw_hor.getitemstring(row,'memo'+ls_col),"'","''")
+setNull(lstr_pat.rv)
+select rendezvous.rv_id
+  into :lstr_pat.rv
+  from t_rdv inner join rendezvous on t_rdv.id_rdv = rendezvous.id_rdv
+ where t_rdv.patient_id = :lstr_pat.patid
+	and t_rdv.rdvdate = :lstr_pat.datecal
+	and t_rdv.rdvheure = :lstr_pat.heure
+	and t_rdv.colonne = :lstr_pat.col;
+if isnull(lstr_pat.memo) then lstr_pat.memo = ''
+for i = 0 to lstr_pat.duree - 1
+	if i > 0 then
+		ls_tmp = w_horaire.dw_hor.getitemstring(row + i,"patient_nom_"+ls_col)
+		if ls_tmp = 'X' or ls_tmp = 'XX' then ls_tmp = ''
+		lstr_pat.l[i] = ls_tmp
+	end if
+	
+	ls_tmp = upper(w_horaire.dw_hor.getitemstring(row + i,"dt"+ls_col))
+	if isNull(ls_tmp) then ls_tmp = 'H'
+	if ls_tmp <> 'D' then ls_tmp = 'H'
+	lstr_pat.dt[i + 1] = ls_tmp
+next
+//vérification si la plage est barré
+if not len(w_horaire.uf_islock(lstr_pat.datecal,lstr_pat.col)) > 1 then
+	// barre plage
+	INSERT INTO t_horlock(ortho_id,hordate,col,id_personnel) VALUES (:w_horaire.il_horidspec,:lstr_pat.datecal,:lstr_pat.col,:gl_idpers);
+	if error_type(-1) = 1 then
+		commit using SQLCA;
+	else
+		rollback using SQLCA;
+	end if
+else
+	error_type(115)
+	w_horaire.event ue_timer(1)
+	return
+end if
+openwithparm(w_rech_patient,lstr_pat)
+end event
+
+type m_transfert from menu within m_choix
+event clicked ( )
+end type
+
+event clicked;long row,ll_idhortrans, ll_cnt
+string ls_sql,ls_col,ls_iduser, ls_rv
+integer i,li_count
+s_pat lstr_pat
+
+row = w_horaire.dw_hor.getrow()
+w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),lstr_pat.col,ls_col)
+
+lstr_pat.patid = w_horaire.dw_hor.getitemnumber(row,'patient_id_'+ls_col)
+// vérification si il y a possibilité de transfert
+if lstr_pat.patid < -1 or lstr_pat.patid = 0 or isnull(lstr_pat.patid) then
+	error_type(116)
+	beep(1)
+	return
+end if
+
+// vérifier si le patient est déjà en transfert
+select count(*) into :li_count from t_hortrans where patid = :lstr_pat.patid;
+if li_count > 0 then
+	error_type(190)
+else
+	// remplir la structure
+	lstr_pat.idspec = w_horaire.il_horidspec
+	lstr_pat.datecal = w_horaire.dw_hor.getitemdate(row,'datecal')
+	lstr_pat.heure = w_horaire.dw_hor.getitemtime(row,'heure')
+	lstr_pat.patnom = w_horaire.dw_hor.getitemstring(row,'patient_nom_'+ls_col)
+	lstr_pat.dt[1] = w_horaire.dw_hor.getitemstring(row,'dt'+ls_col)
+	if isnull(lstr_pat.dt[1]) then lstr_pat.dt[1] = ''
+	lstr_pat.traitid = w_horaire.dw_hor.getitemnumber(row,'traitementid'+ls_col)
+	lstr_pat.memo = rep(w_horaire.dw_hor.getitemstring(row,'memo'+ls_col),"'","''")
+	if isnull(lstr_pat.memo) then lstr_pat.memo = ''
+	lstr_pat.backcolor = w_horaire.dw_hor.getitemNumber(row,'couleur_text_'+ls_col)
+//	lstr_pat.iduser = w_horaire.dw_hor.getitemnumber(row,'iduser'+ls_col)
+//	ls_iduser = string(lstr_pat.iduser)
+	select count(*)
+	  into :ll_cnt
+	  from t_rdv
+	 where patient_id = :lstr_pat.patid
+		and rdvdate = :lstr_pat.datecal
+		and rdvheure = :lstr_pat.heure
+		and colonne = :lstr_pat.col;
+	if ll_cnt > 0 then
+		setNull(lstr_pat.rv)
+		select first rv_id
+		  into :lstr_pat.rv
+		  from rendezvous inner join t_rdv on t_rdv.id_rdv = rendezvous.id_rdv
+		 where t_rdv.patient_id = :lstr_pat.patid
+			and t_rdv.rdvdate = :lstr_pat.datecal
+			and t_rdv.rdvheure = :lstr_pat.heure
+			and t_rdv.colonne = :lstr_pat.col
+	 order by t_rdv.id_rdv asc;
+	end if
+	if isnull(ls_iduser) then ls_iduser = 'null'
+	if w_horaire.dw_hor.getitemnumber(row,'duree'+ls_col) <= 0 then
+		lstr_pat.duree = 1
+	else
+		lstr_pat.duree = w_horaire.dw_hor.getitemnumber(row,'duree'+ls_col)
+	end if
+	for i = 1 to lstr_pat.duree - 1
+		lstr_pat.l[i]  = w_horaire.dw_hor.getitemstring(row + i,"patient_nom_"+ls_col)
+		lstr_pat.dt[i + 1] = w_horaire.dw_hor.getitemstring(row + i,'dt'+ls_col)
+		if isnull(lstr_pat.dt[i + 1]) then lstr_pat.dt[i + 1] = ''
+	next
+	select max(id_hortrans) into :ll_idhortrans from t_hortrans;
+	if isnull(ll_idhortrans) then ll_idhortrans = 0
+	if isnull(lstr_pat.rv) then ls_rv = 'null' else ls_rv = string(lstr_pat.rv)
+	ll_idhortrans++
+	ls_sql = "insert into t_hortrans(id_hortrans,id_specialist,datecal,heure,patid,backcolor,idtrait,duree,col,memo,idpers,dt,rv_id) values ("+string(ll_idhortrans)+","+string(lstr_pat.idspec)+",'"+string(lstr_pat.datecal,'yyyy-mm-dd')+"','"+string(lstr_pat.heure)+"',"+string(lstr_pat.patid)+","+string(lstr_pat.backcolor)+","+string(lstr_pat.traitid)+","+string(lstr_pat.duree)+","+ls_col+",'"+lstr_pat.memo+"',"+string(gl_idpers)+",'"+lstr_pat.dt[1]+"',"+ls_rv+")"
+//	messagebox('ls_sql',ls_sql)
+	execute immediate :ls_sql using sqlca;
+	if error_type(-1) = 1 then
+		for i = 1 to upperbound(lstr_pat.l[])
+			ls_sql = "insert into t_hortransrow(id_hortrans,patnom,dt,ligne) values ("+string(ll_idhortrans)+",'"+lstr_pat.l[i]+"','"+lstr_pat.dt[i + 1]+"',"+string(i)+")"
+//			messagebox('ls_sql',ls_sql)
+			execute immediate :ls_sql using sqlca;
+			error_type(-1)
+		next
+		error_type(188)
+		w_horaire.tab_view.tabpage_1.dw_hortrans.event ue_retrieve()
+	end if
+end if
+end event
+
+on m_transfert.create
+call super::create
+this.text = "Transfert~tF2"
+this.shortcut = 113
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_transfert.destroy
+call super::destroy
+end on
+
+type m_conf from menu within m_choix
+end type
+
+event clicked;long row
+integer li_col
+string ls_sql,ls_col
+date ldt
+time lt
+
+row = w_horaire.dw_hor.getrow()
+w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),li_col,ls_col)
+ldt = w_horaire.dw_hor.getitemdate(row,'datecal')
+lt = w_horaire.dw_hor.getitemtime(row,'heure')
+ls_sql = "update horaire set conf"+ls_col+"= 1 where no_ortho = "+string(w_horaire.il_horidspec)+" and datecal = '"+string(ldt,"yyyy-mm-dd")+"' and heure = '"+string(lt)+"'"
+//messagebox('ls_sql',ls_sql)
+execute immediate :ls_sql using sqlca;
+if error_type(-1) = 1 then
+	commit using sqlca;
+	w_horaire.uf_setsync()
+else
+	rollback using sqlca;
+	error_type(50)
+end if
+end event
+
+on m_conf.create
+call super::create
+this.text = "Confirmé~tF3"
+this.shortcut = 114
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_conf.destroy
+call super::destroy
+end on
+
+type m_memo from menu within m_choix
+end type
+
+event clicked;open(w_hormemo)
+end event
+
+on m_memo.create
+call super::create
+this.text = "Mémo~tF4"
+this.shortcut = 115
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_memo.destroy
+call super::destroy
+end on
+
+type m_cin from menu within m_choix
+end type
+
+event clicked;long ll_row1,ll_patid, ll_shareid
+integer i,li_col,li_count,li_late,li_miss
+string ls_col,ls_rdvetat
+date ldt_caldate
+time lt_heure,lt_miss,lt_late
+
+select horshareid into :ll_shareid from t_options where ortho_id = :v_no_ortho;
+
+ll_row1 = w_horaire.dw_hor.getrow()
+w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),li_col,ls_col)
+
+ll_patid = w_horaire.il_patid
+ldt_caldate = w_horaire.dw_hor.getitemdate(ll_row1,'datecal')
+lt_heure = w_horaire.dw_hor.getitemtime(ll_row1,'heure')
+// verification de la table t_rdv si le patient existe
+select count(*) into :li_count from t_rdv where rdvdate = :ldt_caldate and rdvheure = :lt_heure and patient_id = :ll_patid and colonne = :li_col;
+if li_count = 1 then
+	li_count = 0
+	// verification si le patient est deja ds la salle d'attente
+	select count(*) into :li_count from t_rdv where heurearr is not null and rdvdate = :ldt_caldate and rdvheure = :lt_heure and patient_id = :ll_patid and colonne = :li_col;
+	if li_count = 0 then
+		// définir l'état du rdv
+		select temporet, temporvm into :li_late, :li_miss from t_options where ortho_id = :ll_shareid;
+		lt_miss = relativeTime(lt_heure, (li_miss * 60))
+		lt_late = relativeTime(lt_heure, (li_late * 60))
+//		messagebox('M: '+string(lt_miss),'L: '+string(lt_late))
+		if now() < lt_heure then
+			ls_rdvetat = 'e'
+		elseif now() > lt_miss then
+			ls_rdvetat = 'l'
+		elseif now() > lt_late then
+			ls_rdvetat = 'l'
+		else
+			ls_rdvetat = 'o'
+		end if
+		update t_rdv set heurearr = now(),rdvetat = :ls_rdvetat where rdvdate = :ldt_caldate and rdvheure = :lt_heure and patient_id = :ll_patid and colonne = :li_col;		
+		if error_type(-1) = 1 then
+			commit using sqlca;
+			w_horaire.uf_setsync()
+//			w_horaire.affichage_creation()
+		else
+			rollback using sqlca;
+			error_type(50)
+		end if
+	else
+		error_type(159)
+	end if
+	if isvalid(w_cincout) then
+		
+		
+		w_cincout.tab_cincout.tabpage_pat.dw_cincoutpat.retrieve(ll_shareid)
+		w_cincout.tab_cincout.tabpage_clinique.dw_cincoutwaitingroom.Retrieve(ll_shareid)
+	end if
+else
+	error_type(63)
+end if
+end event
+
+on m_cin.create
+call super::create
+this.text = "Cin~tF5"
+this.shortcut = 116
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cin.destroy
+call super::destroy
+end on
+
+type m_cout from menu within m_choix
+end type
+
+event clicked;long ll_row1,ll_patid, ll_shareid
+integer i,li_col,li_count,li_late,li_miss
+string ls_col,ls_rdvetat
+date ldt_caldate
+time lt_heure,lt_miss,lt_late
+
+select horshareid into :ll_shareid from t_options where ortho_id = :v_no_ortho;
+
+ll_row1 = w_horaire.dw_hor.getrow()
+w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),li_col,ls_col)
+
+ll_patid = w_horaire.il_patid
+ldt_caldate = w_horaire.dw_hor.getitemdate(ll_row1,'datecal')
+lt_heure = w_horaire.dw_hor.getitemtime(ll_row1,'heure')
+// verification de la table t_rdv si le patient existe
+select count(*) into :li_count from t_rdv where rdvdate = :ldt_caldate and rdvheure = :lt_heure and patient_id = :ll_patid and colonne = :li_col;
+if li_count = 1 then
+	li_count = 0
+	// verification si le patient est deja Cout
+	select count(*) into :li_count from t_rdv where released is not null and rdvdate = :ldt_caldate and rdvheure = :lt_heure and patient_id = :ll_patid and colonne = :li_col;
+	if li_count = 1 then
+		update t_rdv set heuredep = now() where rdvdate = :ldt_caldate and rdvheure = :lt_heure and patient_id = :ll_patid and colonne = :li_col;		
+		if error_type(-1) = 1 then
+			commit using sqlca;
+		else
+			rollback using sqlca;
+			error_type(50)
+		end if
+	else
+		error_type(193)
+	end if
+	if isvalid(w_cincout) then
+		w_cincout.tab_cincout.tabpage_pat.dw_cincoutpat.retrieve(ll_shareid)
+		w_cincout.tab_cincout.tabpage_clinique.dw_cincoutseated.Retrieve(ll_shareid)
+		w_cincout.tab_cincout.tabpage_clinique.dw_cincoutreleased.Retrieve(ll_shareid)		
+	end if
+else
+	error_type(63)
+end if
+end event
+
+on m_cout.create
+call super::create
+this.text = "Cout~tF6"
+this.shortcut = 117
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cout.destroy
+call super::destroy
+end on
+
+type m_delrdv from menu within m_choix
+end type
+
+event clicked;long row, ll_cnt
+string ls_col
+s_pat lstr_pat
+
+if error_type(234) = 1 then
+	row = w_horaire.dw_hor.getrow()
+	w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),lstr_pat.col,ls_col)
+	lstr_pat.patid = w_horaire.dw_hor.getitemnumber(row,'patient_id_'+ls_col)
+	lstr_pat.datecal = w_horaire.dw_hor.getitemdate(row,'datecal')
+	lstr_pat.heure = w_horaire.dw_hor.getitemtime(row,'heure')
+	lstr_pat.duree = w_horaire.dw_hor.getitemnumber(row,'duree'+ls_col)
+	lstr_pat.traitid = w_horaire.dw_hor.getitemnumber(row,"traitementid" + ls_col)
+
+	select count(*)
+	  into :ll_cnt
+	  from rendezvous
+	 where exists (select *
+						  from t_rdv
+						 where t_rdv.id_rdv = rendezvous.id_rdv
+							and t_rdv.patient_id = :lstr_pat.patid
+							and t_rdv.rdvdate = :lstr_pat.datecal
+							and t_rdv.rdvheure = :lstr_pat.heure
+							and t_rdv.colonne = :lstr_pat.col);
+	
+	if ll_cnt > 0 then
+		if error_type(260) = 2 then
+			delete from rendezvous
+			 where exists (select *
+								  from t_rdv
+								 where t_rdv.id_rdv = rendezvous.id_rdv
+									and t_rdv.patient_id = :lstr_pat.patid
+									and t_rdv.rdvdate = :lstr_pat.datecal
+									and t_rdv.rdvheure = :lstr_pat.heure
+									and t_rdv.colonne = :lstr_pat.col);
+		end if
+	end if
+	w_horaire.deleterdv(lstr_pat.patid,lstr_pat.datecal,lstr_pat.heure,lstr_pat.col)
+	w_horaire.dw_info_patient_hor.visible = false
+	w_horaire.dw_hor.event ue_delete(lstr_pat,false)
+	w_horaire.uf_setsync() // hor refresh
+	if isvalid(w_liste_des_rappels_retentions) then
+		w_liste_des_rappels_retentions.dw_rappel_retention.event ue_retrieve()
+	end if
+end if
+end event
+
+on m_delrdv.create
+call super::create
+this.text = "Détruire rendez-vous"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_delrdv.destroy
+call super::destroy
+end on
+
+type m_delconf from menu within m_choix
+end type
+
+event clicked;long row
+integer li_col
+string ls_sql,ls_col
+date ldt
+time lt
+
+row = w_horaire.dw_hor.getrow()
+w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),li_col,ls_col)
+ldt = w_horaire.dw_hor.getitemdate(row,'datecal')
+lt = w_horaire.dw_hor.getitemtime(row,'heure')
+ls_sql = "update horaire set conf"+ls_col+"= 0 where no_ortho = "+string(w_horaire.il_horidspec)+" and datecal = '"+string(ldt,"yyyy-mm-dd")+"' and heure = '"+string(lt)+"'"
+//messagebox('ls_sql',ls_sql)
+execute immediate :ls_sql using sqlca;
+if error_type(-1) = 1 then
+	commit using sqlca;
+	w_horaire.uf_setsync()
+else
+	rollback using sqlca;
+	error_type(50)
+end if
+end event
+
+on m_delconf.create
+call super::create
+this.text = "Annuler confirmation"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_delconf.destroy
+call super::destroy
+end on
+
+type m_delmemo from menu within m_choix
+end type
+
+event clicked;long row, ll_patid
+integer li_col
+string nul,ls_col,ls_sql, ls_memo
+date ldt
+time lt
+SetNull(nul)
+
+if messagebox("Suppression","Voulez-vous détruire le mémo?",Information!,YesNo!) = 1 then
+	row = w_horaire.dw_hor.getrow()
+	w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),li_col,ls_col)
+	ldt = w_horaire.dw_hor.getitemdate(row,'datecal')
+	lt = w_horaire.dw_hor.getitemtime(row,'heure')
+	ls_sql = "update horaire set memo"+ls_col+"= '' where no_ortho = "+string(w_horaire.il_horidspec)+" and datecal = '"+string(ldt,"yyyy-mm-dd")+"' and heure = '"+string(lt)+"'"
+	//messagebox('ls_sql',ls_sql)
+	execute immediate :ls_sql using sqlca;
+	if error_type(-1) = 1 then
+		commit using sqlca;
+		w_horaire.uf_setsync()
+	else
+		rollback using sqlca;
+		error_type(50)
+	end if
+	
+	w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),li_col,ls_col)
+	ll_patid = w_horaire.dw_hor.getItemNumber(row,'patient_id_' + ls_col)
+	setnull(ls_memo)
+	update t_rdv set memo = :ls_memo
+	where patient_id = :ll_patid and rdvheure = :lt and rdvdate = :ldt;
+	commit using SQLCA;
+	
+end if
+end event
+
+on m_delmemo.create
+call super::create
+this.text = "Annuler mémo"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_delmemo.destroy
+call super::destroy
+end on
+
+type m_annulercin from menu within m_choix
+end type
+
+event clicked;long ll_row1,ll_patid
+integer i,li_col,li_count
+string ls_col
+date ldt_caldate
+time lt_heure
+
+ll_row1 = w_horaire.dw_hor.getrow()
+w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),li_col,ls_col)
+ll_patid = w_horaire.il_patid
+ldt_caldate = w_horaire.dw_hor.getitemdate(ll_row1,'datecal')
+lt_heure = w_horaire.dw_hor.getitemtime(ll_row1,'heure')
+// verification de la table t_rdv si le patient existe
+select count(*) into :li_count from t_rdv where rdvdate = :ldt_caldate and rdvheure = :lt_heure and patient_id = :ll_patid and colonne = :li_col;
+if li_count = 1 then
+	li_count = 0
+	// verification si le patient est deja ds la salle d'attente
+	select count(*) into :li_count from t_rdv where heurearr is not null and rdvdate = :ldt_caldate and rdvheure = :lt_heure and patient_id = :ll_patid and colonne = :li_col;
+	if li_count = 1 then
+		update t_rdv set rdvetat = null,heurearr = null,seated = null,ready = null,released = null,heuredep = null where rdvdate = :ldt_caldate and rdvheure = :lt_heure and patient_id = :ll_patid and colonne = :li_col;
+		if error_type(-1) = 1 then
+			commit using sqlca;
+			w_horaire.affichage_creation()
+		else
+			rollback using sqlca;
+			error_type(50)
+		end if
+	else
+		error_type(159)
+	end if
+	if isvalid(w_cincout) then
+		w_cincout.tab_cincout.tabpage_pat.dw_cincoutpat.event ue_retrieve()
+		w_cincout.tab_cincout.tabpage_clinique.dw_cincoutwaitingroom.event ue_Retrieve()
+	end if
+else
+	error_type(63)
+end if
+end event
+
+on m_annulercin.create
+call super::create
+this.text = "Annuler Cin"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_annulercin.destroy
+call super::destroy
+end on
+
+type m_traitdispo from menu within m_choix
+end type
+
+event clicked;long ll_row, ll_couleur
+integer li_col
+string ls_col, ls_trait
+
+ll_row = w_horaire.dw_hor.getrow()
+w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),li_col,ls_col)
+
+w_horaire.lb_trait.reset()
+
+ll_couleur = w_horaire.dw_hor.getItemNumber(ll_row, 'colortemplate' + ls_col)
+
+if isNull(ll_couleur) then
+	if v_langue = 'an' then
+		w_horaire.lb_trait.addItem("All")
+	else
+		w_horaire.lb_trait.addItem("Tous")
+	end if
+else
+	DECLARE curTrait CURSOR FOR
+	  SELECT nom_traitement
+		 FROM type_de_traitement INNER JOIN t_color ON type_de_traitement.color_id = t_color.color_id
+		WHERE t_color.color = :ll_couleur
+	ORDER BY nom_traitement ASC;
+	
+	OPEN curTrait;
+	 
+	FETCH curTrait INTO :ls_trait;
+	do while SQLCA.SQLCode = 0
+		w_horaire.lb_trait.addItem(ls_trait)
+		
+		FETCH curTrait INTO :ls_trait;
+	loop
+	 
+	 CLOSE curTrait;
+end if
+
+w_horaire.lb_trait.x = w_horaire.dw_hor.x + long(w_horaire.dw_hor.describe("patient_nom_" + ls_col + ".x"))
+w_horaire.lb_trait.y = w_horaire.dw_hor.y + long(w_horaire.dw_hor.object.datawindow.header.height) + ((ll_row - 1) * long(w_horaire.dw_hor.object.datawindow.detail.height)) + long(w_horaire.dw_hor.describe("patient_nom_" + ls_col + ".y"))
+w_horaire.lb_trait.visible = true
+w_horaire.lb_trait.setFocus()
+
+end event
+
+on m_traitdispo.create
+call super::create
+this.text = "Traitements disponibles"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_traitdispo.destroy
+call super::destroy
+end on
+
+type m_-0 from menu within m_choix
+end type
+
+on m_-0.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-0.destroy
+call super::destroy
+end on
+
+type m_dosspat from menu within m_choix
+end type
+
+event clicked;long row
+integer li_col
+string ls_col
+row = w_horaire.dw_hor.getrow()
+choose case w_horaire.dw_hor.getcolumnname()
+	case 'patient_nom_1'
+		li_col = 1
+		ls_col = '1'
+	case 'patient_nom_2'
+		li_col = 2
+		ls_col = '2'
+	case 'patient_nom_3'
+		li_col = 3
+		ls_col = '3'
+	case 'patient_nom_4'
+		li_col = 4
+		ls_col = '4'
+	case 'patient_nom_5'
+		li_col = 5
+		ls_col = '5'
+	case 'patient_nom_6'
+		li_col = 6
+		ls_col = '6'
+	case 'patient_nom_7'
+		li_col = 7
+		ls_col = '7'
+	case 'patient_nom_8'
+		li_col = 8
+		ls_col = '8'
+	case 'patient_nom_9'
+		li_col = 9
+		ls_col = '9'
+	case 'patient_nom_10'
+		li_col = 10
+		ls_col = '10'
+	case 'patient_nom_11'
+		li_col = 11
+		ls_col = '11'
+	case 'patient_nom_12'
+		li_col = 12
+		ls_col = '12'
+	case 'patient_nom_13'
+		li_col = 13
+		ls_col = '13'
+	case 'patient_nom_14'
+		li_col = 14
+		ls_col = '14'
+	case 'patient_nom_15'
+		li_col = 15
+		ls_col = '15'
+end choose
+w_horaire.il_patid = w_horaire.dw_hor.getitemnumber(row,"patient_id_"+ls_col)
+if isnull(w_horaire.il_patid) = false and w_horaire.il_patid > 0 then
+	Opensheetwithparm(w_dossier_patients,w_horaire.il_patid,w_principal,2,layered! )
+else
+	error_type(116)
+end if
+	
+end event
+
+on m_dosspat.create
+call super::create
+this.text = "Dossier du patient~tF7"
+this.shortcut = 118
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_dosspat.destroy
+call super::destroy
+end on
+
+type m_dossfin from menu within m_choix
+end type
+
+event clicked;w_patient.event ue_dossfin(w_horaire.il_patid)
+end event
+
+on m_dossfin.create
+call super::create
+this.text = "Dossier financier"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_dossfin.destroy
+call super::destroy
+end on
+
+type m_fact from menu within m_choix
+end type
+
+event clicked;openwithparm(w_horfinmenu,'F')
+end event
+
+on m_fact.create
+call super::create
+this.text = "Facturation"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_fact.destroy
+call super::destroy
+end on
+
+type m_paie from menu within m_choix
+end type
+
+event clicked;openwithparm(w_horfinmenu,'P')
+end event
+
+on m_paie.create
+call super::create
+this.text = "Paiement"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_paie.destroy
+call super::destroy
+end on
+
+type m_cpd from menu within m_choix
+end type
+
+event clicked;openwithparm(w_horfinmenu,'C')
+end event
+
+on m_cpd.create
+call super::create
+this.text = "Chèque postdaté"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cpd.destroy
+call super::destroy
+end on
+
+type m_xray from menu within m_choix
+end type
+
+on m_xray.create
+call super::create
+this.visible = false
+this.text = "X-RAY"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_xray.destroy
+call super::destroy
+end on
+
+event clicked;gf_captureortho(w_horaire.il_patid)
+end event
+
+type m_-1 from menu within m_choix
+end type
+
+on m_-1.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-1.destroy
+call super::destroy
+end on
+
+type m_rap from menu within m_choix
+end type
+
+event clicked;if if_rappel() then
+	open(w_hormenuraptrait)
+end if
+
+end event
+
+on m_rap.create
+call super::create
+this.text = "Passer vers rappels~tF8"
+this.shortcut = 119
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_rap.destroy
+call super::destroy
+end on
+
+type m_rvm from menu within m_choix
+event clicked ( )
+end type
+
+event clicked;long row, ll_idraptrait
+integer li_rvm,li_option
+string ls_col
+date ldt_daterap, ldt_datevue
+s_pat lstr_pat
+
+row = w_horaire.dw_hor.getrow()
+lstr_pat.datecal = w_horaire.dw_hor.getitemdate(row,"datecal")
+lstr_pat.heure = w_horaire.dw_hor.getitemtime(row,"heure")
+w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),lstr_pat.col,ls_col)
+lstr_pat.patid = w_horaire.dw_hor.getitemnumber(row,"patient_id_" + ls_col)
+lstr_pat.traitid = w_horaire.dw_hor.getitemnumber(row,"traitementid" + ls_col)
+lstr_pat.duree = w_horaire.dw_hor.getitemnumber(row,"duree" + ls_col)
+
+setnull(ll_idraptrait)
+select id_raptrait into :ll_idraptrait from t_raptrait where isnull(rvm,0) = 1 and ortho_id = :v_no_ortho;
+if isnull(ll_idraptrait) then
+	if v_langue = 'an' then
+		messagebox("Warning!","You have to designate a recall type: miss appointment",Information!,Ok!)
+	else
+		messagebox("Information!","Vous devez déterminer un type de rappel: rendez-vous manqué",Information!,Ok!)
+	end if
+	return
+end if
+
+//incremente rvmanques
+if error_type(233) = 1 then
+	select rvmanques into :li_rvm from patient where patient_id = :lstr_pat.patid;
+	if isnull(li_rvm) then li_rvm = 0
+	li_rvm += 1
+	update patient set rvmanques = :li_rvm where patient_id = :lstr_pat.patid;
+	commit using sqlca;
+end if
+//detruire rdv de l'horaire
+select hordelrvm into :li_option from t_options where ortho_id = :v_no_ortho;
+if li_option = 1 then
+	w_horaire.dw_hor.event ue_delete(lstr_pat,false)
+end if
+//inscrire comme etant manque
+update t_rdv set rdvetat = 'm' where patient_id = :lstr_pat.patid and rdvdate = :lstr_pat.datecal and rdvheure = :lstr_pat.heure;
+commit using sqlca;
+if error_type(-1) = 1 then
+	commit using sqlca;
+	w_horaire.uf_setsync()
+else
+	rollback using sqlca;
+end if
+//inscrire dans la liste des rappels
+if error_type(251) = 1 then
+	
+	select max(rdvdate) into :ldt_datevue
+	from t_rdv 
+	where rdvdate < today() and
+			ortho_id = :v_no_ortho and
+			patient_id = :lstr_pat.patid and 
+			isnull(rdvetat,'') not in ('m','c');
+	insert into rendezvous (date_vue,prochain_rv,patient_id,no_ortho,duree,type_traitement_id,id_raptrait)
+	values (:ldt_datevue,:lstr_pat.datecal,:lstr_pat.patid,:v_no_ortho,:lstr_pat.duree,:lstr_pat.traitid,:ll_idraptrait);
+	error_type(-1)
+end if
+
+if isvalid(w_liste_des_rappels_retentions) then
+	w_liste_des_rappels_retentions.dw_rappel_retention.event ue_retrieve()
+end if
+
+f_logs('rvm','traitid :',lstr_pat.traitid,lstr_pat.patid,today(),'0') //log
+end event
+
+on m_rvm.create
+call super::create
+this.text = "Rendez-vous manqué~tF9"
+this.shortcut = 120
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_rvm.destroy
+call super::destroy
+end on
+
+type m_rva from menu within m_choix
+end type
+
+event clicked;long row, ll_idraptrait
+integer li_ret,li_option
+string ls_col
+date ldt_daterap, ldt_datevue
+s_pat lstr_pat
+
+row = w_horaire.dw_hor.getrow()
+lstr_pat.datecal = w_horaire.dw_hor.getitemdate(row,"datecal")
+lstr_pat.heure = w_horaire.dw_hor.getitemtime(row,"heure")
+w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),lstr_pat.col,ls_col)
+
+lstr_pat.patid = w_horaire.dw_hor.getitemnumber(row,"patient_id_" + ls_col)
+lstr_pat.traitid = w_horaire.dw_hor.getitemnumber(row,"traitementid" + ls_col)
+lstr_pat.duree = w_horaire.dw_hor.getitemnumber(row,"duree" + ls_col)
+
+setnull(ll_idraptrait)
+select id_raptrait into :ll_idraptrait from t_raptrait where isnull(rva,0) = 1 and ortho_id = :v_no_ortho;
+if isnull(ll_idraptrait) then
+	if v_langue = 'an' then
+		messagebox("Warning!","You have to designate a recall type: cancel appointment",Information!,Ok!)
+	else
+		messagebox("Information!","Vous devez déterminer un type de rappel: rendez-vous annulé",Information!,Ok!)
+	end if
+	return
+end if
+
+//incremente retard
+if error_type(238) = 1 then
+	select rvcancel into :li_ret from patient where patient_id = :lstr_pat.patid;
+	if isnull(li_ret) then li_ret = 0
+	li_ret += 1
+	update patient set rvcancel = :li_ret where patient_id = :lstr_pat.patid;
+	if error_type(-1) = 1 then
+		commit using sqlca;
+	else
+		rollback using sqlca;
+		error_type(50)
+	end if
+end if
+//detruire rdv de l'horaire
+select hordelrva into :li_option from t_options where ortho_id = :v_no_ortho;
+if li_option = 1 then
+	w_horaire.dw_hor.event ue_delete(lstr_pat,false)
+end if
+
+//inscrire comme etant annule
+update t_rdv set rdvetat = 'c' where patient_id = :lstr_pat.patid and rdvdate = :lstr_pat.datecal and rdvheure = :lstr_pat.heure;
+if error_type(-1) = 1 then
+	commit using sqlca;
+	w_horaire.uf_setsync()
+else
+	rollback using sqlca;
+	error_type(50)
+end if
+
+if error_type(251) = 1 then
+	select max(rdvdate) into :ldt_datevue
+	from t_rdv 
+	where rdvdate < today() and
+			ortho_id = :v_no_ortho and
+			patient_id = :lstr_pat.patid and 
+			isnull(rdvetat,'') not in ('m','c');
+	insert into rendezvous (date_vue,prochain_rv,patient_id,no_ortho,duree,type_traitement_id,id_raptrait)
+	values (:ldt_datevue,:lstr_pat.datecal,:lstr_pat.patid,:v_no_ortho,:lstr_pat.duree,:lstr_pat.traitid,:ll_idraptrait);
+	if error_type(-1) = 1 then
+		commit using sqlca;
+	else
+		rollback using sqlca;
+		error_type(50)
+	end if
+end if
+
+if isvalid(w_liste_des_rappels_retentions) then
+	w_liste_des_rappels_retentions.dw_rappel_retention.event ue_retrieve()
+end if
+
+
+f_logs('rva','traitid :',lstr_pat.traitid,lstr_pat.patid,today(),'0') //log
+end event
+
+on m_rva.create
+call super::create
+this.text = "Rendez-vous annulé~tF10"
+this.shortcut = 121
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_rva.destroy
+call super::destroy
+end on
+
+type m_retard from menu within m_choix
+end type
+
+event clicked;long ll_patid, row, ll_traitid, ll_idraptrait
+integer li_duree,li_ret
+string ls_col
+date ldt_daterap
+time lt_heure
+
+row = w_horaire.dw_hor.getrow()
+lt_heure = w_horaire.dw_hor.getitemtime(row,"heure")
+choose case w_horaire.dw_hor.getcolumnname()
+	case "patient_nom_1"
+		ls_col = '1'
+	case "patient_nom_2"
+		ls_col = '2'
+	case "patient_nom_3"
+		ls_col = '3'
+	case "patient_nom_4"
+		ls_col = '4'
+	case "patient_nom_5"
+		ls_col = '5'
+	case "patient_nom_6"
+		ls_col = '6'
+	case "patient_nom_7"
+		ls_col = '7'
+	case "patient_nom_8"
+		ls_col = '8'
+	case "patient_nom_9"
+		ls_col = '9'
+	case "patient_nom_10"
+		ls_col = '10'
+	case "patient_nom_11"
+		ls_col = '11'
+	case "patient_nom_12"
+		ls_col = '12'
+	case "patient_nom_13"
+		ls_col = '13'
+	case "patient_nom_14"
+		ls_col = '14'
+	case "patient_nom_15"
+		ls_col = '15'
+end choose
+ll_patid = w_horaire.dw_hor.getitemnumber(row,"patient_id_" + ls_col)
+ll_traitid = w_horaire.dw_hor.getitemnumber(row,"traitementid" + ls_col)
+li_duree = w_horaire.dw_hor.getitemnumber(row,"duree" + ls_col)
+ll_idraptrait = v_no_ortho
+
+//incremente retard
+if error_type(235) = 1 then
+	select retards into :li_ret from patient where patient_id = :ll_patid;
+	if isnull(li_ret) then li_ret = 0
+	li_ret += 1
+	update patient set retards = :li_ret where patient_id = :ll_patid;
+	commit using sqlca;
+end if
+//inscrire comme etant un retard
+update t_rdv set rdvetat = 'l' where patient_id = :ll_patid and rdvdate = :istr_cal.caldate and rdvheure = :lt_heure;
+commit using sqlca;
+
+f_logs('ret','traitid :',ll_traitid,ll_patid,today(),'0') //log
+end event
+
+on m_retard.create
+call super::create
+this.text = "Patient en retard~tF11"
+this.shortcut = 122
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_retard.destroy
+call super::destroy
+end on
+
+type m_labelrdv from menu within m_choix
+end type
+
+event clicked;long row, ll_idpat, ll_retour
+integer li_col
+string ls_col, ls_langue, ls_typeetiq, ls_jour, ls_logo, ls_sql, ls_retour
+date	ld_date
+time	lt_time
+
+select modrdv
+  into :ls_typeetiq
+  from t_options
+ where ortho_id = :v_no_ortho;
+
+row = w_horaire.dw_hor.getrow()
+ls_col = mid(w_horaire.dw_hor.getcolumnname(), 13)
+li_col = integer(ls_col)
+ll_idpat = w_horaire.dw_hor.getitemnumber(row,'patient_id_'+ls_col)
+ld_date = w_horaire.dw_hor.getitemdate(row,'datecal')
+lt_time = w_horaire.dw_hor.getitemtime(row,'heure')
+
+datastore ds_etiquetterdv
+ds_etiquetterdv = create datastore
+if ls_typeetiq = 'M' then
+	ds_etiquetterdv.dataobject = "d_etiquetterdv2"
+	gi_imp = 2
+elseif ls_typeetiq = "S" THEN
+	gi_imp = 2
+	ds_etiquetterdv.dataobject = "d_etiquetterdv"
+elseif ls_typeetiq = "B" THEN
+	gi_imp = 2
+	ds_etiquetterdv.dataobject = "d_etiquetterdv3"
+ELSE
+	gi_imp = 1
+	if ls_typeetiq = 'A' then
+		ds_etiquetterdv.dataobject = "d_carterdv2"
+		ds_etiquetterdv.Modify("DataWindow.Print.Paper.Size=255")
+		ds_etiquetterdv.Modify("DataWindow.Print.CustomPage.Length=5500")
+		ds_etiquetterdv.Modify("DataWindow.Print.CustomPage.Width=4250")
+	else
+		ds_etiquetterdv.dataobject = "d_carterdv"
+	end if
+	
+	//Récupérer le logo
+	select chemin_logo
+	into :ls_logo
+	from t_options
+	where ortho_id = :v_no_ortho;	
+	
+	IF Isnull(ls_logo) = false AND ls_logo <> "" THEN
+		ds_etiquetterdv.object.p_logo.filename = ls_logo
+	END IF
+	//ls_sql = "SELECT FIRST patient.patient_nom,   patient.patient_prenom,patient.langue, t_rdv.rdvdate,   t_rdv.rdvheure,t_rdv.duree,t_rdv.typetraitid,ortho_id.dr_nom_complet,ortho_id.dr_tel_bur,ortho_id.dr_adresse,ortho_id.dr_ville_province_code_postale,ortho_id.site_web,(select hor_step from t_options where ortho_id = ortho_id.ortho_id) as hor_step,(select salutation from t_salutation where patient.id_sal = t_salutation.id_sal) as salutation FROM patient inner join t_rdv on patient.patient_id = t_rdv.patient_id inner join ortho_id on patient.no_ortho = ortho_id.ortho_id WHERE ortho_id.ortho_id = :ra_orthoid AND patient.patient_id = :ra_patient AND   t_rdv.rdvdate > today() AND isnull(t_rdv.rdvetat, '') not in ('c','m')   ORDER BY t_rdv.rdvdate ASC,    t_rdv.rdvheure ASC   "
+	ls_sql = "SELECT patient.patient_nom,   patient.patient_prenom,patient.langue, t_rdv.rdvdate,   t_rdv.rdvheure,t_rdv.duree,t_rdv.typetraitid,ortho_id.dr_nom_complet,ortho_id.dr_tel_bur,ortho_id.dr_adresse,ortho_id.dr_ville_province_code_postale,ortho_id.site_web,(select hor_step from t_options where ortho_id = ortho_id.ortho_id) as hor_step, (select isnull(suppduretiqrdv, 0) from t_options where ortho_id = ortho_id.ortho_id) as suppduretiqrdv, (select salutation from t_salutation where patient.id_sal = t_salutation.id_sal) as salutation FROM patient inner join t_rdv on patient.patient_id = t_rdv.patient_id inner join ortho_id on patient.no_ortho = ortho_id.ortho_id WHERE ortho_id.ortho_id = :ra_orthoid AND patient.patient_id = :ra_patient AND isnull(t_rdv.rdvetat, '') not in ('c','m') " + &
+		" AND t_rdv.rdvdate = '" + string(ld_date, 'yyyy-mm-dd') + "' AND t_rdv.rdvheure = '" + string(lt_time) + "' ORDER BY t_rdv.rdvdate ASC,    t_rdv.rdvheure ASC   "	
+	
+	ls_retour = ds_etiquetterdv.Modify('DataWindow.Table.Select="' + ls_sql + '"')
+end if
+
+ds_etiquetterdv.SetTransObject(SQLCA)
+ll_retour = ds_etiquetterdv.retrieve(v_no_ortho,ll_idpat)
+
+IF ll_retour = 0 THEN
+	error_type(1008)
+	If IsValid(ds_etiquetterdv) THEN destroy ds_etiquetterdv
+	RETURN 
+	
+END IF
+
+gb_datawindow = false
+openwithparm(w_print_options,ds_etiquetterdv)
+destroy ds_etiquetterdv
+
+end event
+
+on m_labelrdv.create
+call super::create
+this.text = "Imprimer étiquette rdv~tF12"
+this.shortcut = 123
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_labelrdv.destroy
+call super::destroy
+end on
+
+type m_caba from menu within m_choix
+end type
+
+event clicked;long row, ll_idraptrait, ll_caba
+integer li_option
+string ls_col
+date ldt_daterap
+s_pat lstr_pat
+
+row = w_horaire.dw_hor.getrow()
+lstr_pat.datecal = w_horaire.dw_hor.getitemdate(row,"datecal")
+lstr_pat.heure = w_horaire.dw_hor.getitemtime(row,"heure")
+w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),lstr_pat.col,ls_col)
+lstr_pat.patid = w_horaire.dw_hor.getitemnumber(row,"patient_id_" + ls_col)
+lstr_pat.traitid = w_horaire.dw_hor.getitemnumber(row,"traitementid" + ls_col)
+lstr_pat.duree = w_horaire.dw_hor.getitemnumber(row,"duree" + ls_col)
+ll_idraptrait = -1
+//inscrire dans la liste des rappels
+if error_type(251) = 1 then
+	insert into rendezvous (date_vue,prochain_rv,patient_id,no_ortho,duree,type_traitement_id,id_raptrait)
+	values (:istr_cal.caldate,:lstr_pat.datecal,:lstr_pat.patid,:v_no_ortho,:lstr_pat.duree,:lstr_pat.traitid,:ll_idraptrait);
+end if
+//incremente CABA
+if error_type(245) = 1 then
+	select caba into :ll_caba from patient where patient_id = :lstr_pat.patid;
+	if isnull(ll_caba) then ll_caba = 0
+	ll_caba += 1
+	update patient set caba = :ll_caba where patient_id = :lstr_pat.patid;
+	commit using sqlca;
+end if
+//detruire rdv de l'horaire
+select hordelrvm into :li_option from t_options where ortho_id = :v_no_ortho;
+if li_option = 1 then
+	w_horaire.dw_hor.event ue_delete(lstr_pat,false)
+end if
+//inscrire comme etant manque
+update t_rdv set rdvetat = 'b' where patient_id = :lstr_pat.patid and rdvdate = :lstr_pat.datecal and rdvheure = :lstr_pat.heure;
+if error_type(-1) = 1 then
+	commit using sqlca;
+	w_horaire.uf_setsync()
+else
+	rollback using sqlca;
+end if
+
+f_logs('cab','traitid :',lstr_pat.traitid,lstr_pat.patid,today(),'0') //log
+end event
+
+on m_caba.create
+call super::create
+this.text = "CABA"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_caba.destroy
+call super::destroy
+end on
+
+type m_corr from menu within m_choix
+end type
+
+on m_corr.create
+call super::create
+this.text = "Correspondance"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_corr.destroy
+call super::destroy
+end on
+
+event clicked;integer li_FileNum
+long ll_contactid[], ll_patid[], ll_phase[]
+string ls_corrpath
+boolean lb_2k3
+OLEObject lole_word
+
+lole_word = create oleobject
+
+if lole_word.connecttonewobject('word.application') <> 0 then return
+lb_2k3 = (left(lole_word.version, 2) = '11')
+lole_word.disconnectobject()
+destroy lole_word
+
+select corrpath into :ls_corrpath from t_options where ortho_id = :v_no_ortho;
+
+s_corrletter s_corr
+s_corr.patid = w_horaire.il_patid
+s_corr.letter = ''
+s_corr.flag = 'r'
+s_corr.mode = 'l'
+select id_contact into :ll_contactid[1] from patient where patient_id = :w_horaire.il_patid;
+ll_patid[1] = w_horaire.il_patid
+ll_phase[1] = 1
+gf_pat2excel(ll_patid,ll_contactid,ll_phase)
+gf_pat2xml(w_horaire.il_patid)
+li_FileNum = fileOpen("C:\ii4net\orthotek\filedel.bat", LineMode!, Write!, lockReadWrite!, replace!)
+fileWrite(li_FileNum, 'del /F ' + ls_corrpath + '\' + string(w_horaire.il_patid) + '\.*.doc~r~nexit')
+fileClose(li_FileNum)
+
+run("C:\ii4net\orthotek\filedel.bat",minimized!)
+
+//sleep(2)
+
+openwithparm(w_dosspatcorrletters,s_corr,w_principal)
+end event
+
+type m_séquencerdv from menu within m_choix
+end type
+
+event clicked;integer li_col
+long ll_patid, row
+string ls_col, ls_iduser,ls_tmp
+s_pat lstr_pat
+
+row = w_horaire.dw_hor.getrow()
+w_horaire.uf_col(w_horaire.dw_hor.getcolumnname(),lstr_pat.col,ls_col)
+ll_patid = w_horaire.dw_hor.getitemnumber(row,'patient_id_'+ls_col)
+openwithparm(w_rdvsequence,ll_patid,w_horaire)
+end event
+
+on m_séquencerdv.create
+call super::create
+this.text = "Séquence RDV"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_séquencerdv.destroy
+call super::destroy
+end on
+

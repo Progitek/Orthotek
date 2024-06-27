@@ -1,0 +1,84 @@
+﻿$PBExportHeader$d_journal_depot_som1.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 110 print.margin.bottom = 110 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=976 color="536870912" )
+summary(height=2024 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=0 color="536870912" )
+table(column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=date updatewhereclause=yes name=paiement_date_paiement dbname="paiement.date_paiement" )
+ column=(type=decimal(2) updatewhereclause=yes name=paiement_montant_recu dbname="paiement.montant_recu" )
+ column=(type=char(20) updatewhereclause=yes name=paiement_paiement dbname="paiement.paiement" values="Chèques	C/Visa	Visa/Mastercard	MC/Paiement direct	PD/Comptant	$/Chèque postdaté	P/" )
+ column=(type=long updatewhereclause=yes name=patient_no_ortho dbname="patient.no_ortho" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(20) updatewhereclause=yes name=ortho_id_dr_compte dbname="ortho_id.dr_compte" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_banque dbname="ortho_id.dr_banque" )
+ retrieve="  SELECT ortho_id.dr_nom_complet,   
+         paiement.date_paiement,   
+         paiement.montant_recu,   
+         paiement.paiement,   
+         patient.no_ortho,   
+         patient.patient_prenom,   
+         patient.patient_nom,   
+         ortho_id.dr_compte,   
+         ortho_id.dr_banque  
+    FROM ortho_id,   
+         paiement,   
+         patient,   
+         traitements  
+   WHERE patient.patient_id = traitements.patient_id AND  
+         paiement.traitement_patient_id = traitements.traitement_id AND  
+         ortho_id.ortho_id = patient.no_ortho AND  
+         ortho_id.ortho_id = :ra_no_ortho AND  
+         paiement.date_paiement BETWEEN :ra_debut AND :ra_fin AND  
+         paiement.cache <> 1  
+ORDER BY paiement.paiement ASC,   
+         patient.patient_nom ASC,   
+         patient.patient_prenom ASC   
+" arguments=(("ra_no_ortho", number),("ra_debut", date),("ra_fin", date)) )
+roundrectangle(band=header ellipseheight="36" ellipsewidth="41"x="411" y="176" height="388" width="2213"  name=rr_1 visible="1" brush.hatch="6" brush.color="1090519039" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="1" background.color="553648127" )
+column(band=header id=9 alignment="0" tabsequence=32766 border="0" color="0" x="773" y="328" height="80" width="1111" format="[general]" html.valueishtml="0"  name=ortho_id_dr_banque visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=8 alignment="0" tabsequence=32766 border="0" color="0" x="1079" y="440" height="80" width="741" format="[general]" html.valueishtml="0"  name=ortho_id_dr_compte visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Banque " border="0" color="0" x="471" y="332" height="64" width="270" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=1 alignment="0" tabsequence=32766 border="0" color="0" x="453" y="224" height="80" width="1093" format="[general]" html.valueishtml="0"  name=ortho_id_dr_nom_complet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Compte courant" border="0" color="0" x="453" y="440" height="64" width="590" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Sommaire du dépôt première partie" border="0" color="0" x="411" y="884" height="80" width="1221" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="DU" border="0" color="0" x="411" y="736" height="76" width="110" html.valueishtml="0"  name=t_21 visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Paramètre date de la recherche" border="0" color="0" x="411" y="632" height="76" width="1006" html.valueishtml="0"  name=t_20 visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="AU" border="0" color="0" x="1093" y="732" height="76" width="110" html.valueishtml="0"  name=t_22 visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="1262" y="736" height="76" width="471" html.valueishtml="0"  name=datedepot2 visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="553" y="736" height="76" width="471" html.valueishtml="0"  name=datedepot1 visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="if( paiement_paiement = 'P',  paiement_montant_recu , 0)"border="0" color="0" x="2441" y="0" height="64" width="96" format="[GENERAL]" html.valueishtml="0"  name=compute_cpd visible="1~t0"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" if(paiement_paiement = 'Amex',  paiement_montant_recu , 0)"border="0" color="0" x="2487" y="20" height="56" width="78" format="[GENERAL]" html.valueishtml="0"  name=compute_amex visible="1~t0"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" if(paiement_paiement = '$',  paiement_montant_recu , 0)"border="0" color="0" x="2478" y="16" height="56" width="73" format="[GENERAL]" html.valueishtml="0"  name=compute_argent visible="1~t0"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" if(paiement_paiement = 'Visa',  paiement_montant_recu ,0) "border="0" color="0" x="2336" y="8" height="56" width="73" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_visa visible="1~t0"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if( paiement_paiement = 'C',  paiement_montant_recu , 0 )"border="0" color="0" x="2345" y="4" height="64" width="64" format="[GENERAL]" html.valueishtml="0"  name=compute_cheques visible="1~t0"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if( paiement_paiement = 'MC',  paiement_montant_recu , 0 )"border="0" color="0" x="2331" y="4" height="64" width="87" format="[GENERAL]" html.valueishtml="0"  name=compute_mastercard visible="1~t0"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if( paiement_paiement = 'PD',  paiement_montant_recu , 0 )"border="0" color="0" x="2345" y="8" height="64" width="73" format="[GENERAL]" html.valueishtml="0"  name=compute_paiementdirect visible="1~t0"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="338" y1="4" x2="2665" y2="4"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=summary x1="1984" y1="296" x2="2638" y2="296"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=summary alignment="1" expression="sum(   compute_cheques for all ) + sum( compute_cpd for all )"border="0" color="0" x="2007" y="324" height="64" width="617" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Total chèques:" border="0" color="0" x="411" y="324" height="64" width="585" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Sous-total Chèques :" border="0" color="0" x="411" y="216" height="64" width="594" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Sous-total Chèques postdaté :" border="0" color="0" x="411" y="148" height="64" width="859" html.valueishtml="0"  name=t_23 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(  compute_cpd  for all )"border="0" color="0" x="2007" y="148" height="64" width="617" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(  compute_cheques  for all )"border="0" color="0" x="2007" y="216" height="64" width="617" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="1000.00$ x ________________ = ____________" border="0" color="0" x="411" y="1940" height="64" width="1285" html.valueishtml="0"  name=t_18 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="1993" y1="676" x2="2638" y2="676"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=summary alignment="0" text="Total Argent:" border="0" color="0" x="411" y="604" height="64" width="585" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=summary alignment="0" text="100.00$ x _________________ = ____________" border="0" color="0" x="411" y="1856" height="64" width="1285" html.valueishtml="0"  name=t_17 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="50.00$ x __________________ = ____________" border="0" color="0" x="411" y="1772" height="64" width="1285" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="20.00$ x __________________ = ____________" border="0" color="0" x="411" y="1688" height="64" width="1285" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="10.00$ x __________________ = ____________" border="0" color="0" x="411" y="1604" height="64" width="1285" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="5.00$ x ___________________ = ____________" border="0" color="0" x="411" y="1520" height="64" width="1285" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="2.00$ x ___________________ = ____________" border="0" color="0" x="411" y="1436" height="64" width="1285" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Détail en espèce" border="0" color="0" x="411" y="1316" height="64" width="910" html.valueishtml="0"  name=t_19 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=summary alignment="0" text="Total première partie:" border="0" color="0" x="411" y="928" height="64" width="635" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum(   compute_argent for all )"border="0" color="0" x="2007" y="596" height="64" width="617" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_9 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="compute_4 + compute_9"border="0" color="0" x="2007" y="928" height="64" width="617" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-11" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

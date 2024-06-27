@@ -1,0 +1,44 @@
+﻿$PBExportHeader$d_factures_sommaire.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=96 color="536870912" )
+summary(height=24 color="536870912" )
+footer(height=72 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=facture_id dbname="factures_traitements.facture_id" )
+ column=(type=decimal(2) updatewhereclause=yes name=montant dbname="factures_traitements.montant" )
+ column=(type=date updatewhereclause=yes name=date_facture dbname="factures_traitements.date_facture" )
+ column=(type=long updatewhereclause=yes name=status_id dbname="factures_traitements.status_id" )
+ column=(type=long updatewhereclause=yes name=traitement_id dbname="factures_traitements.traitement_id" )
+ column=(type=number updatewhereclause=yes name=affect dbname="factures_traitements.affect" )
+ column=(type=long updatewhereclause=yes name=id_contact dbname="factures_traitements.id_contact" )
+ column=(type=number updatewhereclause=yes name=cache dbname="factures_traitements.cache" )
+ retrieve="  SELECT factures_traitements.facture_id,
+         factures_traitements.montant,
+         factures_traitements.date_facture,
+         factures_traitements.status_id,
+         factures_traitements.traitement_id,
+         factures_traitements.affect,
+			factures_traitements.id_contact,
+         factures_traitements.cache
+    FROM factures_traitements
+   WHERE factures_traitements.traitement_id = :ra_traitement_id
+ORDER BY factures_traitements.date_facture ASC,
+         factures_traitements.status_id ASC" arguments=(("ra_traitement_id", number)) )
+rectangle(band=header x="0" y="72" height="4" width="2761"  name=r_2 visible="1" brush.hatch="6" brush.color="0" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+rectangle(band=footer x="0" y="0" height="4" width="2761"  name=r_1 visible="1" brush.hatch="6" brush.color="0" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+text(band=footer alignment="2" text="Total:" border="0" color="0" x="0" y="8" height="64" width="379" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="80269524" )
+compute(band=footer alignment="1" expression="sum(montant for all)"border="0" color="0" x="379" y="8" height="76" width="425" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="80269524" )
+text(band=header alignment="2" text="Date" border="0" color="0" x="0" y="4" height="64" width="338" html.valueishtml="0"  name=date_facture_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="0" color="0~tif(currentrow()=getrow(),rgb(50,50,255), if (  montant  > 0 , rgb(0,0,0) , rgb ( 255,0,0 ) ) )" x="0" y="4" height="64" width="338" format="[general]" html.valueishtml="0"  name=date_facture visible="1" editmask.mask="[date]" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+text(band=header alignment="2" text="Montant" border="0" color="0" x="338" y="4" height="64" width="338" html.valueishtml="0"  name=montant_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="2" tabsequence=32766 border="0" color="0~tif(currentrow()=getrow(),rgb(50,50,255), if (  montant  > 0 , rgb(0,0,0) , rgb ( 255,0,0 ) ) )" x="338" y="4" height="64" width="338" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=montant visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+text(band=header alignment="0" text="Acte" border="0" color="0" x="677" y="4" height="64" width="558" html.valueishtml="0"  name=status_id_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0~tif(currentrow()=getrow(),rgb(50,50,255), if (  montant  > 0 , rgb(0,0,0) , rgb ( 255,0,0 ) ) )" x="677" y="4" height="64" width="558" format="[general]" html.valueishtml="0"  name=status_id visible="1" dddw.name=dddw_status dddw.displaycolumn=description dddw.datacolumn=status_id dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+text(band=header alignment="0" text="Responsable" border="0" color="0" x="1234" y="4" height="64" width="969" html.valueishtml="0"  name=t_resp visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0~tif(currentrow()=getrow(),rgb(50,50,255), if (  montant  > 0 , rgb(0,0,0) , rgb ( 255,0,0 ) ) )" x="1234" y="4" height="64" width="969" format="[general]" html.valueishtml="0"  name=id_contact visible="1" dddw.name=dddw_contact dddw.displaycolumn=compute_1 dddw.datacolumn=id_contact dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

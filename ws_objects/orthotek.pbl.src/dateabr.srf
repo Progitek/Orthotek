@@ -1,0 +1,73 @@
+﻿$PBExportHeader$dateabr.srf
+global type dateabr from function_object
+end type
+
+forward prototypes
+global function string dateabr (date adt_date, string as_langue)
+end prototypes
+
+global function string dateabr (date adt_date, string as_langue);long ll_day, ll_month, ll_year
+string ls_month
+
+ll_day = day(adt_date)
+ll_month = month(adt_date)
+ll_year = year(adt_date)
+
+if as_langue = 'an' then
+	CHOOSE CASE ll_month
+		CASE 1
+			ls_month = 'Jan'
+		CASE 2
+			ls_month = 'Feb'
+		CASE 3
+			ls_month = 'Mar'
+		CASE 4
+			ls_month = 'Apr'
+		CASE 5
+			ls_month = 'May'
+		CASE 6
+			ls_month = 'Jun'
+		CASE 7
+			ls_month = 'Jul'
+		CASE 8
+			ls_month = 'Aug'
+		CASE 9
+			ls_month = 'Sep'
+		CASE 10
+			ls_month = 'Oct'
+		CASE 11
+			ls_month = 'Nov'
+		CASE 12
+			ls_month = 'Dec'
+	END CHOOSE
+else
+	CHOOSE CASE ll_month
+		CASE 1
+			ls_month = 'Jan'
+		CASE 2
+			ls_month = 'Fev'
+		CASE 3
+			ls_month = 'Mar'
+		CASE 4
+			ls_month = 'Avr'
+		CASE 5
+			ls_month = 'Mai'
+		CASE 6
+			ls_month = 'Jun'
+		CASE 7
+			ls_month = 'Jui'
+		CASE 8
+			ls_month = 'aou'
+		CASE 9
+			ls_month = 'Sep'
+		CASE 10
+			ls_month = 'Oct'
+		CASE 11
+			ls_month = 'Nov'
+		CASE 12
+			ls_month = 'Dec'
+	END CHOOSE
+end if
+return  string(ll_day) + ' ' +  ls_month + ' ' + string(ll_year)
+end function
+

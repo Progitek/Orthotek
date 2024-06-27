@@ -1,0 +1,31 @@
+﻿$PBExportHeader$d_horairetplapply.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=56 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=52 color="536870912" )
+table(column=(type=date update=yes updatewhereclause=yes key=yes name=datecal dbname="horaire.datecal" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=no_ortho dbname="horaire.no_ortho" )
+ column=(type=long update=yes updatewhereclause=yes name=colortemplate1 dbname="horaire.colortemplate1" )
+ column=(type=long update=yes updatewhereclause=yes name=colortemplate2 dbname="horaire.colortemplate2" )
+ column=(type=long update=yes updatewhereclause=yes name=colortemplate3 dbname="horaire.colortemplate3" )
+ column=(type=long update=yes updatewhereclause=yes name=colortemplate4 dbname="horaire.colortemplate4" )
+ column=(type=long update=yes updatewhereclause=yes name=colortemplate5 dbname="horaire.colortemplate5" )
+ column=(type=time update=yes updatewhereclause=yes key=yes name=heure dbname="horaire.heure" )
+ retrieve="  SELECT horaire.datecal,   
+         horaire.no_ortho,   
+         horaire.colortemplate1,   
+         horaire.colortemplate2,   
+         horaire.colortemplate3,   
+         horaire.colortemplate4,   
+         horaire.colortemplate5,   
+         horaire.heure  
+    FROM horaire  
+   WHERE horaire.no_ortho = :ra_ortho AND  
+         horaire.datecal BETWEEN :ra_start AND :ra_end  
+            
+" update="horaire" updatewhere=1 updatekeyinplace=no arguments=(("ra_ortho", number),("ra_start", date),("ra_end", date)) )
+column(band=detail id=8 alignment="2" tabsequence=32766 border="0" color="0" x="9" y="0" height="56" width="165" format="[time]"  name=heure editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

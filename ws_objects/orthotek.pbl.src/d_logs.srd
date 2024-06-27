@@ -1,0 +1,62 @@
+﻿$PBExportHeader$d_logs.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=60 color="536870912" )
+detail(height=64 color="536870912" )
+table(column=(type=char(3) updatewhereclause=yes name=actions dbname="t_logs.actions" )
+ column=(type=char(50) updatewhereclause=yes name=intable dbname="t_logs.intable" )
+ column=(type=char(50) updatewhereclause=yes name=pers dbname="t_logs.pers" )
+ column=(type=long updatewhereclause=yes key=yes identity=yes name=id_log dbname="t_logs.id_log" )
+ column=(type=date updatewhereclause=yes name=logdate dbname="t_logs.logdate" )
+ column=(type=char(50) updatewhereclause=yes name=montant dbname="t_logs.montant" )
+ column=(type=time updatewhereclause=yes name=heure dbname="t_logs.heure" )
+ column=(type=long updatewhereclause=yes name=iddel dbname="t_logs.iddel" )
+ column=(type=long updatewhereclause=yes name=idpat dbname="t_logs.idpat" )
+ column=(type=date updatewhereclause=yes name=datetrans dbname="t_logs.datetrans" )
+ column=(type=char(50) updatewhereclause=yes name=montantfin dbname="t_logs.montantfin" )
+ column=(type=char(50) updatewhereclause=yes name=patnom dbname="patnom" )
+ column=(type=char(50) updatewhereclause=yes name=patprenom dbname="patprenom" )
+ retrieve="SELECT  t_logs.actions ,
+		  t_logs.intable ,
+		  t_logs.pers ,
+		  t_logs.id_log ,
+		  t_logs.logdate ,
+		  t_logs.montant ,
+	     t_logs.heure ,
+		  t_logs.iddel ,
+		  t_logs.idpat ,
+		  t_logs.datetrans,
+		  t_logs.montantfin,
+		  (select patient_nom from patient where patient_id = t_logs.idpat) as patnom,
+		  (select patient_prenom from patient where patient_id = t_logs.idpat) as patprenom
+  FROM  t_logs
+WHERE   t_logs.intable = :ra_intable AND
+		  t_logs.logdate BETWEEN :ra_debut AND :ra_fin" update="t_logs" updatewhere=0 updatekeyinplace=no arguments=(("ra_intable", string),("ra_debut", date),("ra_fin", date)) )
+button(band=header text="id_log" enabled=yes action="0" border="0" color="0" x="0" y="0" height="72" width="247" vtextalign="0" htextalign="0"  name=b_idlog visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=header text="Log date" enabled=yes action="0" border="0" color="0" x="251" y="0" height="72" width="283" vtextalign="0" htextalign="0"  name=b_logdate visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=header text="Time" enabled=yes action="0" border="0" color="0" x="539" y="0" height="72" width="201" vtextalign="0" htextalign="0"  name=b_time visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=header text="Action" enabled=yes action="0" border="0" color="0" x="745" y="0" height="72" width="338" vtextalign="0" htextalign="0"  name=b_action visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=header text="Date trans." enabled=yes action="0" border="0" color="0" x="1083" y="0" height="72" width="347" vtextalign="0" htextalign="0"  name=b_trans visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=header text="Username" enabled=yes action="0" border="0" color="0" x="3045" y="0" height="72" width="453" vtextalign="0" htextalign="0"  name=b_user visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=header text="Pat. Name" enabled=yes action="0" border="0" color="0" x="2235" y="0" height="72" width="805" vtextalign="0" htextalign="0"  name=b_name visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=header text="Final" enabled=yes action="0" border="0" color="0" x="1915" y="0" height="72" width="311" vtextalign="0" htextalign="0"  name=b_final visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=header text="Initial" enabled=yes action="0" border="0" color="0" x="1435" y="0" height="72" width="475" vtextalign="0" htextalign="0"  name=b_loginfo visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="0" y="4" height="56" width="247" format="[general]" html.valueishtml="0"  name=id_log visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="251" y="4" height="56" width="283" format="[general]" html.valueishtml="0"  name=logdate visible="1" editmask.mask="[date]" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="539" y="4" height="56" width="201" format="[time]" html.valueishtml="0"  name=heure visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="745" y="4" height="56" width="334" format="[general]" html.valueishtml="0"  name=actions visible="1" edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="1083" y="4" height="56" width="347" format="[general]" html.valueishtml="0"  name=datetrans visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="3045" y="4" height="56" width="453" format="[general]" html.valueishtml="0"  name=pers visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+compute(band=detail alignment="0" expression=" patprenom + ' ' +  patnom "border="0" color="0" x="2235" y="4" height="56" width="805" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="1920" y="4" height="56" width="311" format="[general]" html.valueishtml="0"  name=montantfin visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="1435" y="4" height="56" width="475" format="[general]" html.valueishtml="0"  name=montant visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+text(band=footer alignment="0" text="Printed on" border="0" color="0" x="14" y="4" height="56" width="256" html.valueishtml="0"  name=t_printedon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="297" y="4" height="56" width="389" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2985" y="4" height="56" width="512" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

@@ -1,0 +1,74 @@
+﻿$PBExportHeader$d_monitorliste.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=68 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=104 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes identity=yes name=t_rdv_id_rdv dbname="t_rdv.id_rdv" )
+ column=(type=date updatewhereclause=yes name=t_rdv_rdvdate dbname="t_rdv.rdvdate" )
+ column=(type=time updatewhereclause=yes name=t_rdv_rdvheure dbname="t_rdv.rdvheure" )
+ column=(type=time updatewhereclause=yes name=t_rdv_heurearr dbname="t_rdv.heurearr" )
+ column=(type=long updatewhereclause=yes name=t_rdv_duree dbname="t_rdv.duree" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=t_rdv_rdvetat dbname="t_rdv.rdvetat" )
+ column=(type=long updatewhereclause=yes name=t_rdv_colonne dbname="t_rdv.colonne" )
+ column=(type=long updatewhereclause=yes name=t_rdv_patient_id dbname="t_rdv.patient_id" )
+ column=(type=long updatewhereclause=yes name=t_rdv_typetraitid dbname="t_rdv.typetraitid" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(40) updatewhereclause=yes name=type_de_traitement_nom_traitement dbname="type_de_traitement.nom_traitement" )
+ column=(type=long updatewhereclause=yes name=t_color_color dbname="t_color.color" )
+ column=(type=long updatewhereclause=yes name=colorlate dbname="colorlate" )
+ column=(type=long updatewhereclause=yes name=colorcancel dbname="colorcancel" )
+ column=(type=long updatewhereclause=yes name=colormiss dbname="colormiss" )
+ column=(type=long updatewhereclause=yes name=colorearly dbname="colorearly" )
+ column=(type=long updatewhereclause=yes name=colorontime dbname="colorontime" )
+ retrieve="  SELECT DISTINCT
+			t_rdv.id_rdv,
+			t_rdv.rdvdate,
+			t_rdv.rdvheure,
+			t_rdv.heurearr,
+			t_rdv.duree,
+			t_rdv.rdvetat,
+			t_rdv.colonne,
+			t_rdv.patient_id,
+			t_rdv.typetraitid,
+			patient.patient_nom,
+			patient.patient_prenom,
+			type_de_traitement.nom_traitement,
+			t_color.color,
+			(select cincoutcretard from t_options where ortho_id = :ra_ortho) as colorlate,
+			(select cincoutcancel from t_options where ortho_id = :ra_ortho) as colorcancel,
+			(select cincoutmiss from t_options where ortho_id = :ra_ortho) as colormiss,
+			(select cincoutearly from t_options where ortho_id = :ra_ortho) as colorearly,
+			(select cincoutontime from t_options where ortho_id = :ra_ortho) as colorontime
+	 FROM t_rdv INNER JOIN patient ON t_rdv.patient_id = patient.patient_id
+					INNER JOIN type_de_traitement ON t_rdv.typetraitid = type_de_traitement.type_traitement_id,
+			t_color INNER JOIN type_de_traitement ON t_color.color_id = type_de_traitement.color_id
+	WHERE t_rdv.rdvdate = today() AND
+			t_rdv.released IS NULL AND
+			patient.no_ortho = :ra_ortho
+ORDER BY t_rdv.rdvheure ASC
+
+" update="t_rdv" updatewhere=0 updatekeyinplace=no arguments=(("ra_ortho", number)) )
+text(band=header alignment="2" text="HeureRDV" border="0" color="33554432" x="1147" y="8" height="56" width="247" html.valueishtml="0"  name=heure_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Status" border="0" color="33554432" x="1819" y="8" height="56" width="512" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Chaise" border="0" color="33554432" x="2542" y="8" height="56" width="183" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Procédure" border="0" color="33554432" x="2734" y="8" height="56" width="882" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Heure ARR" border="0" color="33554432" x="1399" y="8" height="56" width="247" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Duree" border="0" color="33554432" x="1650" y="8" height="56" width="169" html.valueishtml="0"  name=duree_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Attente" border="0" color="33554432" x="2336" y="8" height="56" width="197" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="2734" y="4" height="100" width="882" format="[general]" html.valueishtml="0"  name=type_de_traitement_nom_traitement visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-16" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~t t_color_color " )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1147" y="4" height="100" width="247" format="[time]" html.valueishtml="0"  name=t_rdv_rdvheure visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-16" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif( upper(t_rdv_rdvetat) = 'M',  colormiss , if (upper(t_rdv_rdvetat) = 'L', colorlate  ,if( upper(t_rdv_rdvetat) = 'C',  colorcancel ,if( upper(t_rdv_rdvetat) = 'O', colorontime ,if( upper(t_rdv_rdvetat) = 'E',  colorearly ,rgb(255,255,255))))))" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1399" y="4" height="100" width="247" format="[time]" html.valueishtml="0"  name=t_rdv_heurearr visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-16" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif( upper(t_rdv_rdvetat) = 'M',  colormiss , if (upper(t_rdv_rdvetat) = 'L', colorlate  ,if( upper(t_rdv_rdvetat) = 'C',  colorcancel ,if( upper(t_rdv_rdvetat) = 'O', colorontime ,if( upper(t_rdv_rdvetat) = 'E',  colorearly ,rgb(255,255,255))))))" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="1650" y="4" height="100" width="169" format="[general]" html.valueishtml="0"  name=t_rdv_duree visible="1" editmask.mask="##" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-16" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif( upper(t_rdv_rdvetat) = 'M',  colormiss , if (upper(t_rdv_rdvetat) = 'L', colorlate  ,if( upper(t_rdv_rdvetat) = 'C',  colorcancel ,if( upper(t_rdv_rdvetat) = 'O', colorontime ,if( upper(t_rdv_rdvetat) = 'E',  colorearly ,rgb(255,255,255))))))" )
+column(band=detail id=6 alignment="0" tabsequence=10 border="0" color="0" x="1819" y="4" height="100" width="512" format="[general]" html.valueishtml="0"  name=t_rdv_rdvetat visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-16" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif( upper(t_rdv_rdvetat) = 'M',  colormiss , if (upper(t_rdv_rdvetat) = 'L', colorlate  ,if( upper(t_rdv_rdvetat) = 'C',  colorcancel ,if( upper(t_rdv_rdvetat) = 'O', colorontime ,if( upper(t_rdv_rdvetat) = 'E',  colorearly ,rgb(255,255,255))))))" )
+compute(band=detail alignment="2" expression=" int(secondsafter(  t_rdv_heurearr  ,  now()  ) / 60)"border="0" color="33554432" x="2336" y="4" height="100" width="206" format="[GENERAL]" html.valueishtml="0"  name=compute_1 pointer="HyperLink!" visible="1"  font.face="Arial" font.height="-16" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif( upper(t_rdv_rdvetat) = 'M',  colormiss , if (upper(t_rdv_rdvetat) = 'L', colorlate  ,if( upper(t_rdv_rdvetat) = 'C',  colorcancel ,if( upper(t_rdv_rdvetat) = 'O', colorontime ,if( upper(t_rdv_rdvetat) = 'E',  colorearly ,rgb(255,255,255))))))" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="2542" y="4" height="100" width="183" format="[general]" html.valueishtml="0"  name=t_rdv_colonne visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-16" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif( upper(t_rdv_rdvetat) = 'M',  colormiss , if (upper(t_rdv_rdvetat) = 'L', colorlate  ,if( upper(t_rdv_rdvetat) = 'C',  colorcancel ,if( upper(t_rdv_rdvetat) = 'O', colorontime ,if( upper(t_rdv_rdvetat) = 'E',  colorearly ,rgb(255,255,255))))))" )
+compute(band=detail alignment="0" expression=" patient_patient_prenom +  ' ' + patient_patient_nom "border="0" color="33554432" x="18" y="4" height="100" width="1125" format="[GENERAL]" html.valueishtml="0"  name=nom pointer="HyperLink!" visible="1"  font.face="Arial" font.height="-16" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif( upper(t_rdv_rdvetat) = 'M',  colormiss , if (upper(t_rdv_rdvetat) = 'L', colorlate  ,if( upper(t_rdv_rdvetat) = 'C',  colorcancel ,if( upper(t_rdv_rdvetat) = 'O', colorontime ,if( upper(t_rdv_rdvetat) = 'E',  colorearly ,rgb(255,255,255))))))" )
+text(band=header alignment="0" text="Nom" border="0" color="33554432" x="18" y="8" height="56" width="1125" html.valueishtml="0"  name=nom_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

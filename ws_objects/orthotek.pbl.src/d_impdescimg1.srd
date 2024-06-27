@@ -1,0 +1,131 @@
+﻿$PBExportHeader$d_impdescimg1.srd
+release 9;
+datawindow(units=1 timer_interval=0 color=1090519039 processing=0 HTMLDW=no print.printername="Rapport de consultation" print.documentname="Rapport de consultation" print.orientation = 0 print.margin.left = 0 print.margin.right = 0 print.margin.top = 0 print.margin.bottom = 0 print.paper.source = 0 print.paper.size = 1 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=366 color="536870912" )
+summary(height=41 color="536870912" )
+footer(height=18 color="536870912" )
+detail(height=15 color="536870912"  height.autosize=yes)
+table(column=(type=char(1000) updatewhereclause=yes name=t_plans_description dbname="t_plans.description" )
+ column=(type=char(1000) updatewhereclause=yes name=t_plantrait_description dbname="t_plantrait.description" )
+ column=(type=number updatewhereclause=yes name=t_plantrait_present dbname="t_plantrait.present" )
+ column=(type=long updatewhereclause=yes name=patient_idspec dbname="patient.idspec" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_ville dbname="patient.ville" )
+ column=(type=char(25) updatewhereclause=yes name=patient_province dbname="patient.province" )
+ column=(type=char(36) updatewhereclause=yes name=patient_adresse dbname="patient.adresse" )
+ column=(type=char(15) updatewhereclause=yes name=patient_code_postale dbname="patient.code_postale" )
+ column=(type=char(1) updatewhereclause=yes name=patient_sex dbname="patient.sex" )
+ column=(type=long updatewhereclause=yes name=patient_iddentist dbname="patient.iddentist" )
+ column=(type=char(15) updatewhereclause=yes name=patient_new_dossier dbname="patient.new_dossier" )
+ column=(type=long updatewhereclause=yes identity=yes name=patient_patient_id dbname="patient.patient_id" )
+ column=(type=date updatewhereclause=yes name=patient_date_naissance dbname="patient.date_naissance" )
+ column=(type=char(1000) updatewhereclause=yes name=t_catplans_categorie dbname="t_catplans.categorie" )
+ column=(type=long updatewhereclause=yes identity=yes name=t_catplans_id_catplan dbname="t_catplans.id_catplan" )
+ column=(type=char(5) updatewhereclause=yes name=t_dentists_det_suf dbname="t_dentists.det_suf" )
+ column=(type=char(30) updatewhereclause=yes name=t_dentists_det_nom dbname="t_dentists.det_nom" )
+ column=(type=char(30) updatewhereclause=yes name=t_dentists_det_prenom dbname="t_dentists.det_prenom" )
+ column=(type=char(50) updatewhereclause=yes name=t_dentists_det_add dbname="t_dentists.det_add" )
+ column=(type=char(50) updatewhereclause=yes name=t_dentists_det_ville dbname="t_dentists.det_ville" )
+ column=(type=char(20) updatewhereclause=yes name=t_dentists_det_prov dbname="t_dentists.det_prov" )
+ column=(type=char(15) updatewhereclause=yes name=t_dentists_det_zip dbname="t_dentists.det_zip" )
+ column=(type=char(100) updatewhereclause=yes name=t_sujets_sujet dbname="t_sujets.sujet" )
+ column=(type=long updatewhereclause=yes identity=yes name=t_sujets_id_sujet dbname="t_sujets.id_sujet" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_adresse dbname="ortho_id.dr_adresse" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_ville dbname="ortho_id.dr_ville" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_province dbname="ortho_id.dr_province" )
+ column=(type=char(7) updatewhereclause=yes name=ortho_id_dr_code_postal dbname="ortho_id.dr_code_postal" )
+ column=(type=char(15) updatewhereclause=yes name=ortho_id_dr_tel_bur dbname="ortho_id.dr_tel_bur" )
+ column=(type=char(30) updatewhereclause=yes name=specnom dbname="specnom" )
+ column=(type=char(50) updatewhereclause=yes name=specadd dbname="specadd" )
+ column=(type=char(30) updatewhereclause=yes name=specville dbname="specville" )
+ column=(type=char(30) updatewhereclause=yes name=specprov dbname="specprov" )
+ column=(type=char(7) updatewhereclause=yes name=speczip dbname="speczip" )
+ column=(type=number updatewhereclause=yes name=doscons dbname="doscons" )
+ retrieve="select t_plans.description,
+       t_plantrait.description,
+       t_plantrait.present,
+		 patient.no_ortho as idspec,
+       patient.patient_nom,
+       patient.patient_prenom,
+ 		 patient.ville,
+       patient.province,
+       patient.adresse,
+       patient.code_postale,
+       patient.sex,
+		 patient.id_dentist as iddentist,
+		 patient.new_dossier,
+       patient.patient_id,
+		 patient.date_naissance,
+       t_catplans.categorie,
+       t_catplans.id_catplan,
+		 t_dentists.det_suf,
+		 t_dentists.det_nom,
+		 t_dentists.det_prenom,
+		 t_dentists.det_add,
+		 t_dentists.det_ville,
+		 t_dentists.det_prov,
+		 t_dentists.det_zip,
+       t_sujets.sujet,
+		 t_sujets.id_sujet,
+		 ortho_id.dr_nom_complet,
+		 ortho_id.dr_adresse,
+		 ortho_id.dr_ville,
+		 ortho_id.dr_province,
+		 ortho_id.dr_code_postal,
+		 ortho_id.dr_tel_bur,
+		 (select dr_nom_complet from ortho_id where ortho_id = idspec) as specnom,
+		 (select dr_adresse from ortho_id where ortho_id = idspec) as specadd,
+		 (select dr_ville from ortho_id where ortho_id = idspec) as specville,
+		 (select dr_province from ortho_id where ortho_id = idspec) as specprov,
+		 (select dr_code_postal from ortho_id where ortho_id = idspec) as speczip,
+       (select doscons from t_options where ortho_id = idspec) as doscons
+  from t_plans INNER JOIN t_plantrait ON t_plans.id_plan = t_plantrait.id_plan
+               INNER JOIN t_catplans ON t_plans.id_catplan = t_catplans.id_catplan,
+       t_catplans INNER JOIN t_sujets ON t_catplans.id_sujet = t_sujets.id_sujet,
+       patient INNER JOIN t_plantrait ON t_plantrait.patient_id = patient.patient_id
+					LEFT OUTER JOIN t_dentists ON patient.id_dentist = t_dentists.id_dentist
+					INNER JOIN ortho_id ON ortho_id.ortho_id = patient.no_ortho
+ where t_catplans.id_sujet = :ra_sujet and
+		 t_plantrait.patient_id = :ra_patid and
+       t_plantrait.present = 1
+order by t_catplans.ordre asc, t_plans.ordre asc" arguments=(("ra_sujet", number),("ra_patid", number)) )
+group(level=1 header.height=21 trailer.height=0 by=("t_catplans_id_catplan" ) header.color="553648127" trailer.color="536870912" )
+rectangle(band=header x="1" y="216" height="130" width="737"  name=r_3 visible="1" brush.hatch="6" brush.color="12632256" pen.style="0" pen.width="2" pen.color="8388608"  background.mode="1" background.color="553648127" )
+rectangle(band=header x="379" y="53" height="136" width="359"  name=r_1 visible="1" brush.hatch="6" brush.color="12632256" pen.style="0" pen.width="2" pen.color="8388608"  background.mode="1" background.color="553648127" )
+compute(band=header alignment="2" expression=" ortho_id_dr_nom_complet"border="0" color="0" x="2" y="0" height="23" width="742" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1~tif (page() = 1,1,0)"  font.face="Times New Roman" font.height="-14" font.weight="700"  font.family="1" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+bitmap(band=header filename="" x="595" y="221" height="120" width="130" border="0"  name=p_8 visible="1~tif (page() = 1,1,0)" )
+bitmap(band=header filename="" x="450" y="221" height="120" width="130" border="0"  name=p_7 visible="1~tif (page() = 1,1,0)" )
+bitmap(band=header filename="" x="305" y="221" height="120" width="130" border="0"  name=p_6 visible="1~tif (page() = 1,1,0)" )
+bitmap(band=header filename="" x="160" y="221" height="120" width="130" border="0"  name=p_5 visible="1~tif (page() = 1,1,0)" )
+bitmap(band=header filename="" x="15" y="221" height="120" width="130" border="0"  name=p_4 visible="1~tif (page() = 1,1,0)" )
+column(band=header id=25 alignment="0" tabsequence=32766 border="0" color="8388608" x="60" y="192" height="20" width="677" format="[general]" html.valueishtml="0"  name=t_sujets_sujet visible="1~tif (page() = 1,1,0)" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Times New Roman" font.height="-12" font.weight="700"  font.family="1" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Sujet: " border="0" color="0" x="1" y="192" height="20" width="58" html.valueishtml="0"  name=t_sujet visible="1~tif (page() = 1,1,0)"  font.face="Times New Roman" font.height="-12" font.weight="700"  font.family="1" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+bitmap(band=header filename="" x="384" y="58" height="125" width="110" border="0"  name=p_1 visible="1~tif (page() = 1,1,0)" )
+bitmap(band=header filename="" x="503" y="58" height="125" width="110" border="0"  name=p_2 visible="1~tif (page() = 1,1,0)" )
+bitmap(band=header filename="" x="622" y="58" height="125" width="110" border="0"  name=p_3 visible="1~tif (page() = 1,1,0)" )
+text(band=header alignment="0" text="" border="0" color="0" x="3" y="54" height="20" width="372" html.valueishtml="0"  name=mois visible="1~tif (page() = 1,1,0)"  font.face="Times New Roman" font.height="-12" font.weight="700"  font.family="1" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=header alignment="0" expression=" t_dentists_det_add "border="0" color="0" x="3" y="97" height="16" width="269" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1~tif (page() = 1,1,0)"  font.face="Times New Roman" font.height="-9" font.weight="400"  font.family="1" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression=" t_dentists_det_ville + ' ( ' +   t_dentists_det_prov + ' )'"border="0" color="0" x="3" y="114" height="16" width="269" format="[GENERAL]" html.valueishtml="0"  name=compute_6 visible="1~tif (page() = 1,1,0)"  font.face="Times New Roman" font.height="-9" font.weight="400"  font.family="1" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=24 alignment="0" tabsequence=32766 border="0" color="0" x="3" y="131" height="16" width="269" format="[general]" html.valueishtml="0"  name=t_dentists_det_zip visible="1~tif (page() = 1,1,0)" editmask.mask="XXX XXX" editmask.imemode=0 editmask.focusrectangle=no  font.face="Times New Roman" font.height="-9" font.weight="400"  font.family="1" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression=" t_dentists_det_suf + ' ' + t_dentists_det_prenom + ' ' +   t_dentists_det_nom "border="0" color="0" x="3" y="80" height="16" width="269" format="[GENERAL]" html.valueishtml="0"  name=compute_5 visible="1~tif (page() = 1,1,0)"  font.face="Times New Roman" font.height="-9" font.weight="400"  font.family="1" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="" border="0" color="0" x="281" y="105" height="16" width="26" html.valueishtml="0"  name=t_doss visible="0~tif (page() = 1,1,0)"  font.face="Times New Roman" font.height="-9" font.weight="400"  font.family="1" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="orthodontiste" border="0" color="0" x="288" y="103" height="20" width="13" html.valueishtml="0"  name=t_ortho visible="0"  font.face="Times New Roman" font.height="-12" font.weight="400"  font.family="1" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+line(band=header x1="1" y1="25" x2="741" y2="25"  name=l_1 visible="1~tif (page() = 1,1,0)" pen.style="0" pen.width="7" pen.color="8388608"  background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="" border="0" color="0" x="1" y="31" height="16" width="743" html.valueishtml="0"  name=t_note visible="1"  font.face="Times New Roman" font.height="-10" font.weight="700"  font.family="1" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="" border="0" color="0" x="2" y="348" height="16" width="736" html.valueishtml="0"  name=t_intro visible="1~tif (page() = 1,1,0)"  font.face="Times New Roman" font.height="-10" font.weight="400"  font.family="1" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215"  height.autosize=yes)
+column(band=header.1 id=16 alignment="0" tabsequence=32766 border="0" color="8388608" x="2" y="2" height="19" width="736" format="[general]" html.valueishtml="0"  name=t_catplans_categorie visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Times New Roman" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression=" t_plans_description  + ' ' + if ( isnull ( t_plantrait_description ) , '' , t_plantrait_description  )"border="0" color="0" x="37" y="1" height="14" width="702" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Times New Roman" font.height="-9" font.weight="400"  font.family="1" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=summary alignment="0" text="" border="0" color="0" x="3" y="18" height="16" width="736" html.valueishtml="0"  name=t_conc visible="1"  font.face="Times New Roman" font.height="-10" font.weight="400"  font.family="1" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215"  height.autosize=yes)
+rectangle(band=footer x="1" y="0" height="2" width="738"  name=r_2 visible="1"  hidesnaked=1 brush.hatch="6" brush.color="0" pen.style="0" pen.width="1" pen.color="8388608"  background.mode="1" background.color="553648127" )
+compute(band=footer alignment="2" expression=" ortho_id_dr_adresse + ' ' +  ortho_id_dr_ville + ' ( ' +   ortho_id_dr_province + ' ) ' +  string(ortho_id_dr_code_postal,'@@@ @@@' ) + ' - ' + string ( ortho_id_dr_tel_bur , '(@@@) @@@-@@@@' )"border="0" color="0" x="0" y="1" height="14" width="738" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Times New Roman" font.height="-8" font.weight="400"  font.family="1" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Re:" border="0" color="0" x="1" y="152" height="16" width="83" html.valueishtml="0"  name=t_4 visible="1~tif (page() = 1,1,0)"  font.face="Times New Roman" font.height="-9" font.weight="700"  font.family="1" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Date naissance:" border="0" color="0" x="1" y="171" height="16" width="83" html.valueishtml="0"  name=t_datenais visible="1~tif (page() = 1,1,0)"  font.face="Times New Roman" font.height="-9" font.weight="700"  font.family="1" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=header id=15 alignment="0" tabsequence=32766 border="0" color="8388608" x="88" y="171" height="16" width="286" format="[general]" html.valueishtml="0"  name=patient_date_naissance visible="1~tif (page() = 1,1,0)" editmask.mask="[date]" editmask.imemode=0 editmask.focusrectangle=no  font.face="Times New Roman" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=header alignment="0" expression="patient_patient_nom +~",   ~"+  patient_patient_prenom"border="0" color="8388608" x="88" y="152" height="16" width="286" format="[general]" html.valueishtml="0"  name=nom_complet visible="1~tif (page() = 1,1,0)"  font.face="Times New Roman" font.height="-9" font.weight="700"  font.family="1" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

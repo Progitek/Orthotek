@@ -1,0 +1,65 @@
+﻿$PBExportHeader$d_histofin.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 2 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 1 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=308 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=64 color="536870912" )
+detail(height=176 color="536870912" height.autosize=yes )
+table(column=(type=long updatewhereclause=yes identity=yes name=traitements_traitement_id dbname="traitements.traitement_id" dbalias=".traitement_id" )
+ column=(type=char(102) updatewhereclause=yes name=patnom dbname="patnom" )
+ column=(type=char(15) updatewhereclause=yes name=patient_new_dossier dbname="patient.new_dossier" dbalias=".new_dossier" )
+ column=(type=decimal(2) updatewhereclause=yes name=traitements_montant_original dbname="traitements.montant_original" dbalias=".montant_original" )
+ column=(type=decimal(2) updatewhereclause=yes name=montant_global dbname="montant_global" )
+ column=(type=date updatewhereclause=yes name=traitements_debut_traitement dbname="traitements.debut_traitement" dbalias=".debut_traitement" )
+ column=(type=char(30) updatewhereclause=yes name=dr_nom_complet dbname="dr_nom_complet" )
+ retrieve="  SELECT traitements.traitement_id,
+			ISNULL(patient.patient_nom, '') || ', ' || ISNULL(patient.patient_prenom, '') AS patnom,
+			patient.new_dossier,
+			traitements.montant_original,
+			(SELECT ISNULL(SUM(ISNULL(montant, 0)), 0)
+				FROM factures_traitements
+			  WHERE traitement_id = traitements.traitement_id) AS montant_global,
+			traitements.debut_traitement,
+			(SELECT dr_nom_complet FROM ortho_id WHERE ortho_id = patient.no_ortho)
+	 FROM	patient INNER JOIN traitements ON traitements.patient_id = patient.patient_id
+	WHERE no_ortho = :ra_ortho
+	  AND traitements.debut_traitement BETWEEN :ra_deb AND :ra_fin
+ORDER BY patnom ASC
+" arguments=(("ra_ortho", number),("ra_deb", date),("ra_fin", date)) )
+compute(band=header alignment="2" expression="ra_fin"border="0" color="0" x="2098" y="132" height="84" width="494" format="[SHORTDATE]" html.valueishtml="0"  name=cpt_fin visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="2" expression="ra_deb"border="0" color="0" x="1403" y="132" height="84" width="517" format="[shortdate]" html.valueishtml="0"  name=cpt_debut visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Historique financier pour :" border="0" color="0" x="73" y="12" height="92" width="1605" html.valueishtml="0"  name=t_titre visible="1"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=7 alignment="0" tabsequence=32766 border="0" color="0" x="1719" y="12" height="88" width="1605" format="[general]" html.valueishtml="0"  name=dr_nom_complet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Période:" border="0" color="0" x="736" y="132" height="84" width="338" html.valueishtml="0"  name=t_periode visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Du" border="0" color="0" x="1115" y="132" height="84" width="265" html.valueishtml="0"  name=t_from visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="au" border="0" color="0" x="1938" y="132" height="84" width="142" html.valueishtml="0"  name=t_to visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Patient" border="0" color="33554432" x="18" y="240" height="64" width="471" html.valueishtml="0"  name=patnom_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Dossier" border="0" color="33554432" x="1490" y="240" height="64" width="215" html.valueishtml="0"  name=patient_new_dossier_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Coût traitement" border="0" color="33554432" x="1911" y="240" height="64" width="448" html.valueishtml="0"  name=traitements_montant_original_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Coût global" border="0" color="33554432" x="2450" y="240" height="64" width="334" html.valueishtml="0"  name=montant_global_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Debut traitement" border="0" color="33554432" x="2866" y="240" height="64" width="485" html.valueishtml="0"  name=traitements_debut_traitement_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=detail x1="0" y1="0" x2="3465" y2="0"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+report(band=detail dataobject="d_histofact" x="14" y="104" height="72" width="1582" border="0"  height.autosize=yes criteria="" nest_arguments=(("traitements_traitement_id")) trail_footer = yes  name=dw_1 visible="1"  slideup=directlyabove )
+report(band=detail dataobject="d_histopaie" x="1646" y="104" height="72" width="713" border="0"  height.autosize=yes criteria="" nest_arguments=(("traitements_traitement_id")) trail_footer = yes  name=dw_3 visible="1"  slideup=directlyabove )
+report(band=detail dataobject="d_histomens" x="2409" y="104" height="72" width="741" border="0"  height.autosize=yes criteria="" nest_arguments=(("traitements_traitement_id")) trail_footer = yes  name=dw_2 visible="1"  slideup=directlyabove )
+line(band=detail x1="0" y1="100" x2="3465" y2="100"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="0" y1="8" x2="3465" y2="8"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="14" y="16" height="76" width="1403" format="[general]" html.valueishtml="0"  name=patnom visible="1" edit.limit=102 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="1490" y="16" height="76" width="352" format="[general]" html.valueishtml="0"  name=patient_new_dossier visible="1" edit.limit=15 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="33554432" x="1915" y="16" height="76" width="411" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=traitements_montant_original visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="2400" y="16" height="76" width="411" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=montant_global visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="2" tabsequence=32766 border="0" color="33554432" x="2885" y="16" height="76" width="411" format="yyyy-mm-dd" html.valueishtml="0"  name=traitements_debut_traitement visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="251" y="4" height="56" width="334" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Imprimé le " border="0" color="0" x="14" y="4" height="56" width="229" html.valueishtml="0"  name=t_printedon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="© Orthotek" border="0" color="0" x="1609" y="4" height="56" width="238" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2720" y="4" height="56" width="773" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

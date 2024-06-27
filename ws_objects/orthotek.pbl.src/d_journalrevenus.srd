@@ -1,0 +1,56 @@
+﻿$PBExportHeader$d_journalrevenus.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.documentname="Journal des honoraires" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=68 color="536870912" )
+summary(height=84 color="536870912" )
+footer(height=12 color="536870912" )
+detail(height=72 color="536870912"  height.autosize=yes)
+table(column=(type=long updatewhereclause=yes identity=yes name=traitements_idtrait dbname="traitements.idtrait" )
+ column=(type=decimal(2) updatewhereclause=yes name=totfact1 dbname="totfact1" )
+ column=(type=decimal(2) updatewhereclause=yes name=totfact dbname="totfact" )
+ column=(type=decimal(2) updatewhereclause=yes name=totpaie1 dbname="totpaie1" )
+ column=(type=decimal(2) updatewhereclause=yes name=totpaie dbname="totpaie" )
+ column=(type=decimal(2) updatewhereclause=yes name=sumfact1 dbname="sumfact1" )
+ column=(type=decimal(2) updatewhereclause=yes name=sumfact dbname="sumfact" )
+ column=(type=decimal(2) updatewhereclause=yes name=sumpaie1 dbname="sumpaie1" )
+ column=(type=decimal(2) updatewhereclause=yes name=sumpaie dbname="sumpaie" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=long updatewhereclause=yes name=patient_id_satellite dbname="patient.id_satellite" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ retrieve="SELECT DISTINCT traitements.traitement_id as idtrait ,
+		   (select sum(montant) from factures_traitements where date_facture BETWEEN :ra_debut AND :ra_fin AND factures_traitements.traitement_id = idtrait AND cache = 0) as totfact1 ,
+			(if totfact1 is null then 0 else totfact1 endif) as totfact,
+			(select sum(montant_recu) from paiement where date_paiement BETWEEN :ra_debut AND :ra_fin AND paiement.traitement_patient_id = idtrait AND cache = 0) as totpaie1,
+			(if totpaie1 is null then 0 else totpaie1 endif) as totpaie,
+			(select sum(montant) from factures_traitements where days(date_facture,:ra_fin) >= 0 and factures_traitements.traitement_id = idtrait) as sumfact1,
+			(if sumfact1 is null then 0 else sumfact1 endif) as sumfact,
+			(select sum(montant_recu) from paiement where days(date_paiement,:ra_fin) >= 0 and paiement.traitement_patient_id = idtrait) as sumpaie1,
+			(if sumpaie1 is null then 0 else sumpaie1 endif) as sumpaie,
+			patient.patient_nom ,
+		   patient.patient_prenom ,
+			patient.id_satellite,
+		   ortho_id.dr_nom_complet
+    FROM patient INNER JOIN ortho_id ON patient.no_ortho = ortho_id.ortho_id 
+		   		  INNER JOIN traitements ON patient.patient_id = traitements.patient_id,
+			traitements LEFT OUTER JOIN factures_traitements ON traitements.traitement_id = factures_traitements.traitement_id
+							LEFT OUTER JOIN paiement ON traitements.traitement_id = paiement.traitement_patient_id
+   WHERE ortho_id.ortho_id = :ra_ortho AND
+			(factures_traitements.date_facture BETWEEN :ra_debut AND :ra_fin OR
+			paiement.date_paiement BETWEEN :ra_debut AND :ra_fin)
+ORDER BY patient.patient_nom ASC,
+		   patient.patient_prenom ASC" arguments=(("ra_ortho", number),("ra_debut", date),("ra_fin", date)) )
+text(band=header alignment="1" text="Honoraire" border="4" color="0" x="1486" y="0" height="64" width="475" html.valueishtml="0"  name=t_hono visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Encaisse" border="4" color="0" x="1957" y="0" height="64" width="475" html.valueishtml="0"  name=t_enc visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Montant dû" border="4" color="0" x="2432" y="0" height="64" width="590" html.valueishtml="0"  name=t_montant visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Nom du patient" border="4" color="0" x="0" y="0" height="64" width="1486" html.valueishtml="0"  name=t_pat visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" patient_patient_prenom  + ' ' +  patient_patient_nom "border="0" color="0" x="0" y="4" height="64" width="1486" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="0" x="1486" y="4" height="64" width="466" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=totfact visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="0" x="1957" y="4" height="64" width="471" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=totpaie visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="  sumfact -   sumpaie "border="0" color="0" x="2432" y="4" height="64" width="590" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="1" text="Totaux:" border="0" color="0" x="1143" y="4" height="64" width="288" html.valueishtml="0"  name=t_tot visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="sum(totfact for all)"border="0" color="0" x="1495" y="4" height="64" width="430" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="sum(totpaie for all)"border="0" color="0" x="1993" y="4" height="64" width="366" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=footer x1="0" y1="4" x2="3026" y2="0"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

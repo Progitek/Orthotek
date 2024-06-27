@@ -1,0 +1,1257 @@
+﻿$PBExportHeader$gf_autoupdate1.srf
+global type gf_autoupdate1 from function_object
+end type
+
+forward prototypes
+global subroutine gf_autoupdate1 ()
+end prototypes
+
+global subroutine gf_autoupdate1 ();integer li_curver, li_FileNum
+string ls_sql
+w_progressbar iw_progressbar
+
+SetPointer(HourGlass!)
+
+li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj.log",LineMode!,Write!,LockReadWrite!,Append!)
+select ver into :li_curver from t_ver;
+if li_curver < 780 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 7.8.0 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 7.8.0')
+iw_progressbar.of_max(7)
+iw_progressbar.of_position(0)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD lmarge INTEGER NULL, &
+										  ADD rmarge INTEGER NULL, &
+										  ADD umarge INTEGER NULL, &
+										  ADD dmarge INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+// t_histolettre
+ls_sql = "ALTER TABLE t_histolettre ADD nomdoc VARCHAR(1000) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+// t_sujets
+ls_sql = "ALTER TABLE t_sujets ADD nomdoc VARCHAR(1000) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+// t_contrats
+ls_sql = "ALTER TABLE t_contrats ADD pourcentage INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+// t_status
+ls_sql = "ALTER TABLE t_status ADD ordrepaie INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+// t_validuser
+ls_sql = "create table t_validuser (serialnumber integer not null)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+// t_contrats
+ls_sql = "alter table t_contrats add cons dec(8,2) null, &
+										   add diag dec(8,2) null, &
+										   add meb dec(8,2) null"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(7)
+if ib_updateok then
+	update t_ver set ver = 780;
+end if
+end if
+/// END VERSION 7.8.0 ///
+/////////////////////////
+if li_curver < 781 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 7.8.1 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 7.8.1')
+iw_progressbar.of_max(2)
+iw_progressbar.of_position(0)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD defprov CHAR(2) NULL, &
+										  ADD deflangue CHAR(2) NULL, &
+										  ADD defhoram1 TIME NULL, &
+										  ADD defhoram2 TIME NULL, &
+										  ADD defhorpm1 TIME NULL, &
+										  ADD defhorpm2 TIME NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+// patient
+ls_sql = "ALTER TABLE patient ADD id_famille INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+if ib_updateok then
+	update t_ver set ver = 781;
+end if
+end if
+/// END VERSION 7.8.1 ///
+/////////////////////////
+if li_curver < 782 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 7.8.2 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 7.8.2')
+iw_progressbar.of_max(10)
+iw_progressbar.of_position(0)
+// t_entente
+ls_sql = "ALTER TABLE t_entente ADD verpaieinit1 INTEGER NULL, &
+										  ADD verpaieinit2 INTEGER NULL, &
+										  ADD verpaieinit3 INTEGER NULL, &
+										  ADD phase INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+update t_entente set verpaieinit1 = 1,verpaieinit2 = 1, verpaieinit3 = 1;
+update t_entente set estduree1 = 1 where estduree1 is null;
+update t_entente set phase = 1 where phase is null;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD typerappaie INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD typerecu INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+// t_templatedate
+ls_sql = "ALTER TABLE t_templatedate ADD daycolor INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD horcalcolor BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+// t_paiement
+ls_sql = "ALTER TABLE paiement ADD ind BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(7)
+// t_lot
+ls_sql = "create table t_lot (id_lot INTEGER NOT NULL, &
+									  description VARCHAR(10000) NULL, &
+									  ortho_id INTEGER NOT NULL, &
+									  lotdate DATE NOT NULL, &
+									  lotheure TIME NOT NULL, &
+									  PRIMARY KEY(id_lot,ortho_id))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(8)
+ls_sql = "ALTER TABLE t_lot ADD FOREIGN KEY fk_orthoid (ortho_id) REFERENCES ortho_id (ortho_id)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+ls_sql = "ALTER TABLE paiement ADD FOREIGN KEY fk_idlot (id_lot) REFERENCES t_lot (id_lot)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(9)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD hordelrvm BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(10)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD photo BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(11)
+if ib_updateok then
+	update t_ver set ver = 782;
+end if
+end if
+/// END VERSION 7.8.2 ///
+/////////////////////////
+if li_curver < 783 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 7.8.3 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 7.8.3')
+iw_progressbar.of_max(7)
+iw_progressbar.of_position(0)
+// t_personneldroit
+ls_sql = "ALTER TABLE t_personneldroit ADD lot BIT NULL, &
+										  			ADD compterecevablesoldeant BIT NULL, &
+										  			ADD jrevenucomb BIT NULL, &
+										  			ADD taxform BIT NULL, &
+													ADD agecompte BIT NULL, &
+													ADD nzb BIT NULL, &
+													ADD nza BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD hordosspat BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+// t_patient
+ls_sql = "ALTER TABLE patient ADD FOREIGN KEY fk_idref (id_ref) REFERENCES t_referents (id)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+// t_speciality
+ls_sql = "create table t_speciality (id_speciality INTEGER NOT NULL default autoincrement, &
+									  			speciality VARCHAR(100) NOT NULL, &
+									  			PRIMARY KEY(id_speciality))"
+execute immediate :ls_sql using sqlca;
+ls_sql = "ALTER TABLE t_dentists ADD FOREIGN KEY fk_idspeciality (id_speciality) REFERENCES t_speciality (id_speciality)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD norminvoice BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD factnote1 VARCHAR(150) NULL, &
+										  ADD factnote2 VARCHAR(150) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+// t_entente
+ls_sql = "ALTER TABLE t_entente ADD FOREIGN KEY fk_idcontact (id_contact) REFERENCES t_contact (id_contact)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(7)
+if ib_updateok then
+	update t_ver set ver = 783;
+end if
+end if
+/// END VERSION 7.8.3 ///
+/////////////////////////
+if li_curver < 784 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 7.8.4 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 7.8.4')
+iw_progressbar.of_max(26)
+iw_progressbar.of_position(0)
+// t_procedure
+ls_sql = "create table t_procedure(id_proc INTEGER NOT NULL default autoincrement, &
+										  	 procnom VARCHAR(100) NOT NULL, &
+											 ortho_id INTEGER NOT NULL, &
+										  	 PRIMARY KEY (id_proc))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+ls_sql = "ALTER TABLE t_procedure ADD FOREIGN KEY fk_orthoid (ortho_id) REFERENCES ortho_id (ortho_id)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+// t_procpat
+ls_sql = "create table t_procpat(id_proc INTEGER NOT NULL, &
+										  	patient_id INTEGER NOT NULL, &
+										  	PRIMARY KEY (id_proc,patient_id))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+ls_sql = "ALTER TABLE t_procpat ADD FOREIGN KEY fk_idproc (id_proc) REFERENCES t_procedure (id_proc)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+ls_sql = "ALTER TABLE t_procpat ADD FOREIGN KEY fk_idpatient (patient_id) REFERENCES patient (patient_id)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+// t_proctrait
+ls_sql = "create table t_proctrait(id_proc INTEGER NOT NULL, &
+										  	 type_traitement_id INTEGER NOT NULL, &
+										  	 PRIMARY KEY (id_proc,type_traitement_id))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+ls_sql = "ALTER TABLE t_proctrait ADD FOREIGN KEY fk_idproc (id_proc) REFERENCES t_procedure (id_proc)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+ls_sql = "ALTER TABLE t_proctrait ADD FOREIGN KEY fk_typetraitid (type_traitement_id) REFERENCES type_de_traitement (type_traitement_id)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(7)
+// cheques_postdates
+ls_sql = "alter table cheques_postdates ADD ind BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(8)
+ls_sql = "ALTER TABLE cheques_postdates ADD id_lot INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(9)
+// t_options
+ls_sql = "alter table t_options ADD ententetypefusion BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(10)
+// t_cartetrait
+ls_sql = "create table t_cartetrait(patient_id INTEGER NOT NULL, &
+										  	  datecarte Date NOT NULL, &
+											  ecarte CHAR(1) NULL, &
+											  carteproc VARCHAR(200) NULL, &
+											  min VARCHAR(200) NULL, &
+											  cartenote VARCHAR(200) NULL, &
+											  filh VARCHAR(200) NULL, &
+											  filb VARCHAR(200) NULL, &
+											  ceh VARCHAR(200) NULL, &
+											  ceb VARCHAR(200) NULL, &
+											  el VARCHAR(200) NULL, &
+											  pan VARCHAR(200) NULL, &
+											  oh VARCHAR(200) NULL, &
+											  prv VARCHAR(200) NULL, &
+										  	  PRIMARY KEY (patient_id))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(11)
+ls_sql = "ALTER TABLE t_cartetrait ADD FOREIGN KEY fk_patid (patient_id) REFERENCES patient (patient_id)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(12)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD typeimg BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(13)
+// t_imagingconf
+ls_sql = "CREATE TABLE t_imagingconf(id_imgconf INTEGER NOT NULL, &
+												 img VARCHAR(50) NOT NULL, &
+												 prefix VARCHAR(10) NOT NULL, &
+												 rotate DECIMAL(5,2) NOT NULL, &
+												 fliph BIT NOT NULL, &
+												 flipv BIT NOT NULL, &
+												 PRIMARY KEY(id_imgconf))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(14)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD resptopat BIT NULL, &
+										  ADD horalpha BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(15)
+// formulaire_assurance
+ls_sql = "ALTER TABLE assurance_formulaire ADD assdate DATE NULL, &
+										  				 ADD assheure TIME NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(16)
+ls_sql = "ALTER TABLE assurance_formulaire ADD FOREIGN KEY fk_idcontact (id_contact) REFERENCES t_contact (id_contact)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(17)
+// t_contrattype
+ls_sql = "CREATE TABLE t_contrattype(id_contrattype INTEGER NOT NULL DEFAULT AUTOINCREMENT, &
+												 nomcontrat VARCHAR(100) NOT NULL, &
+												 filename VARCHAR(255) NULL, &
+								             PRIMARY KEY(id_contrattype))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(18)
+ls_sql = "ALTER TABLE t_contrattype ADD FOREIGN KEY fk_orthoid (ortho_id) REFERENCES ortho_id (ortho_id)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(19)
+ls_sql = "ALTER TABLE t_contrattype MODIFY ortho_id NOT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(20)
+// t_histolettre
+ls_sql = "ALTER TABLE t_histolettre MODIFY typelettre CHAR(1) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+ls_sql = "ALTER TABLE t_histolettre ADD FOREIGN KEY fk_idcontact (id_contact) REFERENCES t_contact (id_contact)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(21)
+ls_sql = "ALTER TABLE t_histolettre ADD FOREIGN KEY fk_idphase (id_phase) REFERENCES t_phase (id_phase)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(22)
+// t_contrats
+ls_sql = "ALTER TABLE t_contrats ADD retfee DECIMAL(8,2) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(23)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD alphaorder BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(24)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD typeimaging BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(25)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD horprintdu BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(26)
+if ib_updateok then
+	update t_ver set ver = 784;
+end if
+end if
+/// END VERSION 7.8.4 ///
+/////////////////////////
+if li_curver < 785 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 7.8.5 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 7.8.5')
+iw_progressbar.of_max(26)
+iw_progressbar.of_position(0)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD defville VARCHAR(50) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+// t_logs
+ls_sql = "ALTER TABLE t_logs MODIFY montant VARCHAR(50) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD dosspatresp BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+// t_imagerie
+ls_sql = "CREATE TABLE t_imagerie (patient_id INTEGER NOT NULL, &
+											  sequence INTEGER NOT NULL, &
+											  front_smile VARCHAR(100) NULL, &
+											  lateral VARCHAR(100) NULL, &
+											  frontal VARCHAR(100) NULL, &
+											  leftoccl VARCHAR(100) NULL, &
+											  rightoccl VARCHAR(100) NULL, &
+											  anterioroccl VARCHAR(100) NULL, &
+											  upperoccl VARCHAR(100) NULL, &
+											  loweroccl VARCHAR(100) NULL, &
+											  xray3_1 VARCHAR(100) NULL, &
+											  xray3_2 VARCHAR(100) NULL, &
+										     PRIMARY KEY(patient_id,sequence))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+ls_sql = "ALTER TABLE t_imagerie ADD FOREIGN KEY fk_patientid (patient_id) REFERENCES patient (patient_id)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+// t_contact
+ls_sql = "ALTER TABLE t_contact ADD FOREIGN KEY fk_idsal (id_sal) REFERENCES t_salutation (id_sal)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+ls_sql = "ALTER TABLE t_contact ADD FOREIGN KEY fk_idsal1 (id_sal1) REFERENCES t_salutation (id_sal)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(7)
+// t_histolettre
+ls_sql = "ALTER TABLE t_histolettre ADD FOREIGN KEY fk_idcontrat (id_contrattype) REFERENCES t_contrattype (id_contrattype)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(8)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD corrpath VARCHAR(150) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(9)
+// t_transfert
+ls_sql = "ALTER TABLE t_transfert MODIFY DEFAULT autoincrement"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(10)
+ls_sql = "ALTER TABLE t_transfert MODIFY tr_tel VARCHAR(15) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(11)
+// t_entente
+ls_sql = "ALTER TABLE t_entente ADD FOREIGN KEY fk_idphase (id_phase) REFERENCES t_phase (id_phase)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(12)
+// assurance_formulaire
+ls_sql = "ALTER TABLE assurance_formulaire ADD FOREIGN KEY fk_idphase (id_phase) REFERENCES t_phase (id_phase)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(13)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD horimpdubalance BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(14)
+// patient
+ls_sql = "ALTER TABLE patient ADD CABA INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(15)
+// type_de_traitement
+ls_sql = "ALTER TABLE type_de_traitement ADD typetrait INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(16)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD ortho2vistadent BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(17)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD imgpathimport VARCHAR(200) NULL, &
+										  ADD imgtpl VARCHAR(200) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(18)
+// t_consultations
+ls_sql = "ALTER TABLE t_consultations ADD abscong VARCHAR(30) NULL, &
+										  		  ADD dentincl VARCHAR(30) NULL, &
+												  ADD dentsurnum VARCHAR(30) NULL, &
+												  ADD eruptecto VARCHAR(30) NULL, &
+												  ADD dentatro VARCHAR(30) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(19)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD cincoutdelall BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(20)
+// t_rdv
+ls_sql = "ALTER TABLE t_rdv ADD station VARCHAR(15) NULL, &
+									 ADD seated TIME NULL, &
+									 ADD ready TIME NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(21)
+// t_rdv
+ls_sql = "ALTER TABLE t_rdv ADD colonne INTEGER NULL, &
+									 ADD released TIME NULL, &
+									 ADD nostation INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(22)
+// t_dentists
+ls_sql = "ALTER TABLE t_dentists ADD FOREIGN KEY fk_idsal (id_sal) REFERENCES t_salutation (id_sal)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(23)
+// t_referents
+ls_sql = "ALTER TABLE t_referents ADD FOREIGN KEY fk_idsal (id_sal) REFERENCES t_salutation (id_sal)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(24)
+// t_transfert
+ls_sql = "ALTER TABLE t_transfert MODIFY tpsesttraitact INTEGER, &
+											 MODIFY tpsesttraitret INTEGER, &
+											 MODIFY diamfilsht VARCHAR(50), &
+											 MODIFY diamfilsbs VARCHAR(50), &
+											 MODIFY apptrchrreq INTEGER, &
+											 MODIFY elastinthrreq INTEGER, &
+											 MODIFY appamovhrreq INTEGER, &
+											 MODIFY retenhrreq INTEGER, &
+											 MODIFY dosaut VARCHAR(5), &
+											 MODIFY dospho VARCHAR(5), &
+											 MODIFY dosmod VARCHAR(5), &
+											 MODIFY dosceph VARCHAR(5), &
+											 MODIFY dostra VARCHAR(5), &
+											 MODIFY dospan VARCHAR(5), &
+											 MODIFY dimouv VARCHAR(5), &
+											 MODIFY dtposapfixe VARCHAR(25), &
+											 MODIFY remgen VARCHAR(500)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(25)
+// t_rdv
+ls_sql = "ALTER TABLE t_rdv ADD color INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(26)
+// t_transfert
+ls_sql = "ALTER TABLE t_transfert ADD respnom VARCHAR(100) NULL, &
+											 ADD respadd VARCHAR(100) NULL, &
+											 ADD arrfininfo VARCHAR(500) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(27)
+// t_logs
+ls_sql = "ALTER TABLE t_logs ADD montantfin VARCHAR(50) NULL, &
+									  ADD datetrans DATE NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(28)
+// t_personneldroit
+ls_sql = "ALTER TABLE t_personneldroit ADD optionsm BIT NULL, &
+									            ADD logsm BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(29)
+// t_personneldroit
+ls_sql = "ALTER TABLE t_options ADD supppaiefact BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(30)
+if ib_updateok then
+	update t_ver set ver = 785;
+end if
+end if
+/// END VERSION 7.8.5 ///
+/////////////////////////
+if li_curver < 786 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 7.8.6 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 7.8.6')
+iw_progressbar.of_max(21)
+iw_progressbar.of_position(0)
+// patient
+ls_sql = "ALTER TABLE patient ADD idvistadent INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD idvistadent INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+// t_contact
+ls_sql = "ALTER TABLE t_contact ADD telext1 VARCHAR(20) NULL, &
+										  ADD telext5 VARCHAR(20) NULL, &
+										  ADD telext6 VARCHAR(20) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+// t_contact
+ls_sql = "ALTER TABLE t_imagerie ADD datemont DATE NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+// t_printers
+ls_sql = "ALTER TABLE t_printers ADD serialnumber INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD rapcorrinfo VARCHAR(150) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+// t_consultations
+ls_sql = "ALTER TABLE t_consultations ADD flag CHAR(1) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(7)
+// t_sequence
+ls_sql = "CREATE TABLE t_sequence (patient_id INTEGER NOT NULL, &
+											  sequence INTEGER NOT NULL, &
+											  nomseq VARCHAR(100) NULL, &
+										     PRIMARY KEY(patient_id,sequence))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(8)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD traitreq1fr VARCHAR(150) NULL, &
+										  ADD traitreq2fr VARCHAR(150) NULL, &
+										  ADD traitreq3fr VARCHAR(150) NULL, &
+										  ADD traitreq4fr VARCHAR(150) NULL, &
+										  ADD traitreq5fr VARCHAR(150) NULL, &
+										  ADD traitreq6fr VARCHAR(150) NULL, &
+										  ADD traitreq7fr VARCHAR(150) NULL, &
+										  ADD traitreq8fr VARCHAR(150) NULL, &
+										  ADD traitreq9fr VARCHAR(150) NULL, &
+										  ADD traitreq10fr VARCHAR(150) NULL, &
+										  ADD traitreq1en VARCHAR(150) NULL, &
+										  ADD traitreq2en VARCHAR(150) NULL, &
+										  ADD traitreq3en VARCHAR(150) NULL, &
+										  ADD traitreq4en VARCHAR(150) NULL, &
+										  ADD traitreq5en VARCHAR(150) NULL, &
+										  ADD traitreq6en VARCHAR(150) NULL, &
+										  ADD traitreq7en VARCHAR(150) NULL, &
+										  ADD traitreq8en VARCHAR(150) NULL, &
+										  ADD traitreq9en VARCHAR(150) NULL, &
+										  ADD traitreq10en VARCHAR(150) NULL"
+										  
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(9)
+// t_rdv
+ls_sql = "ALTER TABLE t_rdv ADD cincoutnote VARCHAR(100) NULL, &
+									 ADD cincoutnote1 VARCHAR(100) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(10)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD cincoutheurerdv BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(11)
+// t_options
+ls_sql = "ALTER TABLE t_options DROP archive, &
+										  ADD wsync BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(12)
+// patient
+ls_sql = "ALTER TABLE patient MODIFY alerte_medical VARCHAR(100)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(13)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD traitreq0fr VARCHAR(150) NULL, &
+										  ADD traitreq0en VARCHAR(150) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(14)
+// t_contact
+ls_sql = "ALTER TABLE t_contact ADD patadd BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(15)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD corrpathsys VARCHAR(200) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(16)
+// t_plantraitdesc
+ls_sql = "CREATE TABLE t_plantraitdesc (descrip VARCHAR(200), &
+										     		PRIMARY KEY(descrip))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(17)
+// t_rapconsult1
+ls_sql = "CREATE TABLE t_rapconsult1 (id_rapconsult1 INTEGER NOT NULL default autoincrement, &
+												 patient_id INTEGER NOT NULL, &
+											    datecons DATE NULL, &
+											    panceph CHAR(1) NULL, &
+												 plainte VARCHAR(500) NULL, &
+												 squelet CHAR(1) NULL, &
+												 mandibule CHAR(1) NULL, &
+												 maxilaire CHAR(1) NULL, &
+												 contraction CHAR(1) NULL, &
+												 app CHAR(1) NULL, &
+												 profil CHAR(1) NULL, &
+												 levre CHAR(1) NULL, &
+												 menton CHAR(1) NULL, &
+												 nez CHAR(1) NULL, &
+												 dentition CHAR(1) NULL, &
+												 adeno CHAR(1) NULL, &
+												 hyg CHAR(1) NULL, &
+												 recession VARCHAR(30) NULL, &
+												 tonus CHAR(1) NULL, &
+												 habitude CHAR(1) NULL, &
+												 symetrie CHAR(1) NULL, &
+												 relcrco VARCHAR(30) NULL, &
+												 tmj VARCHAR(30) NULL, &
+												 attitude CHAR(1) NULL, &
+												 autre1 VARCHAR(500) NULL, &
+												 sixs1 VARCHAR(30) NULL, &
+												 sixs2 VARCHAR(30) NULL, &
+												 troiss1 VARCHAR(30) NULL, &
+												 troiss2 VARCHAR(30) NULL, &
+												 overbite VARCHAR(50) NULL, &
+												 openbite VARCHAR(50) NULL, &
+												 overjet VARCHAR(50) NULL, &
+												 aldu CHAR(1) NULL, &
+												 aldl CHAR(1) NULL, &
+												 aleu CHAR(1) NULL, &
+												 alel CHAR(1) NULL, &
+												 rotation VARCHAR(30) NULL, &
+												 crossbite VARCHAR(30) NULL, &
+												 midu CHAR(1) NULL, &
+												 midl CHAR(1) NULL, &
+												 curve CHAR(1) NULL, &
+												 archform CHAR(1) NULL, &
+												 toothsize VARCHAR(500) NULL, &
+												 caries VARCHAR(30) NULL, &
+												 autre2 VARCHAR(500) NULL, &
+												 rootres VARCHAR(30) NULL, &
+												 supernum VARCHAR(30) NULL, &
+												 abscesses VARCHAR(30) NULL, &
+												 devitalized VARCHAR(30) NULL, &
+												 ankylosed VARCHAR(30) NULL, &
+												 congmising VARCHAR(30) NULL, &
+												 earlyloss VARCHAR(30) NULL, &
+												 prolongedret VARCHAR(30) NULL, &
+												 permteeth VARCHAR(30) NULL, &
+												 migrated VARCHAR(30) NULL, &
+												 transposed VARCHAR(30) NULL, &
+												 axialincl VARCHAR(30) NULL, &
+												 impactedteeth VARCHAR(30) NULL, &
+												 blockederupt VARCHAR(30) NULL, &
+												 reqspace VARCHAR(30) NULL, &
+												 availablespace VARCHAR(30) NULL, &
+												 difference VARCHAR(30) NULL, &
+												 troisrd CHAR(1) NULL, &
+												 couronne VARCHAR(30) NULL, &
+												 autre3 CHAR(500) NULL, &
+												 traitsugg VARCHAR(200) NULL, &
+												 complorthorec CHAR(1) NULL, &
+												 evalexo VARCHAR(100) NULL, &
+												 rpe INTEGER NULL, &
+												 fixedapp INTEGER NULL, &
+												 esttreat CHAR(30) NULL, &
+												 other1 VARCHAR(500) NULL, &
+												 nextvisit CHAR(1) NULL, &
+												 nextvisitdate DATE NULL, &
+										       PRIMARY KEY(id_rapconsult1))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(18)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD hidecredits BIT NULL, &
+										  ADD typerapcons INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(19)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD noboxstart INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(20)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD lockdate DATE NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(21)
+if ib_updateok then
+	update t_ver set ver = 786;
+end if
+end if
+/// END VERSION 7.8.6 ///
+/////////////////////////
+if li_curver < 787 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 7.8.7 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 7.8.7')
+iw_progressbar.of_max(8)
+iw_progressbar.of_position(0)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD hidearchive BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD cochedepot BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD rapnbelements INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD cincoutchoixt1 VARCHAR(50) NULL, &
+										  ADD cincoutchoixc1 INTEGER NULL, &
+										  ADD cincoutchoixt2 VARCHAR(50) NULL, &
+										  ADD cincoutchoixc2 INTEGER NULL, &
+										  ADD cincoutchoixt3 VARCHAR(50) NULL, &
+										  ADD cincoutchoixc3 INTEGER NULL, &
+										  ADD cincoutchoixt4 VARCHAR(50) NULL, &
+										  ADD cincoutchoixc4 INTEGER NULL, &
+										  ADD cincoutchoixt5 VARCHAR(50) NULL, &
+										  ADD cincoutchoixc5 INTEGER NULL, &
+										  ADD cincoutchoixt6 VARCHAR(50) NULL, &
+										  ADD cincoutchoixc6 INTEGER NULL, &
+										  ADD cincoutchoixt7 VARCHAR(50) NULL, &
+										  ADD cincoutchoixc7 INTEGER NULL, &
+										  ADD cincoutchoixt8 VARCHAR(50) NULL, &
+										  ADD cincoutchoixc8 INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD cincoutcretard INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+// t_printers
+ls_sql = "ALTER TABLE t_printers ADD bac1 INTEGER NULL, &
+											ADD bac2 INTEGER NULL, &
+											ADD bac3 INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+// t_status
+ls_sql = "ALTER TABLE t_status ADD FOREIGN KEY fk_orthoid (ortho_id) REFERENCES ortho_id (ortho_id)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(7)
+// t_rapconsult1
+ls_sql = "ALTER TABLE t_rapconsult1 ADD troisrd1 VARCHAR(200) NULL, &
+												ADD habitude9 VARCHAR(100) NULL, &
+												ADD other2 VARCHAR(500) NULL, &
+												MODIFY complorthorec VARCHAR(500) NULL, &
+												MODIFY rpe VARCHAR(500) NULL, &
+												MODIFY fixedapp VARCHAR(500) NULL, &
+												ADD nextvisit1 VARCHAR(100) NULL, &
+												ADD nextvisitdate1 DATE NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(8)
+if ib_updateok then
+	update t_ver set ver = 787;
+end if
+end if
+/// END VERSION 7.8.7 ///
+/////////////////////////
+
+close(iw_progressbar)
+FileClose(li_FileNum)
+gf_autoupdate2()
+end subroutine
+

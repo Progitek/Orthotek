@@ -1,0 +1,85 @@
+﻿$PBExportHeader$d_nonzerobalance.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="Âge des Comptes" print.orientation = 2 print.margin.left = 0 print.margin.right = 0 print.margin.top = 0 print.margin.bottom = 0 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=380 color="536870912" )
+summary(height=64 color="536870912" )
+footer(height=52 color="536870912" )
+detail(height=128 color="536870912" )
+table(column=(type=long updatewhereclause=yes identity=yes name=trait dbname="traitements.trait" )
+ column=(type=decimal(2) updatewhereclause=yes name=facttot1 dbname="facttot1" )
+ column=(type=decimal(2) updatewhereclause=yes name=facttot dbname="facttot" )
+ column=(type=decimal(2) updatewhereclause=yes name=factgtot1 dbname="factgtot1" )
+ column=(type=decimal(2) updatewhereclause=yes name=factgtot dbname="factgtot" )
+ column=(type=decimal(2) updatewhereclause=yes name=paiegtot1 dbname="paiegtot1" )
+ column=(type=decimal(2) updatewhereclause=yes name=paiegtot dbname="paiegtot" )
+ column=(type=date updatewhereclause=yes name=lastpaie dbname="lastpaie" )
+ column=(type=decimal(2) updatewhereclause=yes name=lastamount dbname="lastamount" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=long updatewhereclause=yes identity=yes name=patient_patient_id dbname="patient.patient_id" )
+ column=(type=char(15) updatewhereclause=yes name=patient_tel_maison dbname="patient.tel_maison" )
+ column=(type=char(15) updatewhereclause=yes name=patient_tel_bureau dbname="patient.tel_bureau" )
+ column=(type=date updatewhereclause=yes name=pdcnextdate dbname="pdcnextdate" )
+ column=(type=decimal(2) updatewhereclause=yes name=pdcnextpay dbname="pdcnextpay" )
+ column=(type=decimal(2) updatewhereclause=yes name=pdconhand1 dbname="pdconhand1" )
+ column=(type=decimal(2) updatewhereclause=yes name=pdconhand dbname="pdconhand" )
+ retrieve="  SELECT 	traitements.traitement_id as trait,
+            (select sum(montant) from factures_traitements where traitement_id = trait and date_facture <= today()) as facttot1,       
+				(if facttot1 is null then 0 else facttot1 endif) as facttot,
+				(select sum(montant) from factures_traitements where traitement_id = trait) as factgtot1,       
+				(if factgtot1 is null then 0 else factgtot1 endif) as factgtot,
+				(select sum(montant_recu) from paiement where traitement_patient_id = trait) as paiegtot1 ,
+            (if paiegtot1 is null then 0 else paiegtot1 endif) as paiegtot,
+				(select max(date_paiement) from paiement where traitement_patient_id = trait and date_paiement <= today()) as lastpaie,
+            (select first montant_recu from paiement where traitement_patient_id = trait and date_paiement = lastpaie) as lastamount,
+				patient.patient_nom,
+            patient.patient_prenom,
+				patient.patient_id,
+				patient.tel_maison,
+				patient.tel_bureau,
+				(select min(date_cheque) from cheques_postdates where traitement_patient_id = trait and date_cheque > today()) as pdcnextdate,
+				(select min(paiement) from cheques_postdates where traitement_patient_id = trait and date_cheque = pdcnextdate) as pdcnextpay,
+				(select sum(paiement) from cheques_postdates where traitement_patient_id = trait and indicateur <> '1') as pdconhand1,
+				(if pdconhand1 is null then 0 else pdconhand1 endif) as pdconhand
+	 FROM 	traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id
+	WHERE    factgtot - paiegtot <> 0
+ORDER BY		patient_nom ASC, patient_prenom ASC
+" )
+text(band=header alignment="2" text="Prochain" border="2" color="0" x="2144" y="308" height="64" width="622" html.valueishtml="0"  name=t_pdcnextdate visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="PDC" border="2" color="0" x="2144" y="244" height="64" width="965" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="dern. paie." border="2" color="0" x="1815" y="308" height="64" width="329" html.valueishtml="0"  name=t_lastpaie visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Nom du patient" border="2" color="0" x="9" y="308" height="64" width="1120" html.valueishtml="0"  name=t_pat visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Coût global" border="2" color="0" x="1472" y="308" height="64" width="343" html.valueishtml="0"  name=t_totfact visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Montant dû" border="2" color="0" x="1129" y="308" height="64" width="343" html.valueishtml="0"  name=t_dueamount visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Solde différent de zéro" border="0" color="8388608" x="5" y="16" height="92" width="3415" html.valueishtml="0"  name=t_title visible="1"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="" border="0" color="8388608" x="5" y="112" height="80" width="3415" html.valueishtml="0"  name=t_ortho visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="À perçevoir" border="2" color="0" x="3113" y="308" height="64" width="329" html.valueishtml="0"  name=t_balance visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="En main" border="2" color="0" x="2770" y="308" height="64" width="338" html.valueishtml="0"  name=t_pdconhand visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="376" x2="3442" y2="376"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=15 alignment="1" tabsequence=32766 border="0" color="0" x="2144" y="4" height="64" width="297" format="[General]" html.valueishtml="0"  name=pdcnextdate visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb( 220,220,220 ) , rgb( 255,255,255 ) )" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="0" x="1815" y="4" height="64" width="329" format="[general]" html.valueishtml="0"  name=lastpaie visible="1" editmask.mask="[date]" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb( 220,220,220 ) , rgb( 255,255,255 ) )" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="0" x="1815" y="72" height="56" width="329" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=lastamount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression=" patient_patient_nom + ' ' + patient_patient_prenom "border="0" color="0" x="9" y="4" height="64" width="1120" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb( 220,220,220 ) , rgb( 255,255,255 ) )" )
+text(band=detail alignment="0" text="Tél. rés.:" border="0" color="0" x="9" y="72" height="56" width="201" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="215" y="72" height="56" width="361" format="[general]" html.valueishtml="0"  name=patient_tel_maison visible="1" editmask.mask="(XXX) XXX-XXXX" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Tél. bur.:" border="0" color="0" x="581" y="72" height="56" width="192" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="782" y="72" height="56" width="361" format="[general]" html.valueishtml="0"  name=patient_tel_bureau visible="1" editmask.mask="(XXX) XXX-XXXX" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="0" x="1472" y="4" height="64" width="343" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=factgtot visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb( 220,220,220 ) , rgb( 255,255,255 ) )" )
+compute(band=detail alignment="1" expression=" facttot - paiegtot "border="0" color="0" x="1129" y="4" height="64" width="343" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb( 220,220,220 ) , rgb( 255,255,255 ) )" )
+compute(band=detail alignment="1" expression=" factgtot  -  paiegtot  -  pdconhand "border="0" color="0" x="3109" y="4" height="64" width="334" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_8 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb( 220,220,220 ) , rgb( 255,255,255 ) )" )
+column(band=detail id=18 alignment="1" tabsequence=32766 border="0" color="0" x="2766" y="4" height="64" width="343" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=pdconhand visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb( 220,220,220 ) , rgb( 255,255,255 ) )" )
+column(band=detail id=16 alignment="1" tabsequence=32766 border="0" color="0" x="2441" y="4" height="64" width="325" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=pdcnextpay visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb( 220,220,220 ) , rgb( 255,255,255 ) )" )
+compute(band=summary alignment="1" expression="sum( facttot - paiegtot  for all)"border="0" color="0" x="1129" y="4" height="64" width="343" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="0" y1="0" x2="3442" y2="4"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=summary alignment="1" expression="sum( factgtot  -  paiegtot  -  pdconhand  for all)"border="0" color="0" x="3109" y="4" height="64" width="334" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum(pdconhand for all)"border="0" color="0" x="2766" y="4" height="64" width="343" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum(pdcnextpay for all)"border="0" color="0" x="2441" y="4" height="64" width="325" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Imprimé le" border="0" color="0" x="9" y="0" height="56" width="215" html.valueishtml="0"  name=t_printedon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="256" y="0" height="56" width="338" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="© Orthotek" border="0" color="0" x="1495" y="0" height="56" width="238" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2880" y="0" height="56" width="562" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

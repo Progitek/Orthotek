@@ -1,0 +1,18 @@
+﻿$PBExportHeader$d_rapport_paiement_impression0an.srd
+release 9;
+datawindow(units=2 timer_interval=0 color=1073741824 processing=5 HTMLDW=no print.printername="" print.documentname="" print.orientation = 2 print.margin.left = 500 print.margin.right = 1 print.margin.top = 250 print.margin.bottom = 250 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+summary(height=0 color="536870912" )
+footer(height=177 color="536870912" )
+detail(height=791 color="536870912"  height.autosize=yes)
+table(column=(type=char(10) updatewhereclause=yes name=a dbname="a" )
+ unbound = "yes"arguments=(("ra_traitement_id", number),("ra_ortho_id", number),("ra_contact", number),("ra_pd", number)) )
+report(band=detail dataobject="d_rapport_paiement_impression1an" x="20" y="31" height="750" width="4000" border="0"  height.autosize=yes criteria="" nest_arguments=((" ra_traitement_id "),(" ra_contact ")) trail_footer = yes  name=dw_1 visible="1"  slideup=directlyabove )
+report(band=detail dataobject="d_rapppaieimp" x="3895" y="31" height="750" width="3781" border="0"  height.autosize=yes criteria="" nest_arguments=((" ra_traitement_id "),(" ra_contact "),(" ra_pd ")) trail_footer = yes  name=dw_2 visible="1"  slideup=directlyabove )
+text(band=footer alignment="0" text="Printed on" border="0" color="0" x="83" y="10" height="145" width="520" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="635" y="10" height="145" width="812" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="6177" y="10" height="145" width="1437" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

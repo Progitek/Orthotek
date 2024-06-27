@@ -1,0 +1,50 @@
+﻿$PBExportHeader$gf_invoice_or_payment.srf
+global type gf_invoice_or_payment from function_object
+end type
+
+forward prototypes
+global function string gf_invoice_or_payment (string as_type)
+end prototypes
+
+global function string gf_invoice_or_payment (string as_type);choose case as_type
+	case '$'
+		return 'p'
+	case 'C'
+		return 'p'
+	case 'Visa'
+		return 'p'
+	case 'pVisa'
+		return 'p'
+	case 'MC'
+		return 'p'
+	case 'pMC'
+		return 'p'
+	case 'AmEx'
+		return 'p'
+	case 'pAmex'
+		return 'p'
+	case 'pPD'
+		return 'p'
+	case 'PD'
+		return 'p'
+	case 'NSF'
+		return 'p'
+	case 'credit'
+		return 'p'
+	case 'trans'
+		return 'p'
+	case 'perte'
+		return 'p'
+	case 'P'
+		return 'p'
+	case 'A'
+		return 'p'
+	case 'mod'
+		return 'p'
+	case 'mens'
+		return 'i'
+	case else
+		return 'i'
+end choose
+end function
+

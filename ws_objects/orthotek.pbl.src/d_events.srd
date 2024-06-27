@@ -1,0 +1,31 @@
+﻿$PBExportHeader$d_events.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="Journsal " print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=id_event dbname="t_events.id_event" dbalias=".id_event" )
+ column=(type=date update=yes updatewhereclause=yes name=eventdate dbname="t_events.eventdate" dbalias=".eventdate" )
+ column=(type=char(500) update=yes updatewhereclause=yes name=eventdet dbname="t_events.eventdet" dbalias=".eventdet" )
+ column=(type=long update=yes updatewhereclause=yes name=ortho_id dbname="t_events.ortho_id" dbalias=".ortho_id" )
+ retrieve="  SELECT t_events.id_event,   
+         t_events.eventdate,   
+         t_events.eventdet,   
+         t_events.ortho_id  
+    FROM t_events 
+   WHERE t_events.ortho_id = :ra_orthoid   
+ORDER BY t_events.eventdet ASC" update="t_events" updatewhere=0 updatekeyinplace=no arguments=(("ra_orthoid", number)) )
+text(band=header alignment="0" text="Description de l'événement" border="0" color="33554432" x="128" y="4" height="64" width="786" html.valueishtml="0"  name=t_event visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=10 border="5" color="33554432" x="128" y="4" height="80" width="2651" format="[general]" html.valueishtml="0"  name=eventdet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217748" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,56 @@
+﻿$PBExportHeader$d_formcpdchoix.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=134217750 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=108 color="536870912" height.autosize=yes )
+summary(height=0 color="536870912" )
+footer(height=28 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=imp dbname="imp" values="	1/	0" )
+ column=(type=date updatewhereclause=yes name=cheques_postdates_date_cheque dbname="cheques_postdates.date_cheque" dbalias=".date_cheque" )
+ column=(type=decimal(2) updatewhereclause=yes name=cheques_postdates_paiement dbname="cheques_postdates.paiement" dbalias=".paiement" )
+ column=(type=long updatewhereclause=yes identity=yes name=cheques_postdates_cheques_postdates_id dbname="cheques_postdates.cheques_postdates_id" dbalias=".cheques_postdates_id" )
+ column=(type=long updatewhereclause=yes name=cheques_postdates_traitement_patient_id dbname="cheques_postdates.traitement_patient_id" dbalias=".traitement_patient_id" )
+ column=(type=long updatewhereclause=yes name=cheques_postdates_id_contact dbname="cheques_postdates.id_contact" dbalias=".id_contact" )
+ column=(type=char(20) updatewhereclause=yes name=cheques_postdates_modalite dbname="cheques_postdates.modalite" dbalias=".modalite" )
+ column=(type=char(101) updatewhereclause=yes name=nomcont dbname="nomcont" )
+ column=(type=char(30) updatewhereclause=yes name=t_activites_activites dbname="t_activites.activites" dbalias=".activites" )
+ retrieve="  SELECT 0 as imp,   
+         cheques_postdates.date_cheque,   
+         cheques_postdates.paiement,   
+         cheques_postdates.cheques_postdates_id,   
+         cheques_postdates.traitement_patient_id,
+			cheques_postdates.id_contact,
+			cheques_postdates.modalite,
+			t_contact.nom + ' ' + t_contact.prenom as nomcont,
+			t_activites.activites
+    FROM cheques_postdates INNER JOIN traitements ON cheques_postdates.traitement_patient_id = traitements.traitement_id
+									INNER JOIN patient ON traitements.patient_id = patient.patient_id
+									LEFT OUTER JOIN t_activites ON patient.id_activite = t_activites.id_activite
+									LEFT OUTER JOIN t_contact ON t_contact.id_contact = cheques_postdates.id_contact
+WHERE cheques_postdates.traitement_patient_id = :ra_traitid and
+	   isnull(cheques_postdates.indicateur,'0') <> '1'
+order by cheques_postdates.date_cheque ASC
+" arguments=(("ra_traitid", number)) )
+text(band=header alignment="2" text="Date" border="0" color="33554432" x="247" y="16" height="64" width="425" html.valueishtml="0"  name=date_paiement_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Montant" border="0" color="33554432" x="686" y="16" height="64" width="334" html.valueishtml="0"  name=montant_recu_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Activité" border="0" color="33554432" x="2807" y="16" height="64" width="795" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Contact" border="0" color="33554432" x="1710" y="16" height="64" width="1083" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Modalité" border="0" color="33554432" x="1033" y="16" height="64" width="663" html.valueishtml="0"  name=paiement_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="14" y1="96" x2="3730" y2="96"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="160" y="8" height="48" width="55" format="[general]" html.valueishtml="0"  name=imp visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="2" tabsequence=20 border="0" color="33554432" x="247" y="4" height="64" width="425" format="[general]" html.valueishtml="0"  name=cheques_postdates_date_cheque visible="1" editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="0" color="33554432" x="686" y="4" height="64" width="334" format="[general]" html.valueishtml="0"  name=cheques_postdates_paiement visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=70 border="0" color="33554432" x="2807" y="4" height="64" width="809" format="[general]" html.valueishtml="0"  name=t_activites_activites visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=80 border="0" color="33554432" x="1710" y="4" height="64" width="1083" format="[general]" html.valueishtml="0"  name=nomcont visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=90 border="0" color="33554432" x="1033" y="4" height="64" width="663" format="[general]" html.valueishtml="0"  name=cheques_postdates_modalite visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

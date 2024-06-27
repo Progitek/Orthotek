@@ -1,0 +1,11 @@
+﻿$PBExportHeader$gf_langue.srf
+global type gf_langue from function_object
+end type
+
+forward prototypes
+global function string gf_langue ()
+end prototypes
+
+global function string gf_langue ();return gnv_app.of_getlangue()
+end function
+

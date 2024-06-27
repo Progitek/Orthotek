@@ -1,0 +1,25 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_srvdropdownsearch.sru
+$PBExportComments$(PRO) DataWindow Property - The DropDownSearch service tabpage
+forward
+global type pro_u_tabpg_dwproperty_srvdropdownsearch from pfc_u_tabpg_dwproperty_srvdropdownsearch
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_srvdropdownsearch from pfc_u_tabpg_dwproperty_srvdropdownsearch
+end type
+global pro_u_tabpg_dwproperty_srvdropdownsearch pro_u_tabpg_dwproperty_srvdropdownsearch
+
+on pro_u_tabpg_dwproperty_srvdropdownsearch.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_srvdropdownsearch.destroy
+call super::destroy
+end on
+
+type st_registeredcolumns from pfc_u_tabpg_dwproperty_srvdropdownsearch`st_registeredcolumns within pro_u_tabpg_dwproperty_srvdropdownsearch
+end type
+
+type lb_registeredcolumns from pfc_u_tabpg_dwproperty_srvdropdownsearch`lb_registeredcolumns within pro_u_tabpg_dwproperty_srvdropdownsearch
+end type
+

@@ -1,0 +1,18 @@
+﻿$PBExportHeader$inputbox.srf
+global type inputbox from function_object
+end type
+
+forward prototypes
+global function string inputbox (string as_title, string as_question, string as_defautchaine)
+end prototypes
+
+global function string inputbox (string as_title, string as_question, string as_defautchaine);str_inputbox st_input
+
+st_input.as_title = as_title
+st_input.as_question = as_question
+st_input.as_defautchaine = as_defautchaine
+
+openwithparm(pro_inputbox,st_input)
+return message.stringparm
+end function
+

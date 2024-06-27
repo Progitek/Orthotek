@@ -1,0 +1,13 @@
+﻿$PBExportHeader$gs_choosecolor.srs
+global type gs_choosecolor from structure
+	long		lStructSize
+	long		hwnd
+	long		hInstance
+	long		rgbResult
+	string		lpCustColors
+	long		Flags
+	long		lCustData
+	long		lpfnHook
+	string		lpTemplateName
+end type
+

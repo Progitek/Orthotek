@@ -1,0 +1,46 @@
+﻿$PBExportHeader$ajustmontantdu.srf
+global type ajustmontantdu from function_object
+end type
+
+forward prototypes
+global subroutine ajustmontantdu ()
+end prototypes
+
+global subroutine ajustmontantdu ();// Cette fonction permet d'ajuster le montant du
+// Auteur: Dave Tremblay
+// Pour: II4NET Inc.
+// CRÉE LE: 04-04-2002
+// Modifié le: 04-04-2002 
+
+dec{2} montant_total_fact, v_montant_paye, montantdu
+long ll_trait
+
+//Ajustement montant du
+
+
+DECLARE ajust CURSOR FOR
+
+SELECT traitement_id as trait,
+       (SELECT sum(montant) FROM factures_traitements (index i_traitementid) WHERE traitement_id = trait AND date_facture <= today()),
+		 (SELECT sum(montant_recu) FROM paiement (index i_paiement) WHERE traitement_patient_id = trait)
+FROM traitements;	
+
+
+OPEN ajust;
+
+Do While SQLCA.SQLCode = 0
+   Fetch ajust Into :ll_trait,
+							 :montant_total_fact,
+							 :v_montant_paye;
+							 
+							 
+montantdu = montant_total_fact - v_montant_paye		   
+	
+if SQLCA.SQLCode = 0 then
+	update traitements set montant_du = :montantdu where traitement_id = :ll_trait;
+end if
+Loop
+commit using SQLCA;
+CLOSE ajust;
+end subroutine
+

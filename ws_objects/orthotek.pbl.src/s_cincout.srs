@@ -1,0 +1,12 @@
+﻿$PBExportHeader$s_cincout.srs
+global type s_cincout from structure
+	long		id_personnel
+	long		patient_id
+	long		chaise
+	string		traitementnom
+	long		duree
+	time		heure
+	string		status
+	long		row
+end type
+

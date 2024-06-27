@@ -1,0 +1,56 @@
+﻿$PBExportHeader$calculagefr.srf
+global type calculagefr from function_object
+end type
+
+forward prototypes
+global function string calculagefr (date datenaiss)
+end prototypes
+
+global function string calculagefr (date datenaiss);int age // Age du patient
+int age_mois // Mois du patient
+int jour // Le jour de la journée en cours
+int mois // Le mois de la journée en cours
+int annee // L'année de la journée en cours
+int jour_naiss // Jour de la date de naissance
+int mois_naiss // Mois de la date de naissance
+int annee_naiss // Année de la date de naissance
+string ls_age // Retourne l'age et le mois
+
+jour = day(today())
+mois = month(today())
+annee = year(today())
+jour_naiss = day(datenaiss)
+mois_naiss = month(datenaiss)
+annee_naiss = year(datenaiss)
+
+
+if mois < mois_naiss then
+	age = annee - annee_naiss - 1
+	if jour < jour_naiss then
+	   age_mois = 12 - (mois_naiss - mois) - 1
+	else
+		age_mois = 12 - (mois_naiss - mois)
+	end if
+elseif mois = mois_naiss then
+	if jour < jour_naiss then
+		age = annee - annee_naiss - 1
+		age_mois = 11
+	else
+		age = annee - annee_naiss
+		age_mois = 0
+	end if
+else
+	age = annee - annee_naiss
+	age_mois = mois - mois_naiss
+end if
+
+ls_age = string(age) + " ans "
+
+if age_mois <> 0 then
+	ls_age = ls_age + string(age_mois) + " mois " 
+end if
+
+return left(ls_age, len(ls_age) - 1)
+
+end function
+

@@ -1,0 +1,25 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_srvreqcolumn.sru
+$PBExportComments$(PRO) DataWindow Property - The ReqColumn service tabpage
+forward
+global type pro_u_tabpg_dwproperty_srvreqcolumn from pfc_u_tabpg_dwproperty_srvreqcolumn
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_srvreqcolumn from pfc_u_tabpg_dwproperty_srvreqcolumn
+end type
+global pro_u_tabpg_dwproperty_srvreqcolumn pro_u_tabpg_dwproperty_srvreqcolumn
+
+on pro_u_tabpg_dwproperty_srvreqcolumn.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_srvreqcolumn.destroy
+call super::destroy
+end on
+
+type st_registeredcolumns from pfc_u_tabpg_dwproperty_srvreqcolumn`st_registeredcolumns within pro_u_tabpg_dwproperty_srvreqcolumn
+end type
+
+type lb_registeredskipcolumns from pfc_u_tabpg_dwproperty_srvreqcolumn`lb_registeredskipcolumns within pro_u_tabpg_dwproperty_srvreqcolumn
+end type
+

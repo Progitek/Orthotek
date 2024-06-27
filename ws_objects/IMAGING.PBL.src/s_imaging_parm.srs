@@ -1,0 +1,7 @@
+﻿$PBExportHeader$s_imaging_parm.srs
+global type s_imaging_parm from structure
+	long		sl_patid
+	long		sl_progressid
+	string		ss_imgname
+end type
+

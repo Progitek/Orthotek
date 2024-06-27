@@ -1,0 +1,55 @@
+﻿$PBExportHeader$d_factures_mensualite.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=76 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=188 color="536870912" height.autosize=yes )
+table(column=(type=long updatewhereclause=yes key=yes identity=yes name=facture_id dbname="factures_traitements.facture_id" )
+ column=(type=decimal(2) updatewhereclause=yes name=montant dbname="factures_traitements.montant" )
+ column=(type=date updatewhereclause=yes name=date_facture dbname="factures_traitements.date_facture" )
+ column=(type=long updatewhereclause=yes name=status_id dbname="factures_traitements.status_id" )
+ column=(type=long updatewhereclause=yes name=traitement_id dbname="factures_traitements.traitement_id" )
+ column=(type=number updatewhereclause=yes name=affect dbname="factures_traitements.affect" values="Oui	1/Non	0/" )
+ column=(type=long updatewhereclause=yes name=qte dbname="factures_traitements.qte" )
+ column=(type=number updatewhereclause=yes name=factures_traitements_imp dbname="factures_traitements.imp" )
+ column=(type=number updatewhereclause=yes name=cache dbname="factures_traitements.cache" )
+ column=(type=long updatewhereclause=yes name=id_contact dbname="factures_traitements.id_contact" )
+ column=(type=long updatewhereclause=yes name=id_satellite dbname="factures_traitements.id_satellite" )
+ retrieve="  SELECT factures_traitements.facture_id,   
+         factures_traitements.montant,   
+         factures_traitements.date_facture,   
+         factures_traitements.status_id,   
+         factures_traitements.traitement_id,   
+         factures_traitements.affect,   
+         factures_traitements.qte,   
+         factures_traitements.imp,   
+         factures_traitements.cache,   
+         factures_traitements.id_contact,
+			factures_traitements.id_satellite  
+    FROM factures_traitements   
+" update="factures_traitements" updatewhere=0 updatekeyinplace=no )
+text(band=header alignment="0" text="Affecte" border="0" color="0" x="3342" y="0" height="64" width="709" html.valueishtml="0"  name=t_affect  tag="" visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Quantité" border="0" color="0" x="626" y="0" height="64" width="229" html.valueishtml="0"  name=t_qte visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Montant" border="0" color="0" x="887" y="0" height="64" width="361" html.valueishtml="0"  name=t_montant visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Coût du traitement" border="0" color="0" x="1266" y="0" height="64" width="503" html.valueishtml="0"  name=t_couttrait visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Responsable financier" border="0" color="0" x="1792" y="0" height="64" width="951" html.valueishtml="0"  name=t_resp visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Date facture" border="0" color="0" x="59" y="0" height="64" width="471" html.valueishtml="0"  name=t_datefact visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+button(band=detail text="Appliquer" filename="" enabled=yes action="0" border="0" color="0" x="2802" y="0" height="108" width="526" vtextalign="0" htextalign="0"  name=b_apply visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="67108864" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="3342" y="12" height="64" width="562" format="[general]" html.valueishtml="0"  name=affect visible="0" radiobuttons.columns=2 radiobuttons.lefttext=yes radiobuttons.scale=yes radiobuttons.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="2" tabsequence=20 border="5" color="0" x="626" y="8" height="76" width="229" format="[general]" html.valueishtml="0"  name=qte visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.required=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="1" tabsequence=30 border="5" color="0" x="887" y="8" height="76" width="361" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=montant visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.required=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="err" border="5" color="0" x="1280" y="8" height="76" width="480" html.valueishtml="0"  name=cout_traitement visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=10 alignment="0" tabsequence=40 border="5" color="0" x="1792" y="8" height="76" width="951" format="[general]" html.valueishtml="0"  name=id_contact visible="1" dddw.name=dddw_contact dddw.displaycolumn=compute_1 dddw.datacolumn=id_contact dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes dddw.autoretrieve=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="2" tabsequence=10 border="5" color="0" x="59" y="8" height="76" width="539" format="[general]" html.valueishtml="0"  name=date_facture visible="1" editmask.required=yes editmask.autoskip=yes editmask.ddcalendar=yes editmask.mask="[date]" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=11 alignment="0" tabsequence=50 border="5" color="0" x="59" y="104" height="76" width="914" format="[general]" html.valueishtml="0"  name=id_satellite visible="1" dddw.name=dddw_satellite dddw.displaycolumn=computelieu dddw.datacolumn=id_satellite dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

@@ -1,0 +1,24 @@
+﻿$PBExportHeader$d_estimed.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=68 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=id_estime dbname="t_estime.id_estime" )
+ column=(type=date update=yes updatewhereclause=yes name=dateest dbname="t_estime.dateest" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=typetrait dbname="t_estime.typetrait" values="Proposé	p/Complété	c/" )
+ column=(type=long update=yes updatewhereclause=yes name=patient_id dbname="t_estime.patient_id" )
+ retrieve="  SELECT t_estime.id_estime,   
+         t_estime.dateest,   
+         t_estime.typetrait,   
+         t_estime.patient_id  
+    FROM t_estime
+   WHERE t_estime.patient_id = :ra_patid
+" update="t_estime" updatewhere=1 updatekeyinplace=no arguments=(("ra_patid", number)) )
+text(band=header alignment="0" text="Date de l'estimé" border="0" color="33554432" x="133" y="8" height="64" width="425" html.valueishtml="0"  name=dateest_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Type de traitement" border="0" color="33554432" x="603" y="8" height="64" width="494" html.valueishtml="0"  name=typetrait_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="2" tabsequence=10 border="5" color="33554432" x="133" y="4" height="76" width="343" format="[general]" html.valueishtml="0"  name=dateest visible="1" editmask.mask="dd/mm/yyyy" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=20 border="0" color="33554432" x="599" y="4" height="76" width="891" format="[general]" html.valueishtml="0"  name=typetrait visible="1" radiobuttons.columns=2 radiobuttons.scale=no radiobuttons.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

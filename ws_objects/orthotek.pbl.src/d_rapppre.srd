@@ -1,0 +1,400 @@
+﻿$PBExportHeader$d_rapppre.srd
+release 11.5;
+datawindow(units=0 timer_interval=0 color=67108864 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="Rapport préliminaire" print.orientation = 0 print.margin.left = 0 print.margin.right = 0 print.margin.top = 0 print.margin.bottom = 0 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=2100 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=t_consultations_id dbname="t_consultations.id" dbalias=".id" )
+ column=(type=long update=yes updatewhereclause=yes name=patient_id dbname="t_consultations.patient_id" dbalias=".patient_id" )
+ column=(type=number update=yes updatewhereclause=yes name=exam dbname="t_consultations.exam" dbalias=".exam" )
+ column=(type=number update=yes updatewhereclause=yes name=prophy dbname="t_consultations.prophy" dbalias=".prophy" )
+ column=(type=number update=yes updatewhereclause=yes name=radio dbname="t_consultations.radio" dbalias=".radio" )
+ column=(type=number update=yes updatewhereclause=yes name=hygiene dbname="t_consultations.hygiene" dbalias=".hygiene" )
+ column=(type=number update=yes updatewhereclause=yes name=rest dbname="t_consultations.rest" dbalias=".rest" )
+ column=(type=number update=yes updatewhereclause=yes name=extrait dbname="t_consultations.extrait" dbalias=".extrait" )
+ column=(type=number update=yes updatewhereclause=yes name=autchir dbname="t_consultations.autchir" dbalias=".autchir" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=autchirdet dbname="t_consultations.autchirdet" dbalias=".autchirdet" )
+ column=(type=number update=yes updatewhereclause=yes name=commpat dbname="t_consultations.commpat" dbalias=".commpat" )
+ column=(type=number update=yes updatewhereclause=yes name=commrab dbname="t_consultations.commrab" dbalias=".commrab" )
+ column=(type=number update=yes updatewhereclause=yes name=retradio dbname="t_consultations.retradio" dbalias=".retradio" )
+ column=(type=number update=yes updatewhereclause=yes name=expre1 dbname="t_consultations.expre1" dbalias=".expre1" values="Un traitement d'orthodontie est maintenant indiqué:	1/Un traitement d'orthodontie est maintenant indiqué:	0" )
+ column=(type=number update=yes updatewhereclause=yes name=expre1 dbname="t_consultations.expre2" dbalias=".expre2" values="Le (la) patient(e) a un rendez-vous pour la prise de tous les aides diagnostiques	1/Le (la) patient(e) a un rendez-vous pour la prise de tous les aides diagnostiques	0" )
+ column=(type=number update=yes updatewhereclause=yes name=expre3 dbname="t_consultations.expre3" dbalias=".expre3" values="Le (la) patient(e) n'a pas eu d'autres rendez-vous à mon bureau	1/Le (la) patient(e) n'a pas eu d'autres rendez-vous à mon bureau	0" )
+ column=(type=number update=yes updatewhereclause=yes name=expre2 dbname="t_consultations.expre4" dbalias=".expre4" values="Le (la) patient(e) a été placé(e) sur une liste de rappel et sera réexaminé(e)	1/Le (la) patient(e) a été placé(e) sur une liste de rappel et sera réexaminé(e)	0" )
+ column=(type=number update=yes updatewhereclause=yes name=expre5 dbname="t_consultations.expre5" dbalias=".expre5" values="Le (la) patient(e) refuse aura besoin d'orthodontie dans le futur.	1/Le (la) patient(e) refuse aura besoin d'orthodontie dans le futur.	0" )
+ column=(type=number update=yes updatewhereclause=yes name=expre6 dbname="t_consultations.expre6" dbalias=".expre6" values="Présentement, il est trop tôt pour se prononcer sur la nature exacte des traitements.	1/Présentement, il est trop tôt pour se prononcer sur la nature exacte des traitements.	0" )
+ column=(type=number update=yes updatewhereclause=yes name=expre7 dbname="t_consultations.expre7" dbalias=".expre7" values="Le (la) patient(e) refuse le traitement.	1/Le (la) patient(e) refuse le traitement.	0" )
+ column=(type=number update=yes updatewhereclause=yes name=expre8 dbname="t_consultations.expre8" dbalias=".expre8" values="Un traitement d'orthodontie n'est pas recommandé.	1/Un traitement d'orthodontie n'est pas recommandé.	0" )
+ column=(type=number update=yes updatewhereclause=yes name=mc1 dbname="t_consultations.mc1" dbalias=".mc1" values="Classe I	1/Classe I	0" )
+ column=(type=number update=yes updatewhereclause=yes name=mc2d1 dbname="t_consultations.mc2d1" dbalias=".mc2d1" values="Classe II Div 1	1/Classe II Div 1	0" )
+ column=(type=number update=yes updatewhereclause=yes name=mc2s2 dbname="t_consultations.mc2s2" dbalias=".mc2s2" values="Classe II Div 2	1/Classe II Div 2	0" )
+ column=(type=number update=yes updatewhereclause=yes name=mc3 dbname="t_consultations.mc3" dbalias=".mc3" values="Classe III	1/Classe III	0" )
+ column=(type=number update=yes updatewhereclause=yes name=surver dbname="t_consultations.surver" dbalias=".surver" values="Surplomb vertical: 	1/Surplomb vertical: 	0" )
+ column=(type=number update=yes updatewhereclause=yes name=surhor dbname="t_consultations.surhor" dbalias=".surhor" values="Surplomb horizontal: 	1/Surplomb horizontal: 	0" )
+ column=(type=number update=yes updatewhereclause=yes name=artouv dbname="t_consultations.artouv" dbalias=".artouv" values="Articulation ouverte:	1/Articulation ouverte:	0" )
+ column=(type=number update=yes updatewhereclause=yes name=chearcmaxant dbname="t_consultations.chearcmaxant" dbalias=".chearcmaxant" values="Chevauchement arcade maxillaire antérieur	1/Chevauchement arcade maxillaire antérieur	0" )
+ column=(type=number update=yes updatewhereclause=yes name=chearcmaxpos dbname="t_consultations.chearcmaxpos" dbalias=".chearcmaxpos" values="Chevauchement arcade maxillaire postérieur	1/Chevauchement arcade maxillaire postérieur	0" )
+ column=(type=number update=yes updatewhereclause=yes name=chearcmanant dbname="t_consultations.chearcmanant" dbalias=".chearcmanant" values="Chevauchement arcade mandibulaire antérieur	1/Chevauchement arcade mandibulaire antérieur	0" )
+ column=(type=number update=yes updatewhereclause=yes name=chearcmanpos dbname="t_consultations.chearcmanpos" dbalias=".chearcmanpos" values="Chevauchement arcade mandibulaire postérieur	1/Chevauchement arcade mandibulaire postérieur	0" )
+ column=(type=number update=yes updatewhereclause=yes name=exarcmaxant dbname="t_consultations.exarcmaxant" dbalias=".exarcmaxant" values="Excès d'espace arcade maxillaire antérieur	1/Excès d'espace arcade maxillaire antérieur	0" )
+ column=(type=number update=yes updatewhereclause=yes name=exarcmaxpos dbname="t_consultations.exarcmaxpos" dbalias=".exarcmaxpos" values="Excès d'espace arcade maxillaire postérieur	1/Excès d'espace arcade maxillaire postérieur	0" )
+ column=(type=number update=yes updatewhereclause=yes name=exarcmanant dbname="t_consultations.exarcmanant" dbalias=".exarcmanant" values="Excès d'espace arcade mandibulaire antérieur	1/Excès d'espace arcade mandibulaire antérieur	0" )
+ column=(type=number update=yes updatewhereclause=yes name=exarcmanpos dbname="t_consultations.exarcmanpos" dbalias=".exarcmanpos" values="Excès d'espace arcade mandibulaire postérieur	1/Excès d'espace arcade mandibulaire postérieur	0" )
+ column=(type=number update=yes updatewhereclause=yes name=occant dbname="t_consultations.occant" dbalias=".occant" values="Occlusion croisée antérieur	1/Occlusion croisée antérieur	0" )
+ column=(type=number update=yes updatewhereclause=yes name=occpos dbname="t_consultations.occpos" dbalias=".occpos" values="Occlusion croisée postérieur	1/Occlusion croisée postérieur	0" )
+ column=(type=char(25000) update=yes updatewhereclause=yes name=observation dbname="t_consultations.observation" dbalias=".observation" )
+ column=(type=real update=yes updatewhereclause=yes name=t_consultations_surverdim dbname="t_consultations.surverdim" dbalias=".surverdim" )
+ column=(type=real update=yes updatewhereclause=yes name=t_consultations_surhordim dbname="t_consultations.surhordim" dbalias=".surhordim" )
+ column=(type=real update=yes updatewhereclause=yes name=t_consultations_artouvdim dbname="t_consultations.artouvdim" dbalias=".artouvdim" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_nbmois dbname="t_consultations.nbmois" dbalias=".nbmois" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d11 dbname="t_consultations.d11" dbalias=".d11" initial="11" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d12 dbname="t_consultations.d12" dbalias=".d12" initial="12" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d13 dbname="t_consultations.d13" dbalias=".d13" initial="13" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d14 dbname="t_consultations.d14" dbalias=".d14" initial="14" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d15 dbname="t_consultations.d15" dbalias=".d15" initial="15" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d16 dbname="t_consultations.d16" dbalias=".d16" initial="16" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d17 dbname="t_consultations.d17" dbalias=".d17" initial="17" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d18 dbname="t_consultations.d18" dbalias=".d18" initial="18" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d21 dbname="t_consultations.d21" dbalias=".d21" initial="21" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d22 dbname="t_consultations.d22" dbalias=".d22" initial="22" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d23 dbname="t_consultations.d23" dbalias=".d23" initial="23" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d24 dbname="t_consultations.d24" dbalias=".d24" initial="24" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d25 dbname="t_consultations.d25" dbalias=".d25" initial="25" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d26 dbname="t_consultations.d26" dbalias=".d26" initial="26" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d27 dbname="t_consultations.d27" dbalias=".d27" initial="27" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d28 dbname="t_consultations.d28" dbalias=".d28" initial="28" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d31 dbname="t_consultations.d31" dbalias=".d31" initial="31" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d32 dbname="t_consultations.d32" dbalias=".d32" initial="32" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d33 dbname="t_consultations.d33" dbalias=".d33" initial="33" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d34 dbname="t_consultations.d34" dbalias=".d34" initial="34" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d35 dbname="t_consultations.d35" dbalias=".d35" initial="35" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d36 dbname="t_consultations.d36" dbalias=".d36" initial="36" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d37 dbname="t_consultations.d37" dbalias=".d37" initial="37" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d38 dbname="t_consultations.d38" dbalias=".d38" initial="38" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d41 dbname="t_consultations.d41" dbalias=".d41" initial="41" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d42 dbname="t_consultations.d42" dbalias=".d42" initial="42" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d43 dbname="t_consultations.d43" dbalias=".d43" initial="43" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d44 dbname="t_consultations.d44" dbalias=".d44" initial="44" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d45 dbname="t_consultations.d45" dbalias=".d45" initial="45" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d46 dbname="t_consultations.d46" dbalias=".d46" initial="46" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d47 dbname="t_consultations.d47" dbalias=".d47" initial="47" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d48 dbname="t_consultations.d48" dbalias=".d48" initial="48" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d51 dbname="t_consultations.d51" dbalias=".d51" initial="51" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d52 dbname="t_consultations.d52" dbalias=".d52" initial="52" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d53 dbname="t_consultations.d53" dbalias=".d53" initial="53" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d54 dbname="t_consultations.d54" dbalias=".d54" initial="54" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d55 dbname="t_consultations.d55" dbalias=".d55" initial="55" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d61 dbname="t_consultations.d61" dbalias=".d61" initial="61" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d62 dbname="t_consultations.d62" dbalias=".d62" initial="62" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d63 dbname="t_consultations.d63" dbalias=".d63" initial="63" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d64 dbname="t_consultations.d64" dbalias=".d64" initial="64" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d65 dbname="t_consultations.d65" dbalias=".d65" initial="65" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d71 dbname="t_consultations.d71" dbalias=".d71" initial="71" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d72 dbname="t_consultations.d72" dbalias=".d72" initial="72" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d73 dbname="t_consultations.d73" dbalias=".d73" initial="73" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d74 dbname="t_consultations.d74" dbalias=".d74" initial="74" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d75 dbname="t_consultations.d75" dbalias=".d75" initial="75" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d81 dbname="t_consultations.d81" dbalias=".d81" initial="81" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d82 dbname="t_consultations.d82" dbalias=".d82" initial="82" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d83 dbname="t_consultations.d83" dbalias=".d83" initial="83" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d84 dbname="t_consultations.d84" dbalias=".d84" initial="84" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d85 dbname="t_consultations.d85" dbalias=".d85" initial="85" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e11 dbname="t_consultations.e11" dbalias=".e11" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e12 dbname="t_consultations.e12" dbalias=".e12" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e13 dbname="t_consultations.e13" dbalias=".e13" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e14 dbname="t_consultations.e14" dbalias=".e14" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e15 dbname="t_consultations.e15" dbalias=".e15" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e16 dbname="t_consultations.e16" dbalias=".e16" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e17 dbname="t_consultations.e17" dbalias=".e17" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e18 dbname="t_consultations.e18" dbalias=".e18" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e21 dbname="t_consultations.e21" dbalias=".e21" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e22 dbname="t_consultations.e22" dbalias=".e22" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e23 dbname="t_consultations.e23" dbalias=".e23" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e24 dbname="t_consultations.e24" dbalias=".e24" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e25 dbname="t_consultations.e25" dbalias=".e25" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e26 dbname="t_consultations.e26" dbalias=".e26" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e27 dbname="t_consultations.e27" dbalias=".e27" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e28 dbname="t_consultations.e28" dbalias=".e28" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e31 dbname="t_consultations.e31" dbalias=".e31" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e32 dbname="t_consultations.e32" dbalias=".e32" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e33 dbname="t_consultations.e33" dbalias=".e33" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e34 dbname="t_consultations.e34" dbalias=".e34" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e35 dbname="t_consultations.e35" dbalias=".e35" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e36 dbname="t_consultations.e36" dbalias=".e36" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e37 dbname="t_consultations.e37" dbalias=".e37" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e38 dbname="t_consultations.e38" dbalias=".e38" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e41 dbname="t_consultations.e41" dbalias=".e41" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e42 dbname="t_consultations.e42" dbalias=".e42" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e43 dbname="t_consultations.e43" dbalias=".e43" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e44 dbname="t_consultations.e44" dbalias=".e44" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e45 dbname="t_consultations.e45" dbalias=".e45" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e46 dbname="t_consultations.e46" dbalias=".e46" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e47 dbname="t_consultations.e47" dbalias=".e47" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e48 dbname="t_consultations.e48" dbalias=".e48" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e51 dbname="t_consultations.e51" dbalias=".e51" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e52 dbname="t_consultations.e52" dbalias=".e52" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e53 dbname="t_consultations.e53" dbalias=".e53" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e54 dbname="t_consultations.e54" dbalias=".e54" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e55 dbname="t_consultations.e55" dbalias=".e55" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e61 dbname="t_consultations.e61" dbalias=".e61" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e62 dbname="t_consultations.e62" dbalias=".e62" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e63 dbname="t_consultations.e63" dbalias=".e63" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e64 dbname="t_consultations.e64" dbalias=".e64" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e65 dbname="t_consultations.e65" dbalias=".e65" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e71 dbname="t_consultations.e71" dbalias=".e71" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e72 dbname="t_consultations.e72" dbalias=".e72" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e73 dbname="t_consultations.e73" dbalias=".e73" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e74 dbname="t_consultations.e74" dbalias=".e74" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e75 dbname="t_consultations.e75" dbalias=".e75" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e81 dbname="t_consultations.e81" dbalias=".e81" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e82 dbname="t_consultations.e82" dbalias=".e82" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e83 dbname="t_consultations.e83" dbalias=".e83" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e84 dbname="t_consultations.e84" dbalias=".e84" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_e85 dbname="t_consultations.e85" dbalias=".e85" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=t_consultations_id_dentist dbname="t_consultations.id_dentist" dbalias=".id_dentist" )
+ column=(type=time update=yes updatewhereclause=yes name=t_consultations_heurecreer dbname="t_consultations.heurecreer" dbalias=".heurecreer" )
+ column=(type=date update=yes updatewhereclause=yes name=t_consultations_datecreer dbname="t_consultations.datecreer" dbalias=".datecreer" )
+ column=(type=number update=yes updatewhereclause=yes name=devligmed dbname="t_consultations.devligmed" dbalias=".devligmed" values="Déviation des lignes médianes	1/Déviation des lignes médianes	0" )
+ column=(type=char(35) update=yes updatewhereclause=yes name=occantnote dbname="t_consultations.occantnote" dbalias=".occantnote" )
+ column=(type=char(35) update=yes updatewhereclause=yes name=occposnote dbname="t_consultations.occposnote" dbalias=".occposnote" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=surveru dbname="t_consultations.surveru" dbalias=".surveru" values="mm	t/%	p/" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=surhoru dbname="t_consultations.surhoru" dbalias=".surhoru" values="mm	t/%	p/" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=artouvu dbname="t_consultations.artouvu" dbalias=".artouvu" values="mm	t/%	p/" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" dbalias=".patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" dbalias=".patient_prenom" )
+ column=(type=char(100) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" dbalias=".dr_nom_complet" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_adresse dbname="ortho_id.dr_adresse" dbalias=".dr_adresse" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_province dbname="ortho_id.dr_province" dbalias=".dr_province" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_ville dbname="ortho_id.dr_ville" dbalias=".dr_ville" )
+ column=(type=char(7) updatewhereclause=yes name=ortho_id_dr_code_postal dbname="ortho_id.dr_code_postal" dbalias=".dr_code_postal" )
+ column=(type=char(30) updatewhereclause=yes name=t_dentists_det_nom dbname="t_dentists.det_nom" dbalias=".det_nom" )
+ column=(type=char(30) updatewhereclause=yes name=t_dentists_det_prenom dbname="t_dentists.det_prenom" dbalias=".det_prenom" )
+ column=(type=char(5) updatewhereclause=yes name=t_dentists_det_suf dbname="t_dentists.det_suf" dbalias=".det_suf" )
+ column=(type=long updatewhereclause=yes name=locked dbname="locked" )
+ retrieve="  SELECT t_consultations.id,
+			t_consultations.patient_id,   
+         t_consultations.exam,   
+         t_consultations.prophy,   
+         t_consultations.radio,   
+         t_consultations.hygiene,   
+         t_consultations.rest,   
+         t_consultations.extrait,   
+         t_consultations.autchir,   
+         t_consultations.autchirdet,   
+         t_consultations.commpat,   
+         t_consultations.commrab,   
+         t_consultations.retradio,   
+         t_consultations.expre1,   
+         t_consultations.expre2,   
+         t_consultations.expre3,   
+         t_consultations.expre4,   
+         t_consultations.expre5,   
+         t_consultations.expre6,   
+         t_consultations.expre7,   
+         t_consultations.expre8,   
+         t_consultations.mc1,   
+         t_consultations.mc2d1,   
+         t_consultations.mc2s2,   
+         t_consultations.mc3,   
+         t_consultations.surver,   
+         t_consultations.surhor,   
+         t_consultations.artouv,   
+         t_consultations.chearcmaxant,   
+         t_consultations.chearcmaxpos,   
+         t_consultations.chearcmanant,   
+         t_consultations.chearcmanpos,   
+         t_consultations.exarcmaxant,   
+         t_consultations.exarcmaxpos,   
+         t_consultations.exarcmanant,   
+         t_consultations.exarcmanpos,   
+         t_consultations.occant,   
+         t_consultations.occpos,   
+         t_consultations.observation,
+         t_consultations.surverdim,
+         t_consultations.surhordim,
+         t_consultations.artouvdim,
+         t_consultations.nbmois,
+         t_consultations.d11,
+			t_consultations.d12,
+			t_consultations.d13,
+			t_consultations.d14,
+         t_consultations.d15,
+         t_consultations.d16,
+         t_consultations.d17,
+         t_consultations.d18,
+         t_consultations.d21,
+			t_consultations.d22,
+			t_consultations.d23,
+			t_consultations.d24,
+			t_consultations.d25,
+			t_consultations.d26,
+			t_consultations.d27,
+			t_consultations.d28,
+			t_consultations.d31,
+			t_consultations.d32,
+			t_consultations.d33,
+			t_consultations.d34,
+			t_consultations.d35,
+			t_consultations.d36,
+			t_consultations.d37,
+			t_consultations.d38,
+			t_consultations.d41,
+			t_consultations.d42,
+			t_consultations.d43,
+			t_consultations.d44,
+			t_consultations.d45,
+         t_consultations.d46,
+			t_consultations.d47,
+			t_consultations.d48,
+			t_consultations.d51,
+			t_consultations.d52,
+			t_consultations.d53,
+			t_consultations.d54,
+			t_consultations.d55,
+			t_consultations.d61,
+			t_consultations.d62,
+			t_consultations.d63,
+			t_consultations.d64,
+			t_consultations.d65,
+			t_consultations.d71,
+			t_consultations.d72,
+			t_consultations.d73,
+			t_consultations.d74,
+			t_consultations.d75,
+			t_consultations.d81,
+			t_consultations.d82,
+			t_consultations.d83,
+			t_consultations.d84,
+			t_consultations.d85,
+			t_consultations.e11,
+			t_consultations.e12,
+			t_consultations.e13,
+			t_consultations.e14,
+         t_consultations.e15,
+         t_consultations.e16,
+         t_consultations.e17,
+         t_consultations.e18,
+         t_consultations.e21,
+			t_consultations.e22,
+			t_consultations.e23,
+			t_consultations.e24,
+			t_consultations.e25,
+			t_consultations.e26,
+			t_consultations.e27,
+			t_consultations.e28,
+			t_consultations.e31,
+			t_consultations.e32,
+			t_consultations.e33,
+			t_consultations.e34,
+			t_consultations.e35,
+			t_consultations.e36,
+			t_consultations.e37,
+			t_consultations.e38,
+			t_consultations.e41,
+			t_consultations.e42,
+			t_consultations.e43,
+			t_consultations.e44,
+			t_consultations.e45,
+			t_consultations.e46,
+			t_consultations.e47,
+			t_consultations.e48,
+			t_consultations.e51,
+			t_consultations.e52,
+			t_consultations.e53,
+			t_consultations.e54,
+			t_consultations.e55,
+			t_consultations.e61,
+			t_consultations.e62,
+			t_consultations.e63,
+			t_consultations.e64,
+			t_consultations.e65,
+			t_consultations.e71,
+			t_consultations.e72,
+			t_consultations.e73,
+			t_consultations.e74,
+			t_consultations.e75,
+			t_consultations.e81,
+			t_consultations.e82,
+			t_consultations.e83,
+			t_consultations.e84,
+			t_consultations.e85,
+			t_consultations.id_dentist,
+			t_consultations.heurecreer,
+			t_consultations.datecreer,
+			t_consultations.devligmed,
+			t_consultations.occantnote,
+			t_consultations.occposnote,
+			t_consultations.surveru,
+			t_consultations.surhoru,
+			t_consultations.artouvu,
+         patient.patient_nom,
+         patient.patient_prenom,
+         ortho_id.dr_nom_complet,
+         ortho_id.dr_adresse,
+         ortho_id.dr_province,
+         ortho_id.dr_ville,
+         ortho_id.dr_code_postal,
+         t_dentists.det_nom,
+         t_dentists.det_prenom,
+         t_dentists.det_suf,
+			0 as locked
+    FROM patient INNER JOIN t_consultations ON  t_consultations.patient_id = patient.patient_id
+                 INNER JOIN ortho_id ON patient.no_ortho = ortho_id.ortho_id
+                 LEFT OUTER JOIN t_dentists ON patient.id_dentist = t_dentists.id_dentist
+	WHERE patient.patient_id = :ra_patid AND
+			t_consultations.flag = 'p'
+" update="t_consultations" updatewhere=0 updatekeyinplace=no arguments=(("ra_patid", number)) )
+text(band=detail alignment="0" text="Dentiste : " border="0" color="8388608" x="0" y="4" height="56" width="215" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Heure : " border="0" color="8388608" x="1317" y="4" height="56" width="165" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Date : " border="0" color="8388608" x="832" y="4" height="56" width="133" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="1" text="Remarque:" border="0" color="33554432" x="55" y="968" height="64" width="334" html.valueishtml="0"  name=t_remarque visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Malocclusion " border="0" color="33554432" x="55" y="324" height="64" width="416" html.valueishtml="0"  name=t_malo visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="dans " border="0" color="33554432" x="137" y="228" height="64" width="165" html.valueishtml="0"  name=t_ds visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Note" border="0" color="33554432" x="2098" y="744" height="64" width="123" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Note" border="0" color="33554432" x="2098" y="880" height="64" width="123" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="mois" border="0" color="33554432" x="526" y="228" height="64" width="192" html.valueishtml="0"  name=t_mois visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=148 alignment="0" tabsequence=32766 border="0" color="8388608" x="219" y="4" height="56" width="594" format="[general]" html.valueishtml="0" protect="0~t locked "  name=t_consultations_id_dentist visible="1" dddw.name=dddw_dentists dddw.displaycolumn=compute_1 dddw.datacolumn=id_dentist dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=150 alignment="0" tabsequence=10 border="0" color="8388608" x="969" y="4" height="56" width="329" format="[general]" html.valueishtml="0" protect="0~t locked "  name=t_consultations_datecreer visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=149 alignment="0" tabsequence=20 border="0" color="8388608" x="1486" y="4" height="56" width="329" format="[time]" html.valueishtml="0" protect="0~t locked "  name=t_consultations_heurecreer visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=43 alignment="2" tabsequence=50 border="5" color="33554432" x="325" y="232" height="52" width="178" format="[general]" html.valueishtml="0" protect="0~t locked "  name=t_consultations_nbmois visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.nilisnull=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=39 alignment="0" tabsequence=310 border="5" color="33554432" x="55" y="1088" height="900" width="3438" format="[general]" html.valueishtml="0" protect="0~t locked "  name=observation visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.nilisnull=yes edit.vscrollbar=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=152 alignment="0" tabsequence=280 border="5" color="33554432" x="2258" y="744" height="64" width="1239" format="[general]" html.valueishtml="0" protect="0~t locked "  name=occantnote visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=153 alignment="0" tabsequence=300 border="5" color="33554432" x="2258" y="880" height="64" width="1239" format="[general]" html.valueishtml="0" protect="0~t locked "  name=occposnote visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=41 alignment="0" tabsequence=110 border="5" color="33554432" x="1591" y="404" height="64" width="183" format="[general]" html.valueishtml="0" protect="0~t locked "  name=t_consultations_surhordim visible="1" editmask.mask="###.0" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=155 alignment="0" tabsequence=120 border="5" color="33554432" x="1792" y="404" height="64" width="183" format="[general]" html.valueishtml="0" protect="0~t locked "  name=surhoru visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.nilisnull=yes ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=40 alignment="0" tabsequence=140 border="5" color="33554432" x="1595" y="484" height="64" width="183" format="[general]" html.valueishtml="0" protect="0~t locked "  name=t_consultations_surverdim visible="1" editmask.mask="###.0" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=154 alignment="0" tabsequence=150 border="5" color="33554432" x="1792" y="484" height="64" width="183" format="[general]" html.valueishtml="0" protect="0~t locked "  name=surveru visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.nilisnull=yes ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=42 alignment="0" tabsequence=170 border="5" color="33554432" x="1595" y="564" height="64" width="183" format="[general]" html.valueishtml="0" protect="0~t locked "  name=t_consultations_artouvdim visible="1" editmask.mask="###.0" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=156 alignment="0" tabsequence=180 border="5" color="33554432" x="1792" y="564" height="64" width="183" format="[general]" html.valueishtml="0" protect="0~t locked "  name=artouvu visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.nilisnull=yes ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=25 alignment="1" tabsequence=90 border="0" color="33554432" x="178" y="608" height="64" width="393" format="[general]" html.valueishtml="0" protect="0~t locked "  name=mc3 visible="1" checkbox.text="Classe III" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=33 alignment="1" tabsequence=190 border="0" color="33554432" x="178" y="676" height="64" width="1399" format="[general]" html.valueishtml="0" protect="0~t locked "  name=exarcmaxant visible="1" checkbox.text="Excès d'espace arcade maxillaire antérieur" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=23 alignment="1" tabsequence=70 border="0" color="33554432" x="178" y="472" height="64" width="489" format="[general]" html.valueishtml="0" protect="0~t locked "  name=mc2d1 visible="1" checkbox.text="Classe II Div 1" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=24 alignment="1" tabsequence=80 border="0" color="33554432" x="178" y="540" height="64" width="489" format="[general]" html.valueishtml="0" protect="0~t locked "  name=mc2s2 visible="1" checkbox.text="Classe II Div 2" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=27 alignment="1" tabsequence=100 border="0" color="33554432" x="869" y="404" height="64" width="713" format="[general]" html.valueishtml="0" protect="0~t locked "  name=surhor visible="1" checkbox.text="Surplomb horizontal: " checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=26 alignment="0" tabsequence=130 border="0" color="33554432" x="869" y="484" height="64" width="713" format="[general]" html.valueishtml="0" protect="0~t locked "  name=surver visible="1" checkbox.text="Surplomb vertical: " checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=28 alignment="1" tabsequence=160 border="0" color="33554432" x="869" y="564" height="64" width="713" format="[general]" html.valueishtml="0" protect="0~t locked "  name=artouv visible="1" checkbox.text="Articulation ouverte:" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=29 alignment="1" tabsequence=230 border="0" color="33554432" x="2098" y="404" height="64" width="1399" format="[general]" html.valueishtml="0" protect="0~t locked "  name=chearcmaxant visible="1" checkbox.text="Chevauchement arcade maxillaire antérieur" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=30 alignment="1" tabsequence=240 border="0" color="33554432" x="2098" y="472" height="64" width="1399" format="[general]" html.valueishtml="0" protect="0~t locked "  name=chearcmaxpos visible="1" checkbox.text="Chevauchement arcade maxillaire postérieur" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=36 alignment="1" tabsequence=220 border="0" color="33554432" x="178" y="880" height="64" width="1399" format="[general]" html.valueishtml="0" protect="0~t locked "  name=exarcmanpos visible="1" checkbox.text="Excès d'espace arcade mandibulaire postérieur" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=34 alignment="1" tabsequence=200 border="0" color="33554432" x="178" y="744" height="64" width="1399" format="[general]" html.valueishtml="0" protect="0~t locked "  name=exarcmaxpos visible="1" checkbox.text="Excès d'espace arcade maxillaire postérieur" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=35 alignment="1" tabsequence=210 border="0" color="33554432" x="178" y="812" height="64" width="1399" format="[general]" html.valueishtml="0" protect="0~t locked "  name=exarcmanant visible="1" checkbox.text="Excès d'espace arcade mandibulaire antérieur" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=22 alignment="1" tabsequence=60 border="0" color="33554432" x="178" y="404" height="64" width="329" format="[general]" html.valueishtml="0" protect="0~t locked "  name=mc1 visible="1" checkbox.text="Classe I" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=15 alignment="1" tabsequence=30 border="0" color="33554432" x="55" y="92" height="64" width="2258" format="[general]" html.valueishtml="0" protect="0~t locked "  name=expre1 visible="1" checkbox.text="Le (la) patient(e) a un rendez-vous pour la prise de tous les aides diagnostiques" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=17 alignment="1" tabsequence=40 border="0" color="33554432" x="55" y="160" height="64" width="2126" format="[general]" html.valueishtml="0" protect="0~t locked "  name=expre2 visible="1" checkbox.text="Le (la) patient(e) a été placé(e) sur une liste de rappel et sera réexaminé(e)" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=151 alignment="1" tabsequence=320 border="0" color="33554432" x="2098" y="948" height="64" width="928" format="[general]" html.valueishtml="0" protect="0~t locked "  name=devligmed visible="1" checkbox.text="Déviation des lignes médianes" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=38 alignment="1" tabsequence=290 border="0" color="33554432" x="2098" y="812" height="64" width="869" format="[general]" html.valueishtml="0" protect="0~t locked "  name=occpos visible="1" checkbox.text="Occlusion croisée postérieur" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=32 alignment="1" tabsequence=260 border="0" color="33554432" x="2098" y="608" height="64" width="1399" format="[general]" html.valueishtml="0" protect="0~t locked "  name=chearcmanpos visible="1" checkbox.text="Chevauchement arcade mandibulaire postérieur" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=37 alignment="1" tabsequence=270 border="0" color="33554432" x="2098" y="676" height="64" width="832" format="[general]" html.valueishtml="0" protect="0~t locked "  name=occant visible="1" checkbox.text="Occlusion croisée antérieur" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=31 alignment="1" tabsequence=250 border="0" color="33554432" x="2098" y="540" height="64" width="1399" format="[general]" html.valueishtml="0" protect="0~t locked "  name=chearcmanant visible="1" checkbox.text="Chevauchement arcade mandibulaire antérieur" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,64 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_buffers.sru
+$PBExportComments$(PRO) DataWindow Property - The buffers tabpage
+forward
+global type pro_u_tabpg_dwproperty_buffers from pfc_u_tabpg_dwproperty_buffers
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_buffers from pfc_u_tabpg_dwproperty_buffers
+end type
+global pro_u_tabpg_dwproperty_buffers pro_u_tabpg_dwproperty_buffers
+
+on pro_u_tabpg_dwproperty_buffers.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_buffers.destroy
+call super::destroy
+end on
+
+type rb_primary from pfc_u_tabpg_dwproperty_buffers`rb_primary within pro_u_tabpg_dwproperty_buffers
+end type
+
+type rb_filtered from pfc_u_tabpg_dwproperty_buffers`rb_filtered within pro_u_tabpg_dwproperty_buffers
+end type
+
+type rb_deleted from pfc_u_tabpg_dwproperty_buffers`rb_deleted within pro_u_tabpg_dwproperty_buffers
+end type
+
+type cb_sort from pfc_u_tabpg_dwproperty_buffers`cb_sort within pro_u_tabpg_dwproperty_buffers
+end type
+
+type cb_filter from pfc_u_tabpg_dwproperty_buffers`cb_filter within pro_u_tabpg_dwproperty_buffers
+end type
+
+type cb_undelete from pfc_u_tabpg_dwproperty_buffers`cb_undelete within pro_u_tabpg_dwproperty_buffers
+end type
+
+type st_primaryrowcount_t from pfc_u_tabpg_dwproperty_buffers`st_primaryrowcount_t within pro_u_tabpg_dwproperty_buffers
+end type
+
+type st_modifiedcount_t from pfc_u_tabpg_dwproperty_buffers`st_modifiedcount_t within pro_u_tabpg_dwproperty_buffers
+end type
+
+type st_primaryrowcount from pfc_u_tabpg_dwproperty_buffers`st_primaryrowcount within pro_u_tabpg_dwproperty_buffers
+end type
+
+type st_modifiedcount from pfc_u_tabpg_dwproperty_buffers`st_modifiedcount within pro_u_tabpg_dwproperty_buffers
+end type
+
+type st_filteredcount from pfc_u_tabpg_dwproperty_buffers`st_filteredcount within pro_u_tabpg_dwproperty_buffers
+end type
+
+type st_deletedcount from pfc_u_tabpg_dwproperty_buffers`st_deletedcount within pro_u_tabpg_dwproperty_buffers
+end type
+
+type gb_buffer from pfc_u_tabpg_dwproperty_buffers`gb_buffer within pro_u_tabpg_dwproperty_buffers
+end type
+
+type dw_requestorview from pfc_u_tabpg_dwproperty_buffers`dw_requestorview within pro_u_tabpg_dwproperty_buffers
+end type
+
+type dw_requestorduplicate from pfc_u_tabpg_dwproperty_buffers`dw_requestorduplicate within pro_u_tabpg_dwproperty_buffers
+end type
+

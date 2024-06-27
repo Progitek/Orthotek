@@ -1,0 +1,249 @@
+﻿$PBExportHeader$m_hortpl.srm
+forward
+global type m_hortpl from menu
+end type
+type m_transjoursuiv from menu within m_hortpl
+end type
+type m_transsemsuiv from menu within m_hortpl
+end type
+type m_transjoursuivs from menu within m_hortpl
+end type
+type m_transsemsuivs from menu within m_hortpl
+end type
+type m_transmois from menu within m_hortpl
+end type
+global type m_hortpl from menu
+m_transjoursuiv m_transjoursuiv
+m_transsemsuiv m_transsemsuiv
+m_transjoursuivs m_transjoursuivs
+m_transsemsuivs m_transsemsuivs
+m_transmois m_transmois
+end type
+end forward
+
+global type m_hortpl from menu
+m_transjoursuiv m_transjoursuiv
+m_transsemsuiv m_transsemsuiv
+m_transjoursuivs m_transjoursuivs
+m_transsemsuivs m_transsemsuivs
+m_transmois m_transmois
+end type
+global m_hortpl m_hortpl
+
+on m_hortpl.create
+m_hortpl=this
+call super::create
+this.text = "m_hortpl"
+this.m_transjoursuiv=create m_transjoursuiv
+this.m_transsemsuiv=create m_transsemsuiv
+this.m_transjoursuivs=create m_transjoursuivs
+this.m_transsemsuivs=create m_transsemsuivs
+this.m_transmois=create m_transmois
+this.Item[UpperBound(this.Item)+1]=this.m_transjoursuiv
+this.Item[UpperBound(this.Item)+1]=this.m_transsemsuiv
+this.Item[UpperBound(this.Item)+1]=this.m_transjoursuivs
+this.Item[UpperBound(this.Item)+1]=this.m_transsemsuivs
+this.Item[UpperBound(this.Item)+1]=this.m_transmois
+end on
+
+on m_hortpl.destroy
+call super::destroy
+destroy(this.m_transjoursuiv)
+destroy(this.m_transsemsuiv)
+destroy(this.m_transjoursuivs)
+destroy(this.m_transsemsuivs)
+destroy(this.m_transmois)
+end on
+
+type m_transjoursuiv from menu within m_hortpl
+end type
+
+on m_transjoursuiv.create
+call super::create
+this.text = "transcrire la journée sur la suivante"
+end on
+
+on m_transjoursuiv.destroy
+call super::destroy
+end on
+
+event clicked;integer i,j,li_tplexist
+string ls_celldata,ls_tpl,ls_cell
+long ll_idtemplate
+date ldt_next
+
+//determine si il existe un tpl
+select count(*) into :li_tplexist from t_templatedate where tpldate = :istr_caltpl.caldate and ortho_id = :v_no_ortho;
+if li_tplexist > 0 then
+	//date applicable
+	ldt_next = relativedate(istr_caltpl.caldate,7)
+	//appliquer
+	datastore ds_horairetpldatesave
+	ds_horairetpldatesave = create datastore
+	ds_horairetpldatesave.dataobject = "d_horairetpldatesave"
+	ds_horairetpldatesave.SetTransObject(SQLCA)
+	ds_horairetpldatesave.retrieve(istr_caltpl.caldate,istr_caltpl.caldate,v_no_ortho)
+	if ds_horairetpldatesave.rowcount() > 0 then
+		for i = 1 to ds_horairetpldatesave.rowcount()
+			ll_idtemplate = ds_horairetpldatesave.getitemnumber(i,'id_template')
+			//inserer
+			insert into t_templatedate(tpldate,id_template,ortho_id) values(:ldt_next,:ll_idtemplate,:v_no_ortho);
+//			w_horaire_template.dw_horairetpldatetpl.retrieve(w_horaire_template.il_idtemplate)
+		next
+		w_horaire_template.f_initrefresh()
+	end if
+	destroy ds_horairetpldatesave
+end if
+end event
+
+type m_transsemsuiv from menu within m_hortpl
+end type
+
+on m_transsemsuiv.create
+call super::create
+this.text = "transcrire la semaine sur la suivante"
+end on
+
+on m_transsemsuiv.destroy
+call super::destroy
+end on
+
+event clicked;integer i,j,li_tplexist
+string ls_celldata,ls_tpl,ls_cell
+long ll_idtemplate
+date ldt_next
+
+//date applicable
+CHOOSE CASE DayNumber(istr_caltpl.caldate)
+CASE 1
+	istr_caltpl.caldate = relativedate(istr_caltpl.caldate,+1)
+	w_horaire_template.uo_caltpl.uf_InitCal(istr_caltpl.caldate)
+CASE 2
+	w_horaire_template.uo_caltpl.uf_InitCal(istr_caltpl.caldate)
+CASE 3
+	istr_caltpl.caldate = relativedate(istr_caltpl.caldate,-1)
+	w_horaire_template.uo_caltpl.uf_InitCal(istr_caltpl.caldate)
+CASE 4
+	istr_caltpl.caldate = relativedate(istr_caltpl.caldate,-2)
+	w_horaire_template.uo_caltpl.uf_InitCal(istr_caltpl.caldate)
+CASE 5
+	istr_caltpl.caldate = relativedate(istr_caltpl.caldate,-3)
+	w_horaire_template.uo_caltpl.uf_InitCal(istr_caltpl.caldate)
+CASE 6
+	istr_caltpl.caldate = relativedate(istr_caltpl.caldate,-4)
+	w_horaire_template.uo_caltpl.uf_InitCal(istr_caltpl.caldate)
+CASE 7
+	istr_caltpl.caldate = relativedate(istr_caltpl.caldate,-5)
+	w_horaire_template.uo_caltpl.uf_InitCal(istr_caltpl.caldate)
+CASE ELSE
+	Messagebox("ERREUR", "Incapable de choisir un lundi!",StopSign!)
+END CHOOSE
+
+ldt_next = relativedate(istr_caltpl.caldate,5)
+//appliquer
+datastore ds_horairetpldatesave
+ds_horairetpldatesave = create datastore
+ds_horairetpldatesave.dataobject = "d_horairetpldatesave"
+ds_horairetpldatesave.SetTransObject(SQLCA)
+ds_horairetpldatesave.retrieve(istr_caltpl.caldate,ldt_next,v_no_ortho)
+if ds_horairetpldatesave.rowcount() > 0 then
+	for i = 1 to ds_horairetpldatesave.rowcount()
+		ll_idtemplate = ds_horairetpldatesave.getitemnumber(i,'id_template')
+		ldt_next = relativedate(ds_horairetpldatesave.getitemdate(i,'tpldate'),7)
+//		messagebox('OK',string(ldt_next))
+		//inserer
+		insert into t_templatedate(tpldate,id_template,ortho_id) values(:ldt_next,:ll_idtemplate,:v_no_ortho);
+//		w_horaire_template.dw_horairetpldatetpl.retrieve(w_horaire_template.il_idtemplate)
+	next
+	w_horaire_template.f_initrefresh()
+end if
+destroy ds_horairetpldatesave
+end event
+
+type m_transjoursuivs from menu within m_hortpl
+end type
+
+on m_transjoursuivs.create
+call super::create
+this.visible = false
+this.text = "transcrire la journée sur les suivantes"
+end on
+
+on m_transjoursuivs.destroy
+call super::destroy
+end on
+
+type m_transsemsuivs from menu within m_hortpl
+end type
+
+on m_transsemsuivs.create
+call super::create
+this.visible = false
+this.text = "transcrire la semaine sur les suivantes"
+end on
+
+on m_transsemsuivs.destroy
+call super::destroy
+end on
+
+type m_transmois from menu within m_hortpl
+end type
+
+on m_transmois.create
+call super::create
+this.text = "transcrire la mois sur le suivante"
+end on
+
+on m_transmois.destroy
+call super::destroy
+end on
+
+event clicked;integer i,j,li_tplexist,li_month,li_year,li_days,li_tab[12]={31,28,31,30,31,30,31,31,30,31,30,31}
+string ls_celldata,ls_tpl,ls_cell
+long ll_idtemplate
+date ldt_start,ldt_next,ldt_nstart,ldt_nend
+
+//date applicable
+li_month = month(istr_caltpl.caldate)
+li_year = year(istr_caltpl.caldate)
+//premiere journee ouvrable du mois suivant
+ldt_nstart = date('01-'+string(li_month + 1)+'-'+string(li_year))
+ldt_nstart = relativedate(ldt_nstart,li_days)
+do until dayname(ldt_nstart) <> 'Sunday'  and dayname(ldt_nstart) <> 'Saturday'
+	ldt_nstart = relativedate(ldt_nstart,1)
+loop
+if (li_month + 1) = 2 and mod(li_year,4) = 0 then li_tab[2] = 29
+li_days = li_tab[(li_month + 1)]
+ldt_nend = date(string(li_days)+'-'+string(li_month + 1)+'-'+string(li_year))
+//premiere journee ouvrable du mois courant du meme type
+ldt_start = date('01-'+string(li_month)+'-'+string(li_year))
+do until dayname(ldt_start) = dayname(ldt_nstart)
+	ldt_start = relativedate(ldt_start,1)
+loop
+if li_month = 2 and mod(li_year,4) = 0 then li_tab[2] = 29
+li_days = li_tab[li_month]
+ldt_next = date(string(li_days)+'-'+string(li_month)+'-'+string(li_year))
+//ajuster la longueur applicable
+if daysafter(ldt_nstart,ldt_nend) < daysafter(ldt_start,ldt_next) then
+	ldt_next = relativedate(ldt_start,daysafter(ldt_nstart,ldt_nend))
+end if
+//ajustement de l'interval
+li_days = daysafter(ldt_start,ldt_nstart)
+//appliquer
+datastore ds_horairetpldatesave
+ds_horairetpldatesave = create datastore
+ds_horairetpldatesave.dataobject = "d_horairetpldatesave"
+ds_horairetpldatesave.SetTransObject(SQLCA)
+ds_horairetpldatesave.retrieve(ldt_start,ldt_next,v_no_ortho)
+if ds_horairetpldatesave.rowcount() > 0 then
+	for i = 1 to ds_horairetpldatesave.rowcount()
+		ll_idtemplate = ds_horairetpldatesave.getitemnumber(i,'id_template')
+		ldt_next = relativedate(ds_horairetpldatesave.getitemdate(i,'tpldate'),li_days)
+		//inserer
+		insert into t_templatedate(tpldate,id_template,ortho_id) values(:ldt_next,:ll_idtemplate,:v_no_ortho);
+//		w_horaire_template.dw_horairetpldatetpl.retrieve(w_horaire_template.il_idtemplate)
+	next
+end if
+destroy ds_horairetpldatesave
+end event
+

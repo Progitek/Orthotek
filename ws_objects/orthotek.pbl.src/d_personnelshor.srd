@@ -1,0 +1,122 @@
+﻿$PBExportHeader$d_personnelshor.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=672 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=id_personnel dbname="t_personnelshor.id_personnel" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_lundistartam dbname="t_personnelshor.lundistartam" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_lundiendam dbname="t_personnelshor.lundiendam" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_lundistartpm dbname="t_personnelshor.lundistartpm" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_lundiendpm dbname="t_personnelshor.lundiendpm" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_mardistartam dbname="t_personnelshor.mardistartam" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_mardiendam dbname="t_personnelshor.mardiendam" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_mardistartpm dbname="t_personnelshor.mardistartpm" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_mardiendpm dbname="t_personnelshor.mardiendpm" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_mercredistartam dbname="t_personnelshor.mercredistartam" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_mercrediendam dbname="t_personnelshor.mercrediendam" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_mercredistartpm dbname="t_personnelshor.mercredistartpm" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_mercrediendpm dbname="t_personnelshor.mercrediendpm" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_jeudistartam dbname="t_personnelshor.jeudistartam" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_jeudiendam dbname="t_personnelshor.jeudiendam" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_jeudistartpm dbname="t_personnelshor.jeudistartpm" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_jeudiendpm dbname="t_personnelshor.jeudiendpm" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_vendredistartam dbname="t_personnelshor.vendredistartam" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_vendrediendam dbname="t_personnelshor.vendrediendam" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_vendredistartpm dbname="t_personnelshor.vendredistartpm" )
+ column=(type=time update=yes updatewhereclause=yes name=t_personnelshor_vendrediendpm dbname="t_personnelshor.vendrediendpm" )
+ column=(type=long update=yes updatewhereclause=yes name=lundicam dbname="t_personnelshor.lundicam" values="1	1/2	2/3	3/4	4/5	5/" )
+ column=(type=long update=yes updatewhereclause=yes name=lundicpm dbname="t_personnelshor.lundicpm" values="1	1/2	2/3	3/4	4/5	5/" )
+ column=(type=long update=yes updatewhereclause=yes name=mardicam dbname="t_personnelshor.mardicam" values="1	1/2	2/3	3/4	4/5	5/" )
+ column=(type=long update=yes updatewhereclause=yes name=mardicpm dbname="t_personnelshor.mardicpm" values="1	1/2	2/3	3/4	4/5	5/" )
+ column=(type=long update=yes updatewhereclause=yes name=mercredicam dbname="t_personnelshor.mercredicam" values="1	1/2	2/3	3/4	4/5	5/" )
+ column=(type=long update=yes updatewhereclause=yes name=mercredicpm dbname="t_personnelshor.mercredicpm" values="1	1/2	2/3	3/4	4/5	5/" )
+ column=(type=long update=yes updatewhereclause=yes name=jeudicam dbname="t_personnelshor.jeudicam" values="1	1/2	2/3	3/4	4/5	5/" )
+ column=(type=long update=yes updatewhereclause=yes name=jeudicpm dbname="t_personnelshor.jeudicpm" values="1	1/2	2/3	3/4	4/5	5/" )
+ column=(type=long update=yes updatewhereclause=yes name=vendredicam dbname="t_personnelshor.vendredicam" values="1	1/2	2/3	3/4	4/5	5/" )
+ column=(type=long update=yes updatewhereclause=yes name=vendredicpm dbname="t_personnelshor.vendredicpm" values="1	1/2	2/3	3/4	4/5	5/" )
+ retrieve="SELECT   t_personnelshor.id_personnel ,
+			t_personnelshor.lundistartam ,
+		   t_personnelshor.lundiendam ,
+		   t_personnelshor.lundistartpm ,
+			t_personnelshor.lundiendpm ,
+			t_personnelshor.mardistartam ,
+			t_personnelshor.mardiendam ,
+    		t_personnelshor.mardistartpm ,
+			t_personnelshor.mardiendpm ,
+			t_personnelshor.mercredistartam , 
+			t_personnelshor.mercrediendam , 
+			t_personnelshor.mercredistartpm , 
+			t_personnelshor.mercrediendpm , 
+			t_personnelshor.jeudistartam , 
+			t_personnelshor.jeudiendam , 
+			t_personnelshor.jeudistartpm , 
+			t_personnelshor.jeudiendpm , 
+			t_personnelshor.vendredistartam , 
+			t_personnelshor.vendrediendam , 
+			t_personnelshor.vendredistartpm , 
+			t_personnelshor.vendrediendpm  ,
+			t_personnelshor.lundicam  ,
+			t_personnelshor.lundicpm  ,
+			t_personnelshor.mardicam  ,
+			t_personnelshor.mardicpm  ,
+			t_personnelshor.mercredicam  ,
+			t_personnelshor.mercredicpm  ,
+			t_personnelshor.jeudicam  ,
+			t_personnelshor.jeudicpm  ,
+			t_personnelshor.vendredicam  ,
+			t_personnelshor.vendredicpm
+  FROM   t_personnelshor
+  WHERE  t_personnelshor.id_personnel = :ra_idpersonnel   " update="t_personnelshor" updatewhere=0 updatekeyinplace=no arguments=(("ra_idpersonnel", number)) )
+groupbox(band=detail text="Horaire"border="2" color="0" x="9" y="4" height="616" width="2117"  name=gb_hor  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Début AM" border="0" color="0" x="297" y="136" height="64" width="265"  name=t_13  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Lundi" border="0" color="0" x="128" y="220" height="64" width="142"  name=t_6  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Mardi" border="0" color="0" x="123" y="288" height="64" width="146"  name=t_7  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Mercredi" border="0" color="0" x="41" y="356" height="64" width="229"  name=t_8  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Jeudi" border="0" color="0" x="133" y="424" height="64" width="137"  name=t_9  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Vendredi" border="0" color="0" x="37" y="492" height="64" width="233"  name=t_10  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="2" tabsequence=10 border="2" color="0" x="297" y="220" height="64" width="265" format="[time]"  name=t_personnelshor_lundistartam editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=7 alignment="2" tabsequence=50 border="2" color="0" x="567" y="288" height="64" width="265" format="[time]"  name=t_personnelshor_mardiendam editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=6 alignment="2" tabsequence=40 border="2" color="0" x="297" y="288" height="64" width="265" format="[time]"  name=t_personnelshor_mardistartam editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=10 alignment="2" tabsequence=70 border="2" color="0" x="297" y="356" height="64" width="265" format="[time]"  name=t_personnelshor_mercredistartam editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=11 alignment="2" tabsequence=80 border="2" color="0" x="567" y="356" height="64" width="265" format="[time]"  name=t_personnelshor_mercrediendam editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=15 alignment="2" tabsequence=110 border="2" color="0" x="567" y="424" height="64" width="265" format="[time]"  name=t_personnelshor_jeudiendam editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=14 alignment="2" tabsequence=100 border="2" color="0" x="297" y="424" height="64" width="265" format="[time]"  name=t_personnelshor_jeudistartam editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=18 alignment="2" tabsequence=130 border="2" color="0" x="297" y="492" height="64" width="265" format="[time]"  name=t_personnelshor_vendredistartam editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=19 alignment="2" tabsequence=140 border="2" color="0" x="567" y="492" height="64" width="265" format="[time]"  name=t_personnelshor_vendrediendam editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+line(band=detail x1="1065" y1="204" x2="1065" y2="560"  name=l_1 pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="2" tabsequence=170 border="2" color="0" x="1303" y="220" height="64" width="265" format="[time]"  name=t_personnelshor_lundistartpm editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="2" tabsequence=200 border="2" color="0" x="1303" y="288" height="64" width="265" format="[time]"  name=t_personnelshor_mardistartpm editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=12 alignment="2" tabsequence=230 border="2" color="0" x="1303" y="356" height="64" width="265" format="[time]"  name=t_personnelshor_mercredistartpm editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=16 alignment="2" tabsequence=260 border="2" color="0" x="1303" y="424" height="64" width="265" format="[time]"  name=t_personnelshor_jeudistartpm editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=20 alignment="2" tabsequence=290 border="2" color="0" x="1303" y="492" height="64" width="265" format="[time]"  name=t_personnelshor_vendredistartpm editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=21 alignment="2" tabsequence=300 border="2" color="0" x="1573" y="492" height="64" width="265" format="[time]"  name=t_personnelshor_vendrediendpm editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=17 alignment="2" tabsequence=270 border="2" color="0" x="1573" y="424" height="64" width="265" format="[time]"  name=t_personnelshor_jeudiendpm editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=13 alignment="2" tabsequence=240 border="2" color="0" x="1573" y="356" height="64" width="265" format="[time]"  name=t_personnelshor_mercrediendpm editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=9 alignment="2" tabsequence=220 border="2" color="0" x="1573" y="288" height="64" width="265" format="[time]"  name=t_personnelshor_mardiendpm editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="1" text="Début PM" border="0" color="0" x="1303" y="136" height="64" width="265"  name=t_15  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Lundi" border="0" color="0" x="1865" y="220" height="64" width="142"  name=t_17  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Mardi" border="0" color="0" x="1865" y="288" height="64" width="146"  name=t_18  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Mercredi" border="0" color="0" x="1865" y="356" height="64" width="229"  name=t_19  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Jeudi" border="0" color="0" x="1865" y="424" height="64" width="137"  name=t_20  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Vendredi" border="0" color="0" x="1865" y="492" height="64" width="233"  name=t_21  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Chaise" border="0" color="0" x="841" y="136" height="64" width="197"  name=t_1  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Chaise" border="0" color="0" x="1097" y="136" height="64" width="197"  name=t_2  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=22 alignment="2" tabsequence=30 border="0" color="0" x="841" y="220" height="64" width="169" format="[general]"  name=lundicam ddlb.limit=5 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=24 alignment="2" tabsequence=60 border="0" color="0" x="841" y="288" height="64" width="169" format="[general]"  name=mardicam ddlb.limit=5 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=26 alignment="2" tabsequence=90 border="0" color="0" x="841" y="356" height="64" width="169" format="[general]"  name=mercredicam ddlb.limit=5 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=28 alignment="2" tabsequence=120 border="0" color="0" x="841" y="424" height="64" width="169" format="[general]"  name=jeudicam ddlb.limit=5 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=30 alignment="2" tabsequence=150 border="0" color="0" x="841" y="492" height="64" width="169" format="[general]"  name=vendredicam ddlb.limit=5 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=23 alignment="2" tabsequence=160 border="0" color="0" x="1125" y="220" height="64" width="169" format="[general]"  name=lundicpm ddlb.limit=5 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=25 alignment="2" tabsequence=190 border="0" color="0" x="1125" y="288" height="64" width="169" format="[general]"  name=mardicpm ddlb.limit=5 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=27 alignment="2" tabsequence=210 border="0" color="0" x="1125" y="356" height="64" width="169" format="[general]"  name=mercredicpm ddlb.limit=5 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=29 alignment="2" tabsequence=250 border="0" color="0" x="1125" y="424" height="64" width="169" format="[general]"  name=jeudicpm ddlb.limit=5 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=31 alignment="2" tabsequence=280 border="0" color="0" x="1125" y="492" height="64" width="169" format="[general]"  name=vendredicpm ddlb.limit=5 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="2" tabsequence=180 border="2" color="0" x="1573" y="220" height="64" width="265" format="[time]"  name=t_personnelshor_lundiendpm editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="1" text="Fin PM" border="0" color="0" x="1573" y="136" height="64" width="265"  name=t_16  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=20 border="2" color="0" x="567" y="220" height="64" width="265" format="[time]"  name=t_personnelshor_lundiendam editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="Fin AM" border="0" color="0" x="567" y="136" height="64" width="265"  name=t_14  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="2" text="AM" border="0" color="0" x="297" y="56" height="64" width="709"  name=t_11  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="2" text="PM" border="0" color="0" x="1129" y="56" height="64" width="709"  name=t_12  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

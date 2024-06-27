@@ -1,0 +1,695 @@
+﻿$PBExportHeader$n_cst_fusion.sru
+forward
+global type n_cst_fusion from n_base
+end type
+end forward
+
+global type n_cst_fusion from n_base autoinstantiate
+end type
+
+type variables
+string is_variable
+end variables
+
+forward prototypes
+public function string of_fusion (string as_texte, long al_idcontact, long al_phase)
+public function string of_fusion (string as_texte, long al_idcontact, long al_phase, date adt_date)
+public function string of_getfusion ()
+end prototypes
+
+public function string of_fusion (string as_texte, long al_idcontact, long al_phase);return of_fusion(as_texte,al_idcontact,al_phase,today())
+end function
+
+public function string of_fusion (string as_texte, long al_idcontact, long al_phase, date adt_date);//////////////////////////////////
+// Créé par : Éric Vézina
+// Créé le  : 24/10/2003
+// Demande  : JMD
+// Version  : 7.6.1
+// Modifié par:
+//	Modifié le :
+//////////////////////////////////
+long ll_pos,ll_iddentist,ll_idpat, ll_ententetypefusion, ll_info
+integer li_info,li_info1
+dec{2} ld_info,ld_info1,ld_info2
+date ldt_info
+time lt_info
+string ls_info, ls_langue
+n_cst_string luo_string
+
+date ldt_datenaispat, ldt_dateexamen
+string ls_salpat, ls_patnom, ls_patprenom, ls_patadresse, ls_upatnom, ls_upatprenom, ls_patville, ls_patprovince, ls_patcodepostal, ls_patsex, ls_newdossierpat, ls_nopatient
+string ls_noboite, ls_telrespat, ls_telburpat, ls_datenaispat, ls_languepat, ls_nomperepat, ls_notelpere, ls_nommerepat, ls_notelmere, ls_dateexamen, ls_sal2cont
+string ls_sal1cont, ls_prenomcont, ls_nomcont, ls_adresscont, ls_villecont, ls_provincecont, ls_zipcont, ls_telrescont, ls_drnomcomplet, ls_adresseortho, ls_villeortho
+string ls_provinceortho, ls_ziportho, ls_saldentist, ls_detsuffix, ls_detprenom, ls_detadd, ls_detnom, ls_detville
+string ls_dettelbur,ls_detprov, ls_detzip, ls_refsal, ls_reftitre, ls_refnom, ls_refprenom, ls_refadd, ls_refville, ls_refpro
+string ls_refzip, ls_teldent, ls_refprov, ls_telref
+
+select patient_id into :ll_idpat from t_contact where id_contact = :al_idcontact;
+select id_dentist into :ll_iddentist from patient where patient_id = :ll_idpat;
+
+//patient
+//select ententetypefusion into :ll_ententetypefusion from t_options where ortho_id = :v_no_ortho;
+
+// Salutation du patient 
+
+select 	isnull(satpat.salutation,''),
+			isnull(patient_nom,''),
+			isnull(patient_prenom,''),
+			isnull(adresse,''),
+			isnull(ville,''),
+			isnull(province,''),
+			isnull(code_postale,''),
+			isnull(sex,''),
+			isnull(new_dossier,''),
+			isnull(no_dossier,''),
+			isnull(no_boite,''),
+			isnull(tel_maison,''),
+			isnull(tel_bureau,''),
+			date_naissance,
+			isnull(langue,''),
+			isnull(nom_pere,''),
+			isnull(no_tel_pere,''),
+			isnull(nom_mere,''),
+			isnull(no_tel_mere,''),
+			isnull(satdent.salutation,''),
+			isnull(det_suf,''),
+			isnull(det_prenom,''),
+			isnull(det_nom,''),
+			isnull(det_add,''),
+			isnull(det_ville,''),
+			isnull(det_prov,''),
+			isnull(upper(det_zip),''),
+			isnull(satref.salutation,''),
+			isnull(ref_suffix,''),
+			isnull(ref_nom,''),
+			isnull(ref_prenom,''),
+			isnull(ref_adresse,''),
+			isnull(ref_ville,''),
+			isnull(ref_province,''),
+			isnull(ref_zip,''),
+			isnull(det_telbur,''),
+			isnull(ref_tel_bur,'')
+			into 	:ls_salpat,
+					:ls_patnom,
+					:ls_patprenom,
+					:ls_patadresse,
+					:ls_patville,
+					:ls_patprovince,
+					:ls_patcodepostal,
+					:ls_patsex,
+					:ls_newdossierpat,
+					:ls_nopatient,
+					:ls_noboite,
+					:ls_telrespat,
+					:ls_telburpat,
+					:ldt_datenaispat,
+					:ls_languepat,
+					:ls_nomperepat,
+					:ls_notelpere,
+					:ls_nommerepat,
+					:ls_notelmere,
+					:ls_saldentist,
+				   :ls_detsuffix,
+				   :ls_detprenom,
+				   :ls_detnom,
+				   :ls_detadd,
+				   :ls_detville,
+				   :ls_detprov,
+				   :ls_detzip,
+					:ls_refsal,
+					:ls_reftitre,
+					:ls_refnom,
+					:ls_refprenom,
+					:ls_refadd,
+					:ls_refville,
+					:ls_refprov,
+					:ls_refzip,
+					:ls_dettelbur,
+					:ls_telref
+from patient LEFT OUTER JOIN t_salutation as satpat on patient.id_sal = satpat.id_sal
+				 LEFT OUTER JOIN t_dentists on t_dentists.id_dentist = patient.id_dentist
+				 LEFT OUTER JOIN t_salutation as satdent on t_dentists.id_sal = satdent.id_sal
+				 LEFT OUTER JOIN t_referents ON t_referents.id = patient.referant_nom
+				 LEFT OUTER JOIN t_salutation as satref on t_referents.id_sal = satref.id_sal 
+where patient.patient_id = :ll_idpat;
+
+if match(as_texte,'<<PatSal>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<PatSal>>',ls_salpat)
+if match(as_texte,'<<patnom>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<patnom>>',ls_patnom)
+if match(as_texte,'<<patprenom>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<patprenom>>',ls_patprenom)
+ls_upatnom = upper(ls_patnom)
+ls_upatprenom = upper(ls_patprenom)
+if match(as_texte,'<<upatnom>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<upatnom>>',ls_upatnom)
+if match(as_texte,'<<upatprenom>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<upatprenom>>',ls_upatprenom)
+if match(as_texte,'<<patadd>>') then  as_texte = luo_string.of_globalreplace(as_texte,'<<patadd>>',ls_patadresse)
+if match(as_texte,'<<patville>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<patville>>',ls_patville)
+if match(as_texte,'<<patprov>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<patprov>>',ls_patprovince)
+ls_patcodepostal = string(ls_patcodepostal,'@@@ @@@')
+if match(as_texte,'<<patcode>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<patcode>>',ls_patcodepostal)
+if match(as_texte,'<<patgenre>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<patgenre>>',ls_patsex)
+if match(as_texte,'<<patnodoss>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<patnodoss>>',ls_newdossierpat)
+if match(as_texte,'<<patnopat>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<patnopat>>',ls_nopatient)
+if match(as_texte,'<<patnoboite>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<patnoboite>>',ls_noboite)
+ls_telrespat = string(ls_telrespat,'(@@@) @@@-@@@@')
+if match(as_texte,'<<pattelr>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<pattelr>>',ls_telrespat)
+ls_telburpat = string(ls_telburpat,'(@@@) @@@-@@@@')
+if match(as_texte,'<<pattelb>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<pattelb>>',ls_telburpat)
+ls_datenaispat = calculage2(ldt_datenaispat)
+if isnull(ls_datenaispat) then ls_datenaispat = ''
+if match(as_texte,'<<patnaiss>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<patnaiss>>',ls_datenaispat)
+ls_datenaispat = string(ldt_datenaispat)
+if isnull(ls_datenaispat) then ls_datenaispat = ''
+if match(as_texte,'<<patnaiss1>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<patnaiss1>>',ls_datenaispat)
+ls_datenaispat = calculage(ldt_datenaispat)
+if isnull(ls_datenaispat) then ls_datenaispat = ''
+if match(as_texte,'<<patnaiss2>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<patnaiss2>>',ls_datenaispat)
+ls_datenaispat = dateabr(ldt_datenaispat,ls_langue)
+if isnull(ls_datenaispat) then ls_datenaispat = ''
+if match(as_texte,'<<patnaiss3>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<patnaiss3>>',ls_datenaispat)
+
+//parent
+if match(as_texte,'<<nom_pere>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<nom_pere>>',ls_nomperepat)
+ls_notelpere = string(ls_notelpere,'(@@@) @@@-@@@@')
+if match(as_texte,'<<tel_pere>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<tel_pere>>',ls_notelpere)
+if match(as_texte,'<<nom_mere>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<nom_mere>>',ls_nommerepat)
+ls_notelmere = string(ls_notelmere,'(@@@) @@@-@@@@')
+if match(as_texte,'<<tel_mere>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<tel_mere>>',ls_notelmere)
+
+// Début du traitement 
+select max(debut_traitement) into :ldt_dateexamen from traitements where patient_id = :ll_idpat;
+ls_dateexamen = string(ldt_dateexamen)
+if isnull(ls_dateexamen) then ls_dateexamen = ''
+if match(as_texte,'<<traitdebut>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<traitdebut>>',ls_dateexamen)
+
+//Responsable
+select 	isnull(sal1.salutation,''),
+			isnull(sal2.salutation,''),
+			isnull(prenom,''),
+			isnull(nom,''),
+			isnull(adresse,''),
+			isnull(ville,''),
+			isnull(province,''),
+			isnull(zip,''),
+			isnull(telres,'')
+into 		:ls_sal1cont,
+			:ls_sal2cont,
+			:ls_prenomcont,
+			:ls_nomcont,
+			:ls_adresscont,
+			:ls_villecont,
+			:ls_provincecont,
+			:ls_zipcont,
+			:ls_telrescont
+from t_contact LEFT OUTER JOIN t_salutation as sal1 ON sal1.id_sal = t_contact.id_sal 
+               LEFT OUTER JOIN t_salutation as sal2 ON sal2.id_sal = t_contact.id_sal1  
+where t_contact.id_contact = :al_idcontact;
+
+if match(as_texte,'<<RespSal>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<RespSal>>',ls_sal1cont)
+if match(as_texte,'<<RespSal2>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<RespSal2>>',ls_sal2cont)
+if match(as_texte,'<<RespPrenom>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<RespPrenom>>',ls_prenomcont)
+if match(as_texte,'<<RespNom>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<RespNom>>',ls_nomcont)
+if match(as_texte,'<<RespAdd>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<RespAdd>>',ls_adresscont)
+if match(as_texte,'<<RespVille>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<RespVille>>',ls_villecont)
+if match(as_texte,'<<RespProv>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<RespProv>>',ls_provincecont)
+ls_zipcont = string(ls_zipcont,'@@@ @@@')
+if match(as_texte,'<<RespCode>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<RespCode>>',ls_zipcont)
+ls_zipcont = string(ls_telrescont,'(@@@) @@@-@@@@')
+if match(as_texte,'<<RespTel>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<RespTel>>',ls_telrescont)
+
+
+select 	isnull(dr_nom_complet,''),
+			isnull(dr_adresse,''),
+			isnull(dr_ville,''),
+			isnull(dr_province,''),
+			isnull(dr_code_postal,'')
+into 		:ls_drnomcomplet ,
+			:ls_adresseortho,
+			:ls_villeortho,
+			:ls_provinceortho,
+			:ls_ziportho
+from ortho_id where ortho_id = :v_no_ortho;
+
+if match(as_texte,'<<spec_nomcompl>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<spec_nomcompl>>',ls_drnomcomplet)
+if match(as_texte,'<<spec_add>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<spec_add>>',ls_adresseortho)
+if match(as_texte,'<<spec_ville>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<spec_ville>>',ls_villeortho)
+if match(as_texte,'<<spec_prov>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<spec_prov>>',ls_provinceortho)
+if match(as_texte,'<<spec_code>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<spec_code>>',ls_ziportho)
+
+// Autre
+as_texte = luo_string.of_globalreplace(as_texte,'<<date>>',string(adt_date))
+as_texte = luo_string.of_globalreplace(as_texte,'<<dateab>>',dateabr(adt_date,ls_languepat))
+
+// Entente financiere
+
+if ll_ententetypefusion = 1 then
+	select id_phase into :li_info from t_contrats where id_contact = :ll_idpat and id_phase = :al_phase;
+else
+	select phase into :li_info from t_entente where id_contact = :al_idcontact;
+end if
+ls_info = "Phase " + string(li_info)
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<Phase>>',ls_info)
+
+select traitement into :li_info from t_entente where id_contact = :al_idcontact;
+choose case li_info
+	case 0
+		ls_info = "Traitement partiel"
+	case 1
+		ls_info = "Traitement complet"
+end choose
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<Ttype>>',ls_info)
+
+if ll_ententetypefusion = 1 then
+	select date1 into :ldt_info from t_contrats where id_contact = :ll_idpat and id_phase = :al_phase;
+else
+	select debut into :ldt_info from t_entente where id_contact = :al_idcontact;
+end if
+ls_info = string(ldt_info)
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<Tdebut>>',ls_info)
+
+select fin into :ldt_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(ldt_info)
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<Tfin>>',ls_info)
+
+select estduree1,estduree2 into :li_info,:li_info1 from t_entente where id_contact = :al_idcontact;
+if li_info1 = 0 or isnull(li_info1) then
+	ls_info = string(li_info) + ' mois'
+else
+	ls_info = string(li_info) + ' à ' + string(li_info1) + ' mois'
+end if
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<Tduree>>',ls_info)
+
+select cout_total into :ld_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TcoutTotal>>',ls_info)
+
+if ll_ententetypefusion = 1 then
+	select couttrait into :ld_info from t_contrats where id_contact = :ll_idpat and id_phase = :al_phase;
+else
+	select cout_total1 into :ld_info from t_entente where id_contact = :al_idcontact;
+end if	
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TcoutPhase1>>',ls_info)
+
+if ll_ententetypefusion = 1 then
+	select diag into :ld_info from t_contrats where id_contact = :ll_idpat and id_phase = :al_phase;
+else
+	select diag_anal1 into :ld_info from t_entente where id_contact = :al_idcontact;
+end if	
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TcoutDiag1>>',ls_info)
+
+if ll_ententetypefusion = 1 then
+	select initial into :ld_info from t_contrats where id_contact = :ll_idpat and id_phase = :al_phase;
+	ls_info = string(ld_info) + ' $'
+else
+	select paiement_init1,verpaieinit1 into :ld_info,:li_info from t_entente where id_contact = :al_idcontact;	
+	if li_info > 1 then
+		ls_info = string(li_info) + ' versement(s) de ' + string(ld_info) + ' $'
+	else
+		ls_info = string(ld_info) + ' $'
+	end if	
+end if	
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TpaieInit1>>',ls_info)
+
+select datepaieinit into :ldt_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(ldt_info)
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TdatePaieInit1>>',ls_info)
+
+if ll_ententetypefusion = 1 then
+	select mmontant into :ld_info from t_contrats where id_contact = :ll_idpat and id_phase = :al_phase;
+else
+	select mensualite1 into :ld_info from t_entente where id_contact = :al_idcontact;
+end if
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<Tversement1>>',ls_info)
+
+if ll_ententetypefusion = 1 then
+	select mqty into :li_info from t_contrats where id_contact = :ll_idpat and id_phase = :al_phase;
+else
+	select duree1 into :li_info from t_entente where id_contact = :al_idcontact;
+end if
+ls_info = string(li_info)
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TnbVersement1>>',ls_info)
+
+if ll_ententetypefusion = 1 then
+	select paiefinal into :ld_info from t_contrats where id_contact = :ll_idpat and id_phase = :al_phase;
+else
+	select paiement_fin1 into :ld_info from t_entente where id_contact = :al_idcontact;
+end if
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TpaieFinal1>>',ls_info)
+
+select cout_total2 into :ld_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TcoutPhase2>>',ls_info)
+
+select diag_anal2 into :ld_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TcoutDiag2>>',ls_info)
+
+select paiement_init2,verpaieinit2 into :ld_info,:li_info from t_entente where id_contact = :al_idcontact;
+if li_info > 1 then
+	ls_info = string(li_info) + ' versement de ' + string(ld_info) + ' $'
+else
+	ls_info = string(ld_info) + ' $'
+end if
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TpaieInit2>>',ls_info)
+
+select datepaieinit into :ldt_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(ldt_info)
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TdatePaieInit2>>',ls_info)
+
+select mensualite2 into :ld_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<Tversement2>>',ls_info)
+
+select duree2 into :li_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(li_info)
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TnbVersement2>>',ls_info)
+
+select paiement_fin2 into :ld_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TpaieFinal2>>',ls_info)
+
+select cout_total3 into :ld_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TcoutPhase3>>',ls_info)
+
+select diag_anal3 into :ld_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TcoutDiag3>>',ls_info)
+
+select paiement_init3,verpaieinit3 into :ld_info,:li_info from t_entente where id_contact = :al_idcontact;
+if li_info > 1 then
+	ls_info = string(li_info) + ' versement de ' + string(ld_info) + ' $'
+else
+	ls_info = string(ld_info) + ' $'
+end if
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TpaieInit3>>',ls_info)
+
+select datepaieinit into :ldt_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(ldt_info)
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TdatePaieInit3>>',ls_info)
+
+select mensualite3 into :ld_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<Tversement3>>',ls_info)
+
+select duree3 into :li_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(li_info)
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TnbVersement3>>',ls_info)
+
+select paiement_fin3 into :ld_info from t_entente where id_contact = :al_idcontact;
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TpaieFinal3>>',ls_info)
+
+select note1 into :ls_info from t_entente where id_contact = :al_idcontact;
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TCommentaire>>',ls_info)
+
+// Contrat
+
+select description into :ls_info from t_contrats where id_contact = :al_idcontact and id_phase = :al_phase and patient_id = :ll_idpat;
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<Description>>',ls_info)
+
+select date1 into :ldt_info from t_contrats where id_contact = :al_idcontact and id_phase = :al_phase and patient_id = :ll_idpat;
+ls_info = string(ldt_info)
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TraitDate>>',ls_info)
+
+select pourcentage into :ld_info from t_contrats where id_contact = :al_idcontact and id_phase = :al_phase and patient_id = :ll_idpat;
+ls_info = string(integer(ld_info))
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<%>>',ls_info)
+
+select couttrait,pourcentage into :ld_info,:ld_info1 from t_contrats where id_contact = :al_idcontact and id_phase = :al_phase and patient_id = :ll_idpat;
+ld_info = ld_info * ld_info1 / 100
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TCoutTrait>>',ls_info)
+
+select initial,pourcentage into :ld_info,:ld_info1 from t_contrats where id_contact = :al_idcontact and id_phase = :al_phase and patient_id = :ll_idpat;
+ld_info = ld_info * ld_info1 / 100
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TCoutInit>>',ls_info)
+
+select cons into :ld_info from t_contrats where id_contact = :al_idcontact and id_phase = :al_phase and patient_id = :ll_idpat;
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TCoutCons>>',ls_info)
+
+select diag,pourcentage into :ld_info,:ld_info1 from t_contrats where id_contact = :al_idcontact and id_phase = :al_phase and patient_id = :ll_idpat;
+ld_info = ld_info * ld_info1 / 100
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TCoutDiag>>',ls_info)
+
+select meb,pourcentage into :ld_info,:ld_info1 from t_contrats where id_contact = :al_idcontact and id_phase = :al_phase and patient_id = :ll_idpat;
+ld_info = ld_info * ld_info1 / 100
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TCoutMeb>>',ls_info)
+
+select retfee,pourcentage into :ld_info,:ld_info1 from t_contrats where id_contact = :al_idcontact and id_phase = :al_phase and patient_id = :ll_idpat;
+ld_info = ld_info * ld_info1 / 100
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ''
+as_texte = luo_string.of_globalreplace(as_texte,'<<TCoutRet>>',ls_info)
+
+// Date de la mensualite
+select mdate1 into :ldt_info from t_contrats where id_contact = :al_idcontact and id_phase = :al_phase and patient_id = :ll_idpat;
+ls_info = string(ldt_info)
+if isnull(ls_info) then ls_info = ""
+as_texte = luo_string.of_globalreplace(as_texte,'<<DateMens>>',ls_info)
+
+// Mensualite
+select mmontant into :ld_info from t_contrats where id_contact = :al_idcontact and id_phase = :al_phase and patient_id = :ll_idpat;
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ""
+as_texte = luo_string.of_globalreplace(as_texte,'<<CoutMens>>',ls_info)
+
+// Nbr. de mensualite
+select mqty into :ld_info from t_contrats where id_contact = :al_idcontact and id_phase = :al_phase and patient_id = :ll_idpat;
+ls_info = string(integer(ld_info + 1))
+if isnull(ls_info) then ls_info = ""
+as_texte = luo_string.of_globalreplace(as_texte,'<<NbMens>>',ls_info)
+
+// Montant total des mensualité
+select mmontant,mqty,paiefinal into :ld_info,:ld_info1,:ld_info2 from t_contrats where id_contact = :al_idcontact and id_phase = :al_phase and patient_id = :ll_idpat;
+ls_info = string((ld_info * ld_info1) + ld_info2) + ' $'
+if isnull(ls_info) then ls_info = ""
+as_texte = luo_string.of_globalreplace(as_texte,'<<TotMens>>',ls_info)
+
+// Montant du paiement final
+select paiefinal into :ld_info from t_contrats where id_contact = :al_idcontact and id_phase = :al_phase and patient_id = :ll_idpat;
+ls_info = string(ld_info) + ' $'
+if isnull(ls_info) then ls_info = ""
+as_texte = luo_string.of_globalreplace(as_texte,'<<PaieFinal>>',ls_info)
+
+// Salutation du dentiste
+
+
+if match(as_texte,'<<DentSal>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<DentSal>>',ls_saldentist)
+if match(as_texte,'<<dttitre>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<dttitre>>',ls_info)
+if match(as_texte,'<<dtprenom>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<dtprenom>>',ls_detprenom)
+if match(as_texte,'<<dtnom>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<dtnom>>',ls_detnom)
+if match(as_texte,'<<dtadd>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<dtadd>>',ls_detadd)
+if match(as_texte,'<<dtville>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<dtville>>',ls_detville)
+if match(as_texte,'<<dtprov>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<dtprov>>',ls_detprov)
+ls_detzip = string(ls_detzip,'@@@ @@@')
+if match(as_texte,'<<dtcode>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<dtcode>>',ls_detzip)
+
+
+// Salutation du referent
+if match(as_texte,'<<RefSal>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<RefSal>>',ls_refsal)
+if match(as_texte,'<<reftitre>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<reftitre>>',ls_reftitre)
+if match(as_texte,'<<refprenom>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<refprenom>>',ls_refprenom)
+if match(as_texte,'<<refnom>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<refnom>>',ls_refnom)
+if match(as_texte,'<<refadd>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<refadd>>',ls_refadd)
+if match(as_texte,'<<refville>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<refville>>',ls_refville)
+if match(as_texte,'<<refprov>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<refprov>>',ls_refprov)
+ls_refzip = string(ls_refzip,'@@@ @@@')
+if match(as_texte,'<<refcode>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<refcode>>',ls_refzip)
+ls_teldent = string(ls_teldent,'(@@@) @@@-@@@@')
+if match(as_texte,'<<dttel>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<dttel>>',ls_teldent)
+ls_telref = string(ls_telref,'(@@@) @@@-@@@@')
+if match(as_texte,'<<reftel>>') then as_texte = luo_string.of_globalreplace(as_texte,'<<reftel>>',ls_telref)
+
+//rendez-vous date prochain RDV
+select min(rdvdate) into :ldt_info from t_rdv 
+where patient_id = :ll_idpat and 
+		rdvdate > :adt_date and
+		upper(isnull(rdvetat,'')) not in ('C','M');
+ls_info = string(ldt_info,'dd-MM-yyyy')
+if isnull(ls_info) then ls_info = ""
+as_texte = luo_string.of_globalreplace(as_texte,'<<rdv_dtp>>',ls_info)
+
+// Heure prochain RDV 
+select min(rdvdate) into :ldt_info from t_rdv 
+where patient_id = :ll_idpat and 
+		rdvdate > :adt_date and
+		upper(isnull(rdvetat,'')) not in ('C','M');
+select min(rdvheure) into :lt_info from t_rdv
+where patient_id = :ll_idpat and 
+		rdvdate = :ldt_info and
+		upper(isnull(rdvetat,'')) not in ('C','M');
+ls_info = string(lt_info,'hh:mm')
+if isnull(ls_info) then ls_info = ""
+as_texte = luo_string.of_globalreplace(as_texte,'<<rdv_hp>>',ls_info)
+
+// Date du prochain RDV FR
+select min(rdvdate) into :ldt_info from t_rdv
+where patient_id = :ll_idpat and 
+		rdvdate > :adt_date and
+		upper(isnull(rdvetat,'')) not in ('C','M');
+ls_info = datefr(ldt_info)
+if isnull(ls_info) then ls_info = ""
+as_texte = luo_string.of_globalreplace(as_texte,'<<rdv_dtpfr>>',ls_info)
+
+// Date du prochain RDV FR
+select min(rdvdate) into :ldt_info from t_rdv
+where patient_id = :ll_idpat and 
+		rdvdate > :adt_date and
+		upper(isnull(rdvetat,'')) not in ('C','M');
+ls_info = datefrcr(ldt_info)
+if isnull(ls_info) then ls_info = ""
+as_texte = luo_string.of_globalreplace(as_texte,'<<rdv_dtpfrsansle>>',ls_info)
+
+
+// Date du prochain RDV AN
+select min(rdvdate) into :ldt_info from t_rdv 
+where patient_id = :ll_idpat and 
+		rdvdate > :adt_date and
+		upper(isnull(rdvetat,'')) not in ('C','M');
+ls_info = datean(ldt_info)
+if isnull(ls_info) then ls_info = ""
+as_texte = luo_string.of_globalreplace(as_texte,'<<rdv_dtpan>>',ls_info)
+
+// Date francais longue prochain RDV
+select min(rdvdate) into :ldt_info from t_rdv 
+where patient_id = :ll_idpat and 
+		rdvdate > :adt_date and
+		upper(isnull(rdvetat,'')) not in ('C','M');
+ls_info = datefrcompl(ldt_info)
+if isnull(ls_info) then ls_info = ""
+as_texte = luo_string.of_globalreplace(as_texte,'<<rdv_dtpfrcompl>>',ls_info)
+
+// Satellite
+select lieu into :ls_info from t_satellites inner join patient on t_satellites.id_satellite = patient.id_satellite where patient_id = :ll_idpat;
+if isnull(ls_info) then ls_info = ""
+as_texte = luo_string.of_globalreplace(as_texte,'<<satellite>>',ls_info)
+
+// Date prochain RDV
+select duree into :ll_info from t_rdv where patient_id = :ll_idpat and rdvdate > :adt_date;
+ls_info = string(ll_info)
+if isnull(ls_info) then ls_info = ""
+as_texte = luo_string.of_globalreplace(as_texte,'<<rdv_dureeprdv>>',ls_info)
+
+// Mois anglais
+CHOOSE CASE month(today())
+	CASE 1
+		ls_info = 'January'
+	CASE 2
+		ls_info = 'February'		
+	CASE 3
+		ls_info = 'March'
+	CASE 4
+		ls_info = 'April'
+	CASE 5
+		ls_info = 'May'
+	CASE 6
+		ls_info = 'June'
+	CASE 7
+		ls_info = 'July'
+	CASE 8
+		ls_info = 'August'
+	CASE 9
+		ls_info = 'September'
+	CASE 10
+		ls_info = 'October'
+	CASE 11
+		ls_info = 'November'
+	CASE 12
+		ls_info = 'December'
+END CHOOSE
+as_texte = luo_string.of_globalreplace(as_texte,'<<moisan>>',ls_info)
+
+// Mois francais
+CHOOSE CASE month(today())
+	CASE 1
+		ls_info = 'Janvier'
+	CASE 2
+		ls_info = 'Février'		
+	CASE 3
+		ls_info = 'Mars'
+	CASE 4
+		ls_info = 'Avril'
+	CASE 5
+		ls_info = 'Mai'
+	CASE 6
+		ls_info = 'Juin'
+	CASE 7
+		ls_info = 'Juillet'
+	CASE 8
+		ls_info = 'Août'
+	CASE 9
+		ls_info = 'Septembre'
+	CASE 10
+		ls_info = 'Octobre'
+	CASE 11
+		ls_info = 'Novembre'
+	CASE 12
+		ls_info = 'Décembre'
+END CHOOSE
+as_texte = luo_string.of_globalreplace(as_texte,'<<moisfr>>',ls_info)
+
+// Annee
+ls_info = string(year(today()))
+as_texte = luo_string.of_globalreplace(as_texte,'<<annee>>',ls_info)
+
+
+return as_texte
+
+
+
+end function
+
+public function string of_getfusion ();return is_variable
+end function
+
+on n_cst_fusion.create
+call super::create
+end on
+
+on n_cst_fusion.destroy
+call super::destroy
+end on
+

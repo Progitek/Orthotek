@@ -1,0 +1,117 @@
+﻿$PBExportHeader$gf_setimgstr.srf
+global type gf_setimgstr from function_object
+end type
+
+forward prototypes
+global function boolean gf_setimgstr (long al_idpat, integer ai_sequence)
+end prototypes
+
+global function boolean gf_setimgstr (long al_idpat, integer ai_sequence);///////////////////////////////////////////
+//
+// Auteur : Eric Vezina
+// Date   : 19-10-2004
+//
+// Cette fonction insert ds la structure gstr_img le nom des images de Vistadent ou de
+// orthotek pour un patient en particulier et une séquence particulière.
+// Il faut que le chemin chemphoto indique le répertoire data de Vistadent ou des phots
+// de orhotek.
+//
+///////////////////////////////////////////
+//integer li_nbitems, li_erreur,li_FileNum,li_sequence,li_vistadent
+//long i,ll_idimg
+//ulong ll_rc, ll_size
+//string ls_path,ls_line, ls_file[],ls_imgname
+//string ls_lat,ls_front,ls_fronts,ls_uoccl,ls_looccl,ls_roccl,ls_aoccl,ls_loccl
+//
+//select chemphoto,idvistadent into :ls_path,:li_vistadent from t_options where ortho_id = :v_no_ortho;
+//
+//if li_vistadent = 1 then
+//	// prendre les photos de Vistadent
+//	select idvistadent into :ll_idimg from patient where patient_id = :al_idpat;
+//	// On va chercher les informations du directory
+//	ls_path += '\' + string(ll_idimg)
+//	w_patient.lb_1.dirlist(ls_path+"\*.jpg",0)
+//else
+//	// prendre les photos de Orthotek
+//	ll_idimg = al_idpat
+//	// On va chercher les informations du directory
+//	ls_path += '\' + string(ll_idimg)
+//	w_patient.lb_1.dirlist(ls_path + "\" + string(ai_sequence) + "\*.jpg",0)
+//end if
+//
+//// On envoie les données dans un tableau de caractère
+//li_nbitems = w_patient.lb_1.TotalItems()
+//i = 1
+//for i = 1 to li_nbitems
+//	ls_file[i] = w_patient.lb_1.text(i)
+//next
+//// Inserer les informations ds la structure
+//li_nbitems = upperbound(ls_file)
+//if li_nbitems > 0 then
+//	gstr_img.sequence = ai_sequence
+//	// Cas Vistadent
+//	if li_vistadent = 1 then
+//		for i = 1 to li_nbitems
+//			// Frontal
+//			li_sequence = integer(left(ls_file[i],1))
+//			if li_sequence = ai_sequence then
+//				ls_imgname = mid(ls_file[i],3,2)
+//				choose case ls_imgname
+//					case '00' // Lateral
+//						gstr_img.lateral = ls_file[i]
+//					case '01' // Frontal
+//						gstr_img.frontal = ls_file[i]
+//					case '02' // Frontal Smile
+//						gstr_img.frontal_smile = ls_file[i]
+//					case '03' // Upper Occlusal
+//						gstr_img.upper_occlusal = ls_file[i]
+//					case '04' // Lower Occlusal
+//						gstr_img.lower_occlusal = ls_file[i]
+//					case '05'
+//						gstr_img.right_occlusion = ls_file[i]
+//					case '06'
+//						gstr_img.anterior_occlusion = ls_file[i]
+//					case '07'
+//						gstr_img.left_occlusion = ls_file[i]
+//	//				case '08'
+//	//					gstr_img.overjet = ls_file[i]
+//	//				case '09'
+//	//				case '10'
+//	//				case '11'
+//	//				case '12'
+//	//				case '13'
+//	//				case '14'
+//	//				case '15'
+//	//				case '16'
+//	//				case '17'
+//	//				case '18'
+//	//				case '19'
+//	//				case '20'
+//	//				case '21'
+//	//				case '22'
+//	//				case '98'
+//	//				case '99'
+//				end choose
+//			end if
+//		next
+//	else
+//		// Cas Orthotek
+//		select lateral,frontal,front_smile,upperoccl,loweroccl,rightoccl,anterioroccl,leftoccl
+//		into :ls_lat,:ls_front,:ls_fronts,:ls_uoccl,:ls_looccl,:ls_roccl,:ls_aoccl,:ls_loccl
+//		from t_imagerie
+//		where patient_id = :al_idpat and sequence = :ai_sequence;
+//		gstr_img.lateral = ls_lat
+//		gstr_img.frontal = ls_front
+//		gstr_img.frontal_smile = ls_fronts
+//		gstr_img.upper_occlusal = ls_uoccl
+//		gstr_img.lower_occlusal = ls_looccl
+//		gstr_img.right_occlusion = ls_roccl
+//		gstr_img.anterior_occlusion = ls_aoccl
+//		gstr_img.left_occlusion = ls_loccl
+//	end if
+//	return true
+//else
+	return false
+//end if
+end function
+

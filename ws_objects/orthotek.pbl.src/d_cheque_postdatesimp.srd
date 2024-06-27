@@ -1,0 +1,97 @@
+﻿$PBExportHeader$d_cheque_postdatesimp.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=1048 color="536870912" )
+summary(height=108 color="536870912" )
+footer(height=56 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=cheques_postdates_id dbname="cheques_postdates.cheques_postdates_id" )
+ column=(type=date update=yes updatewhereclause=yes name=date_cheque dbname="cheques_postdates.date_cheque" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=paiement dbname="cheques_postdates.paiement" )
+ column=(type=long update=yes updatewhereclause=yes name=traitement_patient_id dbname="cheques_postdates.traitement_patient_id" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=solde_ligne dbname="cheques_postdates.solde_ligne" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=indicateur dbname="cheques_postdates.indicateur" )
+ column=(type=number update=yes updatewhereclause=yes name=affect dbname="cheques_postdates.affect" values="	1/	0" )
+ column=(type=char(20) updatewhereclause=yes name=cheques_postdates_modalite dbname="cheques_postdates.modalite" )
+ column=(type=long updatewhereclause=yes name=cheques_postdates_nocheque dbname="cheques_postdates.nocheque" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(36) updatewhereclause=yes name=patient_adresse dbname="patient.adresse" )
+ column=(type=char(50) updatewhereclause=yes name=patient_ville dbname="patient.ville" )
+ column=(type=char(25) updatewhereclause=yes name=patient_province dbname="patient.province" )
+ column=(type=char(15) updatewhereclause=yes name=patient_code_postale dbname="patient.code_postale" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_ville_province_code_postale dbname="ortho_id.dr_ville_province_code_postale" )
+ column=(type=char(7) updatewhereclause=yes name=ortho_id_dr_code_postal dbname="ortho_id.dr_code_postal" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_adresse dbname="ortho_id.dr_adresse" )
+ column=(type=long updatewhereclause=yes name=traitements_id_phase dbname="traitements.id_phase" )
+ column=(type=decimal(2) updatewhereclause=yes name=totfact1 dbname="totfact1" )
+ column=(type=decimal(2) updatewhereclause=yes name=totfact dbname="totfact" )
+ column=(type=decimal(2) updatewhereclause=yes name=totpaie1 dbname="totpaie1" )
+ column=(type=decimal(2) updatewhereclause=yes name=totpaie dbname="totpaie" )
+ column=(type=decimal(2) updatewhereclause=yes name=tottrait dbname="tottrait" )
+ retrieve="SELECT   cheques_postdates.cheques_postdates_id,   
+         cheques_postdates.date_cheque,   
+         cheques_postdates.paiement,   
+         cheques_postdates.traitement_patient_id,   
+         cheques_postdates.solde_ligne,   
+         cheques_postdates.indicateur,   
+         cheques_postdates.affect,   
+			cheques_postdates.modalite,
+			cheques_postdates.nocheque,
+         patient.patient_prenom,   
+         patient.patient_nom,   
+         patient.adresse,   
+         patient.ville,   
+         patient.province,   
+         patient.code_postale,   
+         ortho_id.dr_nom_complet,   
+         ortho_id.dr_ville_province_code_postale,
+         ortho_id.dr_code_postal,   
+         ortho_id.dr_adresse,
+			traitements.id_phase,
+			(select sum(montant) from factures_traitements where traitement_id = :ra_idtrait) as totfact1,
+			(if totfact1 is null then 0 else totfact1 endif) as totfact,
+			(select sum(montant_recu) from paiement where traitement_patient_id = :ra_idtrait) as totpaie1,
+			(if totpaie1 is null then 0 else totpaie1 endif) as totpaie,
+			(totfact - totpaie) as tottrait
+FROM     traitements INNER JOIN patient ON patient.patient_id = traitements.patient_id
+                     INNER JOIN cheques_postdates ON traitements.traitement_id = cheques_postdates.traitement_patient_id,      
+         patient     INNER JOIN ortho_id ON patient.no_ortho = ortho_id.ortho_id
+WHERE    traitements.traitement_id = :ra_idtrait
+ORDER BY cheques_postdates.date_cheque
+     
+" update="cheques_postdates" updatewhere=0 updatekeyinplace=no arguments=(("ra_idtrait", number)) )
+line(band=header x1="69" y1="1040" x2="3241" y2="1040"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Date" border="0" color="0" x="146" y="948" height="64" width="471" html.valueishtml="0"  name=t_date visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="# chèque" border="0" color="0" x="645" y="948" height="64" width="471" html.valueishtml="0"  name=t_nocheque visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Montant" border="0" color="0" x="1143" y="948" height="64" width="494" html.valueishtml="0"  name=t_montant visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Solde" border="0" color="0" x="2747" y="948" height="64" width="494" html.valueishtml="0"  name=t_solde visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Modalité" border="0" color="0" x="1746" y="948" height="64" width="997" html.valueishtml="0"  name=t_method visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Rapport imprimé des chèques postdaté pour le patient" border="0" color="0" x="69" y="36" height="92" width="3173" html.valueishtml="0"  name=t_title visible="1"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Phase:" border="0" color="0" x="146" y="664" height="76" width="197" html.valueishtml="0"  name=t_phase visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=20 alignment="0" tabsequence=32766 border="0" color="0" x="357" y="664" height="76" width="1381" format="[general]" html.valueishtml="0"  name=traitements_id_phase visible="1" dddw.name=dddw_phase dddw.displaycolumn=phase dddw.datacolumn=id_phase dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=12 alignment="0" tabsequence=32766 border="0" color="0" x="146" y="392" height="76" width="1591" format="[general]" html.valueishtml="0"  name=patient_adresse visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression=" patient_ville + ', ( ' +  patient_province  + ' ) '"border="0" color="0" x="146" y="472" height="76" width="1591" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression=" patient_patient_nom + ' ' +  patient_patient_prenom "border="0" color="0" x="146" y="312" height="76" width="1591" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=17 alignment="0" tabsequence=32766 border="0" color="0" x="1888" y="472" height="76" width="1353" format="[general]" html.valueishtml="0"  name=ortho_id_dr_ville_province_code_postale visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=19 alignment="0" tabsequence=32766 border="0" color="0" x="1888" y="392" height="76" width="1353" format="[general]" html.valueishtml="0"  name=ortho_id_dr_adresse visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=16 alignment="0" tabsequence=32766 border="0" color="0" x="1888" y="312" height="76" width="1353" format="[general]" html.valueishtml="0"  name=ortho_id_dr_nom_complet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=15 alignment="0" tabsequence=32766 border="0" color="0" x="146" y="552" height="76" width="1591" format="[general]" html.valueishtml="0"  name=patient_code_postale visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="2" tabsequence=32766 border="0" color="0" x="645" y="4" height="76" width="471" format="[general]" html.valueishtml="0"  name=cheques_postdates_nocheque visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="2" tabsequence=10 border="0" color="0" x="146" y="4" height="76" width="471" format="[General]" html.valueishtml="0"  name=date_cheque visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=20 border="0" color="0" x="1143" y="4" height="76" width="494" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=paiement visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression=" tottrait - cumulativeSum(  paiement  for all )"border="0" color="0" x="2747" y="4" height="76" width="494" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="1746" y="4" height="76" width="997" format="[general]" html.valueishtml="0"  name=cheques_postdates_modalite visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="69" y1="8" x2="3241" y2="8"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=summary alignment="1" text="Total:" border="0" color="0" x="146" y="28" height="76" width="165" html.valueishtml="0"  name=t_tot visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum(paiement for all)"border="0" color="0" x="1143" y="28" height="76" width="494" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="© Orthotek" border="0" color="0" x="1527" y="0" height="56" width="293" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="366" y="0" height="56" width="475" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Imprimé le " border="0" color="0" x="59" y="0" height="56" width="293" html.valueishtml="0"  name=t_printedon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2555" y="0" height="56" width="686" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

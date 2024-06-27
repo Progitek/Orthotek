@@ -1,0 +1,13 @@
+﻿$PBExportHeader$s_img.srs
+global type s_img from structure
+	string		frontal
+	string		frontal_smile
+	string		lateral
+	string		right_occlusion
+	string		anterior_occlusion
+	string		left_occlusion
+	string		upper_occlusal
+	string		lower_occlusal
+	integer		sequence
+end type
+

@@ -1,0 +1,13 @@
+﻿$PBExportHeader$d_corps.srd
+release 8;
+datawindow(units=2 timer_interval=0 color=1073741824 processing=7 print.documentname="" print.orientation = 0 print.margin.left = 250 print.margin.right = 250 print.margin.top = 250 print.margin.bottom = 250 print.paper.source = 0 print.paper.size = 0 print.prompt=no richtext.headerfooter=no richtext.wordwrap=no richtext.popmenu=yes richtext.pictureframe=no richtext.inputfieldnamesvisible=no richtext.inputfieldsvisible=no richtext.tabsvisible=no richtext.returnsvisible=no richtext.spacesvisible=no richtext.inputfieldbackcolor=1073741824 richtext.backcolor=1073741824 richtext.tabbar=yes richtext.rulerbar=yes richtext.toolbar=yes richtext.displayonly=no )
+detail(text="")
+header(text="")
+footer(text="")
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=id_catplan dbname="t_catplans.id_catplan" )
+ retrieve="  SELECT t_catplans.id_catplan  
+    FROM t_catplans  
+   WHERE t_catplans.id_catplan = :ra_idcatplan    
+" update="t_catplans" updatewhere=0 updatekeyinplace=no arguments=(("ra_idcatplan", number)) )
+column(name=id_catplan id=1 visible="1" lineremove=no multiline=no width.autosize=yes width="0" alignment="0" tabsequence=1 format="[general]" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

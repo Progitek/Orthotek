@@ -1,0 +1,68 @@
+﻿$PBExportHeader$d_tplperm.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=448 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=id_tplperiode dbname="t_tplperiode.id_tplperiode" )
+ column=(type=long update=yes updatewhereclause=yes name=qnbjour dbname="t_tplperiode.qnbjour" )
+ column=(type=number update=yes updatewhereclause=yes name=qjourouv dbname="t_tplperiode.qjourouv" )
+ column=(type=long update=yes updatewhereclause=yes name=hnbsem dbname="t_tplperiode.hnbsem" )
+ column=(type=number update=yes updatewhereclause=yes name=hdim dbname="t_tplperiode.hdim" )
+ column=(type=number update=yes updatewhereclause=yes name=hlun dbname="t_tplperiode.hlun" )
+ column=(type=number update=yes updatewhereclause=yes name=hmar dbname="t_tplperiode.hmar" )
+ column=(type=number update=yes updatewhereclause=yes name=hmer dbname="t_tplperiode.hmer" )
+ column=(type=number update=yes updatewhereclause=yes name=hjeu dbname="t_tplperiode.hjeu" )
+ column=(type=number update=yes updatewhereclause=yes name=hven dbname="t_tplperiode.hven" )
+ column=(type=number update=yes updatewhereclause=yes name=hsam dbname="t_tplperiode.hsam" )
+ column=(type=long update=yes updatewhereclause=yes name=mnbmois1 dbname="t_tplperiode.mnbmois1" )
+ column=(type=long update=yes updatewhereclause=yes name=mnbmois2 dbname="t_tplperiode.mnbmois2" )
+ column=(type=long update=yes updatewhereclause=yes name=mdatechiffre dbname="t_tplperiode.mdatechiffre" values="1	1/2	2/3	3/4	4/5	5/6	6/7	7/8	8/9	9/10	10/11	11/12	12/13	13/14	14/15	15/16	16/17	17/18	18/19	19/20	20/21	21/22	22/23	23/24	24/25	25/26	26/27	27/28	28/29	29/30	30/31	31/" )
+ column=(type=long update=yes updatewhereclause=yes name=mdatelettre dbname="t_tplperiode.mdatelettre" values="premier	1/deuxième	2/troisième	3/quatrième	4/cinquième	5/	/	/	/	/	/	/	/	/	/	/	/	/	/	/	/	/	/	/	/	/	/	/	/	/	/	/" )
+ column=(type=long update=yes updatewhereclause=yes name=mjoursem dbname="t_tplperiode.mjoursem" values="Dimanche	1/Lundi	2/Mardi	3/Mercredi	4/Jeudi	5/Vendredi	6/Samedi	7/" )
+ column=(type=number update=yes updatewhereclause=yes name=mchoix dbname="t_tplperiode.mchoix" values="Le            tous les            mois	1/Le                                                        tous les           mois	2/" )
+ column=(type=number update=yes updatewhereclause=yes name=achoix dbname="t_tplperiode.achoix" )
+ column=(type=long update=yes updatewhereclause=yes name=anbjour dbname="t_tplperiode.anbjour" )
+ column=(type=long update=yes updatewhereclause=yes name=ajourlettre dbname="t_tplperiode.ajourlettre" )
+ column=(type=long update=yes updatewhereclause=yes name=adatelettre dbname="t_tplperiode.adatelettre" )
+ column=(type=long update=yes updatewhereclause=yes name=amoislettre1 dbname="t_tplperiode.amoislettre1" )
+ column=(type=long update=yes updatewhereclause=yes name=amoislettre2 dbname="t_tplperiode.amoislettre2" )
+ column=(type=long update=yes updatewhereclause=yes name=ajoursem dbname="t_tplperiode.ajoursem" )
+ column=(type=long update=yes updatewhereclause=yes name=typeperiod dbname="t_tplperiode.typeperiod" )
+ column=(type=long update=yes updatewhereclause=yes name=id_template dbname="t_tplperiode.id_template" )
+ retrieve="SELECT     t_tplperiode.id_tplperiode ,
+           t_tplperiode.qnbjour ,
+           t_tplperiode.qjourouv ,
+           t_tplperiode.hnbsem ,
+           t_tplperiode.hdim ,
+           t_tplperiode.hlun ,
+           t_tplperiode.hmar ,
+           t_tplperiode.hmer ,
+           t_tplperiode.hjeu ,
+           t_tplperiode.hven ,
+           t_tplperiode.hsam ,
+           t_tplperiode.mnbmois1 ,
+           t_tplperiode.mnbmois2 ,
+           t_tplperiode.mdatechiffre ,
+           t_tplperiode.mdatelettre ,
+           t_tplperiode.mjoursem ,
+           t_tplperiode.mchoix ,
+           t_tplperiode.achoix ,
+           t_tplperiode.anbjour ,
+           t_tplperiode.ajourlettre ,
+           t_tplperiode.adatelettre ,
+           t_tplperiode.amoislettre1 ,
+           t_tplperiode.amoislettre2 ,
+           t_tplperiode.ajoursem ,
+           t_tplperiode.typeperiod ,
+           t_tplperiode.id_template     
+     FROM  t_tplperiode      
+     WHERE t_tplperiode.id_template = :ra_idtpl  " update="t_tplperiode" updatewhere=0 updatekeyinplace=no arguments=(("ra_idtpl", number)) )
+column(band=detail id=17 alignment="1" tabsequence=160 border="0" color="33554432" x="91" y="32" height="400" width="1861" format="[general]" html.valueishtml="0"  name=mchoix visible="1" radiobuttons.columns=1 radiobuttons.scale=no radiobuttons.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="2" tabsequence=120 border="5" color="33554432" x="1509" y="300" height="76" width="128" format="[general]" html.valueishtml="0"  name=mnbmois2 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=15 alignment="0" tabsequence=140 border="5" color="33554432" x="283" y="304" height="76" width="448" format="[general]" html.valueishtml="0"  name=mdatelettre visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=16 alignment="0" tabsequence=150 border="5" color="33554432" x="777" y="300" height="76" width="443" format="[general]" html.valueishtml="0"  name=mjoursem visible="1"  hidesnaked=1 ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=12 alignment="2" tabsequence=110 border="5" color="33554432" x="704" y="100" height="76" width="151" format="[general]" html.valueishtml="0"  name=mnbmois1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=14 alignment="2" tabsequence=130 border="5" color="33554432" x="270" y="100" height="76" width="142" format="[general]" html.valueishtml="0"  name=mdatechiffre visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="33554431" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

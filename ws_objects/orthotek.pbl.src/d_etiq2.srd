@@ -1,0 +1,226 @@
+﻿$PBExportHeader$d_etiq2.srd
+release 10.5;
+datawindow(units=1 timer_interval=10 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="Étiquettes" print.orientation = 0 print.margin.left = 25 print.margin.right = 0 print.margin.top = 25 print.margin.bottom = 0 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=id_etiq dbname="t_etiqchoix.id_etiq" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line1 dbname="t_etiqchoix.line1" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line2 dbname="t_etiqchoix.line2" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line3 dbname="t_etiqchoix.line3" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line4 dbname="t_etiqchoix.line4" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line5 dbname="t_etiqchoix.line5" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line6 dbname="t_etiqchoix.line6" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line7 dbname="t_etiqchoix.line7" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line8 dbname="t_etiqchoix.line8" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line9 dbname="t_etiqchoix.line9" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line10 dbname="t_etiqchoix.line10" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line11 dbname="t_etiqchoix.line11" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line12 dbname="t_etiqchoix.line12" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line13 dbname="t_etiqchoix.line13" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line14 dbname="t_etiqchoix.line14" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line15 dbname="t_etiqchoix.line15" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line16 dbname="t_etiqchoix.line16" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line17 dbname="t_etiqchoix.line17" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line18 dbname="t_etiqchoix.line18" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line19 dbname="t_etiqchoix.line19" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=line20 dbname="t_etiqchoix.line20" )
+ column=(type=number update=yes updatewhereclause=yes name=bold1 dbname="t_etiqchoix.bold1" )
+ column=(type=number update=yes updatewhereclause=yes name=bold2 dbname="t_etiqchoix.bold2" )
+ column=(type=number update=yes updatewhereclause=yes name=bold3 dbname="t_etiqchoix.bold3" )
+ column=(type=number update=yes updatewhereclause=yes name=bold4 dbname="t_etiqchoix.bold4" )
+ column=(type=number update=yes updatewhereclause=yes name=bold5 dbname="t_etiqchoix.bold5" )
+ column=(type=number update=yes updatewhereclause=yes name=bold6 dbname="t_etiqchoix.bold6" )
+ column=(type=number update=yes updatewhereclause=yes name=bold7 dbname="t_etiqchoix.bold7" )
+ column=(type=number update=yes updatewhereclause=yes name=bold8 dbname="t_etiqchoix.bold8" )
+ column=(type=number update=yes updatewhereclause=yes name=bold9 dbname="t_etiqchoix.bold9" )
+ column=(type=number update=yes updatewhereclause=yes name=bold10 dbname="t_etiqchoix.bold10" )
+ column=(type=number update=yes updatewhereclause=yes name=bold11 dbname="t_etiqchoix.bold11" )
+ column=(type=number update=yes updatewhereclause=yes name=bold12 dbname="t_etiqchoix.bold12" )
+ column=(type=number update=yes updatewhereclause=yes name=bold13 dbname="t_etiqchoix.bold13" )
+ column=(type=number update=yes updatewhereclause=yes name=bold14 dbname="t_etiqchoix.bold14" )
+ column=(type=number update=yes updatewhereclause=yes name=bold15 dbname="t_etiqchoix.bold15" )
+ column=(type=number update=yes updatewhereclause=yes name=bold16 dbname="t_etiqchoix.bold16" )
+ column=(type=number update=yes updatewhereclause=yes name=bold17 dbname="t_etiqchoix.bold17" )
+ column=(type=number update=yes updatewhereclause=yes name=bold18 dbname="t_etiqchoix.bold18" )
+ column=(type=number update=yes updatewhereclause=yes name=bold19 dbname="t_etiqchoix.bold19" )
+ column=(type=number update=yes updatewhereclause=yes name=bold20 dbname="t_etiqchoix.bold20" )
+ column=(type=number update=yes updatewhereclause=yes name=italic1 dbname="t_etiqchoix.italic1" )
+ column=(type=number update=yes updatewhereclause=yes name=italic2 dbname="t_etiqchoix.italic2" )
+ column=(type=number update=yes updatewhereclause=yes name=italic3 dbname="t_etiqchoix.italic3" )
+ column=(type=number update=yes updatewhereclause=yes name=italic4 dbname="t_etiqchoix.italic4" )
+ column=(type=number update=yes updatewhereclause=yes name=italic5 dbname="t_etiqchoix.italic5" )
+ column=(type=number update=yes updatewhereclause=yes name=italic6 dbname="t_etiqchoix.italic6" )
+ column=(type=number update=yes updatewhereclause=yes name=italic7 dbname="t_etiqchoix.italic7" )
+ column=(type=number update=yes updatewhereclause=yes name=italic8 dbname="t_etiqchoix.italic8" )
+ column=(type=number update=yes updatewhereclause=yes name=italic9 dbname="t_etiqchoix.italic9" )
+ column=(type=number update=yes updatewhereclause=yes name=italic10 dbname="t_etiqchoix.italic10" )
+ column=(type=number update=yes updatewhereclause=yes name=italic11 dbname="t_etiqchoix.italic11" )
+ column=(type=number update=yes updatewhereclause=yes name=italic12 dbname="t_etiqchoix.italic12" )
+ column=(type=number update=yes updatewhereclause=yes name=italic13 dbname="t_etiqchoix.italic13" )
+ column=(type=number update=yes updatewhereclause=yes name=italic14 dbname="t_etiqchoix.italic14" )
+ column=(type=number update=yes updatewhereclause=yes name=italic15 dbname="t_etiqchoix.italic15" )
+ column=(type=number update=yes updatewhereclause=yes name=italic16 dbname="t_etiqchoix.italic16" )
+ column=(type=number update=yes updatewhereclause=yes name=italic17 dbname="t_etiqchoix.italic17" )
+ column=(type=number update=yes updatewhereclause=yes name=italic18 dbname="t_etiqchoix.italic18" )
+ column=(type=number update=yes updatewhereclause=yes name=italic19 dbname="t_etiqchoix.italic19" )
+ column=(type=number update=yes updatewhereclause=yes name=italic20 dbname="t_etiqchoix.italic20" )
+ column=(type=number update=yes updatewhereclause=yes name=underline1 dbname="t_etiqchoix.underline1" )
+ column=(type=number update=yes updatewhereclause=yes name=underline2 dbname="t_etiqchoix.underline2" )
+ column=(type=number update=yes updatewhereclause=yes name=underline3 dbname="t_etiqchoix.underline3" )
+ column=(type=number update=yes updatewhereclause=yes name=underline4 dbname="t_etiqchoix.underline4" )
+ column=(type=number update=yes updatewhereclause=yes name=underline5 dbname="t_etiqchoix.underline5" )
+ column=(type=number update=yes updatewhereclause=yes name=underline6 dbname="t_etiqchoix.underline6" )
+ column=(type=number update=yes updatewhereclause=yes name=underline7 dbname="t_etiqchoix.underline7" )
+ column=(type=number update=yes updatewhereclause=yes name=underline8 dbname="t_etiqchoix.underline8" )
+ column=(type=number update=yes updatewhereclause=yes name=underline9 dbname="t_etiqchoix.underline9" )
+ column=(type=number update=yes updatewhereclause=yes name=underline10 dbname="t_etiqchoix.underline10" )
+ column=(type=number update=yes updatewhereclause=yes name=underline11 dbname="t_etiqchoix.underline11" )
+ column=(type=number update=yes updatewhereclause=yes name=underline12 dbname="t_etiqchoix.underline12" )
+ column=(type=number update=yes updatewhereclause=yes name=underline13 dbname="t_etiqchoix.underline13" )
+ column=(type=number update=yes updatewhereclause=yes name=underline14 dbname="t_etiqchoix.underline14" )
+ column=(type=number update=yes updatewhereclause=yes name=underline15 dbname="t_etiqchoix.underline15" )
+ column=(type=number update=yes updatewhereclause=yes name=underline16 dbname="t_etiqchoix.underline16" )
+ column=(type=number update=yes updatewhereclause=yes name=underline17 dbname="t_etiqchoix.underline17" )
+ column=(type=number update=yes updatewhereclause=yes name=underline18 dbname="t_etiqchoix.underline18" )
+ column=(type=number update=yes updatewhereclause=yes name=underline19 dbname="t_etiqchoix.underline19" )
+ column=(type=number update=yes updatewhereclause=yes name=underline20 dbname="t_etiqchoix.underline20" )
+ column=(type=long update=yes updatewhereclause=yes name=align1 dbname="t_etiqchoix.align1" )
+ column=(type=long update=yes updatewhereclause=yes name=align2 dbname="t_etiqchoix.align2" )
+ column=(type=long update=yes updatewhereclause=yes name=align3 dbname="t_etiqchoix.align3" )
+ column=(type=long update=yes updatewhereclause=yes name=align4 dbname="t_etiqchoix.align4" )
+ column=(type=long update=yes updatewhereclause=yes name=align5 dbname="t_etiqchoix.align5" )
+ column=(type=long update=yes updatewhereclause=yes name=align6 dbname="t_etiqchoix.align6" )
+ column=(type=long update=yes updatewhereclause=yes name=align7 dbname="t_etiqchoix.align7" )
+ column=(type=long update=yes updatewhereclause=yes name=align8 dbname="t_etiqchoix.align8" )
+ column=(type=long update=yes updatewhereclause=yes name=align9 dbname="t_etiqchoix.align9" )
+ column=(type=long update=yes updatewhereclause=yes name=align10 dbname="t_etiqchoix.align10" )
+ column=(type=long update=yes updatewhereclause=yes name=align11 dbname="t_etiqchoix.align11" )
+ column=(type=long update=yes updatewhereclause=yes name=align12 dbname="t_etiqchoix.align12" )
+ column=(type=long update=yes updatewhereclause=yes name=align13 dbname="t_etiqchoix.align13" )
+ column=(type=long update=yes updatewhereclause=yes name=align14 dbname="t_etiqchoix.align14" )
+ column=(type=long update=yes updatewhereclause=yes name=align15 dbname="t_etiqchoix.align15" )
+ column=(type=long update=yes updatewhereclause=yes name=align16 dbname="t_etiqchoix.align16" )
+ column=(type=long update=yes updatewhereclause=yes name=align17 dbname="t_etiqchoix.align17" )
+ column=(type=long update=yes updatewhereclause=yes name=align18 dbname="t_etiqchoix.align18" )
+ column=(type=long update=yes updatewhereclause=yes name=align19 dbname="t_etiqchoix.align19" )
+ column=(type=long update=yes updatewhereclause=yes name=align20 dbname="t_etiqchoix.align20" )
+ retrieve="SELECT  t_etiqchoix.id_etiq ,
+		  t_etiqchoix.line1 ,
+		  t_etiqchoix.line2 ,
+		  t_etiqchoix.line3 ,
+		  t_etiqchoix.line4,
+		  t_etiqchoix.line5 ,
+		  t_etiqchoix.line6 ,
+		  t_etiqchoix.line7 ,
+		  t_etiqchoix.line8,
+		  t_etiqchoix.line9 ,
+		  t_etiqchoix.line10 ,
+		  t_etiqchoix.line11 ,
+		  t_etiqchoix.line12,
+		  t_etiqchoix.line13 ,
+		  t_etiqchoix.line14 ,
+		  t_etiqchoix.line15 ,
+		  t_etiqchoix.line16,
+		  t_etiqchoix.line17,
+		  t_etiqchoix.line18,
+		  t_etiqchoix.line19,
+		  t_etiqchoix.line20,
+		  t_etiqchoix.bold1,
+		  t_etiqchoix.bold2 , 
+		  t_etiqchoix.bold3 , 
+		  t_etiqchoix.bold4 , 
+		  t_etiqchoix.bold5 , 
+		  t_etiqchoix.bold6 , 
+		  t_etiqchoix.bold7 , 
+		  t_etiqchoix.bold8 , 
+		  t_etiqchoix.bold9 , 
+		  t_etiqchoix.bold10 , 
+		  t_etiqchoix.bold11 , 
+		  t_etiqchoix.bold12 , 
+		  t_etiqchoix.bold13 , 
+		  t_etiqchoix.bold14 , 
+		  t_etiqchoix.bold15 , 
+		  t_etiqchoix.bold16 , 
+		  t_etiqchoix.bold17 , 
+		  t_etiqchoix.bold18 , 
+		  t_etiqchoix.bold19 , 
+		  t_etiqchoix.bold20 , 
+		  t_etiqchoix.italic1 , 
+		  t_etiqchoix.italic2 , 
+		  t_etiqchoix.italic3 , 
+		  t_etiqchoix.italic4 ,
+		  t_etiqchoix.italic5 , 
+		  t_etiqchoix.italic6 , 
+		  t_etiqchoix.italic7 , 
+		  t_etiqchoix.italic8 , 
+		  t_etiqchoix.italic9 , 
+		  t_etiqchoix.italic10 , 
+		  t_etiqchoix.italic11 , 
+		  t_etiqchoix.italic12 , 
+		  t_etiqchoix.italic13 , 
+		  t_etiqchoix.italic14 , 
+		  t_etiqchoix.italic15 , 
+		  t_etiqchoix.italic16 , 
+		  t_etiqchoix.italic17 , 
+		  t_etiqchoix.italic18 , 
+		  t_etiqchoix.italic19 , 
+		  t_etiqchoix.italic20 , 
+		  t_etiqchoix.underline1 , 
+		  t_etiqchoix.underline2 , 
+		  t_etiqchoix.underline3 , 
+		  t_etiqchoix.underline4 , 
+		  t_etiqchoix.underline5 , 
+		  t_etiqchoix.underline6 , 
+		  t_etiqchoix.underline7 , 
+		  t_etiqchoix.underline8 , 
+		  t_etiqchoix.underline9 , 
+		  t_etiqchoix.underline10 , 
+		  t_etiqchoix.underline11 , 
+		  t_etiqchoix.underline12 , 
+		  t_etiqchoix.underline13 , 
+		  t_etiqchoix.underline14 , 
+		  t_etiqchoix.underline15 , 
+		  t_etiqchoix.underline16 , 
+		  t_etiqchoix.underline17 , 
+		  t_etiqchoix.underline18 , 
+		  t_etiqchoix.underline19 , 
+		  t_etiqchoix.underline20 , 
+		  t_etiqchoix.align1 , 
+		  t_etiqchoix.align2 , 
+		  t_etiqchoix.align3 , 
+		  t_etiqchoix.align4 ,
+		  t_etiqchoix.align5 , 
+		  t_etiqchoix.align6 , 
+		  t_etiqchoix.align7 , 
+		  t_etiqchoix.align8 , 
+		  t_etiqchoix.align9 , 
+		  t_etiqchoix.align10 , 
+		  t_etiqchoix.align11 , 
+		  t_etiqchoix.align12 , 
+		  t_etiqchoix.align13 , 
+		  t_etiqchoix.align14 , 
+		  t_etiqchoix.align15 , 
+		  t_etiqchoix.align16 , 
+		  t_etiqchoix.align17 , 
+		  t_etiqchoix.align18 , 
+		  t_etiqchoix.align19 , 
+		  t_etiqchoix.align20
+   FROM t_etiqchoix
+  WHERE t_etiqchoix.id_etiq = :ra_idetiq" update="t_etiqchoix" updatewhere=0 updatekeyinplace=no arguments=(("ra_idetiq", number)) )
+column(band=detail id=6 alignment="0" tabsequence=10 border="0" color="0" x="1" y="0" height="16" width="294" format="[general]" html.valueishtml="0"  name=line5 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.nilisnull=yes  font.face="Arial" font.height="-10" font.weight="400~tif ( bold5 = 1 , 1500,0 )"  font.family="2" font.pitch="2" font.charset="0"font.italic="0~tif ( italic5 = 1 , 1,0 )" font.underline="0~tif ( underline5 = 1 , 1,0 )"  background.mode="2" background.color="16777215" )
+column(band=detail id=7 alignment="0" tabsequence=20 border="0" color="0" x="1" y="17" height="16" width="294" format="[general]" html.valueishtml="0"  name=line6 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.nilisnull=yes  font.face="Arial" font.height="-10" font.weight="400~tif ( bold6 = 1 , 1500,0 )"  font.family="2" font.pitch="2" font.charset="0"font.italic="0~tif ( italic6 = 1 , 1,0 )" font.underline="0~tif ( underline6 = 1 , 1,0 )"  background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="0" tabsequence=30 border="0" color="0" x="1" y="34" height="16" width="294" format="[general]" html.valueishtml="0"  name=line7 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.nilisnull=yes  font.face="Arial" font.height="-10" font.weight="400~tif ( bold7 = 1 , 1500,0 )"  font.family="2" font.pitch="2" font.charset="0"font.italic="0~tif ( italic7 = 1 , 1,0 )" font.underline="0~tif ( underline7 = 1 , 1,0 )"  background.mode="2" background.color="16777215" )
+column(band=detail id=9 alignment="0" tabsequence=40 border="0" color="0" x="1" y="51" height="16" width="294" format="[general]" html.valueishtml="0"  name=line8 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.nilisnull=yes  font.face="Arial" font.height="-10" font.weight="400~tif ( bold8 = 1 , 1500,0 )"  font.family="2" font.pitch="2" font.charset="0"font.italic="0~tif ( italic8 = 1 , 1,0 )" font.underline="0~tif ( underline8 = 1 , 1,0 )"  background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

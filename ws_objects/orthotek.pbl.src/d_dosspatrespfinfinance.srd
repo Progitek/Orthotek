@@ -1,0 +1,32 @@
+﻿$PBExportHeader$d_dosspatrespfinfinance.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=192 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=date updatewhereclause=yes name=date_paiement dbname="paiement.date_paiement" )
+ column=(type=decimal(2) updatewhereclause=yes name=montant_recu dbname="paiement.montant_recu" )
+ column=(type=char(30) updatewhereclause=yes name=paiement dbname="paiement.paiement" )
+ retrieve="SELECT paiement.date_paiement,   
+		 paiement.montant_recu,   
+		 paiement.paiement
+ FROM  paiement  
+WHERE  paiement.id_contact = :il_idcontact
+
+UNION
+
+SELECT factures_traitements.date_facture,
+		 factures_traitements.montant,
+		 (select description from t_status where t_status.status_id = factures_traitements.status_id) as status
+ FROM  factures_traitements  
+WHERE  factures_traitements.id_contact = :il_idcontact" arguments=(("il_idcontact", number)) )
+text(band=header alignment="0" text="Responsable financier et autre" border="0" color="8388608" x="0" y="0" height="100" width="1344" html.valueishtml="0"  name=t_title visible="1"  font.face="Arial" font.height="-16" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Date" border="0" color="0" x="18" y="124" height="64" width="512" html.valueishtml="0"  name=t_date visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Description" border="0" color="0" x="535" y="124" height="64" width="809" html.valueishtml="0"  name=t_description visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Montant" border="0" color="0" x="1349" y="124" height="64" width="379" html.valueishtml="0"  name=t_montant visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="18" y="0" height="64" width="512" format="[general]" html.valueishtml="0"  name=date_paiement visible="1" editmask.mask="dd/mm/yyyy" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="535" y="0" height="64" width="809" format="[general]" html.valueishtml="0"  name=paiement visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="1349" y="0" height="64" width="379" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=montant_recu visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

@@ -1,0 +1,134 @@
+﻿$PBExportHeader$d_etatcompte.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="L'âge des comptes" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=1136 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=60 color="536870912" )
+detail(height=96 color="536870912" )
+table(column=(type=long updatewhereclause=yes identity=yes name=trait dbname="traitements.trait" )
+ column=(type=decimal(2) updatewhereclause=yes name=facttot1 dbname="facttot1" )
+ column=(type=decimal(2) updatewhereclause=yes name=facttot dbname="facttot" )
+ column=(type=decimal(2) updatewhereclause=yes name=paietot1 dbname="paietot1" )
+ column=(type=decimal(2) updatewhereclause=yes name=paietot dbname="paietot" )
+ column=(type=decimal(2) updatewhereclause=yes name=factc1 dbname="factc1" )
+ column=(type=decimal(2) updatewhereclause=yes name=factc dbname="factc" )
+ column=(type=decimal(2) updatewhereclause=yes name=paiec1 dbname="paiec1" )
+ column=(type=decimal(2) updatewhereclause=yes name=paiec dbname="paiec" )
+ column=(type=decimal(2) updatewhereclause=yes name=fact301 dbname="fact301" )
+ column=(type=decimal(2) updatewhereclause=yes name=fact30 dbname="fact30" )
+ column=(type=decimal(2) updatewhereclause=yes name=paie301 dbname="paie301" )
+ column=(type=decimal(2) updatewhereclause=yes name=paie30 dbname="paie30" )
+ column=(type=decimal(2) updatewhereclause=yes name=fact601 dbname="fact601" )
+ column=(type=decimal(2) updatewhereclause=yes name=fact60 dbname="fact60" )
+ column=(type=decimal(2) updatewhereclause=yes name=paie601 dbname="paie601" )
+ column=(type=decimal(2) updatewhereclause=yes name=paie60 dbname="paie60" )
+ column=(type=long updatewhereclause=yes name=patient_id_contact dbname="patient.id_contact" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=long updatewhereclause=yes identity=yes name=patient_patient_id dbname="patient.patient_id" )
+ column=(type=char(36) updatewhereclause=yes name=patient_adresse dbname="patient.adresse" )
+ column=(type=char(50) updatewhereclause=yes name=patient_ville dbname="patient.ville" )
+ column=(type=char(25) updatewhereclause=yes name=patient_province dbname="patient.province" )
+ column=(type=char(15) updatewhereclause=yes name=patient_code_postale dbname="patient.code_postale" )
+ column=(type=char(15) updatewhereclause=yes name=patient_tel_maison dbname="patient.tel_maison" )
+ column=(type=char(15) updatewhereclause=yes name=patient_tel_bureau dbname="patient.tel_bureau" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_adresse dbname="ortho_id.dr_adresse" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_ville dbname="ortho_id.dr_ville" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_province dbname="ortho_id.dr_province" )
+ column=(type=char(7) updatewhereclause=yes name=ortho_id_dr_code_postal dbname="ortho_id.dr_code_postal" )
+ column=(type=char(15) updatewhereclause=yes name=ortho_id_dr_tel_bur dbname="ortho_id.dr_tel_bur" )
+ column=(type=char(35) updatewhereclause=yes name=t_contact_adresse dbname="t_contact.adresse" )
+ column=(type=char(50) updatewhereclause=yes name=t_contact_ville dbname="t_contact.ville" )
+ column=(type=char(25) updatewhereclause=yes name=t_contact_province dbname="t_contact.province" )
+ column=(type=char(15) updatewhereclause=yes name=t_contact_zip dbname="t_contact.zip" )
+ column=(type=char(15) updatewhereclause=yes name=t_contact_telres dbname="t_contact.telres" )
+ column=(type=char(15) updatewhereclause=yes name=t_contact_telbur dbname="t_contact.telbur" )
+ retrieve="  SELECT 	traitements.traitement_id as trait,
+            (select sum(montant) from factures_traitements where traitement_id = trait and
+            date_facture <= today()) as facttot1,       
+				(if facttot1 is null then 0 else facttot1 endif) as facttot,
+				(select sum(montant_recu) from paiement where traitement_patient_id = trait and 
+            date_paiement <= today()) as paietot1 ,
+            (if paietot1 is null then 0 else paietot1 endif) as paietot,
+
+            (select sum(montant) from factures_traitements where traitement_id = trait and
+            date_facture <= today() - 30) as factc1,       
+				(if factc1 is null then 0 else factc1 endif) as factc,
+				(select sum(montant_recu) from paiement where traitement_patient_id = trait and
+            date_paiement <= today()) as paiec1 ,
+            (if paiec1 is null then 0 else paiec1 endif) as paiec,
+
+				(select sum(montant) from factures_traitements where traitement_id = trait and
+            date_facture <= today() - 60) as fact301,       
+				(if fact301 is null then 0 else fact301 endif) as fact30,
+				(select sum(montant_recu) from paiement where traitement_patient_id = trait and
+            date_paiement <= today()) as paie301 ,
+            (if paie301 is null then 0 else paie301 endif) as paie30,
+
+				(select sum(montant) from factures_traitements where traitement_id = trait and
+            date_facture <= today() -90) as fact601,       
+				(if fact601 is null then 0 else fact601 endif) as fact60,
+				(select sum(montant_recu) from paiement where traitement_patient_id = trait and
+            date_paiement <= today()) as paie601 ,
+            (if paie601 is null then 0 else paie601 endif) as paie60,
+            patient.id_contact,
+				patient_nom,
+            patient_prenom,
+            patient.patient_id,
+            patient.adresse,
+            patient.ville,
+            patient.province,
+            patient.code_postale,
+            patient.tel_maison,
+            patient.tel_bureau,
+            ortho_id.dr_nom_complet,
+            ortho_id.dr_adresse,
+            ortho_id.dr_ville,
+            ortho_id.dr_province,
+            ortho_id.dr_code_postal,
+            ortho_id.dr_tel_bur,
+				t_contact.adresse,
+			   t_contact.ville,
+				t_contact.province,
+				t_contact.zip,
+				t_contact.telres,
+				t_contact.telbur
+	  FROM 	traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id,
+            patient     INNER JOIN ortho_id ON patient.no_ortho = ortho_id.ortho_id
+								INNER JOIN t_contact ON t_contact.id_contact = patient.id_contact 
+     WHERE  patient.patient_id = :ra_patid" arguments=(("ra_patid", number)) )
+group(level=1 header.height=0 trailer.height=100 by=("patient_patient_id" ) newpage=yes header.color="536870912" trailer.color="536870912" )
+column(band=header id=39 alignment="0" tabsequence=32766 border="0" color="0" x="1038" y="872" height="76" width="480" format="[general]" html.valueishtml="0"  name=t_contact_telbur visible="1" editmask.mask="(###) ###-####" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=38 alignment="0" tabsequence=32766 border="0" color="0" x="288" y="872" height="76" width="480" format="[general]" html.valueishtml="0"  name=t_contact_telres visible="1" editmask.mask="(###) ###-####" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=34 alignment="0" tabsequence=32766 border="0" color="0" x="46" y="712" height="76" width="1152" format="[general]" html.valueishtml="0"  name=t_contact_adresse visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Maison: " border="0" color="0" x="46" y="872" height="76" width="229" html.valueishtml="0"  name=t_maison visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Bureau: " border="0" color="0" x="800" y="872" height="76" width="224" html.valueishtml="0"  name=t_bureau visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression="  t_contact_ville + ' ( ' +  t_contact_province + ' ) ' +   t_contact_zip "border="0" color="0" x="46" y="792" height="76" width="1472" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Total" border="0" color="0" x="41" y="1060" height="64" width="293" html.valueishtml="0"  name=t_total visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Courant" border="0" color="0" x="425" y="1060" height="64" width="329" html.valueishtml="0"  name=t_courant visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="30 jours" border="0" color="0" x="841" y="1060" height="64" width="329" html.valueishtml="0"  name=t_30 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="60 jours" border="0" color="0" x="1234" y="1060" height="64" width="329" html.valueishtml="0"  name=t_60 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="90 jours" border="0" color="0" x="1618" y="1060" height="64" width="329" html.valueishtml="0"  name=t_90 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=29 alignment="0" tabsequence=32766 border="0" color="0" x="46" y="300" height="76" width="1353" format="[general]" html.valueishtml="0"  name=ortho_id_dr_adresse visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression=" ortho_id_dr_ville + '  '+  ortho_id_dr_province + '  ' +  ortho_id_dr_code_postal "border="0" color="0" x="46" y="380" height="76" width="1353" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=33 alignment="0" tabsequence=32766 border="0" color="0" x="46" y="460" height="76" width="1353" format="[general]" html.valueishtml="0"  name=ortho_id_dr_tel_bur visible="1" editmask.mask="(###) ###-####" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=28 alignment="0" tabsequence=32766 border="0" color="0" x="46" y="220" height="76" width="1353" format="[general]" html.valueishtml="0"  name=ortho_id_dr_nom_complet visible="1"  slideleft=yes edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Âge des comptes" border="0" color="0" x="46" y="36" height="92" width="1371" html.valueishtml="0"  name=t_title visible="1"  font.face="Arial" font.height="-14" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=18 alignment="0" tabsequence=32766 border="0" color="0" x="46" y="632" height="76" width="1152" format="[general]" html.valueishtml="0"  name=patient_id_contact visible="1" dddw.name=dddw_contact dddw.displaycolumn=compute_1 dddw.datacolumn=id_contact dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Patient: " border="0" color="0" x="2011" y="632" height="64" width="224" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression=" patient_patient_prenom + ' ' + patient_patient_nom "border="0" color="0" x="2267" y="632" height="64" width="722" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="1" expression=" if((fact60 - paie60) <= 0, 0,(fact60 - paie60) )"border="0" color="0" x="1614" y="16" height="64" width="334" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_90 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression=" if((fact30 - paie30 - compute_90) <= 0, 0,(fact30 - paie30 - compute_90))"border="0" color="0" x="1230" y="16" height="64" width="334" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_60 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression=" if((factc - paiec -compute_60- compute_90) <= 0, 0,(factc - paiec -compute_60- compute_90))"border="0" color="0" x="864" y="12" height="64" width="306" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_30 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression=" if((facttot -  paietot-compute_30-compute_60-compute_90) <= 0, 0,(facttot -  paietot-compute_30-compute_60-compute_90))"border="0" color="0" x="434" y="12" height="64" width="320" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_c visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression=" facttot -  paietot "border="0" color="0" x="46" y="12" height="64" width="288" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Imprimer le " border="0" color="0" x="14" y="4" height="56" width="283" html.valueishtml="0"  name=t_printedon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="302" y="4" height="56" width="411" format="[SHORTDATE]" html.valueishtml="0"  name=compute_8 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="© Orthotek" border="0" color="0" x="1230" y="4" height="56" width="338" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2176" y="4" height="56" width="562" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

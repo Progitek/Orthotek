@@ -1,0 +1,30 @@
+﻿$PBExportHeader$gf_choosecolor.srf
+global type gf_choosecolor from function_object
+end type
+
+forward prototypes
+global function long gf_choosecolor (long al_color)
+end prototypes
+
+global function long gf_choosecolor (long al_color);boolean    lb_ret
+gs_choosecolor  lso_choosecolor
+
+lso_choosecolor.lStructSize = 36
+lso_choosecolor.hwnd = 0
+lso_choosecolor.hInstance = 0
+lso_choosecolor.rgbResult = al_color
+lso_choosecolor.lpCustColors = String(al_color)
+lso_choosecolor.Flags = 6
+lso_choosecolor.lCustData = 0
+lso_choosecolor.lpfnHook = 0
+lso_choosecolor.lpTemplateName  = '0'
+
+IF ChooseColorA(lso_choosecolor) THEN
+	al_color = lso_choosecolor.rgbresult
+	return al_color
+ELSE
+	return rgb(255,255,255)
+END IF
+
+end function
+

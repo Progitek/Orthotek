@@ -1,0 +1,4648 @@
+﻿$PBExportHeader$m_insertinfo.srm
+forward
+global type m_insertinfo from menu
+end type
+type m_patient from menu within m_insertinfo
+end type
+type m_salutation0 from menu within m_patient
+end type
+type m_nompatient from menu within m_patient
+end type
+type m_nompatupper from menu within m_patient
+end type
+type m_prenompatient from menu within m_patient
+end type
+type m_prenompatupper from menu within m_patient
+end type
+type m_addpatient from menu within m_patient
+end type
+type m_ville0 from menu within m_patient
+end type
+type m_provincepatient from menu within m_patient
+end type
+type m_codepostalpatient from menu within m_patient
+end type
+type m_genre from menu within m_patient
+end type
+type m_nodossier from menu within m_patient
+end type
+type m_nopatient from menu within m_patient
+end type
+type m_noboite from menu within m_patient
+end type
+type m_telres from menu within m_patient
+end type
+type m_telbur from menu within m_patient
+end type
+type m_ageformat1 from menu within m_patient
+end type
+type m_datenais from menu within m_patient
+end type
+type m_datenais2 from menu within m_patient
+end type
+type m_datenaisab from menu within m_patient
+end type
+type m_datedebtrait from menu within m_patient
+end type
+type m_parents from menu within m_patient
+end type
+type m_nompere from menu within m_parents
+end type
+type m_telpere from menu within m_parents
+end type
+type m_nommere from menu within m_parents
+end type
+type m_telmere from menu within m_parents
+end type
+type m_parents from menu within m_patient
+m_nompere m_nompere
+m_telpere m_telpere
+m_nommere m_nommere
+m_telmere m_telmere
+end type
+type m_patient from menu within m_insertinfo
+m_salutation0 m_salutation0
+m_nompatient m_nompatient
+m_nompatupper m_nompatupper
+m_prenompatient m_prenompatient
+m_prenompatupper m_prenompatupper
+m_addpatient m_addpatient
+m_ville0 m_ville0
+m_provincepatient m_provincepatient
+m_codepostalpatient m_codepostalpatient
+m_genre m_genre
+m_nodossier m_nodossier
+m_nopatient m_nopatient
+m_noboite m_noboite
+m_telres m_telres
+m_telbur m_telbur
+m_ageformat1 m_ageformat1
+m_datenais m_datenais
+m_datenais2 m_datenais2
+m_datenaisab m_datenaisab
+m_datedebtrait m_datedebtrait
+m_parents m_parents
+end type
+type m_responsable from menu within m_insertinfo
+end type
+type m_salutation from menu within m_responsable
+end type
+type m_salutation2 from menu within m_responsable
+end type
+type m_prenom from menu within m_responsable
+end type
+type m_nom0 from menu within m_responsable
+end type
+type m_adresse2 from menu within m_responsable
+end type
+type m_ville3 from menu within m_responsable
+end type
+type m_province2 from menu within m_responsable
+end type
+type m_codepostal0 from menu within m_responsable
+end type
+type m_tel from menu within m_responsable
+end type
+type m_responsable from menu within m_insertinfo
+m_salutation m_salutation
+m_salutation2 m_salutation2
+m_prenom m_prenom
+m_nom0 m_nom0
+m_adresse2 m_adresse2
+m_ville3 m_ville3
+m_province2 m_province2
+m_codepostal0 m_codepostal0
+m_tel m_tel
+end type
+type m_entente from menu within m_insertinfo
+end type
+type m_1 from menu within m_entente
+end type
+type m_typedetraitement from menu within m_entente
+end type
+type m_datedebtrait0 from menu within m_entente
+end type
+type m_datefintraitement from menu within m_entente
+end type
+type m_dureeapproximative from menu within m_entente
+end type
+type m_couttotal from menu within m_entente
+end type
+type m_couttotalphase1 from menu within m_entente
+end type
+type m_coutdiagnostique1 from menu within m_entente
+end type
+type m_paiementinitial1 from menu within m_entente
+end type
+type m_datepaiementinitial1 from menu within m_entente
+end type
+type m_versementmensuel1 from menu within m_entente
+end type
+type m_nombredeversement1 from menu within m_entente
+end type
+type m_paiementfinal1 from menu within m_entente
+end type
+type m_couttotalphase2 from menu within m_entente
+end type
+type m_coutdiagnostique2 from menu within m_entente
+end type
+type m_paiementinitial2 from menu within m_entente
+end type
+type m_datepaiementinitial2 from menu within m_entente
+end type
+type m_versementmensuel2 from menu within m_entente
+end type
+type m_nombredeversement2 from menu within m_entente
+end type
+type m_paiementfinal2 from menu within m_entente
+end type
+type m_couttotalphase3 from menu within m_entente
+end type
+type m_coutdiagnostique3 from menu within m_entente
+end type
+type m_paiementinitial3 from menu within m_entente
+end type
+type m_datepaiementinitial3 from menu within m_entente
+end type
+type m_versementmensuel3 from menu within m_entente
+end type
+type m_nombredeversement3 from menu within m_entente
+end type
+type m_paiementfinal3 from menu within m_entente
+end type
+type m_commentaire from menu within m_entente
+end type
+type m_entente from menu within m_insertinfo
+m_1 m_1
+m_typedetraitement m_typedetraitement
+m_datedebtrait0 m_datedebtrait0
+m_datefintraitement m_datefintraitement
+m_dureeapproximative m_dureeapproximative
+m_couttotal m_couttotal
+m_couttotalphase1 m_couttotalphase1
+m_coutdiagnostique1 m_coutdiagnostique1
+m_paiementinitial1 m_paiementinitial1
+m_datepaiementinitial1 m_datepaiementinitial1
+m_versementmensuel1 m_versementmensuel1
+m_nombredeversement1 m_nombredeversement1
+m_paiementfinal1 m_paiementfinal1
+m_couttotalphase2 m_couttotalphase2
+m_coutdiagnostique2 m_coutdiagnostique2
+m_paiementinitial2 m_paiementinitial2
+m_datepaiementinitial2 m_datepaiementinitial2
+m_versementmensuel2 m_versementmensuel2
+m_nombredeversement2 m_nombredeversement2
+m_paiementfinal2 m_paiementfinal2
+m_couttotalphase3 m_couttotalphase3
+m_coutdiagnostique3 m_coutdiagnostique3
+m_paiementinitial3 m_paiementinitial3
+m_datepaiementinitial3 m_datepaiementinitial3
+m_versementmensuel3 m_versementmensuel3
+m_nombredeversement3 m_nombredeversement3
+m_paiementfinal3 m_paiementfinal3
+m_commentaire m_commentaire
+end type
+type m_contrat from menu within m_insertinfo
+end type
+type m_description from menu within m_contrat
+end type
+type m_datedutraitement from menu within m_contrat
+end type
+type m_pourcentage from menu within m_contrat
+end type
+type m_coutdutraitement from menu within m_contrat
+end type
+type m_paiementinitial from menu within m_contrat
+end type
+type m_couttconsultation from menu within m_contrat
+end type
+type m_coutdiagnostic from menu within m_contrat
+end type
+type m_coutmiseenbouche from menu within m_contrat
+end type
+type m_coutrentation from menu within m_contrat
+end type
+type m_datepremierversementmensuel from menu within m_contrat
+end type
+type m_nbversementmensuel from menu within m_contrat
+end type
+type m_versementmensuel from menu within m_contrat
+end type
+type m_totalversementmensuel from menu within m_contrat
+end type
+type m_paiementfinal from menu within m_contrat
+end type
+type m_contrat from menu within m_insertinfo
+m_description m_description
+m_datedutraitement m_datedutraitement
+m_pourcentage m_pourcentage
+m_coutdutraitement m_coutdutraitement
+m_paiementinitial m_paiementinitial
+m_couttconsultation m_couttconsultation
+m_coutdiagnostic m_coutdiagnostic
+m_coutmiseenbouche m_coutmiseenbouche
+m_coutrentation m_coutrentation
+m_datepremierversementmensuel m_datepremierversementmensuel
+m_nbversementmensuel m_nbversementmensuel
+m_versementmensuel m_versementmensuel
+m_totalversementmensuel m_totalversementmensuel
+m_paiementfinal m_paiementfinal
+end type
+type m_dentist from menu within m_insertinfo
+end type
+type m_salutation1 from menu within m_dentist
+end type
+type m_titre0 from menu within m_dentist
+end type
+type m_dentiste from menu within m_dentist
+end type
+type m_prenomdentiste from menu within m_dentist
+end type
+type m_adresse0 from menu within m_dentist
+end type
+type m_ville1 from menu within m_dentist
+end type
+type m_province0 from menu within m_dentist
+end type
+type m_codepostale from menu within m_dentist
+end type
+type m_teldentist from menu within m_dentist
+end type
+type m_dentist from menu within m_insertinfo
+m_salutation1 m_salutation1
+m_titre0 m_titre0
+m_dentiste m_dentiste
+m_prenomdentiste m_prenomdentiste
+m_adresse0 m_adresse0
+m_ville1 m_ville1
+m_province0 m_province0
+m_codepostale m_codepostale
+m_teldentist m_teldentist
+end type
+type m_referent from menu within m_insertinfo
+end type
+type m_salutation3 from menu within m_referent
+end type
+type m_titre from menu within m_referent
+end type
+type m_prenom0 from menu within m_referent
+end type
+type m_nom from menu within m_referent
+end type
+type m_adresse1 from menu within m_referent
+end type
+type m_ville2 from menu within m_referent
+end type
+type m_province1 from menu within m_referent
+end type
+type m_codepostale0 from menu within m_referent
+end type
+type m_telephone from menu within m_referent
+end type
+type m_referent from menu within m_insertinfo
+m_salutation3 m_salutation3
+m_titre m_titre
+m_prenom0 m_prenom0
+m_nom m_nom
+m_adresse1 m_adresse1
+m_ville2 m_ville2
+m_province1 m_province1
+m_codepostale0 m_codepostale0
+m_telephone m_telephone
+end type
+type m_specialiste from menu within m_insertinfo
+end type
+type m_nomcomplet from menu within m_specialiste
+end type
+type m_adresse from menu within m_specialiste
+end type
+type m_ville from menu within m_specialiste
+end type
+type m_province from menu within m_specialiste
+end type
+type m_codepostal from menu within m_specialiste
+end type
+type m_specialiste from menu within m_insertinfo
+m_nomcomplet m_nomcomplet
+m_adresse m_adresse
+m_ville m_ville
+m_province m_province
+m_codepostal m_codepostal
+end type
+type m_rdv from menu within m_insertinfo
+end type
+type m_prochainrdv from menu within m_rdv
+end type
+type m_heureprochainrdv from menu within m_rdv
+end type
+type m_prochainrdvfr from menu within m_rdv
+end type
+type m_prochainrdvan from menu within m_rdv
+end type
+type m_prochainrdvcompl from menu within m_rdv
+end type
+type m_dureeprochainrdv from menu within m_rdv
+end type
+type m_prochainrendezvousfrsansle from menu within m_rdv
+end type
+type m_rdv from menu within m_insertinfo
+m_prochainrdv m_prochainrdv
+m_heureprochainrdv m_heureprochainrdv
+m_prochainrdvfr m_prochainrdvfr
+m_prochainrdvan m_prochainrdvan
+m_prochainrdvcompl m_prochainrdvcompl
+m_dureeprochainrdv m_dureeprochainrdv
+m_prochainrendezvousfrsansle m_prochainrendezvousfrsansle
+end type
+type m_autres from menu within m_insertinfo
+end type
+type m_datedujour from menu within m_autres
+end type
+type m_datedujourab from menu within m_autres
+end type
+type m_satellite from menu within m_autres
+end type
+type m_moisan from menu within m_autres
+end type
+type m_moisfr from menu within m_autres
+end type
+type m_annee from menu within m_autres
+end type
+type m_autres from menu within m_insertinfo
+m_datedujour m_datedujour
+m_datedujourab m_datedujourab
+m_satellite m_satellite
+m_moisan m_moisan
+m_moisfr m_moisfr
+m_annee m_annee
+end type
+global type m_insertinfo from menu
+m_patient m_patient
+m_responsable m_responsable
+m_entente m_entente
+m_contrat m_contrat
+m_dentist m_dentist
+m_referent m_referent
+m_specialiste m_specialiste
+m_rdv m_rdv
+m_autres m_autres
+end type
+end forward
+
+global type m_insertinfo from menu
+m_patient m_patient
+m_responsable m_responsable
+m_entente m_entente
+m_contrat m_contrat
+m_dentist m_dentist
+m_referent m_referent
+m_specialiste m_specialiste
+m_rdv m_rdv
+m_autres m_autres
+end type
+global m_insertinfo m_insertinfo
+
+type variables
+string is_champfusion
+end variables
+
+forward prototypes
+public subroutine uf_translate ()
+public function string of_getchampfusion ()
+public subroutine uf_insert (string as_column)
+end prototypes
+
+public subroutine uf_translate ();if v_langue = 'an' then
+	m_patient.m_nompatient.text = "Last name"
+	m_patient.m_nompatupper.text = "Last name (Upper)"
+	m_patient.m_prenompatient.text = "First name"
+	m_patient.m_prenompatupper.text = "First name (Upper)"
+	m_patient.m_addpatient.text = "Address"
+	m_patient.m_ville0.text = "City"
+	m_patient.m_codepostalpatient.text = "Postal code"
+	m_patient.m_genre.text = "Sex"
+	m_patient.m_nodossier.text = "File #"
+	m_patient.m_nopatient.text = "Patient #"
+	m_patient.m_noboite.text = "Box #"
+	m_patient.m_telres.text = "Home Tel."
+	m_patient.m_telbur.text = "Office Tel."
+	m_patient.m_ageformat1.text = "Age format 1"
+	m_patient.m_datenais.text = "Birthdate 1"
+	m_patient.m_datenais2.text = "Birthdate 2"
+	m_patient.m_datenaisab.text = "Birthdate (Abr)"
+	m_patient.m_datedebtrait.text = "Begin treatment date"
+	m_patient.m_parents.m_nompere.text = "Father's name"
+	m_patient.m_parents.m_telpere.text = "Father's phone"
+	m_patient.m_parents.m_nommere.text = "Mother's name"
+	m_patient.m_parents.m_telmere.text = "Mother's name"
+	m_responsable.text = "Responsible party"
+	m_responsable.m_salutation.text = "Salutation"
+	m_responsable.m_prenom.text = "First name"
+	m_responsable.m_nom0.text = "Last name"
+	m_responsable.m_adresse2.text = "Address"
+	m_responsable.m_ville3.text = "City"
+	m_responsable.m_codepostal0.text = "Postal code"
+	m_responsable.m_tel.text = "Tel."
+	m_entente.m_typedetraitement.text = "Type of treatment"
+	m_entente.m_datedebtrait0.text = "Begin treatment date"
+	m_entente.m_datefintraitement.text = "End treatment date"
+	m_entente.m_dureeapproximative.text = "Approximate duration"
+	m_entente.m_couttotal.text = "Treatment cost"
+	m_entente.m_couttotalphase1.text = "Global cost (Phase 1)"
+	m_entente.m_coutdiagnostique1.text = "Record cost (Phase 1)"
+	m_entente.m_paiementinitial1.text = "Initial payment (Phase 1)"
+	m_entente.m_datepaiementinitial1.text = "Initial payment date (Phase 1)"
+	m_entente.m_versementmensuel1.text = "Installment payment (Phase 1)"
+	m_entente.m_nombredeversement1.text = "Nb. payment (Phase 1)"
+	m_entente.m_paiementfinal1.text = "Final payment (Phase 1)"
+	m_entente.m_couttotalphase2.text = "Global cost (Phase 2)"
+	m_entente.m_coutdiagnostique2.text = "Record cost (Phase 2)"
+	m_entente.m_paiementinitial2.text = "Initial payment (Phase 2)"
+	m_entente.m_datepaiementinitial2.text = "Initial payment date (Phase 2)"
+	m_entente.m_versementmensuel2.text = "Installment payment (Phase 2)"
+	m_entente.m_nombredeversement2.text = "Nb. payment (Phase 2)"
+	m_entente.m_paiementfinal2.text = "Final payment (Phase 2)"
+	m_entente.m_couttotalphase3.text = "Global cost (Phase 3)"
+	m_entente.m_coutdiagnostique3.text = "Record cost (Phase 3)"
+	m_entente.m_paiementinitial3.text = "Initial payment (Phase 3)"
+	m_entente.m_datepaiementinitial3.text = "Initial payment date (Phase 3)"
+	m_entente.m_versementmensuel3.text = "Installment payment (Phase 3)"
+	m_entente.m_nombredeversement3.text = "Nb. payment (Phase 3)"
+	m_entente.m_paiementfinal3.text = "Final payment (Phase 3)"
+	m_entente.m_commentaire.text = "Comment"
+	m_contrat.text = "Contract"
+	m_contrat.m_datedutraitement.text = "Begin treatment date"
+	m_contrat.m_pourcentage.text = "Pourcentage"
+	m_contrat.m_coutdutraitement.text = "Treatment cost"
+	m_contrat.m_paiementinitial.text = "Initial payment"
+	m_contrat.m_couttconsultation.text = "Consultation fee"
+	m_contrat.m_coutdiagnostic.text = "Record fee"
+	m_contrat.m_coutmiseenbouche.text = "Bond fee"
+	m_contrat.m_coutrentation.text = "Retention fee"
+	m_contrat.m_datepremierversementmensuel.text = "First installment date"
+	m_contrat.m_nbversementmensuel.text = "Nb. Installment"
+	m_contrat.m_versementmensuel.text = "Installment amount"
+	m_contrat.m_totalversementmensuel.text = "Total of installments"
+	m_contrat.m_paiementfinal.text = "Final payment"
+	m_dentist.text = "Dentist"
+	m_dentist.m_titre0.text = "Title"
+	m_dentist.m_dentiste.text = "Last Name"
+	m_dentist.m_prenomdentiste.text = "First Name"
+	m_dentist.m_adresse0.text = "Address"
+	m_dentist.m_ville1.text = "City"
+	m_dentist.m_province0.text = "Province"
+	m_dentist.m_codepostale.text = "Postal code"
+	m_dentist.m_teldentist.text = "Telephone"
+	m_referent.text = "Referent"
+	m_referent.m_titre.text = "Title"
+	m_referent.m_prenom0.text = "First name"
+	m_referent.m_nom.text = "Last name"
+	m_referent.m_adresse1.text = "Address"
+	m_referent.m_ville2.text = "City"
+	m_referent.m_codepostale0.text = "Postal code"
+	m_referent.m_telephone.text = "Telephone"
+	m_specialiste.text = "Specialist"
+	m_specialiste.m_nomcomplet.text = "Complete name"
+	m_specialiste.m_adresse.text = "Adress"
+	m_specialiste.m_ville.text = "City"
+	m_specialiste.m_codepostal.text = "Postal code"
+	m_rdv.text = "Appointment"
+	m_rdv.m_prochainrdv.text = "Next appointment date (short)"
+	m_rdv.m_heureprochainrdv.text = "Next appointment time"
+	m_rdv.m_prochainrdvfr.text = "Next appointment date (long fr)"
+	m_rdv.m_prochainrdvan.text = "Next appointment date (long an)"
+	m_rdv.m_prochainrdvcompl.text = "Next appointment date (complete fr)"
+	m_rdv.m_dureeprochainrdv.text = "Next appointment length"
+	m_autres.text = "Others"
+	m_autres.m_datedujour.text = "Current date"
+	m_autres.m_datedujourab.text = "Current date (Abr)"
+	m_autres.m_moisan.text = "Month (EN)"
+	m_autres.m_moisfr.text = "Month (FR)"
+	m_autres.m_annee.text = "Year"
+	
+end if
+end subroutine
+
+public function string of_getchampfusion ();return is_champfusion
+end function
+
+public subroutine uf_insert (string as_column);u_dw luo_dw
+long ll_ret = 0
+
+is_champfusion = as_column
+ll_ret = long(gnv_app.inv_entrepotglobal.of_retournedonnee("fusionnerautredw"))
+if isnull(ll_ret) then ll_ret = 0
+if ll_ret = 0 then
+	luo_dw = message.powerObjectParm
+	luo_dw.accepttext()
+	luo_dw.replaceText(as_column)
+else
+	::Clipboard(is_champfusion)
+end if
+
+
+
+end subroutine
+
+on m_insertinfo.create
+m_insertinfo=this
+call super::create
+this.text = "m_insertinfo"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+this.m_patient=create m_patient
+this.m_responsable=create m_responsable
+this.m_entente=create m_entente
+this.m_contrat=create m_contrat
+this.m_dentist=create m_dentist
+this.m_referent=create m_referent
+this.m_specialiste=create m_specialiste
+this.m_rdv=create m_rdv
+this.m_autres=create m_autres
+this.Item[UpperBound(this.Item)+1]=this.m_patient
+this.Item[UpperBound(this.Item)+1]=this.m_responsable
+this.Item[UpperBound(this.Item)+1]=this.m_entente
+this.Item[UpperBound(this.Item)+1]=this.m_contrat
+this.Item[UpperBound(this.Item)+1]=this.m_dentist
+this.Item[UpperBound(this.Item)+1]=this.m_referent
+this.Item[UpperBound(this.Item)+1]=this.m_specialiste
+this.Item[UpperBound(this.Item)+1]=this.m_rdv
+this.Item[UpperBound(this.Item)+1]=this.m_autres
+end on
+
+on m_insertinfo.destroy
+call super::destroy
+destroy(this.m_patient)
+destroy(this.m_responsable)
+destroy(this.m_entente)
+destroy(this.m_contrat)
+destroy(this.m_dentist)
+destroy(this.m_referent)
+destroy(this.m_specialiste)
+destroy(this.m_rdv)
+destroy(this.m_autres)
+end on
+
+type m_patient from menu within m_insertinfo
+m_salutation0 m_salutation0
+m_nompatient m_nompatient
+m_nompatupper m_nompatupper
+m_prenompatient m_prenompatient
+m_prenompatupper m_prenompatupper
+m_addpatient m_addpatient
+m_ville0 m_ville0
+m_provincepatient m_provincepatient
+m_codepostalpatient m_codepostalpatient
+m_genre m_genre
+m_nodossier m_nodossier
+m_nopatient m_nopatient
+m_noboite m_noboite
+m_telres m_telres
+m_telbur m_telbur
+m_ageformat1 m_ageformat1
+m_datenais m_datenais
+m_datenais2 m_datenais2
+m_datenaisab m_datenaisab
+m_datedebtrait m_datedebtrait
+m_parents m_parents
+end type
+
+on m_patient.create
+call super::create
+this.text = "Patient"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+this.m_salutation0=create m_salutation0
+this.m_nompatient=create m_nompatient
+this.m_nompatupper=create m_nompatupper
+this.m_prenompatient=create m_prenompatient
+this.m_prenompatupper=create m_prenompatupper
+this.m_addpatient=create m_addpatient
+this.m_ville0=create m_ville0
+this.m_provincepatient=create m_provincepatient
+this.m_codepostalpatient=create m_codepostalpatient
+this.m_genre=create m_genre
+this.m_nodossier=create m_nodossier
+this.m_nopatient=create m_nopatient
+this.m_noboite=create m_noboite
+this.m_telres=create m_telres
+this.m_telbur=create m_telbur
+this.m_ageformat1=create m_ageformat1
+this.m_datenais=create m_datenais
+this.m_datenais2=create m_datenais2
+this.m_datenaisab=create m_datenaisab
+this.m_datedebtrait=create m_datedebtrait
+this.m_parents=create m_parents
+this.Item[UpperBound(this.Item)+1]=this.m_salutation0
+this.Item[UpperBound(this.Item)+1]=this.m_nompatient
+this.Item[UpperBound(this.Item)+1]=this.m_nompatupper
+this.Item[UpperBound(this.Item)+1]=this.m_prenompatient
+this.Item[UpperBound(this.Item)+1]=this.m_prenompatupper
+this.Item[UpperBound(this.Item)+1]=this.m_addpatient
+this.Item[UpperBound(this.Item)+1]=this.m_ville0
+this.Item[UpperBound(this.Item)+1]=this.m_provincepatient
+this.Item[UpperBound(this.Item)+1]=this.m_codepostalpatient
+this.Item[UpperBound(this.Item)+1]=this.m_genre
+this.Item[UpperBound(this.Item)+1]=this.m_nodossier
+this.Item[UpperBound(this.Item)+1]=this.m_nopatient
+this.Item[UpperBound(this.Item)+1]=this.m_noboite
+this.Item[UpperBound(this.Item)+1]=this.m_telres
+this.Item[UpperBound(this.Item)+1]=this.m_telbur
+this.Item[UpperBound(this.Item)+1]=this.m_ageformat1
+this.Item[UpperBound(this.Item)+1]=this.m_datenais
+this.Item[UpperBound(this.Item)+1]=this.m_datenais2
+this.Item[UpperBound(this.Item)+1]=this.m_datenaisab
+this.Item[UpperBound(this.Item)+1]=this.m_datedebtrait
+this.Item[UpperBound(this.Item)+1]=this.m_parents
+end on
+
+on m_patient.destroy
+call super::destroy
+destroy(this.m_salutation0)
+destroy(this.m_nompatient)
+destroy(this.m_nompatupper)
+destroy(this.m_prenompatient)
+destroy(this.m_prenompatupper)
+destroy(this.m_addpatient)
+destroy(this.m_ville0)
+destroy(this.m_provincepatient)
+destroy(this.m_codepostalpatient)
+destroy(this.m_genre)
+destroy(this.m_nodossier)
+destroy(this.m_nopatient)
+destroy(this.m_noboite)
+destroy(this.m_telres)
+destroy(this.m_telbur)
+destroy(this.m_ageformat1)
+destroy(this.m_datenais)
+destroy(this.m_datenais2)
+destroy(this.m_datenaisab)
+destroy(this.m_datedebtrait)
+destroy(this.m_parents)
+end on
+
+type m_salutation0 from menu within m_patient
+end type
+
+event clicked;uf_insert('<<PatSal>>')
+end event
+
+on m_salutation0.create
+call super::create
+this.text = "Salutation"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_salutation0.destroy
+call super::destroy
+end on
+
+type m_nompatient from menu within m_patient
+end type
+
+event clicked;uf_insert('<<patnom>>')
+end event
+
+on m_nompatient.create
+call super::create
+this.text = "Nom"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_nompatient.destroy
+call super::destroy
+end on
+
+type m_nompatupper from menu within m_patient
+end type
+
+on m_nompatupper.create
+call super::create
+this.text = "Nom(U)"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_nompatupper.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<upatnom>>')
+end event
+
+type m_prenompatient from menu within m_patient
+end type
+
+event clicked;uf_insert('<<patprenom>>')
+end event
+
+on m_prenompatient.create
+call super::create
+this.text = "Prenom"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_prenompatient.destroy
+call super::destroy
+end on
+
+type m_prenompatupper from menu within m_patient
+end type
+
+on m_prenompatupper.create
+call super::create
+this.text = "Prenom(U)"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_prenompatupper.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<upatprenom>>')
+end event
+
+type m_addpatient from menu within m_patient
+end type
+
+event clicked;uf_insert('<<patadd>>')
+end event
+
+on m_addpatient.create
+call super::create
+this.text = "Adresse"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_addpatient.destroy
+call super::destroy
+end on
+
+type m_ville0 from menu within m_patient
+end type
+
+event clicked;uf_insert('<<patville>>')
+end event
+
+on m_ville0.create
+call super::create
+this.text = "Ville"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_ville0.destroy
+call super::destroy
+end on
+
+type m_provincepatient from menu within m_patient
+end type
+
+event clicked;uf_insert('<<patprov>>')
+end event
+
+on m_provincepatient.create
+call super::create
+this.text = "Province"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_provincepatient.destroy
+call super::destroy
+end on
+
+type m_codepostalpatient from menu within m_patient
+end type
+
+event clicked;uf_insert('<<patcode>>')
+end event
+
+on m_codepostalpatient.create
+call super::create
+this.text = "Code postal"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_codepostalpatient.destroy
+call super::destroy
+end on
+
+type m_genre from menu within m_patient
+end type
+
+event clicked;uf_insert('<<patgenre>>')
+end event
+
+on m_genre.create
+call super::create
+this.text = "Genre"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_genre.destroy
+call super::destroy
+end on
+
+type m_nodossier from menu within m_patient
+end type
+
+event clicked;uf_insert('<<patnodoss>>')
+end event
+
+on m_nodossier.create
+call super::create
+this.text = "# Dossier"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_nodossier.destroy
+call super::destroy
+end on
+
+type m_nopatient from menu within m_patient
+end type
+
+event clicked;uf_insert('<<patnopat>>')
+end event
+
+on m_nopatient.create
+call super::create
+this.text = "# Patient"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_nopatient.destroy
+call super::destroy
+end on
+
+type m_noboite from menu within m_patient
+end type
+
+event clicked;uf_insert('<<patnoboite>>')
+end event
+
+on m_noboite.create
+call super::create
+this.text = "# Boîte"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_noboite.destroy
+call super::destroy
+end on
+
+type m_telres from menu within m_patient
+end type
+
+event clicked;uf_insert('<<pattelr>>')
+end event
+
+on m_telres.create
+call super::create
+this.text = "Tél.(rés.)"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_telres.destroy
+call super::destroy
+end on
+
+type m_telbur from menu within m_patient
+end type
+
+event clicked;uf_insert('<<pattelb>>')
+end event
+
+on m_telbur.create
+call super::create
+this.text = "Tél.(bur.)"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_telbur.destroy
+call super::destroy
+end on
+
+type m_ageformat1 from menu within m_patient
+end type
+
+on m_ageformat1.create
+call super::create
+this.text = "Âge format 1"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_ageformat1.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<patnaiss>>')
+end event
+
+type m_datenais from menu within m_patient
+end type
+
+event clicked;uf_insert('<<patnaiss1>>')
+end event
+
+on m_datenais.create
+call super::create
+this.text = "Date de naissance 1"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_datenais.destroy
+call super::destroy
+end on
+
+type m_datenais2 from menu within m_patient
+end type
+
+event clicked;uf_insert('<<patnaiss2>>')
+end event
+
+on m_datenais2.create
+call super::create
+this.text = "Date de naissance 2"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_datenais2.destroy
+call super::destroy
+end on
+
+type m_datenaisab from menu within m_patient
+end type
+
+event clicked;uf_insert('<<patnaiss3>>')
+end event
+
+on m_datenaisab.create
+call super::create
+this.text = "Date de naissance (AB)"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_datenaisab.destroy
+call super::destroy
+end on
+
+type m_datedebtrait from menu within m_patient
+end type
+
+event clicked;uf_insert('<<traitdebut>>')
+end event
+
+on m_datedebtrait.create
+call super::create
+this.text = "Date début traitement"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_datedebtrait.destroy
+call super::destroy
+end on
+
+type m_parents from menu within m_patient
+m_nompere m_nompere
+m_telpere m_telpere
+m_nommere m_nommere
+m_telmere m_telmere
+end type
+
+on m_parents.create
+call super::create
+this.text = "Parents"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+this.m_nompere=create m_nompere
+this.m_telpere=create m_telpere
+this.m_nommere=create m_nommere
+this.m_telmere=create m_telmere
+this.Item[UpperBound(this.Item)+1]=this.m_nompere
+this.Item[UpperBound(this.Item)+1]=this.m_telpere
+this.Item[UpperBound(this.Item)+1]=this.m_nommere
+this.Item[UpperBound(this.Item)+1]=this.m_telmere
+end on
+
+on m_parents.destroy
+call super::destroy
+destroy(this.m_nompere)
+destroy(this.m_telpere)
+destroy(this.m_nommere)
+destroy(this.m_telmere)
+end on
+
+type m_nompere from menu within m_parents
+end type
+
+event clicked;uf_insert('<<nom_pere>>')
+end event
+
+on m_nompere.create
+call super::create
+this.text = "Nom du père"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_nompere.destroy
+call super::destroy
+end on
+
+type m_telpere from menu within m_parents
+end type
+
+event clicked;uf_insert('<<tel_pere>>')
+end event
+
+on m_telpere.create
+call super::create
+this.text = "Téléphone père"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_telpere.destroy
+call super::destroy
+end on
+
+type m_nommere from menu within m_parents
+end type
+
+event clicked;uf_insert('<<nom_mere>>')
+end event
+
+on m_nommere.create
+call super::create
+this.text = "Nom de la mère"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_nommere.destroy
+call super::destroy
+end on
+
+type m_telmere from menu within m_parents
+end type
+
+event clicked;uf_insert('<<tel_mere>>')
+end event
+
+on m_telmere.create
+call super::create
+this.text = "Téléphone mère"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_telmere.destroy
+call super::destroy
+end on
+
+type m_responsable from menu within m_insertinfo
+m_salutation m_salutation
+m_salutation2 m_salutation2
+m_prenom m_prenom
+m_nom0 m_nom0
+m_adresse2 m_adresse2
+m_ville3 m_ville3
+m_province2 m_province2
+m_codepostal0 m_codepostal0
+m_tel m_tel
+end type
+
+on m_responsable.create
+call super::create
+this.text = "Responsable"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+this.m_salutation=create m_salutation
+this.m_salutation2=create m_salutation2
+this.m_prenom=create m_prenom
+this.m_nom0=create m_nom0
+this.m_adresse2=create m_adresse2
+this.m_ville3=create m_ville3
+this.m_province2=create m_province2
+this.m_codepostal0=create m_codepostal0
+this.m_tel=create m_tel
+this.Item[UpperBound(this.Item)+1]=this.m_salutation
+this.Item[UpperBound(this.Item)+1]=this.m_salutation2
+this.Item[UpperBound(this.Item)+1]=this.m_prenom
+this.Item[UpperBound(this.Item)+1]=this.m_nom0
+this.Item[UpperBound(this.Item)+1]=this.m_adresse2
+this.Item[UpperBound(this.Item)+1]=this.m_ville3
+this.Item[UpperBound(this.Item)+1]=this.m_province2
+this.Item[UpperBound(this.Item)+1]=this.m_codepostal0
+this.Item[UpperBound(this.Item)+1]=this.m_tel
+end on
+
+on m_responsable.destroy
+call super::destroy
+destroy(this.m_salutation)
+destroy(this.m_salutation2)
+destroy(this.m_prenom)
+destroy(this.m_nom0)
+destroy(this.m_adresse2)
+destroy(this.m_ville3)
+destroy(this.m_province2)
+destroy(this.m_codepostal0)
+destroy(this.m_tel)
+end on
+
+type m_salutation from menu within m_responsable
+end type
+
+event clicked;uf_insert('<<RespSal>>')
+end event
+
+on m_salutation.create
+call super::create
+this.text = "Salutation"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_salutation.destroy
+call super::destroy
+end on
+
+type m_salutation2 from menu within m_responsable
+end type
+
+event clicked;uf_insert('<<RespSal2>>')
+end event
+
+on m_salutation2.create
+call super::create
+this.text = "Salutation2"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_salutation2.destroy
+call super::destroy
+end on
+
+type m_prenom from menu within m_responsable
+end type
+
+event clicked;uf_insert('<<RespPrenom>>')
+end event
+
+on m_prenom.create
+call super::create
+this.text = "Prenom"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_prenom.destroy
+call super::destroy
+end on
+
+type m_nom0 from menu within m_responsable
+end type
+
+event clicked;uf_insert('<<RespNom>>')
+end event
+
+on m_nom0.create
+call super::create
+this.text = "Nom"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_nom0.destroy
+call super::destroy
+end on
+
+type m_adresse2 from menu within m_responsable
+end type
+
+event clicked;uf_insert('<<RespAdd>>')
+end event
+
+on m_adresse2.create
+call super::create
+this.text = "Adresse"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_adresse2.destroy
+call super::destroy
+end on
+
+type m_ville3 from menu within m_responsable
+end type
+
+event clicked;uf_insert('<<RespVille>>')
+end event
+
+on m_ville3.create
+call super::create
+this.text = "Ville"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_ville3.destroy
+call super::destroy
+end on
+
+type m_province2 from menu within m_responsable
+end type
+
+event clicked;uf_insert('<<RespProv>>')
+end event
+
+on m_province2.create
+call super::create
+this.text = "Province"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_province2.destroy
+call super::destroy
+end on
+
+type m_codepostal0 from menu within m_responsable
+end type
+
+event clicked;uf_insert('<<RespCode>>')
+end event
+
+on m_codepostal0.create
+call super::create
+this.text = "Code postal"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_codepostal0.destroy
+call super::destroy
+end on
+
+type m_tel from menu within m_responsable
+end type
+
+event clicked;uf_insert('<<RespTel>>')
+end event
+
+on m_tel.create
+call super::create
+this.text = "Tél."
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_tel.destroy
+call super::destroy
+end on
+
+type m_entente from menu within m_insertinfo
+m_1 m_1
+m_typedetraitement m_typedetraitement
+m_datedebtrait0 m_datedebtrait0
+m_datefintraitement m_datefintraitement
+m_dureeapproximative m_dureeapproximative
+m_couttotal m_couttotal
+m_couttotalphase1 m_couttotalphase1
+m_coutdiagnostique1 m_coutdiagnostique1
+m_paiementinitial1 m_paiementinitial1
+m_datepaiementinitial1 m_datepaiementinitial1
+m_versementmensuel1 m_versementmensuel1
+m_nombredeversement1 m_nombredeversement1
+m_paiementfinal1 m_paiementfinal1
+m_couttotalphase2 m_couttotalphase2
+m_coutdiagnostique2 m_coutdiagnostique2
+m_paiementinitial2 m_paiementinitial2
+m_datepaiementinitial2 m_datepaiementinitial2
+m_versementmensuel2 m_versementmensuel2
+m_nombredeversement2 m_nombredeversement2
+m_paiementfinal2 m_paiementfinal2
+m_couttotalphase3 m_couttotalphase3
+m_coutdiagnostique3 m_coutdiagnostique3
+m_paiementinitial3 m_paiementinitial3
+m_datepaiementinitial3 m_datepaiementinitial3
+m_versementmensuel3 m_versementmensuel3
+m_nombredeversement3 m_nombredeversement3
+m_paiementfinal3 m_paiementfinal3
+m_commentaire m_commentaire
+end type
+
+on m_entente.create
+call super::create
+this.text = "Entente"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+this.m_1=create m_1
+this.m_typedetraitement=create m_typedetraitement
+this.m_datedebtrait0=create m_datedebtrait0
+this.m_datefintraitement=create m_datefintraitement
+this.m_dureeapproximative=create m_dureeapproximative
+this.m_couttotal=create m_couttotal
+this.m_couttotalphase1=create m_couttotalphase1
+this.m_coutdiagnostique1=create m_coutdiagnostique1
+this.m_paiementinitial1=create m_paiementinitial1
+this.m_datepaiementinitial1=create m_datepaiementinitial1
+this.m_versementmensuel1=create m_versementmensuel1
+this.m_nombredeversement1=create m_nombredeversement1
+this.m_paiementfinal1=create m_paiementfinal1
+this.m_couttotalphase2=create m_couttotalphase2
+this.m_coutdiagnostique2=create m_coutdiagnostique2
+this.m_paiementinitial2=create m_paiementinitial2
+this.m_datepaiementinitial2=create m_datepaiementinitial2
+this.m_versementmensuel2=create m_versementmensuel2
+this.m_nombredeversement2=create m_nombredeversement2
+this.m_paiementfinal2=create m_paiementfinal2
+this.m_couttotalphase3=create m_couttotalphase3
+this.m_coutdiagnostique3=create m_coutdiagnostique3
+this.m_paiementinitial3=create m_paiementinitial3
+this.m_datepaiementinitial3=create m_datepaiementinitial3
+this.m_versementmensuel3=create m_versementmensuel3
+this.m_nombredeversement3=create m_nombredeversement3
+this.m_paiementfinal3=create m_paiementfinal3
+this.m_commentaire=create m_commentaire
+this.Item[UpperBound(this.Item)+1]=this.m_1
+this.Item[UpperBound(this.Item)+1]=this.m_typedetraitement
+this.Item[UpperBound(this.Item)+1]=this.m_datedebtrait0
+this.Item[UpperBound(this.Item)+1]=this.m_datefintraitement
+this.Item[UpperBound(this.Item)+1]=this.m_dureeapproximative
+this.Item[UpperBound(this.Item)+1]=this.m_couttotal
+this.Item[UpperBound(this.Item)+1]=this.m_couttotalphase1
+this.Item[UpperBound(this.Item)+1]=this.m_coutdiagnostique1
+this.Item[UpperBound(this.Item)+1]=this.m_paiementinitial1
+this.Item[UpperBound(this.Item)+1]=this.m_datepaiementinitial1
+this.Item[UpperBound(this.Item)+1]=this.m_versementmensuel1
+this.Item[UpperBound(this.Item)+1]=this.m_nombredeversement1
+this.Item[UpperBound(this.Item)+1]=this.m_paiementfinal1
+this.Item[UpperBound(this.Item)+1]=this.m_couttotalphase2
+this.Item[UpperBound(this.Item)+1]=this.m_coutdiagnostique2
+this.Item[UpperBound(this.Item)+1]=this.m_paiementinitial2
+this.Item[UpperBound(this.Item)+1]=this.m_datepaiementinitial2
+this.Item[UpperBound(this.Item)+1]=this.m_versementmensuel2
+this.Item[UpperBound(this.Item)+1]=this.m_nombredeversement2
+this.Item[UpperBound(this.Item)+1]=this.m_paiementfinal2
+this.Item[UpperBound(this.Item)+1]=this.m_couttotalphase3
+this.Item[UpperBound(this.Item)+1]=this.m_coutdiagnostique3
+this.Item[UpperBound(this.Item)+1]=this.m_paiementinitial3
+this.Item[UpperBound(this.Item)+1]=this.m_datepaiementinitial3
+this.Item[UpperBound(this.Item)+1]=this.m_versementmensuel3
+this.Item[UpperBound(this.Item)+1]=this.m_nombredeversement3
+this.Item[UpperBound(this.Item)+1]=this.m_paiementfinal3
+this.Item[UpperBound(this.Item)+1]=this.m_commentaire
+end on
+
+on m_entente.destroy
+call super::destroy
+destroy(this.m_1)
+destroy(this.m_typedetraitement)
+destroy(this.m_datedebtrait0)
+destroy(this.m_datefintraitement)
+destroy(this.m_dureeapproximative)
+destroy(this.m_couttotal)
+destroy(this.m_couttotalphase1)
+destroy(this.m_coutdiagnostique1)
+destroy(this.m_paiementinitial1)
+destroy(this.m_datepaiementinitial1)
+destroy(this.m_versementmensuel1)
+destroy(this.m_nombredeversement1)
+destroy(this.m_paiementfinal1)
+destroy(this.m_couttotalphase2)
+destroy(this.m_coutdiagnostique2)
+destroy(this.m_paiementinitial2)
+destroy(this.m_datepaiementinitial2)
+destroy(this.m_versementmensuel2)
+destroy(this.m_nombredeversement2)
+destroy(this.m_paiementfinal2)
+destroy(this.m_couttotalphase3)
+destroy(this.m_coutdiagnostique3)
+destroy(this.m_paiementinitial3)
+destroy(this.m_datepaiementinitial3)
+destroy(this.m_versementmensuel3)
+destroy(this.m_nombredeversement3)
+destroy(this.m_paiementfinal3)
+destroy(this.m_commentaire)
+end on
+
+type m_1 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<Phase>>')
+end event
+
+on m_1.create
+call super::create
+this.text = "Phase"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_1.destroy
+call super::destroy
+end on
+
+type m_typedetraitement from menu within m_entente
+end type
+
+event clicked;uf_insert('<<Ttype>>')
+end event
+
+on m_typedetraitement.create
+call super::create
+this.text = "Type de traitement"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_typedetraitement.destroy
+call super::destroy
+end on
+
+type m_datedebtrait0 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<Tdebut>>')
+end event
+
+on m_datedebtrait0.create
+call super::create
+this.text = "Date début traitement"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_datedebtrait0.destroy
+call super::destroy
+end on
+
+type m_datefintraitement from menu within m_entente
+end type
+
+event clicked;uf_insert('<<Tfin>>')
+end event
+
+on m_datefintraitement.create
+call super::create
+this.text = "Date fin traitement"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_datefintraitement.destroy
+call super::destroy
+end on
+
+type m_dureeapproximative from menu within m_entente
+end type
+
+event clicked;uf_insert('<<Tduree>>')
+end event
+
+on m_dureeapproximative.create
+call super::create
+this.text = "Durée approximative"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_dureeapproximative.destroy
+call super::destroy
+end on
+
+type m_couttotal from menu within m_entente
+end type
+
+event clicked;uf_insert('<<TcoutTotal>>')
+end event
+
+on m_couttotal.create
+call super::create
+this.text = "Coût total"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_couttotal.destroy
+call super::destroy
+end on
+
+type m_couttotalphase1 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<TcoutPhase1>>')
+end event
+
+on m_couttotalphase1.create
+call super::create
+this.text = "Coût total phase 1"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_couttotalphase1.destroy
+call super::destroy
+end on
+
+type m_coutdiagnostique1 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<TcoutDiag1>>')
+end event
+
+on m_coutdiagnostique1.create
+call super::create
+this.text = "Coût diagnostique 1"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_coutdiagnostique1.destroy
+call super::destroy
+end on
+
+type m_paiementinitial1 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<TpaieInit1>>')
+end event
+
+on m_paiementinitial1.create
+call super::create
+this.text = "Paiement initial 1"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_paiementinitial1.destroy
+call super::destroy
+end on
+
+type m_datepaiementinitial1 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<TdatePaieInit1>>')
+end event
+
+on m_datepaiementinitial1.create
+call super::create
+this.text = "Date paiement initial 1"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_datepaiementinitial1.destroy
+call super::destroy
+end on
+
+type m_versementmensuel1 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<Tversement1>>')
+end event
+
+on m_versementmensuel1.create
+call super::create
+this.text = "Versement mensuel 1"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_versementmensuel1.destroy
+call super::destroy
+end on
+
+type m_nombredeversement1 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<TnbVersement1>>')
+end event
+
+on m_nombredeversement1.create
+call super::create
+this.text = "Nombre de versement 1"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_nombredeversement1.destroy
+call super::destroy
+end on
+
+type m_paiementfinal1 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<TpaieFinal1>>')
+end event
+
+on m_paiementfinal1.create
+call super::create
+this.text = "Paiement final 1"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_paiementfinal1.destroy
+call super::destroy
+end on
+
+type m_couttotalphase2 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<TcoutPhase2>>')
+end event
+
+on m_couttotalphase2.create
+call super::create
+this.text = "Coût total phase 2"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_couttotalphase2.destroy
+call super::destroy
+end on
+
+type m_coutdiagnostique2 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<TcoutDiag2>>')
+end event
+
+on m_coutdiagnostique2.create
+call super::create
+this.text = "Coût diagnostique 2"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_coutdiagnostique2.destroy
+call super::destroy
+end on
+
+type m_paiementinitial2 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<TpaieInit2>>')
+end event
+
+on m_paiementinitial2.create
+call super::create
+this.text = "Paiement initial 2"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_paiementinitial2.destroy
+call super::destroy
+end on
+
+type m_datepaiementinitial2 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<TdatePaieInit2>>')
+end event
+
+on m_datepaiementinitial2.create
+call super::create
+this.text = "Date paiement initial 2"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_datepaiementinitial2.destroy
+call super::destroy
+end on
+
+type m_versementmensuel2 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<Tversement2>>')
+end event
+
+on m_versementmensuel2.create
+call super::create
+this.text = "Versement mensuel 2"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_versementmensuel2.destroy
+call super::destroy
+end on
+
+type m_nombredeversement2 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<TnbVersement2>>')
+end event
+
+on m_nombredeversement2.create
+call super::create
+this.text = "Nombre de versement 2"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_nombredeversement2.destroy
+call super::destroy
+end on
+
+type m_paiementfinal2 from menu within m_entente
+end type
+
+event clicked;uf_insert('<<TpaieFinal2>>')
+end event
+
+on m_paiementfinal2.create
+call super::create
+this.text = "Paiement final 2"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_paiementfinal2.destroy
+call super::destroy
+end on
+
+type m_couttotalphase3 from menu within m_entente
+end type
+
+on m_couttotalphase3.create
+call super::create
+this.text = "Coût total phase 3"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_couttotalphase3.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<TcoutPhase3>>')
+end event
+
+type m_coutdiagnostique3 from menu within m_entente
+end type
+
+on m_coutdiagnostique3.create
+call super::create
+this.text = "Coût diagnostique 3"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_coutdiagnostique3.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<TcoutDiag3>>')
+end event
+
+type m_paiementinitial3 from menu within m_entente
+end type
+
+on m_paiementinitial3.create
+call super::create
+this.text = "Paiement initial 3"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_paiementinitial3.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<TpaieInit3>>')
+end event
+
+type m_datepaiementinitial3 from menu within m_entente
+end type
+
+on m_datepaiementinitial3.create
+call super::create
+this.text = "Date paiement initial 3"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_datepaiementinitial3.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<TdatePaieInit3>>')
+end event
+
+type m_versementmensuel3 from menu within m_entente
+end type
+
+on m_versementmensuel3.create
+call super::create
+this.text = "Versement mensuel 3"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_versementmensuel3.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<Tversement3>>')
+end event
+
+type m_nombredeversement3 from menu within m_entente
+end type
+
+on m_nombredeversement3.create
+call super::create
+this.text = "Nombre de versement 3"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_nombredeversement3.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<TnbVersement3>>')
+end event
+
+type m_paiementfinal3 from menu within m_entente
+end type
+
+on m_paiementfinal3.create
+call super::create
+this.text = "Paiement final 3"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_paiementfinal3.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<TpaieFinal3>>')
+end event
+
+type m_commentaire from menu within m_entente
+end type
+
+event clicked;uf_insert('<<TCommentaire>>')
+end event
+
+on m_commentaire.create
+call super::create
+this.text = "Commentaire"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_commentaire.destroy
+call super::destroy
+end on
+
+type m_contrat from menu within m_insertinfo
+m_description m_description
+m_datedutraitement m_datedutraitement
+m_pourcentage m_pourcentage
+m_coutdutraitement m_coutdutraitement
+m_paiementinitial m_paiementinitial
+m_couttconsultation m_couttconsultation
+m_coutdiagnostic m_coutdiagnostic
+m_coutmiseenbouche m_coutmiseenbouche
+m_coutrentation m_coutrentation
+m_datepremierversementmensuel m_datepremierversementmensuel
+m_nbversementmensuel m_nbversementmensuel
+m_versementmensuel m_versementmensuel
+m_totalversementmensuel m_totalversementmensuel
+m_paiementfinal m_paiementfinal
+end type
+
+on m_contrat.create
+call super::create
+this.text = "Contrat"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+this.m_description=create m_description
+this.m_datedutraitement=create m_datedutraitement
+this.m_pourcentage=create m_pourcentage
+this.m_coutdutraitement=create m_coutdutraitement
+this.m_paiementinitial=create m_paiementinitial
+this.m_couttconsultation=create m_couttconsultation
+this.m_coutdiagnostic=create m_coutdiagnostic
+this.m_coutmiseenbouche=create m_coutmiseenbouche
+this.m_coutrentation=create m_coutrentation
+this.m_datepremierversementmensuel=create m_datepremierversementmensuel
+this.m_nbversementmensuel=create m_nbversementmensuel
+this.m_versementmensuel=create m_versementmensuel
+this.m_totalversementmensuel=create m_totalversementmensuel
+this.m_paiementfinal=create m_paiementfinal
+this.Item[UpperBound(this.Item)+1]=this.m_description
+this.Item[UpperBound(this.Item)+1]=this.m_datedutraitement
+this.Item[UpperBound(this.Item)+1]=this.m_pourcentage
+this.Item[UpperBound(this.Item)+1]=this.m_coutdutraitement
+this.Item[UpperBound(this.Item)+1]=this.m_paiementinitial
+this.Item[UpperBound(this.Item)+1]=this.m_couttconsultation
+this.Item[UpperBound(this.Item)+1]=this.m_coutdiagnostic
+this.Item[UpperBound(this.Item)+1]=this.m_coutmiseenbouche
+this.Item[UpperBound(this.Item)+1]=this.m_coutrentation
+this.Item[UpperBound(this.Item)+1]=this.m_datepremierversementmensuel
+this.Item[UpperBound(this.Item)+1]=this.m_nbversementmensuel
+this.Item[UpperBound(this.Item)+1]=this.m_versementmensuel
+this.Item[UpperBound(this.Item)+1]=this.m_totalversementmensuel
+this.Item[UpperBound(this.Item)+1]=this.m_paiementfinal
+end on
+
+on m_contrat.destroy
+call super::destroy
+destroy(this.m_description)
+destroy(this.m_datedutraitement)
+destroy(this.m_pourcentage)
+destroy(this.m_coutdutraitement)
+destroy(this.m_paiementinitial)
+destroy(this.m_couttconsultation)
+destroy(this.m_coutdiagnostic)
+destroy(this.m_coutmiseenbouche)
+destroy(this.m_coutrentation)
+destroy(this.m_datepremierversementmensuel)
+destroy(this.m_nbversementmensuel)
+destroy(this.m_versementmensuel)
+destroy(this.m_totalversementmensuel)
+destroy(this.m_paiementfinal)
+end on
+
+type m_description from menu within m_contrat
+end type
+
+event clicked;uf_insert('<<Description>>')
+
+end event
+
+on m_description.create
+call super::create
+this.text = "Description"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_description.destroy
+call super::destroy
+end on
+
+type m_datedutraitement from menu within m_contrat
+end type
+
+event clicked;uf_insert('<<TraitDate>>')
+
+end event
+
+on m_datedutraitement.create
+call super::create
+this.text = "Date du traitement"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_datedutraitement.destroy
+call super::destroy
+end on
+
+type m_pourcentage from menu within m_contrat
+end type
+
+event clicked;uf_insert('<<%>>')
+end event
+
+on m_pourcentage.create
+call super::create
+this.text = "Pourcentage"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_pourcentage.destroy
+call super::destroy
+end on
+
+type m_coutdutraitement from menu within m_contrat
+end type
+
+event clicked;uf_insert('<<TCoutTrait>>')
+end event
+
+on m_coutdutraitement.create
+call super::create
+this.text = "Coût du traitement"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_coutdutraitement.destroy
+call super::destroy
+end on
+
+type m_paiementinitial from menu within m_contrat
+end type
+
+event clicked;uf_insert('<<TCoutInit>>')
+end event
+
+on m_paiementinitial.create
+call super::create
+this.text = "Paiement initial"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_paiementinitial.destroy
+call super::destroy
+end on
+
+type m_couttconsultation from menu within m_contrat
+end type
+
+event clicked;uf_insert('<<TCoutCons>>')
+end event
+
+on m_couttconsultation.create
+call super::create
+this.text = "Coût consultation"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_couttconsultation.destroy
+call super::destroy
+end on
+
+type m_coutdiagnostic from menu within m_contrat
+end type
+
+event clicked;uf_insert('<<TCoutDiag>>')
+end event
+
+on m_coutdiagnostic.create
+call super::create
+this.text = "Coût diagnostic"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_coutdiagnostic.destroy
+call super::destroy
+end on
+
+type m_coutmiseenbouche from menu within m_contrat
+end type
+
+event clicked;uf_insert('<<TCoutMeb>>')
+end event
+
+on m_coutmiseenbouche.create
+call super::create
+this.text = "Coût mise en bouche"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_coutmiseenbouche.destroy
+call super::destroy
+end on
+
+type m_coutrentation from menu within m_contrat
+end type
+
+event clicked;uf_insert('<<TCoutRet>>')
+end event
+
+on m_coutrentation.create
+call super::create
+this.text = "Coût rétention"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_coutrentation.destroy
+call super::destroy
+end on
+
+type m_datepremierversementmensuel from menu within m_contrat
+end type
+
+event clicked;uf_insert('<<DateMens>>')
+end event
+
+on m_datepremierversementmensuel.create
+call super::create
+this.text = "Date premier versement mensuel"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_datepremierversementmensuel.destroy
+call super::destroy
+end on
+
+type m_nbversementmensuel from menu within m_contrat
+end type
+
+event clicked;uf_insert('<<NbMens>>')
+end event
+
+on m_nbversementmensuel.create
+call super::create
+this.text = "Nb versement mensuel"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_nbversementmensuel.destroy
+call super::destroy
+end on
+
+type m_versementmensuel from menu within m_contrat
+end type
+
+event clicked;uf_insert('<<CoutMens>>')
+end event
+
+on m_versementmensuel.create
+call super::create
+this.text = "Versement mensuel"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_versementmensuel.destroy
+call super::destroy
+end on
+
+type m_totalversementmensuel from menu within m_contrat
+end type
+
+event clicked;uf_insert('<<TotMens>>')
+end event
+
+on m_totalversementmensuel.create
+call super::create
+this.text = "Total versements mensuels"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_totalversementmensuel.destroy
+call super::destroy
+end on
+
+type m_paiementfinal from menu within m_contrat
+end type
+
+event clicked;uf_insert('<<PaieFinal>>')
+end event
+
+on m_paiementfinal.create
+call super::create
+this.text = "Paiement final"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_paiementfinal.destroy
+call super::destroy
+end on
+
+type m_dentist from menu within m_insertinfo
+m_salutation1 m_salutation1
+m_titre0 m_titre0
+m_dentiste m_dentiste
+m_prenomdentiste m_prenomdentiste
+m_adresse0 m_adresse0
+m_ville1 m_ville1
+m_province0 m_province0
+m_codepostale m_codepostale
+m_teldentist m_teldentist
+end type
+
+on m_dentist.create
+call super::create
+this.text = "Dentiste"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+this.m_salutation1=create m_salutation1
+this.m_titre0=create m_titre0
+this.m_dentiste=create m_dentiste
+this.m_prenomdentiste=create m_prenomdentiste
+this.m_adresse0=create m_adresse0
+this.m_ville1=create m_ville1
+this.m_province0=create m_province0
+this.m_codepostale=create m_codepostale
+this.m_teldentist=create m_teldentist
+this.Item[UpperBound(this.Item)+1]=this.m_salutation1
+this.Item[UpperBound(this.Item)+1]=this.m_titre0
+this.Item[UpperBound(this.Item)+1]=this.m_dentiste
+this.Item[UpperBound(this.Item)+1]=this.m_prenomdentiste
+this.Item[UpperBound(this.Item)+1]=this.m_adresse0
+this.Item[UpperBound(this.Item)+1]=this.m_ville1
+this.Item[UpperBound(this.Item)+1]=this.m_province0
+this.Item[UpperBound(this.Item)+1]=this.m_codepostale
+this.Item[UpperBound(this.Item)+1]=this.m_teldentist
+end on
+
+on m_dentist.destroy
+call super::destroy
+destroy(this.m_salutation1)
+destroy(this.m_titre0)
+destroy(this.m_dentiste)
+destroy(this.m_prenomdentiste)
+destroy(this.m_adresse0)
+destroy(this.m_ville1)
+destroy(this.m_province0)
+destroy(this.m_codepostale)
+destroy(this.m_teldentist)
+end on
+
+type m_salutation1 from menu within m_dentist
+end type
+
+event clicked;uf_insert('<<DentSal>>')
+end event
+
+on m_salutation1.create
+call super::create
+this.text = "Salutation"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_salutation1.destroy
+call super::destroy
+end on
+
+type m_titre0 from menu within m_dentist
+end type
+
+event clicked;uf_insert('<<dttitre>>')
+end event
+
+on m_titre0.create
+call super::create
+this.text = "Titre"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_titre0.destroy
+call super::destroy
+end on
+
+type m_dentiste from menu within m_dentist
+end type
+
+event clicked;uf_insert('<<dtnom>>')
+end event
+
+on m_dentiste.create
+call super::create
+this.text = "Nom"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_dentiste.destroy
+call super::destroy
+end on
+
+type m_prenomdentiste from menu within m_dentist
+end type
+
+event clicked;uf_insert('<<dtprenom>>')
+end event
+
+on m_prenomdentiste.create
+call super::create
+this.text = "Prenom"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_prenomdentiste.destroy
+call super::destroy
+end on
+
+type m_adresse0 from menu within m_dentist
+end type
+
+event clicked;uf_insert('<<dtadd>>')
+end event
+
+on m_adresse0.create
+call super::create
+this.text = "Adresse"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_adresse0.destroy
+call super::destroy
+end on
+
+type m_ville1 from menu within m_dentist
+end type
+
+event clicked;uf_insert('<<dtville>>')
+end event
+
+on m_ville1.create
+call super::create
+this.text = "Ville"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_ville1.destroy
+call super::destroy
+end on
+
+type m_province0 from menu within m_dentist
+end type
+
+event clicked;uf_insert('<<dtprov>>')
+end event
+
+on m_province0.create
+call super::create
+this.text = "Province"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_province0.destroy
+call super::destroy
+end on
+
+type m_codepostale from menu within m_dentist
+end type
+
+event clicked;uf_insert('<<dtcode>>')
+end event
+
+on m_codepostale.create
+call super::create
+this.text = "Code postale"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_codepostale.destroy
+call super::destroy
+end on
+
+type m_teldentist from menu within m_dentist
+end type
+
+event clicked;uf_insert('<<dttel>>')
+end event
+
+on m_teldentist.create
+call super::create
+this.text = "Téléphone"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_teldentist.destroy
+call super::destroy
+end on
+
+type m_referent from menu within m_insertinfo
+m_salutation3 m_salutation3
+m_titre m_titre
+m_prenom0 m_prenom0
+m_nom m_nom
+m_adresse1 m_adresse1
+m_ville2 m_ville2
+m_province1 m_province1
+m_codepostale0 m_codepostale0
+m_telephone m_telephone
+end type
+
+on m_referent.create
+call super::create
+this.text = "Référent"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+this.m_salutation3=create m_salutation3
+this.m_titre=create m_titre
+this.m_prenom0=create m_prenom0
+this.m_nom=create m_nom
+this.m_adresse1=create m_adresse1
+this.m_ville2=create m_ville2
+this.m_province1=create m_province1
+this.m_codepostale0=create m_codepostale0
+this.m_telephone=create m_telephone
+this.Item[UpperBound(this.Item)+1]=this.m_salutation3
+this.Item[UpperBound(this.Item)+1]=this.m_titre
+this.Item[UpperBound(this.Item)+1]=this.m_prenom0
+this.Item[UpperBound(this.Item)+1]=this.m_nom
+this.Item[UpperBound(this.Item)+1]=this.m_adresse1
+this.Item[UpperBound(this.Item)+1]=this.m_ville2
+this.Item[UpperBound(this.Item)+1]=this.m_province1
+this.Item[UpperBound(this.Item)+1]=this.m_codepostale0
+this.Item[UpperBound(this.Item)+1]=this.m_telephone
+end on
+
+on m_referent.destroy
+call super::destroy
+destroy(this.m_salutation3)
+destroy(this.m_titre)
+destroy(this.m_prenom0)
+destroy(this.m_nom)
+destroy(this.m_adresse1)
+destroy(this.m_ville2)
+destroy(this.m_province1)
+destroy(this.m_codepostale0)
+destroy(this.m_telephone)
+end on
+
+type m_salutation3 from menu within m_referent
+end type
+
+event clicked;uf_insert('<<RefSal>>')
+end event
+
+on m_salutation3.create
+call super::create
+this.text = "Salutation"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_salutation3.destroy
+call super::destroy
+end on
+
+type m_titre from menu within m_referent
+end type
+
+event clicked;uf_insert('<<reftitre>>')
+end event
+
+on m_titre.create
+call super::create
+this.text = "Titre"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_titre.destroy
+call super::destroy
+end on
+
+type m_prenom0 from menu within m_referent
+end type
+
+event clicked;uf_insert('<<refprenom>>')
+end event
+
+on m_prenom0.create
+call super::create
+this.text = "Prénom"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_prenom0.destroy
+call super::destroy
+end on
+
+type m_nom from menu within m_referent
+end type
+
+event clicked;uf_insert('<<refnom>>')
+end event
+
+on m_nom.create
+call super::create
+this.text = "Nom"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_nom.destroy
+call super::destroy
+end on
+
+type m_adresse1 from menu within m_referent
+end type
+
+event clicked;uf_insert('<<refadd>>')
+end event
+
+on m_adresse1.create
+call super::create
+this.text = "Adresse"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_adresse1.destroy
+call super::destroy
+end on
+
+type m_ville2 from menu within m_referent
+end type
+
+event clicked;uf_insert('<<refville>>')
+end event
+
+on m_ville2.create
+call super::create
+this.text = "Ville"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_ville2.destroy
+call super::destroy
+end on
+
+type m_province1 from menu within m_referent
+end type
+
+event clicked;uf_insert('<<refprov>>')
+end event
+
+on m_province1.create
+call super::create
+this.text = "Province"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_province1.destroy
+call super::destroy
+end on
+
+type m_codepostale0 from menu within m_referent
+end type
+
+event clicked;uf_insert('<<refcode>>')
+end event
+
+on m_codepostale0.create
+call super::create
+this.text = "Code postale"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_codepostale0.destroy
+call super::destroy
+end on
+
+type m_telephone from menu within m_referent
+end type
+
+event clicked;uf_insert('<<reftel>>')
+end event
+
+on m_telephone.create
+call super::create
+this.text = "Téléphone"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_telephone.destroy
+call super::destroy
+end on
+
+type m_specialiste from menu within m_insertinfo
+m_nomcomplet m_nomcomplet
+m_adresse m_adresse
+m_ville m_ville
+m_province m_province
+m_codepostal m_codepostal
+end type
+
+on m_specialiste.create
+call super::create
+this.text = "Spécialiste"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+this.m_nomcomplet=create m_nomcomplet
+this.m_adresse=create m_adresse
+this.m_ville=create m_ville
+this.m_province=create m_province
+this.m_codepostal=create m_codepostal
+this.Item[UpperBound(this.Item)+1]=this.m_nomcomplet
+this.Item[UpperBound(this.Item)+1]=this.m_adresse
+this.Item[UpperBound(this.Item)+1]=this.m_ville
+this.Item[UpperBound(this.Item)+1]=this.m_province
+this.Item[UpperBound(this.Item)+1]=this.m_codepostal
+end on
+
+on m_specialiste.destroy
+call super::destroy
+destroy(this.m_nomcomplet)
+destroy(this.m_adresse)
+destroy(this.m_ville)
+destroy(this.m_province)
+destroy(this.m_codepostal)
+end on
+
+type m_nomcomplet from menu within m_specialiste
+end type
+
+event clicked;uf_insert('<<spec_nomcompl>>')
+end event
+
+on m_nomcomplet.create
+call super::create
+this.text = "Nom complet"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_nomcomplet.destroy
+call super::destroy
+end on
+
+type m_adresse from menu within m_specialiste
+end type
+
+event clicked;uf_insert('<<spec_add>>')
+end event
+
+on m_adresse.create
+call super::create
+this.text = "Adresse"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_adresse.destroy
+call super::destroy
+end on
+
+type m_ville from menu within m_specialiste
+end type
+
+event clicked;uf_insert('<<spec_ville>>')
+end event
+
+on m_ville.create
+call super::create
+this.text = "Ville"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_ville.destroy
+call super::destroy
+end on
+
+type m_province from menu within m_specialiste
+end type
+
+event clicked;uf_insert('<<spec_prov>>')
+end event
+
+on m_province.create
+call super::create
+this.text = "Province"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_province.destroy
+call super::destroy
+end on
+
+type m_codepostal from menu within m_specialiste
+end type
+
+event clicked;uf_insert('<<spec_code>>')
+end event
+
+on m_codepostal.create
+call super::create
+this.text = "Code postal"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_codepostal.destroy
+call super::destroy
+end on
+
+type m_rdv from menu within m_insertinfo
+m_prochainrdv m_prochainrdv
+m_heureprochainrdv m_heureprochainrdv
+m_prochainrdvfr m_prochainrdvfr
+m_prochainrdvan m_prochainrdvan
+m_prochainrdvcompl m_prochainrdvcompl
+m_dureeprochainrdv m_dureeprochainrdv
+m_prochainrendezvousfrsansle m_prochainrendezvousfrsansle
+end type
+
+on m_rdv.create
+call super::create
+this.text = "Rendez-vous"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+this.m_prochainrdv=create m_prochainrdv
+this.m_heureprochainrdv=create m_heureprochainrdv
+this.m_prochainrdvfr=create m_prochainrdvfr
+this.m_prochainrdvan=create m_prochainrdvan
+this.m_prochainrdvcompl=create m_prochainrdvcompl
+this.m_dureeprochainrdv=create m_dureeprochainrdv
+this.m_prochainrendezvousfrsansle=create m_prochainrendezvousfrsansle
+this.Item[UpperBound(this.Item)+1]=this.m_prochainrdv
+this.Item[UpperBound(this.Item)+1]=this.m_heureprochainrdv
+this.Item[UpperBound(this.Item)+1]=this.m_prochainrdvfr
+this.Item[UpperBound(this.Item)+1]=this.m_prochainrdvan
+this.Item[UpperBound(this.Item)+1]=this.m_prochainrdvcompl
+this.Item[UpperBound(this.Item)+1]=this.m_dureeprochainrdv
+this.Item[UpperBound(this.Item)+1]=this.m_prochainrendezvousfrsansle
+end on
+
+on m_rdv.destroy
+call super::destroy
+destroy(this.m_prochainrdv)
+destroy(this.m_heureprochainrdv)
+destroy(this.m_prochainrdvfr)
+destroy(this.m_prochainrdvan)
+destroy(this.m_prochainrdvcompl)
+destroy(this.m_dureeprochainrdv)
+destroy(this.m_prochainrendezvousfrsansle)
+end on
+
+type m_prochainrdv from menu within m_rdv
+end type
+
+event clicked;uf_insert('<<rdv_dtp>>')
+end event
+
+on m_prochainrdv.create
+call super::create
+this.text = "prochain rendez-vous"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_prochainrdv.destroy
+call super::destroy
+end on
+
+type m_heureprochainrdv from menu within m_rdv
+end type
+
+event clicked;uf_insert('<<rdv_hp>>')
+end event
+
+on m_heureprochainrdv.create
+call super::create
+this.text = "heure du prochain rendez-vous"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_heureprochainrdv.destroy
+call super::destroy
+end on
+
+type m_prochainrdvfr from menu within m_rdv
+end type
+
+event clicked;uf_insert('<<rdv_dtpfr>>')
+end event
+
+on m_prochainrdvfr.create
+call super::create
+this.text = "prochain rendez-vous (longue fr)"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_prochainrdvfr.destroy
+call super::destroy
+end on
+
+type m_prochainrdvan from menu within m_rdv
+end type
+
+on m_prochainrdvan.create
+call super::create
+this.text = "prochain rendez-vous (longue an)"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_prochainrdvan.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<rdv_dtpan>>')
+end event
+
+type m_prochainrdvcompl from menu within m_rdv
+end type
+
+on m_prochainrdvcompl.create
+call super::create
+this.text = "prochain rendez-vous (compl. fr)"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_prochainrdvcompl.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<rdv_dtpfrcompl>>')
+end event
+
+type m_dureeprochainrdv from menu within m_rdv
+end type
+
+on m_dureeprochainrdv.create
+call super::create
+this.text = "Durée prochain rendez-vous"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_dureeprochainrdv.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<rdv_dureeprdv>>')
+end event
+
+type m_prochainrendezvousfrsansle from menu within m_rdv
+end type
+
+on m_prochainrendezvousfrsansle.create
+call super::create
+this.text = "prochain rendez-vous (sans LE fr)"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_prochainrendezvousfrsansle.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<rdv_dtpfrsansle>>')
+end event
+
+type m_autres from menu within m_insertinfo
+m_datedujour m_datedujour
+m_datedujourab m_datedujourab
+m_satellite m_satellite
+m_moisan m_moisan
+m_moisfr m_moisfr
+m_annee m_annee
+end type
+
+on m_autres.create
+call super::create
+this.text = "Autres"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+this.m_datedujour=create m_datedujour
+this.m_datedujourab=create m_datedujourab
+this.m_satellite=create m_satellite
+this.m_moisan=create m_moisan
+this.m_moisfr=create m_moisfr
+this.m_annee=create m_annee
+this.Item[UpperBound(this.Item)+1]=this.m_datedujour
+this.Item[UpperBound(this.Item)+1]=this.m_datedujourab
+this.Item[UpperBound(this.Item)+1]=this.m_satellite
+this.Item[UpperBound(this.Item)+1]=this.m_moisan
+this.Item[UpperBound(this.Item)+1]=this.m_moisfr
+this.Item[UpperBound(this.Item)+1]=this.m_annee
+end on
+
+on m_autres.destroy
+call super::destroy
+destroy(this.m_datedujour)
+destroy(this.m_datedujourab)
+destroy(this.m_satellite)
+destroy(this.m_moisan)
+destroy(this.m_moisfr)
+destroy(this.m_annee)
+end on
+
+type m_datedujour from menu within m_autres
+end type
+
+event clicked;uf_insert('<<date>>')
+end event
+
+on m_datedujour.create
+call super::create
+this.text = "Date du jour"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_datedujour.destroy
+call super::destroy
+end on
+
+type m_datedujourab from menu within m_autres
+end type
+
+event clicked;uf_insert('<<dateab>>')
+end event
+
+on m_datedujourab.create
+call super::create
+this.text = "Date du jour (AB)"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_datedujourab.destroy
+call super::destroy
+end on
+
+type m_satellite from menu within m_autres
+end type
+
+event clicked;uf_insert('<<satellite>>')
+end event
+
+on m_satellite.create
+call super::create
+this.text = "Satellite"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_satellite.destroy
+call super::destroy
+end on
+
+type m_moisan from menu within m_autres
+end type
+
+on m_moisan.create
+call super::create
+this.text = "Mois (AN)"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_moisan.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<moisan>>')
+end event
+
+type m_moisfr from menu within m_autres
+end type
+
+on m_moisfr.create
+call super::create
+this.text = "Mois (FR)"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_moisfr.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<moisfr>>')
+end event
+
+type m_annee from menu within m_autres
+end type
+
+on m_annee.create
+call super::create
+this.text = "Annee"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 15780518
+this.menuhighlightcolor = 134217741
+this.textsize = -7
+this.weight = 700
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 65535
+this.menutitles = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217752
+end on
+
+on m_annee.destroy
+call super::destroy
+end on
+
+event clicked;uf_insert('<<annee>>')
+end event
+

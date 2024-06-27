@@ -1,0 +1,25 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_srvrowmanager.sru
+$PBExportComments$(PRO) DataWindow Property - The RowManager service tabpage
+forward
+global type pro_u_tabpg_dwproperty_srvrowmanager from pfc_u_tabpg_dwproperty_srvrowmanager
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_srvrowmanager from pfc_u_tabpg_dwproperty_srvrowmanager
+end type
+global pro_u_tabpg_dwproperty_srvrowmanager pro_u_tabpg_dwproperty_srvrowmanager
+
+on pro_u_tabpg_dwproperty_srvrowmanager.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_srvrowmanager.destroy
+call super::destroy
+end on
+
+type cbx_confirmondelete from pfc_u_tabpg_dwproperty_srvrowmanager`cbx_confirmondelete within pro_u_tabpg_dwproperty_srvrowmanager
+end type
+
+type cbx_restorerow from pfc_u_tabpg_dwproperty_srvrowmanager`cbx_restorerow within pro_u_tabpg_dwproperty_srvrowmanager
+end type
+

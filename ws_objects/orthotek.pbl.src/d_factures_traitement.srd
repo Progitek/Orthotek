@@ -1,0 +1,50 @@
+﻿$PBExportHeader$d_factures_traitement.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=76 color="536870912" )
+summary(height=28 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=180 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=facture_id dbname="factures_traitements.facture_id" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=montant dbname="factures_traitements.montant" )
+ column=(type=date update=yes updatewhereclause=yes name=date_facture dbname="factures_traitements.date_facture" )
+ column=(type=long update=yes updatewhereclause=yes name=status_id dbname="factures_traitements.status_id" )
+ column=(type=long update=yes updatewhereclause=yes name=traitement_id dbname="factures_traitements.traitement_id" )
+ column=(type=number update=yes updatewhereclause=yes name=affect dbname="factures_traitements.affect" values="	1/	0" )
+ column=(type=number update=yes updatewhereclause=yes name=imp dbname="factures_traitements.imp" )
+ column=(type=number update=yes updatewhereclause=yes name=cache dbname="factures_traitements.cache" )
+ column=(type=long update=yes updatewhereclause=yes name=id_contact dbname="factures_traitements.id_contact" )
+ column=(type=long update=yes updatewhereclause=yes name=id_satellite dbname="factures_traitements.id_satellite" )
+ retrieve="  SELECT factures_traitements.facture_id,   
+         factures_traitements.montant,   
+         factures_traitements.date_facture,   
+         factures_traitements.status_id,   
+         factures_traitements.traitement_id,   
+         factures_traitements.affect,   
+         factures_traitements.imp,   
+         factures_traitements.cache,   
+         factures_traitements.id_contact,
+			factures_traitements.id_satellite  
+    FROM factures_traitements   
+" update="factures_traitements" updatewhere=1 updatekeyinplace=no )
+text(band=header alignment="2" text="Acte" border="0" color="0" x="110" y="0" height="64" width="480" html.valueishtml="0"  name=t_acte visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Date facture" border="0" color="0" x="649" y="0" height="64" width="471" html.valueishtml="0"  name=t_datefact visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Montant" border="0" color="0" x="1166" y="0" height="64" width="361" html.valueishtml="0"  name=t_montant visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Responsable financier" border="0" color="0" x="1573" y="0" height="64" width="992" html.valueishtml="0"  name=t_resp visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Affecte" border="0" color="0" x="2633" y="0" height="64" width="306" html.valueishtml="0"  name=t_affect  tag="" visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="2" tabsequence=20 border="5" color="0" x="649" y="8" height="76" width="471" format="[general]" html.valueishtml="0"  name=date_facture visible="1" editmask.required=yes editmask.autoskip=yes editmask.ddcalendar=yes editmask.mask="[date]" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="1" tabsequence=30 border="5" color="0" x="1166" y="8" height="76" width="361" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=montant visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.required=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=9 alignment="0" tabsequence=40 border="5" color="0" x="1573" y="8" height="76" width="992" format="[general]" html.valueishtml="0"  name=id_contact visible="1" dddw.name=dddw_contact dddw.displaycolumn=compute_1 dddw.datacolumn=id_contact dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes dddw.autoretrieve=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="1" tabsequence=10 border="5" color="0" x="110" y="8" height="76" width="480" format="[general]" html.valueishtml="0"  name=status_id visible="1" dddw.name=dddw_status dddw.displaycolumn=code dddw.datacolumn=status_id dddw.percentwidth=0 dddw.lines=10 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.required=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=10 alignment="0" tabsequence=60 border="5" color="0" x="110" y="100" height="76" width="955" format="[general]" html.valueishtml="0"  name=id_satellite visible="1" dddw.name=dddw_satellite dddw.displaycolumn=computelieu dddw.datacolumn=id_satellite dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=6 alignment="2" tabsequence=50 border="0" color="0" x="2633" y="12" height="64" width="306" format="[general]" html.valueishtml="0"  name=affect visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

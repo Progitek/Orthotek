@@ -1,0 +1,21 @@
+﻿$PBExportHeader$d_hormemo9.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=556 color="536870912" )
+table(column=(type=char(1000) update=yes updatewhereclause=yes name=memo9 dbname="horaire.memo9" )
+ column=(type=time updatewhereclause=yes key=yes name=heure dbname="horaire.heure" )
+ column=(type=date updatewhereclause=yes key=yes name=datecal dbname="horaire.datecal" )
+ column=(type=long updatewhereclause=yes key=yes name=no_ortho dbname="horaire.no_ortho" )
+ retrieve="SELECT  horaire.memo9 ,
+		  horaire.heure ,
+		  horaire.datecal ,
+		  horaire.no_ortho     
+  FROM  horaire      
+ WHERE  horaire.no_ortho = :ra_ortho and
+        horaire.heure = :ra_heure and
+        horaire.datecal = :ra_date" update="horaire" updatewhere=0 updatekeyinplace=no arguments=(("ra_ortho", number),("ra_heure", time),("ra_date", date)) )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="33554432" x="0" y="4" height="516" width="1586" format="[general]" html.valueishtml="0"  name=memo9 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

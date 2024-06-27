@@ -1,0 +1,59 @@
+﻿$PBExportHeader$d_pourcentage_entrer.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=236 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=64 color="536870912" )
+detail(height=88 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=pourcentage_actuel dbname="pourcentage_actuel" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient_prenom" )
+ column=(type=date updatewhereclause=yes name=debut_traitement dbname="debut_traitement" )
+ column=(type=date updatewhereclause=yes name=fin_traitement dbname="fin_traitement" )
+ column=(type=decimal(2) updatewhereclause=yes name=traitements_montant_original dbname="montant_original" )
+ column=(type=decimal(2) updatewhereclause=yes name=traitements_montant_paye dbname="montant_paye" )
+ column=(type=long updatewhereclause=yes key=yes identity=yes name=traitements_traitement_id dbname="traitement_id" )
+ column=(type=char(30) updatewhereclause=yes name=dr_nom_complet dbname="dr_nom_complet" )
+ retrieve="  SELECT traitements.pourcentage_actuel,   
+         patient.patient_nom,   
+         patient.patient_prenom,   
+         traitements.debut_traitement,   
+         traitements.fin_traitement, 
+			traitements.montant_original,
+			traitements.montant_paye,  
+         traitements.traitement_id, 
+			ortho_id.dr_nom_complet 
+    FROM traitements INNER JOIN patient  ON traitements.patient_id = patient.patient_id,
+			patient 		INNER JOIN ortho_id ON patient.no_ortho = ortho_id.ortho_id     
+   WHERE patient.no_ortho = :ra_ortho  AND
+			traitements.montant_original > 0  AND 
+		  (years(traitements.fin_traitement) <= :ra_year OR
+			traitements.fin_traitement is null)  AND
+        (traitements.pourcentage_actuel < 100   OR  
+        (traitements.pourcentage_actuel = 100  AND  
+         years(traitements.fin_traitement) = :ra_year ) OR
+			traitements.pourcentage_actuel is null )  
+ORDER BY patient.patient_nom ASC,   
+         patient.patient_prenom ASC   
+" update="traitements" updatewhere=0 updatekeyinplace=no arguments=(("ra_ortho", number),("ra_year", number)) )
+text(band=header alignment="2" text="%" border="0" color="0" x="151" y="168" height="64" width="242"  name=pourcentage_actuel_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Nom du patient" border="0" color="0" x="421" y="168" height="64" width="1202"  name=t_1  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Début" border="0" color="0" x="1646" y="168" height="64" width="453"  name=debut_traitement_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Fin" border="0" color="0" x="2121" y="168" height="64" width="453"  name=fin_traitement_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Montant payé" border="0" color="0" x="3063" y="168" height="64" width="453"  name=t_3  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Coût traitement" border="0" color="0" x="2592" y="168" height="64" width="453"  name=t_4  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="LISTE ENTRER POURCENTAGES MODIFIÉS" border="0" color="0" x="151" y="8" height="64" width="3369"  name=t_5  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=9 alignment="2" tabsequence=32766 border="0" color="0" x="151" y="88" height="64" width="3369" format="[general]"  name=dr_nom_complet edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="5" color="0" x="151" y="4" height="72" width="242" format="[general]"  name=pourcentage_actuel edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression=" patient_patient_nom + ',  ' +  patient_patient_prenom "border="0" color="0" x="421" y="8" height="64" width="1202" format="[GENERAL]"  name=compute_1  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=32766 border="0" color="0" x="1646" y="4" height="76" width="453" format="[general]"  name=debut_traitement editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="0" x="2121" y="4" height="76" width="453" format="[general]"  name=fin_traitement editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="2592" y="4" height="76" width="453" format="#,##0.00 $; (#,##0.00 $)"  name=traitements_montant_original edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="3067" y="4" height="76" width="453" format="#,##0.00 $; (#,##0.00 $)"  name=traitements_montant_paye edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2793" y="0" height="64" width="727" format="[general]"  name=page_1  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="count( patient_patient_nom + ' ' +  patient_patient_prenom  for all)"border="0" color="0" x="1467" y="0" height="64" width="1202" format="[GENERAL]"  name=compute_2  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="TOTAL:" border="0" color="0" x="1234" y="0" height="64" width="215"  name=t_2  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Imprimé le " border="0" color="0" x="146" y="0" height="56" width="229"  name=t_6  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="398" y="0" height="56" width="439" format="[general]"  name=date_1  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

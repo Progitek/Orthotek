@@ -1,0 +1,28 @@
+﻿$PBExportHeader$gf_uhelp.srf
+global type gf_uhelp from function_object
+end type
+
+forward prototypes
+global subroutine gf_uhelp (long fl_patid)
+end prototypes
+
+global subroutine gf_uhelp (long fl_patid);if isnull(fl_patid) = false and  fl_patid > 0 then
+
+	window activesheet
+	string ls_text, ls_patn, ls_patp, ls_title
+	
+	activesheet = w_principal.GetActiveSheet()
+	
+	IF IsValid(activesheet) THEN
+			ls_text = activesheet.Tag
+	ELSE
+			ls_text = 'Unknow windows'
+	END IF
+	select patient_nom, patient_prenom into :ls_patn, :ls_patp from patient where patient_id = :fl_patid;
+	ls_title = ls_text + ' ( ' + ls_patp + ' ' + ls_patn + ' )'
+	w_principal.SetMicroHelp(ls_title)
+	activesheet.Title = ls_title
+	
+end if
+end subroutine
+

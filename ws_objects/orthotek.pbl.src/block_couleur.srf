@@ -1,0 +1,66 @@
+﻿$PBExportHeader$block_couleur.srf
+global type block_couleur from function_object
+end type
+
+forward prototypes
+global subroutine block_couleur (long couleur)
+end prototypes
+
+global subroutine block_couleur (long couleur);long row, v_fin, ll_idpat
+integer li_col
+string ls_col
+
+//row = w_horaire.dw_hor.getrow()
+//choose case w_horaire.dw_hor.getcolumnname()
+//	case "patient_nom_1"
+//		li_col = 1
+//		ls_col = '1'
+//	case "patient_nom_2"
+//		li_col = 2
+//		ls_col = '2'
+//	case "patient_nom_3"
+//		li_col = 3
+//		ls_col = '3'
+//	case "patient_nom_4"
+//		li_col = 4
+//		ls_col = '4'
+//	case "patient_nom_5"
+//		li_col = 5
+//		ls_col = '5'
+//	case "patient_nom_6"
+//		li_col = 6
+//		ls_col = '6'
+//	case "patient_nom_7"
+//		li_col = 7
+//		ls_col = '7'
+//	case "patient_nom_8"
+//		li_col = 8
+//		ls_col = '8'
+//	case "patient_nom_9"
+//		li_col = 9
+//		ls_col = '9'
+//	case "patient_nom_10"
+//		li_col = 10
+//		ls_col = '10'
+//end choose
+//ll_idpat = w_horaire.dw_hor.getitemnumber(row,"patient_id_"+ls_col)
+//w_horaire.dw_hor.setitem(row,"couleur_text_"+ls_col,couleur)
+//row = row + 1			
+//w_horaire.dw_hor.scrollTorow(row)
+//v_fin = w_horaire.dw_hor.GetRow ( )
+//if v_fin = row then
+//	DO WHILE w_horaire.dw_hor.getitemstring(row,"patient_nom_"+ls_col) <> "" &
+//		and w_horaire.dw_hor.getitemnumber(row,"patient_id_"+ls_col) = ll_idpat
+//		w_horaire.dw_hor.setitem(row,"couleur_text_"+ls_col,couleur)
+//		row = row + 1
+//		w_horaire.dw_hor.scrollTorow(row)
+//		v_fin = w_horaire.dw_hor.GetRow()
+//		if v_fin <> row then
+//			exit
+//		end if
+//	LOOP
+//end if
+//w_horaire.change = true
+//w_horaire.sauve()
+end subroutine
+

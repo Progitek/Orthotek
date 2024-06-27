@@ -1,0 +1,82 @@
+﻿$PBExportHeader$dw_imaging_print.srd
+release 10.5;
+datawindow(units=1 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="Montage" print.orientation = 0 print.margin.left = 24 print.margin.right = 24 print.margin.top = 24 print.margin.bottom = 24 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=999 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=patient_id dbname="t_imagerie.patient_id" )
+ column=(type=long updatewhereclause=yes name=sequence dbname="t_imagerie.sequence" )
+ column=(type=char(100) updatewhereclause=yes name=front_smile dbname="t_imagerie.front_smile" )
+ column=(type=char(100) updatewhereclause=yes name=lateral dbname="t_imagerie.lateral" )
+ column=(type=char(100) updatewhereclause=yes name=frontal dbname="t_imagerie.frontal" )
+ column=(type=char(100) updatewhereclause=yes name=leftoccl dbname="t_imagerie.leftoccl" )
+ column=(type=char(100) updatewhereclause=yes name=rightoccl dbname="t_imagerie.rightoccl" )
+ column=(type=char(100) updatewhereclause=yes name=anterioroccl dbname="t_imagerie.anterioroccl" )
+ column=(type=char(100) updatewhereclause=yes name=upperoccl dbname="t_imagerie.upperoccl" )
+ column=(type=char(100) updatewhereclause=yes name=loweroccl dbname="t_imagerie.loweroccl" )
+ column=(type=char(10) updatewhereclause=yes name=t_specialists_dr_titre dbname="t_specialists.dr_titre" )
+ column=(type=char(50) updatewhereclause=yes name=t_specialists_dr_nom dbname="t_specialists.dr_nom" )
+ column=(type=char(50) updatewhereclause=yes name=t_specialists_dr_prenom dbname="t_specialists.dr_prenom" )
+ column=(type=char(50) updatewhereclause=yes name=t_specialists_dr_adresse dbname="t_specialists.dr_adresse" )
+ column=(type=char(75) updatewhereclause=yes name=specville dbname="specville" )
+ column=(type=char(75) updatewhereclause=yes name=specprov dbname="specprov" )
+ column=(type=char(10) updatewhereclause=yes name=t_specialists_dr_zip dbname="t_specialists.dr_zip" )
+ column=(type=char(50) updatewhereclause=yes name=t_patients_nom dbname="t_patients.nom" )
+ column=(type=char(50) updatewhereclause=yes name=t_patients_prenom dbname="t_patients.prenom" )
+ column=(type=long updatewhereclause=yes name=t_patients_nodos dbname="t_patients.nodos" )
+ retrieve="  SELECT t_imagerie.patient_id,   
+         t_imagerie.sequence,   
+         t_imagerie.front_smile,   
+         t_imagerie.lateral,   
+         t_imagerie.frontal,   
+         t_imagerie.leftoccl,   
+         t_imagerie.rightoccl,   
+         t_imagerie.anterioroccl,   
+         t_imagerie.upperoccl,   
+         t_imagerie.loweroccl,
+			t_specialists.dr_titre,
+			t_specialists.dr_nom,
+			t_specialists.dr_prenom,
+			t_specialists.dr_adresse,
+			(select nomville from t_ville where id_ville = t_specialists.id_ville) as specville,
+			(select nomprov from t_province where id_province = t_specialists.id_province) as specprov,
+			t_specialists.dr_zip,
+			t_patients.nom,
+			t_patients.prenom,
+			t_patients.nodos  
+    FROM t_patients INNER JOIN t_imagerie ON t_imagerie.patient_id = t_patients.id_patient
+					     INNER JOIN t_specialists ON t_patients.id_specialist = t_specialists.id_specialist
+WHERE    t_imagerie.patient_id = :ra_patid AND
+			t_imagerie.sequence = :ra_seq   
+" arguments=(("ra_patid", number),("ra_seq", number)) )
+rectangle(band=detail x="8" y="0" height="988" width="743"  name=r_1 visible="0" brush.hatch="6" brush.color="134217742" pen.style="0" pen.width="1" pen.color="33554432"  background.mode="2" background.color="134217742" )
+roundrectangle(band=detail ellipseheight="9" ellipsewidth="9"x="29" y="52" height="90" width="304"  name=rr_1 visible="1" brush.hatch="6" brush.color="134217742" pen.style="0" pen.width="1" pen.color="33554432"  background.mode="2" background.color="134217742" )
+roundrectangle(band=detail ellipseheight="9" ellipsewidth="9"x="435" y="52" height="90" width="304"  name=rr_2 visible="1" brush.hatch="6" brush.color="134217742" pen.style="0" pen.width="1" pen.color="33554432"  background.mode="2" background.color="134217742" )
+bitmap(band=detail filename="" x="30" y="719" height="160" width="216" border="0"  name=p_7 visible="1" )
+bitmap(band=detail filename="" x="29" y="539" height="160" width="216" border="0"  name=p_4 visible="1" )
+compute(band=detail alignment="0" expression=" t_specialists_dr_titre + ' ' +  t_specialists_dr_prenom + ' ' +  t_specialists_dr_nom "border="0" color="0" x="35" y="58" height="19" width="292" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression=" t_patients_prenom  + ' ' +   t_patients_nom "border="0" color="0" x="442" y="62" height="19" width="291" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=20 alignment="0" tabsequence=32766 border="0" color="0" x="442" y="82" height="19" width="291" format="[general]" html.valueishtml="0"  name=t_patients_nodos visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+bitmap(band=detail filename="" x="276" y="214" height="305" width="216" border="0"  name=p_2 visible="1" )
+bitmap(band=detail filename="" x="29" y="214" height="305" width="216" border="0"  name=p_1 visible="1" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="35" y="78" height="19" width="292" format="[general]" html.valueishtml="0"  name=t_specialists_dr_adresse visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression=" specville   + ' ( ' +    specprov   + ' ) ' +  string( t_specialists_dr_zip ,~"@@@ @@@~")"border="0" color="0" x="35" y="97" height="19" width="292" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="initial Records" border="0" color="33554432" x="31" y="947" height="19" width="221" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Copyright Imprimé par DENTITEK" border="0" color="33554432" x="470" y="952" height="14" width="272" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+bitmap(band=detail filename="" x="523" y="214" height="305" width="216" border="0"  name=p_3 visible="1" )
+bitmap(band=detail filename="" x="523" y="539" height="160" width="216" border="0"  name=p_6 visible="1" )
+bitmap(band=detail filename="" x="523" y="719" height="160" width="216" border="0"  name=p_8 visible="1" )
+bitmap(band=detail filename="" x="276" y="539" height="160" width="216" border="0"  name=p_5 visible="1" )
+bitmap(band=detail filename="" x="276" y="719" height="160" width="216" border="0"  name=p_9 visible="1" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

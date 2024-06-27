@@ -1,0 +1,46 @@
+﻿$PBExportHeader$d_contacttypelist.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=76 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=64 color="536870912" )
+detail(height=64 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes identity=yes name=id_contact dbname="t_contact.id_contact" )
+ column=(type=char(50) updatewhereclause=yes name=nom dbname="t_contact.nom" )
+ column=(type=char(50) updatewhereclause=yes name=prenom dbname="t_contact.prenom" )
+ column=(type=char(35) updatewhereclause=yes name=adresse dbname="t_contact.adresse" )
+ column=(type=char(50) updatewhereclause=yes name=ville dbname="t_contact.ville" )
+ column=(type=char(25) updatewhereclause=yes name=province dbname="t_contact.province" )
+ column=(type=char(15) updatewhereclause=yes name=zip dbname="t_contact.zip" )
+ column=(type=long updatewhereclause=yes name=ortho_id dbname="t_contact.ortho_id" )
+ column=(type=long updatewhereclause=yes name=id_conttype dbname="t_contact.id_conttype" )
+ retrieve="  SELECT t_contact.id_contact,   
+         t_contact.nom,   
+         t_contact.prenom,
+			t_contact.adresse, 
+			t_contact.ville, 
+			t_contact.province, 
+			t_contact.zip, 
+         t_contact.ortho_id,   
+         t_contact.id_conttype  
+    FROM t_contact
+	WHERE t_contact.ortho_id = :ra_ortho AND
+			(t_contact.id_conttype = :ra_type OR
+			t_contact.id_conttype2 = :ra_type OR
+			t_contact.id_conttype3 = :ra_type OR
+			t_contact.id_conttype4 = :ra_type OR
+			t_contact.id_conttype5 = :ra_type OR
+			t_contact.id_conttype6 = :ra_type )
+ORDER BY t_contact.nom ASC,   
+         t_contact.prenom ASC" update="t_contact" updatewhere=0 updatekeyinplace=no arguments=(("ra_ortho", number),("ra_type", number)) )
+line(band=header x1="0" y1="72" x2="3483" y2="72"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Adresse" border="0" color="0" x="1271" y="0" height="64" width="2007" html.valueishtml="0"  name=t_ville visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Nom du spécialiste" border="0" color="0" x="18" y="0" height="64" width="1253" html.valueishtml="0"  name=t_nom visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression=" prenom  + ' ' +  nom "border="0" color="33554432" x="18" y="0" height="64" width="1253" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" adresse  + ' ' + ville  + ' (' + province + ')'"border="0" color="33554432" x="1271" y="0" height="64" width="2007" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="count( prenom  + ' ' +  nom  for all)"border="0" color="33554432" x="187" y="0" height="64" width="1079" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Qté :" border="0" color="0" x="27" y="0" height="60" width="155" html.valueishtml="0"  name=t_qty visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+button(band=header text="Nom du spécialiste"filename=""action="0" border="0" color="0" x="0" y="0" height="72" width="1157" vtextalign="0" htextalign="0"  name=b_nomspec visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=header text="Adresse"filename=""action="0" border="0" color="0" x="1157" y="0" height="72" width="1157" vtextalign="0" htextalign="0"  name=b_ville visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

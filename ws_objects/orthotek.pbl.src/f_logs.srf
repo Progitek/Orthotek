@@ -1,0 +1,24 @@
+﻿$PBExportHeader$f_logs.srf
+global type f_logs from function_object
+end type
+
+forward prototypes
+global subroutine f_logs (string f_action, string f_montant, long f_id, long f_idpat, date f_date, string f_montfin)
+end prototypes
+
+global subroutine f_logs (string f_action, string f_montant, long f_id, long f_idpat, date f_date, string f_montfin);window activesheet
+string ls_text
+
+activesheet = w_principal.GetActiveSheet()
+
+IF IsValid(activesheet) THEN
+		ls_text = activesheet.Tag
+ELSE
+		ls_text = 'Unknow windows'
+END IF
+//messagebox(string(f_montant),'')
+insert into t_logs(logdate,heure,pers,intable,actions,montant,iddel,idpat,datetrans,montantfin) values(today(),now(),:gs_user,:ls_text,:f_action,:f_montant,:f_id,:f_idpat,:f_date,:f_montfin);
+commit using SQLCA;
+error_type(-1)
+end subroutine
+

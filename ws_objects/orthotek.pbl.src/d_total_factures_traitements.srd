@@ -1,0 +1,26 @@
+﻿$PBExportHeader$d_total_factures_traitements.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=77 color="536870912" )
+summary(height=5 color="536870912" )
+footer(height=9 color="536870912" )
+detail(height=93 color="536870912" )
+table(column=(type=number update=yes updatewhereclause=yes key=yes identity=yes name=facture_id dbname="factures_traitements.facture_id" )
+ column=(type=date update=yes updatewhereclause=yes name=date_facture dbname="factures_traitements.date_facture" )
+ column=(type=long update=yes updatewhereclause=yes name=traitement_patient_id dbname="factures_traitements.traitement_patient_id" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=montant dbname="factures_traitements.montant" )
+ retrieve="  SELECT ~"factures_traitements~".~"facture_id~",   
+         ~"factures_traitements~".~"date_facture~",   
+         ~"factures_traitements~".~"traitement_patient_id~",   
+         ~"factures_traitements~".~"montant~"  
+    FROM ~"factures_traitements~"  
+	WHERE ( ~"factures_traitements~".~"traitement_patient_id~" = :id ) and  
+         ( ~"factures_traitements~".~"date_facture~" <= today() )    
+" update="factures_traitements" updatewhere=1 updatekeyinplace=no retrieve.asneeded=yes arguments=(("id", number))  sort="date_facture A montant A " )
+text(band=header alignment="2" text="Date Facture"border="0" color="0" x="156" y="8" height="65" width="343"  name=date_facture_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Montant"border="0" color="0" x="622" y="8" height="65" width="215"  name=montant_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="0" x="3781" y="12" height="65" width="165" format="[General]"  name=traitement_patient_id edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="3155" y="12" height="65" width="275" format="[General]"  name=facture_id edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=20 border="5" color="0" x="577" y="12" height="65" width="307" format="#,##0.00 $; (#,##0.00 $)"  name=montant edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="2" tabsequence=10 border="5" color="0" x="170" y="12" height="65" width="307" format="[general]"  name=date_facture edit.name="DD/MM/YYYY" editmask.mask="DD/MM/YYYY" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="sum(  montant  for all )"border="0" color="16777215" x="983" y="4" height="77" width="362" format="#,##0.00 $; (#,##0.00 $)"  name=total_factures  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )

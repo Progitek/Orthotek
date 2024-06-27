@@ -1,0 +1,21 @@
+﻿$PBExportHeader$remplir_zerosign.srf
+global type remplir_zerosign from function_object
+end type
+
+forward prototypes
+global function string remplir_zerosign (long nbzero, long chiffre)
+end prototypes
+
+global function string remplir_zerosign (long nbzero, long chiffre);string ls_newstring, ls_chiffre
+int i
+long ll_nbcarac
+
+ls_chiffre = string(chiffre)
+ll_nbcarac = len(ls_chiffre)
+ls_newstring = ls_chiffre
+for i = ll_nbcarac to nbzero - 1
+	ls_newstring = "0" + ls_newstring
+next
+return ls_newstring
+end function
+

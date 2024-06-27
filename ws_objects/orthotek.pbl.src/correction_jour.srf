@@ -1,0 +1,50 @@
+﻿$PBExportHeader$correction_jour.srf
+global type correction_jour from function_object
+end type
+
+forward prototypes
+global function integer correction_jour (integer jour, integer mois, integer annee)
+end prototypes
+
+global function integer correction_jour (integer jour, integer mois, integer annee);long v_jour
+choose case mois
+	case 2
+		if jour > 28 then
+			if mod(annee,4) = 0 then
+				v_jour=29
+			else
+				v_jour=28
+			end if		
+		else
+			v_jour = jour
+		end if
+	case 4
+		if jour > 30 then
+			v_jour=30
+		else
+			v_jour = jour
+		end if
+	case 6
+		if jour > 30 then
+			v_jour=30
+		else
+			v_jour = jour
+		end if
+	case 9
+		if jour > 30 then
+			v_jour=30
+		else
+			v_jour = jour
+		end if
+	case 11
+		if jour > 30 then
+			v_jour=30
+		else
+			v_jour = jour
+		end if
+	case else
+			v_jour = jour
+end choose
+return(v_jour)
+end function
+

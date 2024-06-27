@@ -1,0 +1,46 @@
+﻿$PBExportHeader$d_depot_compact.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 110 print.margin.bottom = 110 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=412 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=decimal(2) updatewhereclause=yes name=paiement_montant_recu dbname="paiement.montant_recu" )
+ column=(type=char(20) updatewhereclause=yes name=paiement_paiement dbname="paiement.paiement" values="Chèques	C/Visa	Visa/Mastercard	MC/Paiement direct	PD/Comptant	$/Chèque postdaté	P/" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(15) updatewhereclause=yes name=patient_new_dossier dbname="patient.new_dossier" )
+ retrieve="  SELECT ortho_id.dr_nom_complet,   
+         paiement.montant_recu,   
+         paiement.paiement,  
+         patient.patient_prenom,   
+         patient.patient_nom,
+			patient.new_dossier
+    FROM traitements INNER JOIN paiement ON paiement.traitement_patient_id = traitements.traitement_id
+                     INNER JOIN patient ON patient.patient_id = traitements.patient_id,
+         patient     INNER JOIN ortho_id ON ortho_id.ortho_id = patient.no_ortho
+   WHERE ortho_id.ortho_id = :ra_no_ortho AND
+         paiement.date_paiement = :ra_date AND
+         (paiement.paiement = 'C' OR paiement = 'MC' OR paiement = 'visa' OR paiement = 'R') AND
+         paiement.cache <> 1
+ORDER BY paiement.paiement ASC,   
+         patient.patient_nom ASC,   
+         patient.patient_prenom ASC   
+" arguments=(("ra_no_ortho", number),("ra_date", date)) )
+group(level=1 header.height=104 trailer.height=84 by=("paiement_paiement" ) header.color="536870912" trailer.color="536870912"  sort="count(patient_patient_nom for group 1) A count(patient_patient_prenom for group 1) A " )
+column(band=header id=1 alignment="0" tabsequence=32766 border="0" color="0" x="146" y="172" height="84" width="1509" format="[general]" html.valueishtml="0"  name=ortho_id_dr_nom_complet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="" border="0" color="0" x="553" y="72" height="64" width="425" html.valueishtml="0"  name=t_date visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Date du jour " border="0" color="0" x="146" y="72" height="64" width="375" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Patient Nom" border="0" color="0" x="55" y="332" height="56" width="791" html.valueishtml="0"  name=patient_patient_nom_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Montant Recu" border="0" color="0" x="1120" y="328" height="56" width="485" html.valueishtml="0"  name=paiement_montant_recu_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=3 alignment="0" tabsequence=32766 border="0" color="0" x="55" y="8" height="64" width="690" format="[general]" html.valueishtml="0"  name=paiement_paiement visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=upper ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="  patient_patient_nom +' ,  '+ patient_patient_prenom  + if ( isnull( patient_new_dossier ) or patient_new_dossier = '', '', ' (' +  patient_new_dossier + ')')"border="0" color="0" x="50" y="8" height="56" width="1019" format="[general]" html.valueishtml="0"  name=nom_patient visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="1189" y="8" height="56" width="416" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=paiement_montant_recu visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="55" y1="4" x2="1641" y2="4"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=trailer.1 alignment="1" expression="sum(paiement_montant_recu for group 1)"border="0" color="0" x="1189" y="20" height="56" width="416" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

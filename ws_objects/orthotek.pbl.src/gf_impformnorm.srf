@@ -1,0 +1,133 @@
+﻿$PBExportHeader$gf_impformnorm.srf
+global type gf_impformnorm from function_object
+end type
+
+forward prototypes
+global subroutine gf_impformnorm (date adt_debut, date adt_fin)
+end prototypes
+
+global subroutine gf_impformnorm (date adt_debut, date adt_fin);//////////////////////////////////////////////////////
+//
+// Impression des formulaires normalisés automatique
+//
+//////////////////////////////////////////////////////
+
+long ll_traitid, i, ll_contactid, ll_contactidold = 0, ll_traitidold = 0, ll_job
+string ls_langue
+date ldt_datepaie
+dec{2} ld_montant
+datastore ds_formnorm
+
+//printsetup()
+ds_formnorm = create datastore
+
+gb_imp = false
+gb_datawindow = false
+ds_formnorm.dataobject = 'd_formnormpaiefr'
+openwithparm(w_print_options,ds_formnorm)
+ds_formnorm = message.powerObjectParm
+if isNull(ds_formnorm) then return
+ll_job = PrintOpen("Formulaires normalisés")
+
+Declare pat cursor for
+
+ select  traitements.traitement_id,
+			  cont.id_contact,
+			  cont.mont,
+			  cont.datecpd,
+			  patient.langue
+	from (select id_contact, traitement_patient_id, sum(paiement) as mont, date_cheque as datecpd
+			from cheques_postdates 
+			where date_cheque between :adt_debut and :adt_fin and
+					cheques_postdates.indicateur <> '1'
+			group by id_contact, traitement_patient_id, date_cheque
+			union
+			select id_contact, traitement_patient_id, sum(montant_recu) as mont, date_paiement as datecpd
+			from paiement
+			where date_paiement between :adt_debut and :adt_fin and
+					(paiement.impformnorm IS NULL OR paiement.impformnorm = 0)
+			group by id_contact, traitement_patient_id, date_paiement) as cont INNER JOIN traitements ON traitements.traitement_id = cont.traitement_patient_id
+																									 INNER JOIN patient ON traitements.patient_id = patient.patient_id
+	where patient.no_ortho = :v_no_ortho and
+		  patient.assurance = 'oui'
+	order by patient.patient_nom ASC, patient.patient_prenom ASC, traitements.traitement_id ASC, cont.id_contact ASC;
+		 
+			 
+open pat;
+
+fetch pat into :ll_traitid,
+					:ll_contactid,
+					:ld_montant,
+					:ldt_datepaie,
+					:ls_langue;
+					
+					
+do while sqlca.sqlcode = 0
+	
+	if ll_traitidold <> ll_traitid or ll_contactid <> ll_contactidold then
+	
+		if ll_contactidold <> 0 and ll_traitidold <> 0 then
+//			ds_formnorm.print()
+			PrintDataWindow(ll_job, ds_formnorm)
+		end if
+		
+		if ls_langue = 'A' then
+			ds_formnorm.dataobject = 'd_formnormenauto'
+		else
+			ds_formnorm.dataobject = 'd_formnormpaiefr'
+		end if
+	
+		ds_formnorm.SetTransObject(SQLCA)
+		ds_formnorm.retrieve(ll_traitid, adt_debut, adt_fin,ll_contactid)
+	
+		i = 1
+		ll_traitidold = ll_traitid
+		ll_contactidold = ll_contactid
+	
+	end if
+	
+	ds_formnorm.modify("codeacte" + string(i) + ".visible = true")
+	ds_formnorm.modify("factures_traitements_date" + string(i) + ".visible = true")
+	ds_formnorm.modify("factures_traitements_montant" + string(i) + ".visible = true")
+	ds_formnorm.modify("factures_traitements_montant" + string(i) + "_1.visible = true")
+	ds_formnorm.setItem(ds_formnorm.getRow(),'factures_traitements_date' + string(i),ldt_datepaie)
+	ds_formnorm.setItem(ds_formnorm.getRow(),'factures_traitements_montant' + string(i),ld_montant)
+	i++
+		
+
+	
+	fetch pat into :ll_traitid,
+						:ll_contactid,
+						:ld_montant,
+						:ldt_datepaie,
+						:ls_langue;
+						
+loop
+
+close pat;
+
+//ds_formnorm.print()
+PrintDataWindow(ll_job, ds_formnorm)
+
+PrintClose(ll_job)
+
+destroy ds_formnorm
+
+// On coche automatiquemenet les factures de date a date
+	
+update factures_traitements set imp = 1 where date_facture between :adt_debut and :adt_fin;
+if error_type(-1) = 1 then
+	commit using SQLCA;
+else
+	rollback using SQLCA;
+end if
+
+update paiement set imp = 1 where date_paiement between :adt_debut and :adt_fin;
+if error_type(-1) = 1 then
+	commit using SQLCA;
+else
+	rollback using SQLCA;
+end if
+
+end subroutine
+

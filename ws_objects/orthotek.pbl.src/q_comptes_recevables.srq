@@ -1,0 +1,22 @@
+﻿$PBExportHeader$q_comptes_recevables.srq
+  SELECT patient.patient_nom,   
+         patient.patient_prenom,   
+         ortho_id.nom_complet,   
+         traitements.montant_du,   
+         traitements.traitement_id,   
+         traitements.dernier_paiement,   
+         traitements.montant_original,   
+         traitements.montant_paye,   
+         traitements.date_cpd,   
+         traitements.montant_cpd,   
+         traitements.total_montant_cpd  
+    FROM ortho_id,   
+         patient,   
+         traitements  
+   WHERE ( patient.no_ortho = ortho_id.ortho_id ) and  
+         ( traitements.patient_id = patient.patient_id ) and  
+         ( traitements.montant_original <> traitements.montant_paye ) and  
+         ( ortho_id.ortho_id = :ra_no_ortho ) AND  
+         (( traitements.montant_original > 0 ) OR  
+         ((  traitements.honoraire_evaluation > 0 ) AND
+		   ( traitements.honoraire_evaluation <> traitements.montant_paye ))) ARG(NAME = "ra_no_ortho" TYPE = number)

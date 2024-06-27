@@ -1,0 +1,57 @@
+﻿$PBExportHeader$d_biopunch.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=15780518 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=100 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=148 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=id_personnel dbname="t_personnels.id_personnel" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=nom dbname="t_personnels.nom" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=prenom dbname="t_personnels.prenom" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=password dbname="t_personnels.password" )
+ column=(type=datetime updatewhereclause=yes name=max_heureentree dbname="max_heureentree" )
+ column=(type=datetime updatewhereclause=yes name=max_heuresortie dbname="max_heuresortie" )
+ retrieve="  SELECT t_personnels.id_personnel,   
+         t_personnels.nom,   
+         t_personnels.prenom,   
+         t_personnels.password,
+			(SELECT FIRST heureentree from t_biopunch 
+				WHERE t_personnels.id_personnel = t_biopunch.id_personnel ORDER BY heureentree desc) as max_heureentree,
+			(SELECT FIRST heuresortie from t_biopunch 
+				WHERE t_personnels.id_personnel = t_biopunch.id_personnel 
+				AND heuresortie >= max_heureentree ORDER BY heuresortie desc) as max_heuresortie
+    FROM t_personnels 
+   WHERE isnull(t_personnels.actif,0) = 1 AND  
+         isnull(t_personnels.groupe,0) = 0 AND
+			isnull(t_personnels.ortho_id,1) = :ra_orthoid
+GROUP BY t_personnels.id_personnel,
+         t_personnels.nom,   
+         t_personnels.prenom,  
+         t_personnels.password
+ORDER BY t_personnels.nom ASC,   
+         t_personnels.prenom ASC" update="t_personnels" updatewhere=0 updatekeyinplace=no arguments=(("ra_orthoid", number)) )
+text(band=header alignment="2" text="Nom" border="0" color="33554432" x="219" y="4" height="64" width="713" html.valueishtml="0"  name=nom_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Entrée" border="0" color="33554432" x="946" y="4" height="64" width="649" html.valueishtml="0"  name=t_in visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Sortie" border="0" color="33554432" x="1655" y="4" height="64" width="649" html.valueishtml="0"  name=t_out visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="5" y1="84" x2="2322" y2="84"  name=l_out visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="1073741824" )
+line(band=header x1="0" y1="92" x2="2318" y2="92"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="15793151"  background.mode="2" background.color="1073741824" )
+bitmap(band=detail filename="C:\ii4net\orthotek\images\crochetfondvert.gif" x="14" y="8" height="128" width="146" border="0"  name=p_vert visible="1~tif (isnull( max_heuresortie ) and not isnull( max_heureentree ),1, 0)" )
+bitmap(band=detail filename="C:\ii4net\orthotek\images\crochetfondrouge.gif" x="14" y="8" height="128" width="146" border="0"  name=p_rouge visible="1~tif (isnull( max_heuresortie ) ,if (isnull( max_heureentree ),1, 0), 1)" )
+text(band=detail alignment="2" text="Couleur" border="0" color="33554432" x="841" y="372" height="64" width="329" html.valueishtml="0"  name=couleur_t visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="2" text="Password" border="0" color="33554432" x="1234" y="408" height="64" width="302" html.valueishtml="0"  name=password_t visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="2" text="Id User" border="0" color="33554432" x="114" y="288" height="64" width="329" html.valueishtml="0"  name=id_user_t visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="2" text="Prenom" border="0" color="33554432" x="1829" y="428" height="64" width="713" html.valueishtml="0"  name=prenom_t visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if ( isnull( nom ), ~"~",  nom + ~" ~" ) + if ( isnull( prenom ), ~"~",  prenom  )"border="0" color="33554432" x="219" y="40" height="64" width="713" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="33554432" x="946" y="40" height="64" width="649" format="[shortdate] [time]" html.valueishtml="0"  name=max_heureentree visible="1" editmask.mask="yyyy-mm-dd hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="2" tabsequence=32766 border="0" color="33554432" x="1655" y="40" height="64" width="649" format="[shortdate] [time]" html.valueishtml="0"  name=max_heuresortie visible="1" editmask.mask="yyyy-mm-dd hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

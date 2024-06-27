@@ -1,0 +1,58 @@
+﻿$PBExportHeader$d_etiquettesref.srd
+release 10.5;
+datawindow(units=1 timer_interval=10 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="Étiquettes" print.orientation = 0 print.margin.left = 24 print.margin.right = 24 print.margin.top = 24 print.margin.bottom = 0 print.paper.source = 8 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=70 color="536870912" )
+table(column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(15) updatewhereclause=yes name=patient_tel_bureau dbname="patient.tel_bureau" )
+ column=(type=char(50) updatewhereclause=yes name=t_referents_ref_nom_complet dbname="t_referents.ref_nom_complet" )
+ column=(type=char(15) updatewhereclause=yes name=patient_tel_maison dbname="patient.tel_maison" )
+ column=(type=char(15) updatewhereclause=yes name=patient_new_dossier dbname="patient.new_dossier" )
+ column=(type=date updatewhereclause=yes name=traitements_debut_traitement dbname="traitements.debut_traitement" )
+ column=(type=char(1) updatewhereclause=yes name=patient_sex dbname="patient.sex" )
+ column=(type=char(36) updatewhereclause=yes name=patient_adresse dbname="patient.adresse" )
+ column=(type=char(50) updatewhereclause=yes name=patient_ville dbname="patient.ville" )
+ column=(type=char(25) updatewhereclause=yes name=patient_province dbname="patient.province" )
+ column=(type=char(15) updatewhereclause=yes name=patient_code_postale dbname="patient.code_postale" )
+ column=(type=char(50) updatewhereclause=yes name=salutation dbname="salutation" )
+ retrieve="  SELECT patient.patient_nom,   
+         patient.patient_prenom,   
+         patient.tel_bureau,   
+         t_referents.ref_nom_complet,   
+         patient.tel_maison,   
+         patient.new_dossier,   
+         traitements.debut_traitement,   
+         patient.sex,   
+         patient.adresse,   
+         patient.ville,   
+         patient.province,   
+         patient.code_postale,
+			(select salutation from t_salutation where patient.id_sal = t_salutation.id_sal) as salutation
+    FROM patient,   
+         t_referents,   
+         traitements  
+   WHERE patient.referant_nom = t_referents.id and  
+         patient.patient_id = traitements.patient_id and  
+         patient.patient_id = :ra_patient   
+" arguments=(("ra_patient", number)) )
+compute(band=detail alignment="0" expression="patient_patient_nom + '  ' +  patient_patient_prenom + '  ' +  patient_new_dossier  "border="0" color="0" x="0" y="0" height="16" width="203" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="2" tabsequence=32766 border="0" color="0" x="204" y="0" height="16" width="67" format="[general]" html.valueishtml="0"  name=traitements_debut_traitement visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="0" font.pitch="0" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="0" x="272" y="0" height="16" width="14" format="[general]" html.valueishtml="0"  name=patient_sex visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="0" font.pitch="0" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="0" y="51" height="16" width="64" format="[general]" html.valueishtml="0"  name=patient_code_postale visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="0" font.pitch="0" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="0" y="17" height="16" width="286" format="[general]" html.valueishtml="0"  name=patient_adresse visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="0" font.pitch="0" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression=" patient_ville  + ' (' +  patient_province +')'"border="0" color="0" x="0" y="34" height="16" width="286" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="'dent: ' +  t_referents_ref_nom_complet "border="0" color="0" x="65" y="51" height="16" width="221" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

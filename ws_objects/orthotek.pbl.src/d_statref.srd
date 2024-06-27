@@ -1,0 +1,32 @@
+﻿$PBExportHeader$d_statref.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="Statistique sur les référents" print.orientation = 0 print.margin.left = 600 print.margin.right = 0 print.margin.top = 0 print.margin.bottom = 0 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=304 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=4 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=referant_nom dbname="patient.referant_nom" )
+ column=(type=char(67) updatewhereclause=yes name=refnom dbname="refnom" )
+ column=(type=date updatewhereclause=yes name=datetrait dbname="datetrait" )
+ retrieve="SELECT   patient.referant_nom,
+         (select t_referents.ref_suffix + ' ' + t_referents.ref_prenom + ' ' + t_referents.ref_nom from t_referents where patient.referant_nom = t_referents.id) as refnom,
+			(select min(traitements.debut_traitement) from traitements where patient.patient_id = traitements.patient_id) as datetrait
+FROM     patient
+WHERE    patient.no_ortho = :ra_ortho AND
+         datetrait BETWEEN :ra_datedebut AND :ra_datefin AND
+			patient.referant_nom > 0
+ORDER BY refnom ASC" arguments=(("ra_datedebut", date),("ra_datefin", date),("ra_ortho", number)) )
+group(level=1 header.height=0 trailer.height=68 by=("referant_nom" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="2" text="Statistique sur les référents" border="0" color="8388608" x="27" y="8" height="92" width="1865" html.valueishtml="0"  name=t_title visible="1"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Quantité" border="4" color="0" x="1303" y="236" height="64" width="594" html.valueishtml="0"  name=t_qte visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Nom du référent" border="4" color="0" x="27" y="236" height="64" width="1275" html.valueishtml="0"  name=t_refnom visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+button(band=header text="Qté" filename="" enabled=yes action="0" border="0" color="0" x="1303" y="236" height="64" width="594" vtextalign="0" htextalign="0"  name=b_qte visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=trailer.1 alignment="2" expression="count(referant_nom for group 1)"border="0" color="0" x="1303" y="4" height="64" width="594" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="0" tabsequence=0 border="0" color="0" x="1303" y="4" height="64" width="594" html.valueishtml="0"  name=referant_nom visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+button(band=header text="Nom du référent" filename="" enabled=yes action="0" border="0" color="0" x="27" y="236" height="64" width="1275" vtextalign="0" htextalign="0"  name=b_refnom visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=trailer.1 id=2 alignment="0" tabsequence=0 border="0" color="0" x="23" y="4" height="64" width="1280" html.valueishtml="0"  name=refnom visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

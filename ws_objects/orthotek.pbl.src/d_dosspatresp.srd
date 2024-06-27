@@ -1,0 +1,47 @@
+﻿$PBExportHeader$d_dosspatresp.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes identity=yes name=id_contact dbname="t_contact.id_contact" )
+ column=(type=char(50) updatewhereclause=yes name=nom dbname="t_contact.nom" )
+ column=(type=char(50) updatewhereclause=yes name=prenom dbname="t_contact.prenom" )
+ column=(type=char(15) updatewhereclause=yes name=telres dbname="t_contact.telres" )
+ column=(type=char(15) updatewhereclause=yes name=telbur dbname="t_contact.telbur" )
+ column=(type=char(15) updatewhereclause=yes name=telcell dbname="t_contact.telcell" )
+ column=(type=char(15) updatewhereclause=yes name=telautre dbname="t_contact.telautre" )
+ column=(type=char(30) updatewhereclause=yes name=resptype dbname="t_contact.resptype" )
+ column=(type=number updatewhereclause=yes name=pat dbname="t_contact.pat" )
+ column=(type=long updatewhereclause=yes name=defcontact dbname="defcontact" )
+ retrieve="  SELECT t_contact.id_contact,
+			t_contact.nom,   
+         t_contact.prenom,   
+         t_contact.telres,   
+         t_contact.telbur,   
+         t_contact.telcell,   
+         t_contact.telautre,   
+         t_contact.resptype,
+			t_contact.pat,
+			(select id_contact from patient where patient_id = t_contact.patient_id) as defcontact
+    FROM t_contact
+	WHERE t_contact.patient_id = :ra_idpat
+" update="t_contact" updatewhere=0 updatekeyinplace=no arguments=(("ra_idpat", number)) )
+text(band=header alignment="0" text="Responsable" border="0" color="33554432" x="5" y="4" height="64" width="942" html.valueishtml="0"  name=t_resp visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Lien de parenté" border="0" color="33554432" x="2729" y="4" height="64" width="617" html.valueishtml="0"  name=t_resptype visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Tél. (autre)" border="0" color="33554432" x="2286" y="4" height="64" width="439" html.valueishtml="0"  name=t_telautre visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Tél. (cellulaire)" border="0" color="33554432" x="1842" y="4" height="64" width="439" html.valueishtml="0"  name=t_telcell visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Tél. (bureau)" border="0" color="33554432" x="1394" y="4" height="64" width="443" html.valueishtml="0"  name=t_telbur visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Tél. (résidence)" border="0" color="33554432" x="951" y="4" height="64" width="439" html.valueishtml="0"  name=t_telres visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="76" x2="4334" y2="72"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression=" prenom  + ' ' +  nom "border="0" color="33554432" x="5" y="4" height="64" width="942" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="951" y="4" height="64" width="439" format="[general]" html.valueishtml="0"  name=telres visible="1" editmask.mask="(###) ###-####" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1394" y="4" height="64" width="443" format="[general]" html.valueishtml="0"  name=telbur visible="1" editmask.mask="(###) ###-####" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="1842" y="4" height="64" width="439" format="[general]" html.valueishtml="0"  name=telcell visible="1" editmask.mask="(###) ###-####" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="2286" y="4" height="64" width="439" format="[general]" html.valueishtml="0"  name=telautre visible="1" editmask.mask="(###) ###-####" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="2729" y="4" height="64" width="617" format="[general]" html.valueishtml="0"  name=resptype visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if ( id_contact =  defcontact , '<-----' , '' )"border="0" color="33554432" x="3351" y="4" height="64" width="215" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=0 border="0" color="33554432" x="3589" y="4" height="64" width="146" html.valueishtml="0"  name=pat visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

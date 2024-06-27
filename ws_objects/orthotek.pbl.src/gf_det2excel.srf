@@ -1,0 +1,22 @@
+﻿$PBExportHeader$gf_det2excel.srf
+global type gf_det2excel from function_object
+end type
+
+forward prototypes
+global subroutine gf_det2excel (long al_detid[])
+end prototypes
+
+global subroutine gf_det2excel (long al_detid[]);n_ds ds_dentcorr
+int i, li_ret
+string ls_detid
+
+ls_detid = unsplit(al_detid,',')
+ds_dentcorr = create n_ds
+ds_dentcorr.dataobject = 'd_exportdet'
+ds_dentcorr.setTransObject(SQLCA)
+li_ret = ds_dentcorr.retrieve(ls_detid)
+ds_dentcorr.saveas('c:\ii4net\orthotek\pat.xls',excel5!,true)
+
+destroy ds_dentcorr
+end subroutine
+

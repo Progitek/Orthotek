@@ -1,0 +1,70 @@
+﻿$PBExportHeader$d_feuiltempsemp.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=92 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=t_personnels_id_personnel dbname="t_personnels.id_personnel" )
+ column=(type=char(50) updatewhereclause=yes name=t_personnels_nom dbname="t_personnels.nom" )
+ column=(type=char(50) updatewhereclause=yes name=t_personnels_prenom dbname="t_personnels.prenom" )
+ column=(type=datetime updatewhereclause=yes name=t_biopunch_heureentree dbname="t_biopunch.heureentree" )
+ column=(type=datetime updatewhereclause=yes name=t_biopunch_heuresortie dbname="t_biopunch.heuresortie" )
+ retrieve="SELECT 	t_personnels.id_personnel,   
+			t_personnels.nom,   
+			t_personnels.prenom,   
+			t_biopunch.heureentree,
+			t_biopunch.heuresortie
+    FROM t_biopunch inner join t_personnels on t_biopunch.id_personnel = t_personnels.id_personnel
+   WHERE isnull(t_personnels.actif,0) = 1 AND  
+         isnull(t_personnels.groupe,0) = 0 AND
+			t_biopunch.heureentree between isnull(:ra_debut, cast ('1900-01-01 00:00:00.000' as datetime)) and isnull(:ra_fin, now()) and
+			(:ra_iduser = t_personnels.id_personnel or :ra_iduser is null)
+GROUP BY t_personnels.id_personnel,
+			t_personnels.nom,   
+			t_personnels.prenom,   
+			t_biopunch.heureentree,
+			t_biopunch.heuresortie
+ORDER BY t_personnels.nom ASC,   
+         t_personnels.prenom ASC,
+		 	t_biopunch.heureentree,
+		 	t_biopunch.heuresortie" arguments=(("ra_debut", datetime),("ra_fin", datetime),("ra_iduser", number)) )
+group(level=1 header.height=0 trailer.height=96 by=("t_personnels_id_personnel" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="2" text="T Users
+Id User" border="0" color="33554432" x="5" y="152" height="128" width="329" html.valueishtml="0"  name=t_users_id_user_t visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="T Users
+Nom" border="0" color="33554432" x="338" y="152" height="128" width="713" html.valueishtml="0"  name=t_users_nom_t visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="T Users
+Prenom" border="0" color="33554432" x="1056" y="152" height="128" width="713" html.valueishtml="0"  name=t_users_prenom_t visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Entrée" border="0" color="33554432" x="1038" y="4" height="68" width="603" html.valueishtml="0"  name=t_biopunch_heureentree_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Sortie" border="0" color="33554432" x="1646" y="4" height="68" width="603" html.valueishtml="0"  name=t_biopunch_heuresortie_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Temps" border="0" color="33554432" x="2254" y="4" height="68" width="590" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="5" y1="84" x2="2825" y2="84"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="1073741824" )
+text(band=header alignment="2" text="Nom" border="0" color="33554432" x="32" y="4" height="68" width="1001" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=32766 border="0" color="33554432" x="1038" y="8" height="64" width="603" format="[shortdate] [time]" html.valueishtml="0"  name=t_biopunch_heureentree visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="33554432" x="1646" y="8" height="64" width="603" format="[shortdate] [time]" html.valueishtml="0"  name=t_biopunch_heuresortie visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="truncate((daysafter(  t_biopunch_heureentree ,  t_biopunch_heuresortie  )  * 24) + (secondsafter(time( t_biopunch_heureentree), time( t_biopunch_heuresortie )) / 60) /60,0 )"border="0" color="33554432" x="2258" y="76" height="64" width="325" format="[GENERAL]" html.valueishtml="0"  name=compute_nbrheures visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if(compute_min -  ( compute_heures  * 60) < 10, ~"0~"+string(truncate(compute_min -  ( compute_heures  * 60),0)) , string(truncate(compute_min -  ( compute_heures  * 60),0)) )"border="0" color="33554432" x="2249" y="144" height="64" width="334" format="[GENERAL]" html.valueishtml="0"  name=compute_nbrminutes visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if((secondsafter(time( t_biopunch_heureentree), time( t_biopunch_heuresortie ))/60)< 0 ,1440 + secondsafter(time( t_biopunch_heureentree), time( t_biopunch_heuresortie ))/60,secondsafter(time( t_biopunch_heureentree), time( t_biopunch_heuresortie ))/60)"border="0" color="33554432" x="2693" y="144" height="64" width="215" format="[GENERAL]" html.valueishtml="0"  name=compute_min visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if( compute_pos<0, 24 + compute_pos, compute_pos)"border="0" color="33554432" x="2693" y="76" height="64" width="215" format="[GENERAL]" html.valueishtml="0"  name=compute_heures visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="(if((truncate((secondsafter(time( t_biopunch_heureentree), time( t_biopunch_heuresortie ))/60)/60,0))>((secondsafter(time( t_biopunch_heureentree), time( t_biopunch_heuresortie ))/60)/60) ,(truncate((secondsafter(time( t_biopunch_heureentree), time( t_biopunch_heuresortie ))/60)/60,0))-1,(truncate((secondsafter(time( t_biopunch_heureentree), time( t_biopunch_heuresortie ))/60)/60,0))))"border="0" color="33554432" x="2912" y="76" height="64" width="215" format="[GENERAL]" html.valueishtml="0"  name=compute_pos visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="compute_nbrheures  + ~":~" +  compute_nbrminutes"border="0" color="33554432" x="2254" y="8" height="64" width="361" format="[General]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" if ( isnull(  t_personnels_nom ), ~"~",  t_personnels_nom + ~" ~" ) + if ( isnull(  t_personnels_prenom ), ~"~",    t_personnels_prenom )"border="0" color="33554432" x="32" y="8" height="64" width="1001" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="0" expression="string(sum( compute_nbrheures for group 1 )  + truncate((sum(  number(compute_nbrminutes)  for group 1 )/60),0))"border="0" color="33554432" x="2048" y="108" height="64" width="215" format="[General]" html.valueishtml="0"  name=compute_heuressommetotal visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="0" expression="if((sum(  number(compute_nbrminutes)  for group 1 )) > 59,mod( sum(  number(compute_nbrminutes)  for group 1 ), 60 ), sum(  number(compute_nbrminutes)  for group 1 ))"border="0" color="33554432" x="2290" y="108" height="64" width="215" format="[GENERAL]" html.valueishtml="0"  name=compute_mintotal visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="0" expression="if(compute_mintotal < 10, ~"0~"+string( compute_mintotal ) , string( compute_mintotal))"border="0" color="33554432" x="2546" y="108" height="64" width="215" format="[General]" html.valueishtml="0"  name=compute_minutessommetotal visible="0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="0" y1="4" x2="2821" y2="4"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="1073741824" )
+text(band=trailer.1 alignment="2" text="Total:" border="0" color="33554432" x="2075" y="16" height="64" width="165" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression=" compute_heuressommetotal + ~":~" +  compute_minutessommetotal "border="0" color="33554432" x="2254" y="16" height="64" width="361" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="0" y1="88" x2="2821" y2="88"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="1073741824" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

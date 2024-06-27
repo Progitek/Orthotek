@@ -1,0 +1,143 @@
+﻿$PBExportHeader$r_imp_patient.srd
+release 10.5;
+datawindow(units=3 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 2 print.margin.left = 635 print.margin.right = 635 print.margin.top = 635 print.margin.bottom = 635 print.paper.source = 0 print.paper.size = 1 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=1031 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=423 color="536870912" )
+detail(height=2090 color="536870912" height.autosize=yes )
+table(column=(type=long updatewhereclause=yes name=horaire_patient_id_patient_id dbname="horaire_patient_id.patient_id" dbalias=".patient_id" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" dbalias=".patient_prenom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" dbalias=".patient_nom" )
+ column=(type=char(27) updatewhereclause=yes name=patient_nom_pere dbname="patient.nom_pere" dbalias=".nom_pere" )
+ column=(type=date updatewhereclause=yes name=horaire_patient_id_date_rv dbname="horaire_patient_id.date_rv" dbalias=".date_rv" )
+ column=(type=time updatewhereclause=yes name=horaire_patient_id_heure_rv dbname="horaire_patient_id.heure_rv" dbalias=".heure_rv" )
+ column=(type=long updatewhereclause=yes name=horaire_patient_id_no_chaise dbname="horaire_patient_id.no_chaise" dbalias=".no_chaise" )
+ column=(type=char(15) updatewhereclause=yes name=patient_tel_maison dbname="patient.tel_maison" dbalias=".tel_maison" )
+ column=(type=char(15) updatewhereclause=yes name=patient_tel_bureau dbname="patient.tel_bureau" dbalias=".tel_bureau" )
+ column=(type=char(100) updatewhereclause=yes name=patient_text1 dbname="patient.text1" dbalias=".text1" )
+ column=(type=char(100) updatewhereclause=yes name=patient_text2 dbname="patient.text2" dbalias=".text2" )
+ column=(type=char(15) updatewhereclause=yes name=patient_new_dossier dbname="patient.new_dossier" dbalias=".new_dossier" )
+ column=(type=long updatewhereclause=yes identity=yes name=patient_patient_id dbname="patient.patient_id" dbalias=".patient_id" )
+ column=(type=char(27) updatewhereclause=yes name=patient_nom_mere dbname="patient.nom_mere" dbalias=".nom_mere" )
+ column=(type=long updatewhereclause=yes name=patient_couleur_postdate dbname="patient.couleur_postdate" dbalias=".couleur_postdate" )
+ column=(type=char(100) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" dbalias=".dr_nom_complet" )
+ column=(type=char(20) updatewhereclause=yes name=patient_langue dbname="patient.langue" dbalias=".langue" )
+ column=(type=number updatewhereclause=yes name=horaire_patient_id_conf1 dbname="horaire_patient_id.conf1" dbalias=".conf1" )
+ column=(type=number updatewhereclause=yes name=horaire_patient_id_conf2 dbname="horaire_patient_id.conf2" dbalias=".conf2" )
+ column=(type=number updatewhereclause=yes name=horaire_patient_id_conf3 dbname="horaire_patient_id.conf3" dbalias=".conf3" )
+ column=(type=number updatewhereclause=yes name=horaire_patient_id_conf4 dbname="horaire_patient_id.conf4" dbalias=".conf4" )
+ column=(type=number updatewhereclause=yes name=horaire_patient_id_conf5 dbname="horaire_patient_id.conf5" dbalias=".conf5" )
+ column=(type=date updatewhereclause=yes name=patient_date_naissance dbname="patient.date_naissance" dbalias=".date_naissance" )
+ column=(type=char(15) updatewhereclause=yes name=patient_no_tel_mere dbname="patient.no_tel_mere" dbalias=".no_tel_mere" )
+ column=(type=char(15) updatewhereclause=yes name=patient_no_tel_pere dbname="patient.no_tel_pere" dbalias=".no_tel_pere" )
+ column=(type=char(100) updatewhereclause=yes name=patient_text3 dbname="patient.text3" dbalias=".text3" )
+ column=(type=char(100) updatewhereclause=yes name=patient_text4 dbname="patient.text4" dbalias=".text4" )
+ column=(type=char(15) updatewhereclause=yes name=patient_telcell dbname="patient.telcell" dbalias=".telcell" )
+ column=(type=char(15) updatewhereclause=yes name=patient_telautre dbname="patient.telautre" dbalias=".telautre" )
+ column=(type=char(100) updatewhereclause=yes name=patient_text5 dbname="patient.text5" dbalias=".text5" )
+ column=(type=char(100) updatewhereclause=yes name=patient_text6 dbname="patient.text6" dbalias=".text6" )
+ column=(type=date updatewhereclause=yes name=patient_date_naissance dbname="patient.date_naissance" dbalias=".date_naissance" )
+ column=(type=char(1) updatewhereclause=yes name=patient_sex dbname="patient.sex" dbalias=".sex" )
+ column=(type=char(100) updatewhereclause=yes name=patient_alerte_medical dbname="patient.alerte_medical" dbalias=".alerte_medical" )
+ column=(type=char(1000) updatewhereclause=yes name=horaire_patient_id_memo dbname="horaire_patient_id.memo" dbalias=".memo" )
+ column=(type=long updatewhereclause=yes name=courriel dbname="courriel" )
+ retrieve="  SELECT DISTINCT horaire_patient_id.patient_id,   
+         patient.patient_prenom,   
+         patient.patient_nom,   
+         patient.nom_pere,   
+         horaire_patient_id.date_rv,   
+         horaire_patient_id.heure_rv,   
+         horaire_patient_id.no_chaise,   
+         patient.tel_maison,   
+         patient.tel_bureau,   
+         patient.text1,   
+         patient.text2,   
+         patient.new_dossier,   
+         patient.patient_id,   
+         patient.nom_mere,   
+         patient.couleur_postdate,   
+         ortho_id.dr_nom_complet,   
+         patient.langue,   
+         horaire_patient_id.conf1,   
+         horaire_patient_id.conf2,   
+         horaire_patient_id.conf3,   
+         horaire_patient_id.conf4,   
+         horaire_patient_id.conf5,   
+         patient.date_naissance,   
+         patient.no_tel_mere,   
+         patient.no_tel_pere,   
+         patient.text3,   
+         patient.text4,   
+         patient.telcell,   
+         patient.telautre,   
+         patient.text5,   
+         patient.text6,
+			patient.date_naissance,
+  			patient.sex,
+			patient.alerte_medical,
+			horaire_patient_id.memo,
+			(if isnull(email, '') <> '' or isnull(email2, '') <> '' or isnull(email3, '') <> '' then 1 else 0 endif) courriel
+    FROM patient inner join horaire_patient_id on patient.patient_id = horaire_patient_id.patient_id
+         		  inner join ortho_id on patient.no_ortho = ortho_id.ortho_id
+   WHERE ortho_id.ortho_id = :ra_ortho 
+ORDER BY horaire_patient_id.no_chaise ASC,   
+         horaire_patient_id.heure_rv ASC   
+" arguments=(("ra_ortho", number))  sort="horaire_patient_id_no_chaise A horaire_patient_id_heure_rv A " )
+line(band=header x1="0" y1="1005" x2="19764" y2="1005"  name=l_2 visible="1" pen.style="0" pen.width="26" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Chaise" border="0" color="0" x="0" y="555" height="423" width="1190" html.valueishtml="0"  name=t_chair visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="' LISTE TÉLÉPHONIQUE POUR :  '  +  ortho_id_dr_nom_complet "border="0" color="0" x="26" y="26" height="423" width="19685" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Nom du patient" border="0" color="0" x="1322" y="555" height="423" width="7725" html.valueishtml="0"  name=t_patname visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="text" border="0" color="0" x="15425" y="555" height="423" width="4286" html.valueishtml="0"  name=t_date visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+line(band=detail x1="0" y1="2064" x2="19790" y2="2064"  name=l_1 visible="1"  slideup=allabove pen.style="0" pen.width="26" pen.color="8421504"  background.mode="1" background.color="536870912" )
+column(band=detail id=32 alignment="0" tabsequence=32766 border="0" color="0" x="952" y="4498" height="370" width="7778" format="[general]" html.valueishtml="0"  name=patient_date_naissance visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Tél. (autre):" border="0" color="0" x="12408" y="1217" height="370" width="2037" html.valueishtml="0"  name=t_telautre visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Tél.(maison) :" border="0" color="0" x="12408" y="27" height="370" width="2037" html.valueishtml="0"  name=t_telmais visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Tél. (bureau):" border="0" color="0" x="12408" y="424" height="370" width="2037" html.valueishtml="0"  name=t_telbur visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Tél.(cell.) :" border="0" color="0" x="12408" y="820" height="370" width="2037" html.valueishtml="0"  name=t_telcell visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=27 alignment="0" tabsequence=32766 border="0" color="0" x="9868" y="820" height="370" width="2434" format="[general]" html.valueishtml="0"  name=patient_text4 visible="1" editmask.mask="(###) ###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=25 alignment="0" tabsequence=32766 border="0" color="0" x="7328" y="424" height="370" width="2460" format="[general]" html.valueishtml="0"  name=patient_no_tel_pere visible="1" editmask.mask="(###) ###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=24 alignment="0" tabsequence=32766 border="0" color="0" x="7328" y="820" height="370" width="2460" format="[general]" html.valueishtml="0"  name=patient_no_tel_mere visible="1" editmask.mask="(###) ###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=26 alignment="0" tabsequence=32766 border="0" color="0" x="9868" y="424" height="370" width="2434" format="[general]" html.valueishtml="0"  name=patient_text3 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="9868" y="27" height="370" width="2434" format="[general]" html.valueishtml="0"  name=patient_new_dossier visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="2725" y="424" height="370" width="4524" format="[general]" html.valueishtml="0"  name=patient_nom_pere  tag="patient_nom_pere" visible="1" edit.limit=27 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="2725" y="820" height="370" width="4524" format="[general]" html.valueishtml="0"  name=patient_nom_mere visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="14472" y="27" height="370" width="2460" format="[general]" html.valueishtml="0"  name=patient_tel_maison visible="1" editmask.mask="(###) ###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="14472" y="424" height="370" width="2460" format="[general]" html.valueishtml="0"  name=patient_tel_bureau visible="1" editmask.mask="(###) ###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=28 alignment="0" tabsequence=32766 border="0" color="0" x="14472" y="820" height="370" width="2460" format="[general]" html.valueishtml="0"  name=patient_telcell visible="1" editmask.mask="(###) ###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=29 alignment="0" tabsequence=32766 border="0" color="0" x="14472" y="1217" height="370" width="2460" format="[general]" html.valueishtml="0"  name=patient_telautre visible="1" editmask.mask="(###) ###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" patient_patient_prenom +~" ~"+ patient_patient_nom + if (isnull (  patient_date_naissance ) , '' , ~" (~" + string(year( today() ) - year( patient_date_naissance )) + ~" A)~" )"border="0" color="0" x="1005" y="27" height="370" width="7223" format="[general]" html.valueishtml="0"  name=nom_patient  tag="nom_patient" visible="1"  font.face="Arial" font.height="-10" font.weight="700~tif (  horaire_patient_id_conf1 = 1  or  horaire_patient_id_conf2 = 1 or  horaire_patient_id_conf3 = 1 or  horaire_patient_id_conf4 = 1 or  horaire_patient_id_conf5 = 1, 1000 , 0 )"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~t patient_couleur_postdate" )
+text(band=detail alignment="1" text="# dossier:" border="0" color="0" x="8334" y="27" height="370" width="1455" html.valueishtml="0"  name=t_nodoss visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Nom père:" border="0" color="0" x="1005" y="424" height="370" width="1640" html.valueishtml="0"  name=t_fathername visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Nom mère:" border="0" color="0" x="1005" y="820" height="370" width="1640" html.valueishtml="0"  name=t_mothername visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Mémo:" border="0" color="0" x="1005" y="1641" height="370" width="1455" html.valueishtml="0"  name=t_memo visible="1~tif ( isnull(horaire_patient_id_memo ), 0, 1)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=35 alignment="0" tabsequence=32766 border="0" color="0" x="2725" y="1667" height="370" width="7672" format="[general]" html.valueishtml="0"  name=horaire_patient_id_memo visible="1" height.autosize=yes edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="16959" y="27" height="370" width="2778" format="[general]" html.valueishtml="0"  name=patient_text1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="16959" y="424" height="370" width="2778" format="[general]" html.valueishtml="0"  name=patient_text2 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=30 alignment="0" tabsequence=32766 border="0" color="0" x="16959" y="820" height="370" width="2778" format="[general]" html.valueishtml="0"  name=patient_text5 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=31 alignment="0" tabsequence=32766 border="0" color="0" x="16959" y="1217" height="370" width="2778" format="[general]" html.valueishtml="0"  name=patient_text6 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="0" y="820" height="370" width="978" format="[time]" html.valueishtml="0"  name=horaire_patient_id_heure_rv visible="1" editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="0" y="27" height="370" width="978" format="[General]" html.valueishtml="0"  name=horaire_patient_id_no_chaise visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Alerte médicale:" border="0" color="0" x="10609" y="1641" height="370" width="2381" html.valueishtml="0"  name=t_alerte visible="1~tif ( isnull(  patient_alerte_medical  ), 0, 1)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=34 alignment="0" tabsequence=32766 border="0" color="0" x="13070" y="1667" height="370" width="6667" format="[general]" html.valueishtml="0"  name=patient_alerte_medical visible="1" height.autosize=yes edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="1666" y="27" height="370" width="2301" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Imprimé le " border="0" color="0" x="26" y="27" height="370" width="1534" html.valueishtml="0"  name=t_printedon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="16457" y="27" height="370" width="3254" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="© Orthotek" border="0" color="0" x="9921" y="27" height="370" width="1375" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Âge:" border="0" color="0" x="9048" y="1217" height="370" width="740" html.valueishtml="0"  name=t_age visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if( isnull(  patient_date_naissance  ), '',string( year( today() ) - year( patient_date_naissance ) - if( month( today() ) < month( patient_date_naissance ), 1, if( month( today() ) = month( patient_date_naissance) and day( today() ) < day( patient_date_naissance ) , 1, 0))) + if( month( today() ) - month( patient_date_naissance ) - if( day( today() ) < day( patient_date_naissance ), 1, 0) = 0, '',if (gf_getlangue() = 'an', ' and ',  ' et ') + string( mod( month( today() ) - month( patient_date_naissance ) - if( day( today() ) < day( patient_date_naissance), 1, 0) + 12, 12) + if (gf_getlangue() = 'an',' months',~" mois~"))))"border="0" color="0" x="9895" y="1244" height="370" width="2381" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="~tif  ( courriel = 1 , 'Courriel = oui' , 'courriel = non' )" border="0" color="0" x="5371" y="1244" height="370" width="2910" html.valueishtml="0"  name=t_email visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=33 alignment="0" tabsequence=32766 border="0" color="0" x="4788" y="1244" height="370" width="343" format="[general]" html.valueishtml="0"  name=patient_sex visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Genre:" border="0" color="0" x="3413" y="1244" height="370" width="1322" html.valueishtml="0"  name=t_genre visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="0" color="0" x="2725" y="1244" height="370" width="423" format="[general]" html.valueishtml="0"  name=patient_langue visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Langue:" border="0" color="0" x="1005" y="1244" height="370" width="1640" html.valueishtml="0"  name=t_langue visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

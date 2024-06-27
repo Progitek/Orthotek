@@ -1,0 +1,68 @@
+﻿$PBExportHeader$d_etiquettes_3.srd
+release 10.5;
+datawindow(units=1 timer_interval=10 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="Étiquettes" print.orientation = 0 print.margin.left = 24 print.margin.right = 24 print.margin.top = 24 print.margin.bottom = 0 print.paper.source = 8 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=70 color="536870912" )
+table(column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=date updatewhereclause=yes name=patient_date_naissance dbname="patient.date_naissance" )
+ column=(type=date updatewhereclause=yes name=traitements_debut_traitement dbname="traitements.debut_traitement" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=char(36) updatewhereclause=yes name=patient_adresse dbname="patient.adresse" )
+ column=(type=char(15) updatewhereclause=yes name=patient_tel_maison dbname="patient.tel_maison" )
+ column=(type=char(15) updatewhereclause=yes name=patient_tel_bureau dbname="patient.tel_bureau" )
+ column=(type=char(50) updatewhereclause=yes name=patient_ville dbname="patient.ville" )
+ column=(type=char(25) updatewhereclause=yes name=patient_province dbname="patient.province" )
+ column=(type=char(15) updatewhereclause=yes name=patient_code_postale dbname="patient.code_postale" )
+ column=(type=char(27) updatewhereclause=yes name=patient_nom_mere dbname="patient.nom_mere" )
+ column=(type=char(15) updatewhereclause=yes name=patient_no_tel_mere dbname="patient.no_tel_mere" )
+ column=(type=char(27) updatewhereclause=yes name=patient_nom_pere dbname="patient.nom_pere" )
+ column=(type=char(15) updatewhereclause=yes name=patient_no_tel_pere dbname="patient.no_tel_pere" )
+ column=(type=long updatewhereclause=yes identity=yes name=traitements_traitement_id dbname="traitements.traitement_id" )
+ column=(type=char(15) updatewhereclause=yes name=patient_new_dossier dbname="patient.new_dossier" )
+ column=(type=long updatewhereclause=yes name=patient_no_dossier dbname="patient.no_dossier" )
+ column=(type=char(50) updatewhereclause=yes name=salutation dbname="salutation" )
+ retrieve="SELECT     patient.patient_nom ,
+           patient.patient_prenom ,
+           patient.date_naissance ,
+           traitements.debut_traitement ,
+           ortho_id.dr_nom_complet ,
+           patient.adresse ,
+           patient.tel_maison ,
+           patient.tel_bureau ,
+           patient.ville ,
+           patient.province ,
+           patient.code_postale ,
+           patient.nom_mere ,
+           patient.no_tel_mere ,
+           patient.nom_pere ,
+           patient.no_tel_pere ,
+           traitements.traitement_id,
+			  patient.new_dossier,
+           patient.no_dossier,
+			  (select salutation from t_salutation where patient.id_sal = t_salutation.id_sal) as salutation
+      FROM patient INNER JOIN traitements ON patient.patient_id = traitements.patient_id
+                   INNER JOIN ortho_id ON patient.no_ortho = ortho_id.ortho_id  
+     WHERE patient.patient_id = :ra_patient and
+           traitements.traitement_id = :traitement_id " arguments=(("ra_patient", number),("traitement_id", number)) )
+column(band=detail id=18 alignment="0" tabsequence=32766 border="0" color="0" x="232" y="51" height="16" width="58" format="[general]" html.valueishtml="0"  name=patient_no_dossier_1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="1" font.pitch="1" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=18 alignment="0" tabsequence=32766 border="0" color="0" x="232" y="17" height="16" width="58" format="[general]" html.valueishtml="0"  name=patient_no_dossier visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="1" font.pitch="1" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="patient_patient_nom + '  ' +  patient_patient_prenom "border="0" color="0" x="0" y="0" height="16" width="290" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="patient_patient_nom + '  ' + patient_patient_prenom "border="0" color="0" x="1" y="34" height="16" width="289" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" if( isNull( traitements_debut_traitement ),'',string(traitements_debut_traitement ))"border="0" color="0" x="1" y="17" height="16" width="131" format="[GENERAL]" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" if( isNull( traitements_debut_traitement ),'',string(traitements_debut_traitement ))"border="0" color="0" x="1" y="51" height="16" width="131" format="[GENERAL]" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="" border="0" color="0" x="133" y="17" height="16" width="98" html.valueishtml="0"  name=t_age1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="" border="0" color="0" x="133" y="51" height="16" width="98" html.valueishtml="0"  name=t_age2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

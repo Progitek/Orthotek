@@ -1,0 +1,74 @@
+﻿$PBExportHeader$d_rapport_annuel_statuts.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=4 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=t_status_status_id dbname="t_status.status_id" )
+ column=(type=char(10) updatewhereclause=yes name=t_status_code dbname="t_status.code" )
+ column=(type=long updatewhereclause=yes name=t_status_jan dbname="t_status.jan" )
+ column=(type=long updatewhereclause=yes name=t_status_fev dbname="t_status.fev" )
+ column=(type=long updatewhereclause=yes name=t_status_mars dbname="t_status.mars" )
+ column=(type=long updatewhereclause=yes name=t_status_avr dbname="t_status.avr" )
+ column=(type=long updatewhereclause=yes name=t_status_mai dbname="t_status.mai" )
+ column=(type=long updatewhereclause=yes name=t_status_juin dbname="t_status.juin" )
+ column=(type=long updatewhereclause=yes name=t_status_juil dbname="t_status.juil" )
+ column=(type=long updatewhereclause=yes name=t_status_aout dbname="t_status.aout" )
+ column=(type=long updatewhereclause=yes name=t_status_sept dbname="t_status.sept" )
+ column=(type=long updatewhereclause=yes name=t_status_oct dbname="t_status.oct" )
+ column=(type=long updatewhereclause=yes name=t_status_nov dbname="t_status.nov" )
+ column=(type=long updatewhereclause=yes name=t_status_dec dbname="t_status.dec" )
+ retrieve="
+SELECT DISTINCT ~"t_status~".~"status_id~",
+			~"t_status~".~"code~",   
+         ~"t_status~".~"jan~",   
+         ~"t_status~".~"fev~",   
+         ~"t_status~".~"mars~",   
+         ~"t_status~".~"avr~",   
+         ~"t_status~".~"mai~",   
+         ~"t_status~".~"juin~",   
+         ~"t_status~".~"juil~",   
+         ~"t_status~".~"aout~",   
+         ~"t_status~".~"sept~",   
+         ~"t_status~".~"oct~",   
+         ~"t_status~".~"nov~",   
+         ~"t_status~".~"dec~"  
+    FROM ~"factures_traitements~",   
+         ~"t_status~",   
+         ~"traitements~",   
+         ~"patient~"  
+   WHERE ( ~"factures_traitements~".~"status_id~" = ~"t_status~".~"status_id~" ) and  
+         ( ~"factures_traitements~".~"traitement_id~" = ~"traitements~".~"traitement_id~" ) and  
+         ( ~"traitements~".~"patient_id~" = ~"patient~".~"patient_id~" ) and  
+         ( ( ~"patient~".~"no_ortho~" = :ra_ortho_id ) AND  
+         ( year(~"factures_traitements~".~"date_facture~") = :ra_year ) )   " retrieve.asneeded=yes arguments=(("ra_ortho_id", number),("ra_year", number)) )
+text(band=header alignment="0" text="STATUT" border="2" color="0" x="14" y="4" height="64" width="329"  name=t_1  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=header alignment="2" text="FEV" border="2" color="0" x="530" y="4" height="64" width="178"  name=t_3  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=header alignment="2" text="MAR" border="2" color="0" x="713" y="4" height="64" width="178"  name=t_4  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=header alignment="2" text="AVR" border="2" color="0" x="896" y="4" height="64" width="178"  name=t_5  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=header alignment="2" text="MAI" border="2" color="0" x="1079" y="4" height="64" width="178"  name=t_6  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=header alignment="2" text="JUIN" border="2" color="0" x="1262" y="4" height="64" width="178"  name=t_7  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=header alignment="2" text="JUIL" border="2" color="0" x="1445" y="4" height="64" width="178"  name=t_8  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=header alignment="2" text="AOUT" border="2" color="0" x="1627" y="4" height="64" width="178"  name=t_9  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=header alignment="2" text="SEPT" border="2" color="0" x="1810" y="4" height="64" width="178"  name=t_10  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=header alignment="2" text="OCT" border="2" color="0" x="1993" y="4" height="64" width="178"  name=t_11  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=header alignment="2" text="NOV" border="2" color="0" x="2176" y="4" height="64" width="178"  name=t_12  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=header alignment="2" text="DEC" border="2" color="0" x="2359" y="4" height="64" width="178"  name=t_13  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=header alignment="2" text="err" border="0" color="0" x="2629" y="0" height="64" width="288"  name=t_year  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="JAN" border="2" color="0" x="347" y="4" height="64" width="178"  name=t_2  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="18" y="4" height="76" width="320" format="[general]"  name=t_status_code edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="347" y="4" height="76" width="178" format="[general]"  name=t_status_jan edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="530" y="4" height="76" width="178" format="[general]"  name=t_status_fev edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="713" y="4" height="76" width="178" format="[general]"  name=t_status_mars edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="896" y="4" height="76" width="178" format="[general]"  name=t_status_avr edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="1079" y="4" height="76" width="178" format="[general]"  name=t_status_mai edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="1262" y="4" height="76" width="178" format="[general]"  name=t_status_juin edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="1445" y="4" height="76" width="178" format="[general]"  name=t_status_juil edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="1627" y="4" height="76" width="178" format="[general]"  name=t_status_aout edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="1810" y="4" height="76" width="178" format="[general]"  name=t_status_sept edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="1993" y="4" height="76" width="178" format="[general]"  name=t_status_oct edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="2176" y="4" height="76" width="178" format="[general]"  name=t_status_nov edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="2359" y="4" height="76" width="178" format="[general]"  name=t_status_dec edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

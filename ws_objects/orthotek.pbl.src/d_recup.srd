@@ -1,0 +1,78 @@
+﻿$PBExportHeader$d_recup.srd
+release 11.5;
+datawindow(units=0 timer_interval=0 color=80269524 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="Recu" print.orientation = 2 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 1 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=2416 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=long updatewhereclause=yes name=ortho_id dbname="ortho_id.ortho_id" )
+ column=(type=char(100) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_ville_province_code_postale dbname="ortho_id.dr_ville_province_code_postale" )
+ column=(type=char(15) updatewhereclause=yes name=ortho_id_dr_tel_bur dbname="ortho_id.dr_tel_bur" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_adresse dbname="ortho_id.dr_adresse" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_numero dbname="ortho_id.dr_numero" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_nomresp1 dbname="patient.nomresp1" )
+ column=(type=char(50) updatewhereclause=yes name=patient_nomresp2 dbname="patient.nomresp2" )
+ column=(type=char(50) updatewhereclause=yes name=patient_nomresp3 dbname="patient.nomresp3" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=paiement_nomresp dbname="paiement.nomresp" )
+ column=(type=decimal(2) updatewhereclause=yes name=paiement_montant_recu dbname="paiement.montant_recu" )
+ column=(type=date update=yes updatewhereclause=yes name=paiement_date_debut_recu dbname="paiement.date_debut_recu" )
+ column=(type=date update=yes updatewhereclause=yes name=paiement_date_fin_recu dbname="paiement.date_fin_recu" )
+ column=(type=long updatewhereclause=yes key=yes name=paiement_paiement_id dbname="paiement.paiement_id" )
+ column=(type=date updatewhereclause=yes name=paiement_date_paiement dbname="paiement.date_paiement" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=paiement_recu dbname="paiement.recu" )
+ column=(type=char(600) update=yes updatewhereclause=yes name=paiement_recunote dbname="paiement.recunote" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=paiement_somme_recu dbname="paiement.somme_recu" )
+ column=(type=long updatewhereclause=yes name=paiement_id_contact dbname="paiement.id_contact" )
+ column=(type=long updatewhereclause=yes identity=yes name=patient_patient_id dbname="patient.patient_id" )
+ retrieve="  SELECT ortho_id.ortho_id,   
+         ortho_id.dr_nom_complet,   
+         ortho_id.dr_ville_province_code_postale,   
+         ortho_id.dr_tel_bur,   
+         ortho_id.dr_adresse,
+         ortho_id.dr_numero,
+         patient.patient_nom,   
+         patient.patient_prenom,
+			patient.nomresp1,			
+			patient.nomresp2,   
+			patient.nomresp3,
+			paiement.nomresp,
+         paiement.montant_recu,   
+         paiement.date_debut_recu,   
+         paiement.date_fin_recu,   
+         paiement.paiement_id,   
+         paiement.date_paiement,      
+         paiement.recu,  
+			paiement.recunote, 
+         paiement.somme_recu,
+         paiement.id_contact,     
+         patient.patient_id
+
+    FROM patient INNER JOIN ortho_id ON patient.no_ortho = ortho_id.ortho_id,
+			patient INNER JOIN traitements ON traitements.patient_id = patient.patient_id,
+         traitements INNER JOIN paiement ON traitements.traitement_id = paiement.traitement_patient_id
+
+   WHERE paiement.paiement_id IN (:ra_paiement)    
+" update="paiement" updatewhere=0 updatekeyinplace=no arguments=(("ra_paiement", numberlist)) )
+column(band=detail id=19 alignment="0" tabsequence=40 border="5" color="0" x="59" y="848" height="220" width="1417" format="[general]" html.valueishtml="0"  name=paiement_recunote visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Note:" border="0" color="0" x="59" y="764" height="64" width="142" html.valueishtml="0"  name=t_note visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=15 alignment="2" tabsequence=20 border="5" color="0" x="1207" y="544" height="64" width="389" format="[general]" html.valueishtml="0"  name=paiement_date_fin_recu visible="1" edit.name="DD/MM/YYYY" editmask.autoskip=yes editmask.ddcalendar=yes editmask.mask="[date]" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=20 alignment="2" tabsequence=30 border="5" color="0" x="622" y="676" height="64" width="471" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=paiement_somme_recu visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=14 alignment="2" tabsequence=10 border="5" color="0" x="622" y="544" height="64" width="384" format="[general]" html.valueishtml="0"  name=paiement_date_debut_recu visible="1" edit.name="DD/MM/YYYY" editmask.autoskip=yes editmask.ddcalendar=yes editmask.mask="[date]" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="1" text="Pour la somme de:" border="0" color="0" x="59" y="672" height="64" width="530" html.valueishtml="0"  name=t_amount visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="1" text="Pour la période du:" border="0" color="0" x="59" y="544" height="64" width="530" html.valueishtml="0"  name=t_from pointer="Arrow!" visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="au:" border="0" color="0" x="1074" y="544" height="64" width="91" html.valueishtml="0"  name=t_to pointer="Arrow!" visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="1" text="" border="0" color="0" x="1495" y="1016" height="56" width="393" html.valueishtml="0"  name=t_norecu visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

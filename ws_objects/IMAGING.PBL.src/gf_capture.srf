@@ -1,0 +1,196 @@
+﻿$PBExportHeader$gf_capture.srf
+global type gf_capture from function_object
+end type
+
+forward prototypes
+global subroutine gf_capture (integer ai_soft, string as_prenom, string as_nom, string as_nodoss, date adt_datenais, string as_sex, long al_idspec, string as_specnom, string as_specprenom, long al_patid)
+end prototypes
+
+global subroutine gf_capture (integer ai_soft, string as_prenom, string as_nom, string as_nodoss, date adt_datenais, string as_sex, long al_idspec, string as_specnom, string as_specprenom, long al_patid);string ls_path, ls_info, ls_imgtype, ls_nas
+integer li_captsoft, li_errcode
+
+select imgtype into :ls_imgtype from t_optiongen;
+select cptrpath, cptrsoft into :ls_path,:li_captsoft from t_cptrconf where id_cptrconf = :ai_soft;
+
+choose case li_captsoft
+	case 1 // CaptureLink
+		ls_info = as_prenom + ' ' + as_nom + ' ' + as_nodoss
+		Clipboard(ls_info)
+		run(ls_path, Maximized!)
+	case 2 // Image Adstra
+		//1.	Patient ID			up to 12 characters – used for internal ID
+		//2.	Patient Last Name		up to 24 characters
+		//3.	Patient First Name 		up to 24 characters
+		//4.	Patient Date of Birth 		10 characters: yyyy/mm/dd
+		//5.	Patient Gender 		1 character M or F
+		//6.	Patient Other Number		up to 15 characters – used for display
+		//7.	Patient Full Name		up to 50 characters
+		//8.	Provider ID			up to 15 characters
+		//9.	Provider Last Name		up to 50 characters
+		//10.	Provider First Name		up to 50 characters
+		//11.	Provider Date of Birth		10 characters: yyyy/mm/dd
+		//12.	Provider Gender 		1 character M or F
+		
+		li_errcode = ExecRemote(" " + left(string(al_patid), 12)+"|"+&
+												left(as_nom, 24)+"|"+&
+												left(as_prenom, 24)+"|"+&
+												string(adt_datenais,"yyyy/mm/dd")+"|"+&
+												as_sex+"|"+""+"|"+""+"|"+&
+												left(string(al_idspec), 15)+"|"+&
+												left(as_specnom, 50)+"|"+&
+												left(as_specprenom, 50), "ADSTRA", "Patient")
+		if li_errcode = -1 then
+			if run(ls_path, Maximized!) = 1 then
+				sleep(1) // attendre que le logiciel ouvre sinon la dde ne fonctionne pas
+				li_errcode = ExecRemote(" " + string(al_patid)+"|"+as_nom+"|"+as_prenom+"|"+string(adt_datenais,"yyyy/mm/dd")+"|"+as_sex+"|"+""+"|"+""+"|"+string(al_idspec)+"|"+as_specnom+"|"+as_specprenom, "ADSTRA", "Patient")
+			end if
+		end if
+	case 3 // VixWin
+		//VixWin accepts the following command line parameters in bridge mode:
+		//
+		//<VIXWIN PATH> -I <Patient ID> [<OPTIONAL>]
+		//
+		//Example:
+		//c:\vixwin\vixwin -I 123ABC -N Bill^Smith -P C:\VxImages
+		//
+		//NEEDED:
+		//-I  Patient ID : max 64 alphanumeric characters)
+		//    
+		//OPTIONAL:
+		//-N  Patient's Name : Name^Surname
+		//-P  Storage Path The drive letter will be over-written with that configured in the VixWin's preferences
+		//
+		//NOTE 1: Use the printable ASCII character set. No spaces allowed.
+		//NOTE 2: The maximum combined length of the command-line arguments (including spaces and the program name itself) is 256 characters.
+		//NOTE 3: If the image storage pathname is not sent then VixWin uses the last one received (default is C:\Vximages).
+		//NOTE 4: The directory structure for the storage pathname must be created by the calling program. VixWin will only create single level directories.
+
+		if upper(ls_imgtype) = 'D' then
+			run('"' + ls_path + '" -I ' + as_nodoss + ' -N "' + as_prenom + '"^"' + as_nom + '"', Maximized!)
+		else	
+			run('"' + ls_path + '" -I ' + string(al_patid) + ' -N "' + as_prenom + '"^"' + as_nom + '"', Maximized!)
+		end if
+	case 4 // Schick
+		n_tr luo_sch
+		long ll_cnt
+		string ls_id, ls_sex
+		datetime ldtt_dn
+		
+		luo_sch = create n_tr
+		
+		luo_sch.DBMS       = 'ODBC'
+		luo_sch.AutoCommit = True 
+		luo_sch.LOCK		  = "0"
+		luo_sch.DbParm  = "ConnectString='DSN=CDRDataMU;UID=sa;PWD=cdr;DATABASE=CDRData',ConnectOption='SQL_DRIVER_CONNECT,SQL_DRIVER_NOPROMPT'"
+		connect using luo_sch;
+		if luo_sch.sqlcode <> 0 then
+			messagebox("Erreur de base de données " + string(luo_sch.SQLDBCode),luo_sch.SQLErrText)
+			destroy luo_sch
+		//	error_type(1107)
+			return
+		end if
+		
+		ls_id = string(al_patid)
+		choose case as_sex
+			case 'M'
+				ls_sex = 'Male'
+			case 'F'
+				ls_sex = 'Female'
+			case else
+				ls_sex = ''
+		end choose
+		ldtt_dn = datetime(adt_datenais, time('00:00'))
+		
+		select count(*) into :ll_cnt from patient where patientID = :ls_id using luo_sch;
+		if ll_cnt > 0 then
+			update patient
+			set nameDICOM = :as_nom + '^' + :as_prenom,
+				 nameLast = :as_nom,
+				 nameFirst = :as_prenom,
+				 patientSex = :ls_sex,
+				 birthDate = :ldtt_dn,
+				 otherID = :as_nodoss
+			where patientID = :ls_id
+			using luo_sch;
+		else
+			insert into patient (patientID,
+										nameDICOM,
+										nameLast,
+										nameFirst,
+										patientSex,
+										birthDate,
+										otherID)
+							 values (:ls_id,
+										:as_nom + '^' + :as_prenom,
+										:as_nom,
+										:as_prenom,
+										:ls_sex,
+										:ldtt_dn,
+										:as_nodoss)
+			using luo_sch;
+		end if
+		
+		if (luo_sch.sqlCode <> 0) then
+			messagebox(string(today()) + ',' + string(now()) + string(luo_sch.SQLDBCode) ,luo_sch.SQLErrText)
+		end if
+		
+		disconnect using luo_sch;
+		destroy luo_sch
+		
+		run(ls_path)
+		
+	case 5,6 // PatientGallery et Image FX
+		
+		ls_path += " -" + string(al_patid) + ";" + as_prenom + ";" + as_nom + ";;" + string(adt_datenais,'mm/dd/yyyy') + ";"		
+		run(ls_path)
+		
+	case 7 // TigerView
+		
+		string ls_winDir
+		ls_winDir = profileString(gnv_app.of_getAppIniFile(), "Environnement", "WinDir", "")
+		
+		if right(ls_winDir, 1) <> '\' then ls_winDir += '\'
+		
+		setProfileString(ls_winDir + "Tiger1.ini", "Slave", "LastName", as_nom)
+		setProfileString(ls_winDir + "Tiger1.ini", "Slave", "FirstName", as_prenom)
+		setProfileString(ls_winDir + "Tiger1.ini", "Slave", "ProviderFirstName", as_specprenom)
+		setProfileString(ls_winDir + "Tiger1.ini", "Slave", "ProviderLastName", as_specnom)
+		setProfileString(ls_winDir + "Tiger1.ini", "Slave", "PatientID", string(al_patid))
+		choose case as_sex
+			case 'M'
+				setProfileString(ls_winDir + "Tiger1.ini", "Slave", "Gender", 'MALE')
+			case 'F'
+				setProfileString(ls_winDir + "Tiger1.ini", "Slave", "Gender", 'FEMALE')
+		end choose
+		setProfileString(ls_winDir + "Tiger1.ini", "Slave", "DOB", string(adt_datenais, 'mm/dd/yyyy'))
+		
+		ls_path += " SLAVE"
+		
+		run(ls_path)
+		
+	case 8 // ProImage
+		
+		li_errcode = ExecRemote("SetPatient, " + string(al_patid)+", "+as_prenom+", "+as_nom+", "+string(adt_datenais,"mm/dd/yy")+", "+as_sex+",,,,", "ProImage", "Image")
+		if li_errcode = -1 then
+			if run(ls_path, Maximized!) = 1 then
+				sleep(1) // attendre que le logiciel ouvre sinon la dde ne fonctionne pas
+				li_errcode = ExecRemote("SetPatient, " + string(al_patid)+", "+as_prenom+", "+as_nom+", "+string(adt_datenais,"mm/dd/yy")+", "+as_sex+",,,,", "ProImage", "Image")
+			end if
+		end if
+		
+		li_errcode = ExecRemote("Image, " + string(al_patid)+", "+as_prenom+", "+as_nom+", "+string(adt_datenais,"mm/dd/yy")+", "+as_sex+",,,,", "ProImage", "Image")
+		
+	case 9 // Sidexis
+		
+	case 10 // KODAK DENTAL IMAGING
+		
+		ls_path += "\" + string(al_patid) + " -N " + as_prenom + " " + as_nom
+		run(ls_path)
+		
+	case 11 // Cliniview
+		ls_path += " ~"-p " + as_nom + "," + as_prenom + "::::" + string(al_patid)+"~""
+		run(ls_path)
+		
+end choose
+end subroutine
+

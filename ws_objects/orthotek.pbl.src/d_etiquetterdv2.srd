@@ -1,0 +1,53 @@
+﻿$PBExportHeader$d_etiquetterdv2.srd
+release 10.5;
+datawindow(units=2 timer_interval=10 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="Appointment label" print.orientation = 0 print.margin.left = 0 print.margin.right = 0 print.margin.top = 0 print.margin.bottom = 0 print.paper.source = 8 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=229 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=187 color="536870912" )
+table(column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(20) updatewhereclause=yes name=patient_langue dbname="patient.langue" )
+ column=(type=date updatewhereclause=yes name=t_rdv_rdvdate dbname="t_rdv.rdvdate" )
+ column=(type=time updatewhereclause=yes name=t_rdv_rdvheure dbname="t_rdv.rdvheure" )
+ column=(type=decimal(2) updatewhereclause=yes name=t_rdv_duree dbname="t_rdv.duree" )
+ column=(type=long updatewhereclause=yes name=hor_step dbname="hor_step" )
+ column=(type=char(100) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=char(15) updatewhereclause=yes name=ortho_id_dr_tel_bur dbname="ortho_id.dr_tel_bur" )
+ column=(type=decimal(0) updatewhereclause=yes name=suppduretiqrdv dbname="suppduretiqrdv" )
+ column=(type=char(50) updatewhereclause=yes name=salutation dbname="salutation" )
+ retrieve="  SELECT patient.patient_nom,   
+         patient.patient_prenom,
+			patient.langue,   
+         t_rdv.rdvdate,   
+         t_rdv.rdvheure,
+			t_rdv.duree,
+			(select hor_step from t_options where ortho_id = :ra_orthoid),
+			ortho_id.dr_nom_complet,
+			ortho_id.dr_tel_bur,
+			(select isnull(suppduretiqrdv, 0) from t_options where ortho_id = ortho_id.ortho_id) as suppduretiqrdv,
+			(select salutation from t_salutation where patient.id_sal = t_salutation.id_sal) as salutation
+    FROM patient inner join t_rdv on patient.patient_id = t_rdv.patient_id
+					  inner join ortho_id on patient.no_ortho = ortho_id.ortho_id
+	WHERE ortho_id.ortho_id = :ra_orthoid AND
+			patient.patient_id = :ra_patient AND  
+         t_rdv.rdvdate > today() AND
+			isnull(t_rdv.rdvetat, '') not in ('c','m')
+ORDER BY t_rdv.rdvdate ASC,   
+         t_rdv.rdvheure ASC   
+" arguments=(("ra_orthoid", number),("ra_patient", number)) )
+compute(band=header alignment="0" expression="if (  patient_langue = 'A' , 'For: ' , 'Pour: ' )"border="0" color="0" x="10" y="41" height="166" width="500" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="patient_patient_prenom + ' ' +  patient_patient_nom "border="0" color="0" x="541" y="41" height="166" width="2447" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="218" x2="2989" y2="218"  name=l_1 visible="1" pen.style="0" pen.width="10" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="if (  patient_langue = 'F' , case(dayNumber(t_rdv_rdvdate) when 1 then 'Dimanche' when 2 then 'Lundi' when 3 then 'Mardi' when 4 then 'Mercredi' when 5 then 'Jeudi' when 6 then 'Vendredi' when 7 then 'Samedi') + ' ' + string(t_rdv_rdvdate, 'dd') + ' ' + case(month(t_rdv_rdvdate) when 1 then 'jan' when 2 then 'fév' when 3 then 'mars' when 4 then 'avr' when 5 then 'mai' when 6 then 'juin' when 7 then 'juil' when 8 then 'août' when 9 then 'sep' when 10 then 'oct' when 11 then 'nov' when 12 then 'déc') + ' ' + string(t_rdv_rdvdate, 'yyyy') + ' -- ', dayName( t_rdv_rdvdate ) + ', ' + string( t_rdv_rdvdate, 'mmm' ) + ' ' + day( t_rdv_rdvdate) + ' ' + year( t_rdv_rdvdate ) + ' at ') + string ( t_rdv_rdvheure , 'hh:mm' ) + if ( suppduretiqrdv = 0, if (  patient_langue = 'A' ,  ' Len. ' , ' Dur. ' ) + ( t_rdv_duree  *  hor_step ) + ' min', '')"border="0" color="0" x="10" y="10" height="166" width="2989" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

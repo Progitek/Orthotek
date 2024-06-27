@@ -1,0 +1,22 @@
+﻿$PBExportHeader$d_liste_paiement.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=77 color="553648127" )
+summary(height=13 color="536870912" )
+footer(height=109 color="536870912" )
+detail(height=85 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=paiement_id dbname="paiement.paiement_id" )
+ column=(type=date updatewhereclause=yes name=date_paiement dbname="paiement.date_paiement" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=montant_recu dbname="paiement.montant_recu" )
+ column=(type=long update=yes updatewhereclause=yes name=traitement_patient_id dbname="paiement.traitement_patient_id" )
+ retrieve="  SELECT  ~"paiement~".~"paiement_id~" ,           ~"paiement~".~"date_paiement~" ,           ~"paiement~".~"montant_recu~" ,           ~"paiement~".~"traitement_patient_id~"     
+        FROM ~"paiement~"    " update="paiement" updatewhere=1 updatekeyinplace=no )
+text(band=header alignment="2" text="Montant reçu"border="0" color="0" x="508" y="4" height="65" width="348"  name=montant_recu_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Date"border="0" color="0" x="220" y="4" height="65" width="202"  name=date_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="2007" y="12" height="65" width="1203" format="[General]"  name=paiement_id edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="3210" y="0" height="65" width="1203" format="[General]"  name=traitement_patient_id edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="1" tabsequence=30 border="5" color="16777215" x="517" y="8" height="65" width="311" format="#,##0.00 $; (#,##0.00 $)"  name=montant_recu edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="8421504" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="183" y="12" height="65" width="279" format="[general]"  name=date_paiement edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+line(band=footer x1="1" y1="12" x2="1994" y2="12" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=footer alignment="0" expression="sum(  montant_recu  for all )"border="0" color="0" x="503" y="28" height="77" width="311" format="#,##0.00 $; (#,##0.00 $)"  name=total  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=footer alignment="0" text="Total:"border="0" color="0" x="279" y="28" height="77" width="174"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )

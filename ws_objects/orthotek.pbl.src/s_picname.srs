@@ -1,0 +1,6 @@
+﻿$PBExportHeader$s_picname.srs
+global type s_picname from structure
+	string		s_name
+	string		s_picture
+end type
+

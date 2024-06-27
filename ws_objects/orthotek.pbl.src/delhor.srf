@@ -1,0 +1,15 @@
+﻿$PBExportHeader$delhor.srf
+global type delhor from function_object
+end type
+
+forward prototypes
+global subroutine delhor ()
+end prototypes
+
+global subroutine delhor ();date v_date
+
+v_date = relativedate(today(),-365)
+delete from horaire where datecal < :v_date;
+
+end subroutine
+

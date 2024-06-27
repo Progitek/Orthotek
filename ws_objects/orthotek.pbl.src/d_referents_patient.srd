@@ -1,0 +1,37 @@
+﻿$PBExportHeader$d_referents_patient.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=316 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=88 color="536870912" )
+table(column=(type=char(67) updatewhereclause=yes name=refnom dbname="refnom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=date updatewhereclause=yes name=patient_opendoss dbname="patient.opendoss" )
+ column=(type=long updatewhereclause=yes identity=yes name=patient_patid dbname="patient.patid" )
+ column=(type=char(15) updatewhereclause=yes name=patient_new_dossier dbname="patient.new_dossier" )
+ retrieve="SELECT	  (t_referents.ref_suffix + ' ' + t_referents.ref_prenom + ' ' + t_referents.ref_nom) as refnom, 
+           patient_nom, 
+           patient_prenom,
+			  patient.opendoss,
+			  patient.patient_id as patid, 
+			  new_dossier
+FROM       patient INNER JOIN t_referents ON t_referents.id = patient.referant_nom
+WHERE      patient.referant_nom = :ra_referent AND
+           opendoss between :ra_start and :ra_end
+ORDER BY   patient_nom ASC, patient_prenom ASC" arguments=(("ra_referent", number),("ra_start", date),("ra_end", date)) )
+line(band=header x1="23" y1="312" x2="2537" y2="312"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Nom du patient" border="0" color="0" x="41" y="240" height="64" width="1102" html.valueishtml="0"  name=t_patnom visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="# Dossier" border="0" color="0" x="1824" y="240" height="64" width="667" html.valueishtml="0"  name=t_doss visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Liste des patients référés par : " border="0" color="8388608" x="41" y="32" height="80" width="1070" html.valueishtml="0"  name=t_title visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=1 alignment="0" tabsequence=32766 border="0" color="8388608" x="1129" y="32" height="80" width="1490" format="[general]" html.valueishtml="0"  name=refnom visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="0" x="1824" y="4" height="76" width="667" format="[general]" html.valueishtml="0"  name=patient_new_dossier visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Debut d'ouverture" border="0" color="0" x="1157" y="240" height="64" width="654" html.valueishtml="0"  name=t_date visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" patient_patient_nom + ' ' + patient_patient_prenom "border="0" color="0" x="41" y="4" height="76" width="1102" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=0 border="0" color="0" x="1157" y="4" height="76" width="654" html.valueishtml="0"  name=patient_opendoss visible="1" editmask.mask="dd/mm/yyyy" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

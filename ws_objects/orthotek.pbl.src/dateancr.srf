@@ -1,0 +1,43 @@
+﻿$PBExportHeader$dateancr.srf
+global type dateancr from function_object
+end type
+
+forward prototypes
+global function string dateancr (date lf_date)
+end prototypes
+
+global function string dateancr (date lf_date);string n,j,m,a
+
+n =  string(DayName(lf_date))
+j = string(Day(lf_date))
+
+choose case string(Month(lf_date))
+case "1"
+	m = "January"
+case "2"
+	m = "February"
+case "3"
+	m = "March"
+case "4"
+	m = "April"
+case "5"
+	m = "May"
+case "6"
+	m = "June"
+case "7"
+	m = "July"
+case "8"
+	m = "August"
+case "9"
+	m = "September"
+case "10"
+	m = "October"
+case "11"
+	m = "November"
+case "12"
+	m = "December"
+end choose
+a = string(year(lf_date))
+return m+" "+j+" "+a
+end function
+

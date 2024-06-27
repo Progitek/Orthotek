@@ -1,0 +1,79 @@
+﻿$PBExportHeader$d_pourcentageentrerimp.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.printername="LISTE ENTRER POURCENTAGES MODIFIÉS" print.documentname="LISTE ENTRER POURCENTAGES MODIF" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no pointer="Arrow!" )
+header(height=240 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=56 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes identity=yes name=patient_id dbname="patient.patient_id" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(15) updatewhereclause=yes name=patient_new_dossier dbname="patient.new_dossier" )
+ column=(type=long updatewhereclause=yes name=patient_id_satellite dbname="patient.id_satellite" )
+ column=(type=date updatewhereclause=yes name=debut_traitement dbname="traitements.debut_traitement" )
+ column=(type=date updatewhereclause=yes name=fin_traitement dbname="traitements.fin_traitement" )
+ column=(type=decimal(2) updatewhereclause=yes name=traitements_montant_original dbname="traitements.montant_original" )
+ column=(type=decimal(2) updatewhereclause=yes name=traitements_montant_paye dbname="traitements.montant_paye" )
+ column=(type=long updatewhereclause=yes key=yes name=t_pourcentages_traitement_id dbname="t_pourcentages.traitement_id" )
+ column=(type=char(30) updatewhereclause=yes name=dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=long update=yes updatewhereclause=yes name=pourcentage dbname="t_pourcentages.pourcentage" )
+ column=(type=long updatewhereclause=yes name=year1 dbname="year1" )
+ column=(type=long updatewhereclause=yes name=year2 dbname="year2" )
+ column=(type=decimal(2) updatewhereclause=yes name=totfact1 dbname="totfact1" )
+ column=(type=decimal(2) updatewhereclause=yes name=totfact dbname="totfact" )
+ column=(type=long updatewhereclause=yes key=yes name=annee dbname="t_pourcentages.annee" )
+ column=(type=long updatewhereclause=yes name=maxpourc dbname="maxpourc" )
+ retrieve="  SELECT patient.patient_id,
+			patient.patient_nom,   
+         patient.patient_prenom,
+			patient.new_dossier,
+			patient.id_satellite,
+         traitements.debut_traitement,
+         traitements.fin_traitement, 
+			traitements.montant_original,
+			traitements.montant_paye,  
+         t_pourcentages.traitement_id, 
+			ortho_id.dr_nom_complet,
+			t_pourcentages.pourcentage,
+			(select pourcentage from t_pourcentages where annee = :ra_year - 1 and traitement_id = traitements.traitement_id) as year1,
+			(select pourcentage from t_pourcentages where annee = :ra_year - 2 and traitement_id = traitements.traitement_id) as year2,
+			(select sum(montant) from factures_traitements where factures_traitements.traitement_id = traitements.traitement_id) as totfact1,
+			(if totfact1 is null then 0 else totfact1 endif) as totfact,
+			t_pourcentages.annee,
+			(select max(isnull(pourcentage,0)) from t_pourcentages where annee < :ra_year and traitement_id = traitements.traitement_id) as maxpourc
+    FROM traitements INNER JOIN patient  ON traitements.patient_id = patient.patient_id
+							INNER JOIN t_pourcentages ON t_pourcentages.traitement_id = traitements.traitement_id,
+			patient 		INNER JOIN ortho_id ON patient.no_ortho = ortho_id.ortho_id
+   WHERE patient.no_ortho = :ra_ortho and
+			t_pourcentages.annee = :ra_year and
+			totfact <> 0 and
+			(maxpourc <> 100 or maxpourc is null)
+			
+ORDER BY patient.patient_nom ASC,   
+         patient.patient_prenom ASC" update="t_pourcentages" updatewhere=0 updatekeyinplace=no arguments=(("ra_ortho", number),("ra_year", number)) )
+text(band=footer alignment="0" text="Imprimé le" border="0" color="8388608" x="14" y="0" height="56" width="215" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="today()"border="0" color="8388608" x="256" y="0" height="56" width="293" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="8388608" x="2565" y="0" height="56" width="562" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="© Orthotek" border="0" color="8388608" x="1531" y="0" height="56" width="238" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="count( patient_patient_nom + ',  ' +  patient_patient_prenom + if ( isnull (  patient_new_dossier ) , '' , ' (' + patient_new_dossier  + ')' ) for all)"border="0" color="8388608" x="814" y="0" height="56" width="485" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Qté:" border="0" color="8388608" x="699" y="0" height="56" width="105" html.valueishtml="0"  name=t_qty visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="0" y1="236" x2="3113" y2="236"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Nom du patient" border="0" color="0" x="0" y="168" height="64" width="1550" html.valueishtml="0"  name=t_pat visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" patient_patient_nom + ',  ' +  patient_patient_prenom + if ( isnull (  patient_new_dossier ) , '' , ' (' + patient_new_dossier  + ')' )"border="0" color="0" x="0" y="4" height="76" width="1550" format="[GENERAL]" html.valueishtml="0"  name=compute_1 pointer="HyperLink!" visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+text(band=header alignment="2" text="LISTE ENTRER POURCENTAGES MODIFIÉS" border="0" color="8388608" x="0" y="8" height="64" width="3104" html.valueishtml="0"  name=t_titre visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=11 alignment="2" tabsequence=32766 border="0" color="0" x="0" y="88" height="64" width="3104" format="[general]" html.valueishtml="0"  name=dr_nom_complet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="2" tabsequence=32766 border="0" color="0" x="1550" y="4" height="76" width="471" format="[general]" html.valueishtml="0"  name=debut_traitement visible="1" editmask.mask="dd/mm/yyyy" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+text(band=header alignment="2" text="Début" border="0" color="0" x="1550" y="168" height="64" width="471" html.valueishtml="0"  name=t_start visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="2" tabsequence=32766 border="0" color="0" x="2021" y="4" height="76" width="475" format="[general]" html.valueishtml="0"  name=fin_traitement visible="1" editmask.mask="dd/mm/yyyy" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+text(band=header alignment="2" text="Fin" border="0" color="0" x="2021" y="168" height="64" width="475" html.valueishtml="0"  name=t_end visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="2" tabsequence=32766 border="0" color="0" x="2496" y="4" height="76" width="201" format="[general]" html.valueishtml="0"  name=year2 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+text(band=header alignment="2" text="err" border="0" color="0" x="2496" y="168" height="64" width="201" html.valueishtml="0"  name=t_year1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="2" tabsequence=32766 border="0" color="0" x="2697" y="4" height="76" width="210" format="[general]" html.valueishtml="0"  name=year1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+text(band=header alignment="2" text="err" border="0" color="0" x="2697" y="168" height="64" width="210" html.valueishtml="0"  name=t_year2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="2" tabsequence=10 border="0" color="0" x="2907" y="4" height="76" width="197" format="[general]" html.valueishtml="0"  name=pourcentage visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+text(band=header alignment="2" text="err" border="0" color="0" x="2907" y="168" height="64" width="197" html.valueishtml="0"  name=t_year3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

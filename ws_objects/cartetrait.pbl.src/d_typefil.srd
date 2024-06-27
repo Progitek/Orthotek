@@ -1,0 +1,34 @@
+﻿$PBExportHeader$d_typefil.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=id_filstype dbname="t_filstypes.id_filstype" dbalias=".id_filstype" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=filstype dbname="t_filstypes.filstype" dbalias=".filstype" )
+ column=(type=long update=yes updatewhereclause=yes name=id_filsmattype dbname="t_filstypes.id_filsmattype" dbalias=".id_filsmattype" )
+ column=(type=long update=yes updatewhereclause=yes name=ordre dbname="t_filstypes.ordre" dbalias=".ordre" )
+ column=(type=long update=yes updatewhereclause=yes name=ortho_id dbname="t_filstypes.ortho_id" dbalias=".ortho_id" )
+ retrieve="  SELECT t_filstypes.id_filstype,   
+         t_filstypes.filstype,
+			t_filstypes.id_filsmattype,
+			t_filstypes.ordre,
+			t_filstypes.ortho_id
+    FROM t_filstypes
+	WHERE t_filstypes.ortho_id = :ra_orthoid
+ORDER BY t_filstypes.ordre ASC" update="t_filstypes" updatewhere=0 updatekeyinplace=no arguments=(("ra_orthoid", number)) )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="5" color="0" x="2811" y="4" height="76" width="1166" format="[general]" html.valueishtml="0"  name=id_filsmattype visible="0" dddw.name=dddw_filmattype dddw.displaycolumn=filmattype dddw.datacolumn=id_filsmattype dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes dddw.autoretrieve=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=10 border="5" color="0" x="14" y="4" height="76" width="2222" format="[general]" html.valueishtml="0"  name=filstype visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="0" tabsequence=20 border="5" color="0" x="2272" y="4" height="76" width="466" html.valueishtml="0"  name=ordre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

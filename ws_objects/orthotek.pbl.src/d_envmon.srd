@@ -1,0 +1,130 @@
+﻿$PBExportHeader$d_envmon.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=136 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912~tif( mod( getrow(), 2) = 0, rgb(225,225,225), rgb(212,208,200))" )
+table(column=(type=long updatewhereclause=yes name=patient_patient_id dbname="patient_id" )
+ column=(type=long updatewhereclause=yes name=cheques_postdates_traitement_patient_id dbname="traitement_patient_id" )
+ column=(type=char(120) updatewhereclause=yes name=patnom dbname="patnom" )
+ column=(type=char(20) updatewhereclause=yes name=cheques_postdates_modalite dbname="modalite" values="Visa	pVisa/MasterCard	pMC/American Express	pAmex/Visa	Visa/MasterCard	MC/American Express	Amex/" )
+ column=(type=char(20) updatewhereclause=yes name=cheques_postdates_nocarte dbname="nocarte" )
+ column=(type=date updatewhereclause=yes name=cheques_postdates_datecarte dbname="datecarte" )
+ column=(type=decimal(2) updatewhereclause=yes name=cheques_postdates_paiement dbname="paiement" )
+ column=(type=long updatewhereclause=yes name=nbrec dbname="nbrec" )
+ column=(type=date updatewhereclause=yes name=debut dbname="debut" )
+ column=(type=long updatewhereclause=yes name=sel dbname="sel" values="	1/	0" )
+ column=(type=long updatewhereclause=yes name=num dbname="num" )
+ column=(type=date updatewhereclause=yes name=date_deb dbname="date_deb" )
+ retrieve="with recursive serie_cp (id_cp, mod, mont, no_carte, date_carte, date_deb, date_cp, itr) as
+((select cheques_postdates.traitement_patient_id,
+			cheques_postdates.modalite,
+			cheques_postdates.paiement,
+			cheques_postdates.nocarte,
+			cheques_postdates.datecarte,
+			cheques_postdates.date_cheque,
+			cheques_postdates.date_cheque,
+			0
+	 from cheques_postdates
+	where cheques_postdates.indicateur = '0'
+	  and isnull(cheques_postdates.envmon, 0) = 0
+	  and cheques_postdates.date_cheque > current date
+	  and not exists (select 1
+							  from cheques_postdates as cp
+							 where cp.nocarte = cheques_postdates.nocarte
+								and cp.datecarte = cheques_postdates.datecarte
+								and ucase(cp.modalite) = ucase(cheques_postdates.modalite)
+								and cp.paiement = cheques_postdates.paiement
+								and cp.indicateur = '0'
+								and isnull(cp.envmon, 0) = 0
+								and cp.date_cheque > current date
+								and (dateadd(month, 1, cp.date_cheque) = cheques_postdates.date_cheque
+									 or cp.date_cheque = dateadd(month, -1, cheques_postdates.date_cheque))))
+union all
+(select cheques_postdates.traitement_patient_id,
+		  cheques_postdates.modalite,
+		  cheques_postdates.paiement,
+		  cheques_postdates.nocarte,
+		  cheques_postdates.datecarte,
+		  serie_cp.date_deb,
+		  cheques_postdates.date_cheque,
+		  serie_cp.itr + 1
+	from cheques_postdates inner join serie_cp on serie_cp.id_cp = cheques_postdates.traitement_patient_id
+															and serie_cp.no_carte = cheques_postdates.nocarte
+															and serie_cp.date_carte = cheques_postdates.datecarte
+															and ucase(serie_cp.mod) = ucase(cheques_postdates.modalite)
+															and serie_cp.mont = cheques_postdates.paiement
+															and serie_cp.date_cp < cheques_postdates.date_cheque
+  where cheques_postdates.indicateur = '0'
+	and isnull(cheques_postdates.envmon, 0) = 0
+	and cheques_postdates.date_cheque > current date
+	and (dateadd(month, -1, cheques_postdates.date_cheque) = serie_cp.date_cp
+		 or cheques_postdates.date_cheque = dateadd(month, 1, serie_cp.date_cp))
+	and itr < 30))
+  SELECT patient.patient_id,
+			cheques_postdates.traitement_patient_id,
+			isnull(patient.new_dossier, '') || ' - ' || isnull(patient.patient_nom, '') || ', ' || isnull(patient.patient_prenom, '') AS patnom,
+			cheques_postdates.modalite,
+			cheques_postdates.nocarte,
+			cheques_postdates.datecarte,
+			cheques_postdates.paiement,
+			count(cheques_postdates.cheques_postdates_id) AS nbrec,
+			serie_cp.date_deb AS debut,
+			1 AS sel,
+			CAST(NULL AS INTEGER) AS num,
+			serie_cp.date_deb
+	 FROM cheques_postdates INNER JOIN traitements ON cheques_postdates.traitement_patient_id = traitements.traitement_id
+									INNER JOIN patient ON traitements.patient_id = patient.patient_id
+									inner join serie_cp on serie_cp.id_cp = cheques_postdates.traitement_patient_id
+															 and serie_cp.no_carte = cheques_postdates.nocarte
+															 and serie_cp.date_carte = cheques_postdates.datecarte
+															 and ucase(serie_cp.mod) = ucase(cheques_postdates.modalite)
+															 and serie_cp.mont = cheques_postdates.paiement
+															 and serie_cp.date_cp = cheques_postdates.date_cheque
+	WHERE cheques_postdates.indicateur = '0'
+	  AND isnull(cheques_postdates.envmon, 0) = 0
+	  AND ucase(cheques_postdates.modalite) in ('VISA', 'MC', 'AMEX', 'PVISA', 'PMC', 'PAMEX')
+	  AND cheques_postdates.date_cheque > current date
+	  AND (ymd(year(dateadd(month, 1, cheques_postdates.datecarte)), month(dateadd(month, 1, cheques_postdates.datecarte)), 1) > cheques_postdates.date_cheque
+			or (select isnull(t_options.monvalidexpcarte, 0) from t_options where t_options.ortho_id = patient.no_ortho) = 0)
+	  and (not exists(select 1
+							  from cheques_postdates as c
+							 where indicateur = '0'
+								and isnull(envmon, 0) = 0
+								and ucase(modalite) in ('VISA', 'MC', 'AMEX', 'PVISA', 'PMC', 'PAMEX')
+								and date_cheque > current date
+								and date_cheque < cheques_postdates.date_cheque
+								and ymd(year(dateadd(month, 1, datecarte)), month(dateadd(month, 1, datecarte)), 1) > date_cheque
+								and traitement_patient_id = cheques_postdates.traitement_patient_id) or :ra_tous = 1)
+GROUP BY patient.patient_id,
+			cheques_postdates.traitement_patient_id,
+			patnom,
+			cheques_postdates.modalite,
+			cheques_postdates.nocarte,
+			cheques_postdates.datecarte,
+			cheques_postdates.paiement,
+			debut
+ORDER BY patnom ASC,
+			debut ASC" arguments=(("ra_tous", number)) )
+text(band=header alignment="2" text="Paiement" border="0" color="33554432" x="2583" y="4" height="64" width="366" html.valueishtml="0"  name=cheques_postdates_paiement_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Nb. Récurences" border="0" color="33554432" x="2953" y="4" height="124" width="325" html.valueishtml="0"  name=nbrec_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Debut" border="0" color="33554432" x="3282" y="4" height="64" width="366" html.valueishtml="0"  name=debut_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Modalité" border="0" color="33554432" x="1938" y="4" height="64" width="640" html.valueishtml="0"  name=cheques_postdates_modalite_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Patient" border="0" color="33554432" x="119" y="4" height="64" width="1815" html.valueishtml="0"  name=patnom_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=10 border="0" color="33554432" x="14" y="4" height="76" width="101" format="[general]" html.valueishtml="0"  name=sel visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="2583" y="4" height="76" width="366" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=cheques_postdates_paiement visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="2" tabsequence=32766 border="0" color="33554432" x="2953" y="4" height="76" width="325" format="[general]" html.valueishtml="0"  name=nbrec visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="3282" y="4" height="76" width="366" format="[shortdate]" html.valueishtml="0"  name=debut visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="1938" y="4" height="76" width="640" format="[general]" html.valueishtml="0"  name=cheques_postdates_modalite visible="1" edit.limit=20 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.codetable=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="119" y="4" height="76" width="1815" format="[general]" html.valueishtml="0"  name=patnom visible="1" edit.limit=102 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

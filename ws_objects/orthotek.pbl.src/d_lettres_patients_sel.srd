@@ -1,0 +1,62 @@
+﻿$PBExportHeader$d_lettres_patients_sel.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=84 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=char(50) updatewhereclause=yes name=patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_nom dbname="patient.patient_nom" )
+ column=(type=char(36) updatewhereclause=yes name=adresse dbname="patient.adresse" )
+ column=(type=char(50) updatewhereclause=yes name=ville dbname="patient.ville" )
+ column=(type=char(25) updatewhereclause=yes name=referent_province dbname="patient.province" )
+ column=(type=char(15) updatewhereclause=yes name=code_postale dbname="patient.code_postale" )
+ column=(type=char(15) updatewhereclause=yes name=tel_maison dbname="patient.tel_maison" )
+ column=(type=number updatewhereclause=yes name=patient_corr dbname="patient.corr" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_ville_province_code_postale dbname="ortho_id.dr_ville_province_code_postale" )
+ column=(type=char(15) updatewhereclause=yes name=ortho_id_dr_tel_bur dbname="ortho_id.dr_tel_bur" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_adresse dbname="ortho_id.dr_adresse" )
+ column=(type=char(50) updatewhereclause=yes name=t_referents_ref_adresse dbname="t_referents.ref_adresse" )
+ column=(type=char(50) updatewhereclause=yes name=t_referents_ref_ville dbname="t_referents.ref_ville" )
+ column=(type=char(10) updatewhereclause=yes name=t_referents_ref_sexe dbname="t_referents.ref_sexe" )
+ column=(type=char(40) updatewhereclause=yes name=t_referents_ref_province dbname="t_referents.ref_province" )
+ column=(type=char(20) updatewhereclause=yes name=t_referents_ref_zip dbname="t_referents.ref_zip" )
+ column=(type=char(20) updatewhereclause=yes name=t_referents_ref_tel_bur dbname="t_referents.ref_tel_bur" )
+ column=(type=char(20) updatewhereclause=yes name=t_referents_ref_tel_fax dbname="t_referents.ref_tel_fax" )
+ column=(type=char(40) updatewhereclause=yes name=t_referents_ref_email dbname="t_referents.ref_email" )
+ column=(type=char(50) updatewhereclause=yes name=t_referents_ref_nom_complet dbname="t_referents.ref_nom_complet" )
+ column=(type=long updatewhereclause=yes name=patient_patient_id dbname="patient.patient_id" )
+ retrieve="  SELECT patient.patient_prenom,   
+         patient.patient_nom,   
+         patient.adresse,   
+         patient.ville,   
+         patient.province,   
+         patient.code_postale,   
+         patient.tel_maison,   
+         patient.corr,   
+         ortho_id.dr_nom_complet,   
+         ortho_id.dr_ville_province_code_postale,   
+         ortho_id.dr_tel_bur,   
+         ortho_id.dr_adresse,   
+         t_referents.ref_adresse,   
+         t_referents.ref_ville,   
+         t_referents.ref_sexe,   
+         t_referents.ref_province,   
+         t_referents.ref_zip,   
+         t_referents.ref_tel_bur,   
+         t_referents.ref_tel_fax,   
+         t_referents.ref_email,   
+         t_referents.ref_nom_complet,   
+         patient.patient_id  
+    FROM patient LEFT OUTER JOIN t_referents ON patient.referant_nom = t_referents.id   
+                 INNER JOIN ortho_id ON patient.no_ortho = ortho_id.ortho_id
+   WHERE patient.no_ortho = :ra_ortho_id AND
+         patient.patient_nom like :ra_patnom
+    
+" arguments=(("ra_ortho_id", number),("ra_patnom", string)) )
+compute(band=detail alignment="0" expression=" patient_nom + ', ' +  patient_prenom "border="0" color="0" x="114" y="0" height="72" width="1349" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Nb. de patients:" border="0" color="0" x="123" y="12" height="64" width="453" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+line(band=footer x1="114" y1="0" x2="1463" y2="0"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=footer alignment="0" expression="count( patient_nom + ', ' +  patient_prenom  for all)"border="0" color="0" x="594" y="12" height="64" width="832" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

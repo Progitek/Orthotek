@@ -1,0 +1,199 @@
+﻿$PBExportHeader$d_recumodel2.srd
+release 11.5;
+datawindow(units=2 timer_interval=0 color=79741120 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="Receipt" print.orientation = 2 print.margin.left = 1125 print.margin.right = 0 print.margin.top = 500 print.margin.bottom = 0 print.paper.source = 0 print.paper.size = 1 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=4083 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=long updatewhereclause=yes name=ortho_id dbname="ortho_id" )
+ column=(type=char(100) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="dr_nom_complet" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_ville_province_code_postale dbname="dr_ville_province_code_postale" )
+ column=(type=char(15) updatewhereclause=yes name=ortho_id_dr_tel_bur dbname="dr_tel_bur" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_adresse dbname="dr_adresse" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_numero dbname="dr_numero" )
+ column=(type=char(25) updatewhereclause=yes name=tps dbname="tps" )
+ column=(type=char(25) updatewhereclause=yes name=tvq dbname="tvq" )
+ column=(type=char(1) updatewhereclause=yes name=dr_special dbname="dr_special" )
+ column=(type=char(100) updatewhereclause=yes name=cie dbname="cie" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient_prenom" )
+ column=(type=date updatewhereclause=yes name=patient_prochain_rappel dbname="prochain_rappel" )
+ column=(type=number updatewhereclause=yes name=patient_recuresp dbname="recuresp" )
+ column=(type=char(50) updatewhereclause=yes name=patient_nomresp1 dbname="nomresp1" )
+ column=(type=char(20) updatewhereclause=yes name=langue dbname="langue" )
+ column=(type=char(15) updatewhereclause=yes name=new_dossier dbname="new_dossier" )
+ column=(type=char(50) updatewhereclause=yes name=t_salutation_salutation dbname="salutation" )
+ column=(type=decimal(2) updatewhereclause=yes name=montantrecu dbname="montantrecu" )
+ column=(type=long updatewhereclause=yes name=idrecu dbname="idrecu" )
+ column=(type=date updatewhereclause=yes name=mindaterecu dbname="mindaterecu" )
+ column=(type=date updatewhereclause=yes name=maxdaterecu dbname="maxdaterecu" )
+ column=(type=char(1) updatewhereclause=yes name=recurecu dbname="recurecu" )
+ column=(type=char(600) updatewhereclause=yes name=paiement_recunote dbname="recunote" )
+ column=(type=char(152) updatewhereclause=yes name=recucontact dbname="recucontact" )
+ column=(type=number updatewhereclause=yes name=recutaxe dbname="recutaxe" )
+ column=(type=long updatewhereclause=yes name=nbrecu dbname="nbrecu" )
+ column=(type=long updatewhereclause=yes name=patient_patient_id dbname="patient_id" )
+ column=(type=number updatewhereclause=yes name=re dbname="re" )
+ column=(type=decimal(0) updatewhereclause=yes name=hidenumber dbname="hidenumber" )
+ column=(type=decimal(0) updatewhereclause=yes name=poste dbname="poste" )
+ column=(type=decimal(0) updatewhereclause=yes name=signature dbname="signature" )
+ column=(type=char(1) updatewhereclause=yes name=phasetype dbname="phasetype" )
+ column=(type=char(500) updatewhereclause=yes name=noterecu dbname="noterecu" )
+ column=(type=char(500) updatewhereclause=yes name=noterecuan dbname="noterecuan" )
+ column=(type=char(255) updatewhereclause=yes name=signfile dbname="signfile" )
+ column=(type=char(36) updatewhereclause=yes name=cadresse dbname="cadresse" )
+ column=(type=char(50) updatewhereclause=yes name=ville dbname="ville" )
+ column=(type=char(25) updatewhereclause=yes name=province dbname="province" )
+ column=(type=char(15) updatewhereclause=yes name=codepostal dbname="codepostal" )
+ column=(type=decimal(2) updatewhereclause=yes name=montantpaye dbname="montantpaye" )
+ column=(type=decimal(2) updatewhereclause=yes name=montantdu dbname="montantdu" )
+ retrieve="select  	ortho_id.ortho_id,
+        	ortho_id.dr_nom_complet,   
+        	ortho_id.dr_ville_province_code_postale,   
+        	ortho_id.dr_tel_bur,   
+        	ortho_id.dr_adresse,
+        	ortho_id.dr_numero,
+			ortho_id.tps,
+			ortho_id.tvq,
+			ortho_id.dr_special,
+			ortho_id.cie,
+        	patient.patient_nom,   
+        	patient.patient_prenom,
+			patient.prochain_rappel,
+			patient.recuresp,
+			patient.nomresp1,
+			patient.langue,
+			isnull(patient.new_dossier,'') as new_dossier,
+        	t_salutation.salutation,
+        	isnull(sum(isnull(t_recu.montantrecu,0)),0) as montantrecu,
+        	isnull(sum(isnull(t_recu.idrecu,0)),0) as idrecu,   
+        	min(t_recu.daterecu) as mindaterecu,
+			max(t_recu.daterecu) as maxdaterecu,      
+	      min(t_recu.recurecu) as recurecu,  
+			min(t_recu.recunote) as recunote,
+        	if :ra_idcontact is null then    
+        		t_salutation.salutation || ' ' || patient.patient_prenom ||' ' ||	patient.patient_nom
+			else 
+				salcont.salutation || ' ' || t_contact.prenom || ' ' || t_contact.nom
+			endif as recucontact,
+			min(t_recu.recutaxe) as recutaxe,
+			count(t_recu.idrecu) as nbrecu,      
+        	patient.patient_id,
+			t_options.recure as re,
+			isnull(t_options.recudelassnumber, 0) as hidenumber,
+        	isnull(patient.aposter,0) as poste,
+			isnull(t_options.sigrecu,0) as signature,
+			isnull(phasetype,'f') as phasetype,
+  			t_options.noterecu,
+			t_options.noterecuan,
+			t_options.signfile,
+			ifnull(t_contact.id_contact,patient.adresse,t_contact.adresse) as cadresse,
+			ifnull(t_contact.id_contact,patient.ville,t_contact.ville) as ville,
+			ifnull(t_contact.id_contact,patient.province,t_contact.province) as province,
+			ifnull(t_contact.id_contact,patient.code_postale,t_contact.zip) as codepostal,
+			(select isnull(sum(isnull(montant_recu,0)),0) FROM paiement WHERE traitement_patient_id = t_recu.idtraitementrecu)  as montantpaye,
+		   (select isnull(sum(isnull(montant,0)),0) FROM factures_traitements WHERE traitement_id = t_recu.idtraitementrecu) - montantpaye as montantdu
+from
+(select  montant_recu as montantrecu,
+        	paiement_id as idrecu,
+        	date_paiement as daterecu,
+        	nomresp as resprecu,
+        	recu as recurecu,
+        	recunote as recunote,
+        	id_contact as recucontact,
+        	taxe as recutaxe,
+        	traitement_patient_id as idtraitementrecu,
+        	'P' as typetrans
+from    	paiement
+union
+select  	paiement,
+        	cheques_postdates_id,
+        	date_cheque,
+        	nomresp,
+        	recu,
+        	'',
+        	id_contact,
+        	taxe,
+        	traitement_patient_id,
+        	'C'
+from    	cheques_postdates) as t_recu 	INNER JOIN traitements ON traitements.traitement_id = t_recu.idtraitementrecu
+                                     	INNER JOIN patient ON patient.patient_id = traitements.patient_id
+                                     	INNER JOIN ortho_id ON ortho_id.ortho_id = patient.no_ortho
+                                     	INNER JOIN t_options ON t_options.ortho_id = ortho_id.ortho_id
+                                     	LEFT OUTER JOIN t_contact ON t_contact.id_contact = t_recu.recucontact
+				                     		LEFT OUTER JOIN t_salutation ON t_salutation.id_sal = patient.id_sal
+													LEFT OUTER JOIN t_salutation as salcont ON salcont.id_sal = t_contact.id_sal 
+where   	t_recu.typetrans = :ra_typetrans AND
+        	t_recu.idrecu IN (:ra_idrecu) AND
+			(t_recu.recucontact = :ra_idcontact or :ra_idcontact is null)
+group by ortho_id.ortho_id,
+        	ortho_id.dr_nom_complet,   
+        	ortho_id.dr_ville_province_code_postale,   
+        	ortho_id.dr_tel_bur,   
+        	ortho_id.dr_adresse,
+        	ortho_id.dr_numero,
+			ortho_id.tps,
+			ortho_id.tvq,
+			ortho_id.dr_special,
+			ortho_id.cie,
+        	patient.patient_nom,   
+        	patient.patient_prenom,
+			patient.adresse,
+			patient.ville,
+			patient.province,
+			patient.code_postale,
+			patient.prochain_rappel,
+			patient.recuresp,
+			patient.nomresp1,
+			patient.langue,
+			patient.new_dossier,
+        	t_salutation.salutation,
+			patient.patient_id,
+			re,
+			hidenumber,
+        	poste,
+			signature,
+			phasetype,
+  			t_options.noterecu,
+			t_options.noterecuan,
+			t_options.signfile,
+			t_contact.adresse,
+			t_contact.ville,
+			t_contact.province,
+			t_contact.zip,
+			t_contact.id_contact,
+			t_contact.nom,
+			t_contact.prenom,
+			salcont.salutation,
+			t_recu.idtraitementrecu" arguments=(("ra_typetrans", string),("ra_idrecu", numberlist),("ra_idcontact", number)) )
+compute(band=detail alignment="1" expression="'# : ' + ortho_id_dr_numero"border="0" color="0" x="1333" y="1104" height="166" width="1875" format="[GENERAL]" html.valueishtml="0"  name=cp_dr_no_1 visible="1~t1 - hidenumber"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="125" y="750" height="166" width="3083" format="[general]" html.valueishtml="0"  name=ortho_id_dr_adresse visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="125" y="573" height="166" width="3083" format="[general]" html.valueishtml="0"  name=ortho_id_dr_nom_complet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-11" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="125" y="927" height="166" width="3083" format="[general]" html.valueishtml="0"  name=ortho_id_dr_ville_province_code_postale visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="" border="0" color="0" x="4500" y="573" height="166" width="1708" html.valueishtml="0"  name=t_date1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=24 alignment="0" tabsequence=32766 border="0" color="0" x="2729" y="2166" height="572" width="3229" format="[general]" html.valueishtml="0"  name=paiement_recunote visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="125" y="1104" height="166" width="1197" format="[general]" html.valueishtml="0"  name=ortho_id_dr_tel_bur visible="1" editmask.mask="(###) ###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="For the amount of:" border="0" color="0" x="125" y="2448" height="166" width="1229" html.valueishtml="0"  name=t_20 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="For the following orthodontic services:" border="0" color="0" x="125" y="2166" height="166" width="2458" html.valueishtml="0"  name=t_21 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Previous balance:" border="0" color="0" x="125" y="2677" height="166" width="1229" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Current balance:" border="0" color="0" x="125" y="2906" height="166" width="1229" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Patient name:" border="0" color="0" x="125" y="1719" height="166" width="1125" html.valueishtml="0"  name=t_22 visible="1~tif ( re = 1 , 0 , 1 )"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=detail alignment="1" expression="  montantdu +   montantrecu"border="0" color="0" x="1468" y="2677" height="166" width="989" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=detail alignment="1" expression=" montantdu"border="0" color="0" x="1468" y="2906" height="166" width="989" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="2" text="Receipt" border="0" color="0" x="2864" y="21" height="208" width="687" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=detail alignment="1" expression=" if (   recurecu = '1' , 'Copy' , '' )"border="0" color="0" x="5156" y="3864" height="166" width="1083" format="[GENERAL]" html.valueishtml="0"  name=compute_10 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Signature: __________________________________________" border="0" color="0" x="2520" y="3583" height="166" width="3718" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Responsible party:" border="0" color="0" x="125" y="1469" height="166" width="1125" html.valueishtml="0"  name=t_17 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=detail alignment="0" expression="if ( isnull (  t_salutation_salutation  ) , '', t_salutation_salutation  )+ ' ' +  patient_patient_prenom +'  '+ patient_patient_nom "border="0" color="0" x="1468" y="1719" height="166" width="3708" format="[general]" html.valueishtml="0"  name=compute_2 visible="1~tif ( re = 1 , 0 , 1 )"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=25 alignment="0" tabsequence=0 border="0" color="0" x="1468" y="1469" height="166" width="3708" html.valueishtml="0"  name=recucontact visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

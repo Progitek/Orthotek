@@ -1,0 +1,34 @@
+﻿$PBExportHeader$d_journal_revenus1.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=80 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=date updatewhereclause=yes name=factures_traitements_date_facture dbname="factures_traitements.date_facture" )
+ column=(type=decimal(2) updatewhereclause=yes name=compute_0002 dbname="compute_0002" )
+ retrieve="  SELECT distinct ~"factures_traitements~".~"date_facture~",   
+         sum(~"factures_traitements~".~"montant~")  
+    FROM ~"factures_traitements~",   
+         ~"traitements~",   
+         ~"patient~",   
+         ~"ortho_id~"  
+   WHERE ( ~"factures_traitements~".~"traitement_id~" = ~"traitements~".~"traitement_id~" ) and  
+         ( ~"traitements~".~"patient_id~" = ~"patient~".~"patient_id~" ) and  
+         ( ~"patient~".~"no_ortho~" = ~"ortho_id~".~"ortho_id~" ) and  
+         ( ( ~"ortho_id~".~"ortho_id~" = :ra_ortho_id ) AND  
+         ( ~"factures_traitements~".~"date_facture~" >= :ra_debut ) AND  
+         ( ~"factures_traitements~".~"date_facture~" <= :ra_fin ) ) AND  
+         ~"factures_traitements~".~"cache~" = 0   
+GROUP BY ~"factures_traitements~".~"date_facture~"  
+ORDER BY ~"factures_traitements~".~"date_facture~" ASC   
+" arguments=(("ra_ortho_id", number),("ra_debut", date),("ra_fin", date)) )
+text(band=header alignment="2" text="Date de la facture" border="0" color="0" x="5" y="4" height="64" width="562" html.valueishtml="0"  name=t_date visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Honoraire" border="0" color="0" x="713" y="4" height="64" width="562" html.valueishtml="0"  name=t_hono visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="0" color="0" x="5" y="4" height="76" width="562" format="[general]" html.valueishtml="0"  name=factures_traitements_date_facture visible="1" editmask.mask="[date]" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="713" y="4" height="64" width="562" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_0002 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(compute_0002 for all)"border="0" color="0" x="608" y="12" height="64" width="667" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="1" text="Total:" border="0" color="0" x="357" y="12" height="64" width="215" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+line(band=summary x1="585" y1="4" x2="1271" y2="4"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

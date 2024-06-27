@@ -1,0 +1,55 @@
+﻿$PBExportHeader$d_histocorr.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=76 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=360 color="536870912" )
+table(column=(type=datetime update=yes updatewhereclause=yes key=yes name=id_lettre dbname="t_histolettre.id_lettre" )
+ column=(type=long update=yes updatewhereclause=yes name=id_sujet dbname="t_histolettre.id_sujet" )
+ column=(type=long update=yes updatewhereclause=yes name=id_intro dbname="t_histolettre.id_intro" )
+ column=(type=long update=yes updatewhereclause=yes name=id_concl dbname="t_histolettre.id_concl" )
+ column=(type=long update=yes updatewhereclause=yes name=id_dentist dbname="t_histolettre.id_dentist" )
+ column=(type=date update=yes updatewhereclause=yes name=cdate dbname="t_histolettre.cdate" )
+ column=(type=time update=yes updatewhereclause=yes name=cheure dbname="t_histolettre.cheure" )
+ column=(type=char(10000) update=yes updatewhereclause=yes name=cnote dbname="t_histolettre.cnote" )
+ column=(type=char(1000) update=yes updatewhereclause=yes name=nomdoc dbname="t_histolettre.nomdoc" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=typelettre dbname="t_histolettre.typelettre" )
+ column=(type=long update=yes updatewhereclause=yes name=id_contact dbname="t_histolettre.id_contact" )
+ column=(type=long update=yes updatewhereclause=yes name=id_phase dbname="t_histolettre.id_phase" )
+ column=(type=long update=yes updatewhereclause=yes name=id_contrattype dbname="t_histolettre.id_contrattype" )
+ retrieve="  SELECT t_histolettre.id_lettre,
+         t_histolettre.id_sujet,   
+         t_histolettre.id_intro,   
+         t_histolettre.id_concl,   
+         t_histolettre.id_dentist,   
+         t_histolettre.cdate,   
+         t_histolettre.cheure,   
+         t_histolettre.cnote,
+			t_histolettre.nomdoc,
+		   t_histolettre.typelettre,
+			t_histolettre.id_contact,
+			t_histolettre.id_phase,
+			t_histolettre.id_contrattype  
+    FROM t_histolettre
+	WHERE t_histolettre.patient_id = :ra_patid
+ORDER BY t_histolettre.cdate DESC,
+         t_histolettre.cheure DESC" update="t_histolettre" updatewhere=1 updatekeyinplace=no arguments=(("ra_patid", number)) )
+text(band=header alignment="0" text="Destinataire" border="0" color="33554432" x="9" y="0" height="64" width="1161" html.valueishtml="0"  name=t_dest visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="72" x2="3438" y2="72"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Sujet" border="0" color="33554432" x="1198" y="0" height="64" width="2240" html.valueishtml="0"  name=t_sujet visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="1" tabsequence=32766 border="0" color="33554432" x="1198" y="4" height="64" width="2240" format="[general]" html.valueishtml="0"  name=id_contrattype visible="1~tif( typelettre = 'c', 1,0)" dddw.name=dddw_contrattype dddw.displaycolumn=nomcontrat dddw.datacolumn=id_contrattype dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Heure :" border="0" color="33554432" x="581" y="88" height="64" width="215" html.valueishtml="0"  name=t_heure visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="187" y="88" height="64" width="375" format="[general]" html.valueishtml="0"  name=cdate visible="1" editmask.mask="[date]" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="805" y="88" height="64" width="361" format="[time]" html.valueishtml="0"  name=cheure visible="1" editmask.mask="hh:mm" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="9" y="4" height="64" width="1161" format="[general]" html.valueishtml="0"  name=id_dentist visible="1" dddw.name=dddw_dentists dddw.displaycolumn=compute_1 dddw.datacolumn=id_dentist dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Date :" border="0" color="33554432" x="9" y="88" height="64" width="174" html.valueishtml="0"  name=t_date visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Nom du document: " border="0" color="0" x="1198" y="88" height="64" width="521" html.valueishtml="0"  name=t_docname visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="0" tabsequence=10 border="2" color="33554432" x="9" y="172" height="180" width="3433" format="[general]" html.valueishtml="0"  name=cnote visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="1733" y="88" height="64" width="1705" format="[general]" html.valueishtml="0"  name=nomdoc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="1198" y="4" height="64" width="2240" format="[general]" html.valueishtml="0"  name=id_sujet visible="1~tif( typelettre = 'c',0,1)" dddw.name=dddw_sujet dddw.displaycolumn=sujet dddw.datacolumn=id_sujet dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

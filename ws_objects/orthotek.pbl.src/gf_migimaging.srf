@@ -1,0 +1,64 @@
+﻿$PBExportHeader$gf_migimaging.srf
+global type gf_migimaging from function_object
+end type
+
+forward prototypes
+global subroutine gf_migimaging ()
+end prototypes
+
+global subroutine gf_migimaging ();long ll_type, ll_patid   
+string ls_frontsmile, ls_lateral,ls_frontal,ls_leftoccl,ls_upperoccl,ls_rightoccl,ls_antoccl,ls_xray32,ls_xray31   
+string ls_loweroccl
+
+DECLARE imaging CURSOR FOR
+	  SELECT t_imaging.type,   
+         	t_imaging.patient_id,   
+         	t_imaging.front_smile,   
+         	t_imaging."lateral",   
+         	t_imaging.frontal,   
+         	t_imaging.leftoccl,   
+         	t_imaging.upperoccl,   
+         	t_imaging.rightoccl,   
+         	t_imaging.anterioroccl,   
+         	t_imaging.xray3_2,   
+         	t_imaging.xray3_1,   
+         	t_imaging.loweroccl    
+    FROM t_imaging;
+	 
+OPEN imaging;
+FETCH imaging INTO :ll_type,   
+         			 :ll_patid,   
+         			 :ls_frontsmile,   
+         		 	 :ls_lateral,   
+         			 :ls_frontal,   
+         			 :ls_leftoccl,   
+         			 :ls_upperoccl,   
+         			 :ls_rightoccl,   
+         			 :ls_antoccl,   
+         			 :ls_xray32,   
+         			 :ls_xray31,   
+         			 :ls_loweroccl;
+						 
+DO WHILE SQLCA.SQLCode = 0
+	
+	insert into t_imagerie(sequence,patient_id,front_smile,"lateral",frontal,leftoccl,upperoccl,rightoccl,anterioroccl,xray3_2,xray3_1,loweroccl) 
+	values(:ll_type,:ll_patid,:ls_frontsmile,:ls_lateral,:ls_frontal,:ls_leftoccl,:ls_upperoccl,:ls_rightoccl,:ls_antoccl,:ls_xray32,:ls_xray31,:ls_loweroccl);
+	
+	FETCH imaging INTO :ll_type,   
+         			 :ll_patid,   
+         			 :ls_frontsmile,   
+         		 	 :ls_lateral,   
+         			 :ls_frontal,   
+         			 :ls_leftoccl,   
+         			 :ls_upperoccl,   
+         			 :ls_rightoccl,   
+         			 :ls_antoccl,   
+         			 :ls_xray32,   
+         			 :ls_xray31,   
+         			 :ls_loweroccl;
+LOOP
+
+CLOSE imaging;
+
+end subroutine
+

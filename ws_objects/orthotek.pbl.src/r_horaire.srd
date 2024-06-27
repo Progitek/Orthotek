@@ -1,0 +1,64 @@
+﻿$PBExportHeader$r_horaire.srd
+release 7;
+datawindow(units=3 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="Horaire" print.orientation = 2 print.margin.left = 635 print.margin.right = 635 print.margin.top = 635 print.margin.bottom = 635 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=899 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=740 color="536870912" )
+table(column=(type=date updatewhereclause=yes name=datecal dbname="horaire.datecal" )
+ column=(type=time updatewhereclause=yes name=heure dbname="horaire.heure" )
+ column=(type=char(40) updatewhereclause=yes name=patient_nom_1 dbname="horaire.patient_nom_1" )
+ column=(type=char(40) updatewhereclause=yes name=patient_nom_2 dbname="horaire.patient_nom_2" )
+ column=(type=char(40) updatewhereclause=yes name=patient_nom_3 dbname="horaire.patient_nom_3" )
+ column=(type=char(40) updatewhereclause=yes name=patient_nom_4 dbname="horaire.patient_nom_4" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=char(20) updatewhereclause=yes name=horaire_no_dossier1 dbname="horaire.no_dossier1" )
+ column=(type=char(20) updatewhereclause=yes name=horaire_no_dossier2 dbname="horaire.no_dossier2" )
+ column=(type=char(20) updatewhereclause=yes name=horaire_no_dossier3 dbname="horaire.no_dossier3" )
+ column=(type=char(20) updatewhereclause=yes name=horaire_no_dossier4 dbname="horaire.no_dossier4" )
+ column=(type=char(20) updatewhereclause=yes name=horaire_no_dossier5 dbname="horaire.no_dossier5" )
+ column=(type=char(40) updatewhereclause=yes name=horaire_patient_nom_5 dbname="horaire.patient_nom_5" )
+ retrieve="SELECT  ~"horaire~".~"datecal~" ,
+           ~"horaire~".~"heure~" ,
+           ~"horaire~".~"patient_nom_1~" ,
+           ~"horaire~".~"patient_nom_2~" ,
+           ~"horaire~".~"patient_nom_3~" ,
+           ~"horaire~".~"patient_nom_4~" ,
+           ~"ortho_id~".~"dr_nom_complet~" ,
+           ~"horaire~".~"no_dossier1~" ,
+           ~"horaire~".~"no_dossier2~" ,
+           ~"horaire~".~"no_dossier3~" ,
+           ~"horaire~".~"no_dossier4~" ,
+           ~"horaire~".~"no_dossier5~" ,
+           ~"horaire~".~"patient_nom_5~"     
+        FROM ~"horaire~" ,
+           ~"ortho_id~"     
+        WHERE ( ~"horaire~".~"no_ortho~" = ~"ortho_id~".~"ortho_id~" ) and          ( ( ~"horaire~".~"datecal~" = :f_date ) and          ( ~"ortho_id~".~"ortho_id~" = :f_ortho ) )  " arguments=(("f_date", date),("f_ortho", number))  sort="datecal A heure A " )
+text(band=header alignment="0" text="Chaise 1" border="0" color="0" x="2460" y="476" height="370" width="1111"  name=t_1  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127"  height.autosize=yes)
+text(band=header alignment="0" text="Chaise 2" border="0" color="0" x="6244" y="476" height="370" width="1349"  name=t_2  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127"  height.autosize=yes)
+text(band=header alignment="0" text="Chaise 3" border="0" color="0" x="10186" y="476" height="370" width="1111"  name=t_3  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127"  height.autosize=yes)
+text(band=header alignment="0" text="Chaise 4" border="0" color="0" x="13811" y="476" height="370" width="1349"  name=t_4  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127"  height.autosize=yes)
+line(band=header x1="0" y1="873" x2="20240" y2="873"  name=l_1 pen.style="0" pen.width="26" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Chaise 5" border="0" color="0" x="17674" y="476" height="370" width="1349"  name=t_6  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127"  height.autosize=yes)
+text(band=header alignment="0" text="Horaire pour :" border="0" color="0" x="0" y="0" height="396" width="3122"  name=t_5  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=1 alignment="1" tabsequence=32766 border="0" color="0" x="17171" y="0" height="396" width="2989" format="[general]"  name=datecal height.autosize=yes edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+line(band=detail x1="26" y1="688" x2="20267" y2="688"  name=l_2 pen.style="0" pen.width="26" pen.color="0"  background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="52" y="79" height="423" width="1005" format="[time]"  name=heure height.autosize=yes editmask.mask="HH:MM" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=detail x1="16457" y1="0" x2="16457" y2="661"  name=l_4 pen.style="0" pen.width="26" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=detail x1="20293" y1="26" x2="20293" y2="688"  name=l_8 pen.style="0" pen.width="26" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=detail x1="1084" y1="0" x2="1084" y2="661"  name=l_3 pen.style="0" pen.width="26" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=detail x1="8784" y1="0" x2="8784" y2="661"  name=l_5 pen.style="0" pen.width="26" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=detail x1="12620" y1="0" x2="12620" y2="661"  name=l_6 pen.style="0" pen.width="26" pen.color="0"  background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1164" y="0" height="343" width="3757" format="[general]"  name=patient_nom_1 height.autosize=yes edit.limit=40 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="1164" y="317" height="343" width="3757" format="[general]"  name=horaire_no_dossier1 edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+line(band=detail x1="4947" y1="0" x2="4947" y2="661"  name=l_7 pen.style="0" pen.width="26" pen.color="0"  background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="5000" y="0" height="343" width="3757" format="[general]"  name=patient_nom_2 height.autosize=yes edit.limit=40 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="5000" y="317" height="343" width="3757" format="[general]"  name=horaire_no_dossier2 edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="8837" y="0" height="343" width="3757" format="[general]"  name=patient_nom_3 height.autosize=yes edit.limit=40 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="8837" y="317" height="343" width="3757" format="[general]"  name=horaire_no_dossier3 edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="12673" y="317" height="343" width="3757" format="[general]"  name=horaire_no_dossier4 edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="16510" y="317" height="343" width="3757" format="[general]"  name=horaire_no_dossier5 edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="12673" y="0" height="343" width="3757" format="[general]"  name=patient_nom_4 height.autosize=yes edit.limit=40 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="16510" y="0" height="343" width="3757" format="[general]"  name=horaire_patient_nom_5 edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

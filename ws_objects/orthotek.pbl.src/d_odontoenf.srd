@@ -1,0 +1,292 @@
+﻿$PBExportHeader$d_odontoenf.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="Traitement requis" print.orientation = 0 print.margin.left = 0 print.margin.right = 0 print.margin.top = 0 print.margin.bottom = 0 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=1272 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=patient_id dbname="t_consultations.patient_id" )
+ column=(type=number update=yes updatewhereclause=yes name=exam dbname="t_consultations.exam" values="Examen	1/Examen	0" )
+ column=(type=number update=yes updatewhereclause=yes name=prophy dbname="t_consultations.prophy" values="Prophylaxie et application de fluor	1/Prophylaxie et application de fluor	0" )
+ column=(type=number update=yes updatewhereclause=yes name=radio dbname="t_consultations.radio" values="S.V.P, envoyer les radiographies les plus récentes à mon bureau	1/S.V.P, envoyer les radiographies les plus récentes à mon bureau	0" )
+ column=(type=number update=yes updatewhereclause=yes name=hygiene dbname="t_consultations.hygiene" values="L'hygiène buccale n'est pas adéquate. SVP, aidez-nous à accentuer l'hygiène buccale	1/L'hygiène buccale n'est pas adéquate. SVP, aidez-nous à accentuer l'hygiène buccale	0" )
+ column=(type=number update=yes updatewhereclause=yes name=rest dbname="t_consultations.rest" values="Restaurations	1/Restaurations	0" )
+ column=(type=number update=yes updatewhereclause=yes name=extrait dbname="t_consultations.extrait" values="SVP, extraire: 	1/SVP, extraire: 	0" )
+ column=(type=number update=yes updatewhereclause=yes name=autchir dbname="t_consultations.autchir" values="Autre chirurgie: 	1/Autre chirurgie: 	0" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=autchirdet dbname="t_consultations.autchirdet" )
+ column=(type=number update=yes updatewhereclause=yes name=commpat dbname="t_consultations.commpat" values="SVP, communiquer avec le patient pour un rendez-vous.	1/SVP, communiquer avec le patient pour un rendez-vous.	0" )
+ column=(type=number update=yes updatewhereclause=yes name=commrab dbname="t_consultations.commrab" values="Le patient doit communiquer avec votre cabinet.	1/Le patient doit communiquer avec votre cabinet.	0" )
+ column=(type=number update=yes updatewhereclause=yes name=retradio dbname="t_consultations.retradio" values="SVP, retourner les radiographies à la fin de votre traitement.	1/SVP, retourner les radiographies à la fin de votre traitement.	0" )
+ column=(type=char(16000) update=yes updatewhereclause=yes name=t_consultations_remarque dbname="t_consultations.remarque" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d11 dbname="t_consultations.d11" initial="11" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d12 dbname="t_consultations.d12" initial="12" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d13 dbname="t_consultations.d13" initial="13" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d14 dbname="t_consultations.d14" initial="14" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d15 dbname="t_consultations.d15" initial="15" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d16 dbname="t_consultations.d16" initial="16" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d17 dbname="t_consultations.d17" initial="17" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d18 dbname="t_consultations.d18" initial="18" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d21 dbname="t_consultations.d21" initial="21" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d22 dbname="t_consultations.d22" initial="22" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d23 dbname="t_consultations.d23" initial="23" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d24 dbname="t_consultations.d24" initial="24" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d25 dbname="t_consultations.d25" initial="25" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d26 dbname="t_consultations.d26" initial="26" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d27 dbname="t_consultations.d27" initial="27" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d28 dbname="t_consultations.d28" initial="28" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d31 dbname="t_consultations.d31" initial="31" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d32 dbname="t_consultations.d32" initial="32" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d33 dbname="t_consultations.d33" initial="33" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d34 dbname="t_consultations.d34" initial="34" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d35 dbname="t_consultations.d35" initial="35" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d36 dbname="t_consultations.d36" initial="36" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d37 dbname="t_consultations.d37" initial="37" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d38 dbname="t_consultations.d38" initial="38" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d41 dbname="t_consultations.d41" initial="41" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d42 dbname="t_consultations.d42" initial="42" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d43 dbname="t_consultations.d43" initial="43" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d44 dbname="t_consultations.d44" initial="44" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d45 dbname="t_consultations.d45" initial="45" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d46 dbname="t_consultations.d46" initial="46" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d47 dbname="t_consultations.d47" initial="47" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d48 dbname="t_consultations.d48" initial="48" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d51 dbname="t_consultations.d51" initial="51" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d52 dbname="t_consultations.d52" initial="52" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d53 dbname="t_consultations.d53" initial="53" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d54 dbname="t_consultations.d54" initial="54" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d55 dbname="t_consultations.d55" initial="55" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d61 dbname="t_consultations.d61" initial="61" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d62 dbname="t_consultations.d62" initial="62" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d63 dbname="t_consultations.d63" initial="63" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d64 dbname="t_consultations.d64" initial="64" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d65 dbname="t_consultations.d65" initial="65" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d71 dbname="t_consultations.d71" initial="71" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d72 dbname="t_consultations.d72" initial="72" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d73 dbname="t_consultations.d73" initial="73" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d74 dbname="t_consultations.d74" initial="74" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d75 dbname="t_consultations.d75" initial="75" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d81 dbname="t_consultations.d81" initial="81" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d82 dbname="t_consultations.d82" initial="82" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d83 dbname="t_consultations.d83" initial="83" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d84 dbname="t_consultations.d84" initial="84" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=t_consultations_d85 dbname="t_consultations.d85" initial="85" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e11 dbname="t_consultations.e11" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e12 dbname="t_consultations.e12" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e13 dbname="t_consultations.e13" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e14 dbname="t_consultations.e14" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e15 dbname="t_consultations.e15" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e16 dbname="t_consultations.e16" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e17 dbname="t_consultations.e17" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e18 dbname="t_consultations.e18" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e21 dbname="t_consultations.e21" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e22 dbname="t_consultations.e22" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e23 dbname="t_consultations.e23" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e24 dbname="t_consultations.e24" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e25 dbname="t_consultations.e25" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e26 dbname="t_consultations.e26" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e27 dbname="t_consultations.e27" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e28 dbname="t_consultations.e28" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e31 dbname="t_consultations.e31" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e32 dbname="t_consultations.e32" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e33 dbname="t_consultations.e33" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e34 dbname="t_consultations.e34" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e35 dbname="t_consultations.e35" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e36 dbname="t_consultations.e36" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e37 dbname="t_consultations.e37" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e38 dbname="t_consultations.e38" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e41 dbname="t_consultations.e41" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e42 dbname="t_consultations.e42" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e43 dbname="t_consultations.e43" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e44 dbname="t_consultations.e44" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e45 dbname="t_consultations.e45" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e46 dbname="t_consultations.e46" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e47 dbname="t_consultations.e47" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e48 dbname="t_consultations.e48" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e51 dbname="t_consultations.e51" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e52 dbname="t_consultations.e52" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e53 dbname="t_consultations.e53" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e54 dbname="t_consultations.e54" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e55 dbname="t_consultations.e55" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e61 dbname="t_consultations.e61" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e62 dbname="t_consultations.e62" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e63 dbname="t_consultations.e63" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e64 dbname="t_consultations.e64" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e65 dbname="t_consultations.e65" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e71 dbname="t_consultations.e71" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e72 dbname="t_consultations.e72" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e73 dbname="t_consultations.e73" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e74 dbname="t_consultations.e74" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e75 dbname="t_consultations.e75" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e81 dbname="t_consultations.e81" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e82 dbname="t_consultations.e82" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e83 dbname="t_consultations.e83" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e84 dbname="t_consultations.e84" initial="0" )
+ column=(type=number update=yes updatewhereclause=yes name=t_consultations_e85 dbname="t_consultations.e85" initial="0" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_adresse dbname="ortho_id.dr_adresse" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_province dbname="ortho_id.dr_province" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_ville dbname="ortho_id.dr_ville" )
+ column=(type=char(7) updatewhereclause=yes name=ortho_id_dr_code_postal dbname="ortho_id.dr_code_postal" )
+ column=(type=char(30) updatewhereclause=yes name=t_dentists_det_nom dbname="t_dentists.det_nom" )
+ column=(type=char(30) updatewhereclause=yes name=t_dentists_det_prenom dbname="t_dentists.det_prenom" )
+ column=(type=char(5) updatewhereclause=yes name=t_dentists_det_suf dbname="t_dentists.det_suf" )
+ retrieve="  SELECT t_consultations.patient_id,   
+         t_consultations.exam,   
+         t_consultations.prophy,   
+         t_consultations.radio,   
+         t_consultations.hygiene,   
+         t_consultations.rest,   
+         t_consultations.extrait,   
+         t_consultations.autchir,   
+         t_consultations.autchirdet,   
+         t_consultations.commpat,   
+         t_consultations.commrab,   
+         t_consultations.retradio,
+         t_consultations.remarque,
+         t_consultations.d11,
+         t_consultations.d12,
+			t_consultations.d13,
+			t_consultations.d14,
+			t_consultations.d15,
+			t_consultations.d16,
+			t_consultations.d17,
+			t_consultations.d18,
+	   	t_consultations.d21,
+			t_consultations.d22,
+			t_consultations.d23,
+			t_consultations.d24,
+			t_consultations.d25,
+			t_consultations.d26,
+			t_consultations.d27,
+			t_consultations.d28,
+			t_consultations.d31,
+			t_consultations.d32,
+			t_consultations.d33,
+			t_consultations.d34,
+			t_consultations.d35,
+			t_consultations.d36,
+			t_consultations.d37,
+			t_consultations.d38,
+			t_consultations.d41,
+			t_consultations.d42,
+			t_consultations.d43,
+			t_consultations.d44,
+			t_consultations.d45,
+			t_consultations.d46,
+			t_consultations.d47,
+			t_consultations.d48,
+			t_consultations.d51,
+			t_consultations.d52,
+			t_consultations.d53,
+			t_consultations.d54,
+			t_consultations.d55,
+			t_consultations.d61,
+			t_consultations.d62,
+			t_consultations.d63,
+			t_consultations.d64,
+			t_consultations.d65,
+			t_consultations.d71,
+			t_consultations.d72,
+			t_consultations.d73,
+			t_consultations.d74,
+			t_consultations.d75,
+			t_consultations.d81,
+			t_consultations.d82,
+			t_consultations.d83,
+			t_consultations.d84,
+			t_consultations.d85,
+			t_consultations.e11,
+         t_consultations.e12,
+			t_consultations.e13,
+			t_consultations.e14,
+			t_consultations.e15,
+			t_consultations.e16,
+			t_consultations.e17,
+			t_consultations.e18,
+	   	t_consultations.e21,
+			t_consultations.e22,
+			t_consultations.e23,
+			t_consultations.e24,
+			t_consultations.e25,
+			t_consultations.e26,
+			t_consultations.e27,
+			t_consultations.e28,
+			t_consultations.e31,
+			t_consultations.e32,
+			t_consultations.e33,
+			t_consultations.e34,
+			t_consultations.e35,
+			t_consultations.e36,
+			t_consultations.e37,
+			t_consultations.e38,
+			t_consultations.e41,
+			t_consultations.e42,
+			t_consultations.e43,
+			t_consultations.e44,
+			t_consultations.e45,
+			t_consultations.e46,
+			t_consultations.e47,
+			t_consultations.e48,
+			t_consultations.e51,
+			t_consultations.e52,
+			t_consultations.e53,
+			t_consultations.e54,
+			t_consultations.e55,
+			t_consultations.e61,
+			t_consultations.e62,
+			t_consultations.e63,
+			t_consultations.e64,
+			t_consultations.e65,
+			t_consultations.e71,
+			t_consultations.e72,
+			t_consultations.e73,
+			t_consultations.e74,
+			t_consultations.e75,
+			t_consultations.e81,
+			t_consultations.e82,
+			t_consultations.e83,
+			t_consultations.e84,
+			t_consultations.e85,
+         patient.patient_nom,
+         patient.patient_prenom,
+         ortho_id.dr_nom_complet,
+         ortho_id.dr_adresse,
+         ortho_id.dr_province,
+         ortho_id.dr_ville,
+         ortho_id.dr_code_postal,
+         t_dentists.det_nom,
+         t_dentists.det_prenom,
+         t_dentists.det_suf 
+    FROM patient INNER JOIN t_consultations ON  t_consultations.patient_id = patient.patient_id
+                 INNER JOIN ortho_id ON patient.no_ortho = ortho_id.ortho_id
+                 LEFT OUTER JOIN t_dentists ON patient.id_dentist = t_dentists.id_dentist
+	WHERE patient.patient_id = :ra_patid
+" update="t_consultations" updatewhere=0 updatekeyinplace=no arguments=(("ra_patid", number)) )
+line(band=detail x1="736" y1="32" x2="736" y2="232"  name=l_5 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="55" y1="132" x2="1408" y2="132"  name=l_6 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=65 alignment="0" tabsequence=490 border="0~tif (  t_consultations_e85 = 1 , 2 , 0 )" color="33554432" x="114" y="152" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d85 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=64 alignment="0" tabsequence=500 border="0~tif (  t_consultations_e84 = 1 , 2 , 0 )" color="33554432" x="238" y="152" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d84 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=63 alignment="0" tabsequence=510 border="0~tif (  t_consultations_e83 = 1 , 2 , 0 )" color="33554432" x="361" y="152" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d83 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=62 alignment="0" tabsequence=520 border="0~tif (  t_consultations_e82  = 1 , 2 , 0 )" color="33554432" x="485" y="152" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d82 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=61 alignment="0" tabsequence=530 border="0~tif (  t_consultations_e81 = 1 , 2 , 0 )" color="33554432" x="608" y="152" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d81 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=56 alignment="0" tabsequence=540 border="0~tif (  t_consultations_e71 = 1 , 2 , 0 )" color="33554432" x="795" y="152" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d71 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=57 alignment="0" tabsequence=550 border="0~tif (  t_consultations_e72 = 1 , 2 , 0 )" color="33554432" x="910" y="152" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d72 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=58 alignment="0" tabsequence=560 border="0~tif (  t_consultations_e73 = 1 , 2 , 0 )" color="33554432" x="1024" y="152" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d73 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=59 alignment="0" tabsequence=570 border="0~tif (  t_consultations_e74 = 1 , 2 , 0 )" color="33554432" x="1138" y="152" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d74 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=60 alignment="0" tabsequence=580 border="0~tif (  t_consultations_e75 = 1 , 2 , 0 )" color="33554432" x="1253" y="152" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d75 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=51 alignment="0" tabsequence=440 border="0~tif (  t_consultations_e61 = 1 , 2 , 0 )" color="33554432" x="795" y="52" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d61 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=52 alignment="0" tabsequence=450 border="0~tif (  t_consultations_e62 = 1 , 2 , 0 )" color="33554432" x="910" y="52" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d62 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=53 alignment="0" tabsequence=460 border="0~tif (  t_consultations_e63 = 1 , 2 , 0 )" color="33554432" x="1024" y="52" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d63 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=54 alignment="0" tabsequence=470 border="0~tif (  t_consultations_e64 = 1 , 2 , 0 )" color="33554432" x="1138" y="52" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d64 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=55 alignment="0" tabsequence=480 border="0~tif (  t_consultations_e65 = 1 , 2 , 0 )" color="33554432" x="1253" y="52" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d65 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=50 alignment="0" tabsequence=390 border="0~tif (  t_consultations_e55 = 1 , 2 , 0 )" color="33554432" x="114" y="52" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d55 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=49 alignment="0" tabsequence=400 border="0~tif (  t_consultations_e54 = 1 , 2 , 0 )" color="33554432" x="238" y="52" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d54 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=48 alignment="0" tabsequence=410 border="0~tif (  t_consultations_e53 = 1 , 2 , 0 )" color="33554432" x="361" y="52" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d53 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=47 alignment="0" tabsequence=420 border="0~tif (  t_consultations_e52 = 1 , 2 , 0 )" color="33554432" x="485" y="52" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d52 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=46 alignment="0" tabsequence=430 border="0~tif (  t_consultations_e51 = 1 , 2 , 0 )" color="33554432" x="608" y="52" height="64" width="78" format="[general]" html.valueishtml="0"  name=t_consultations_d51 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

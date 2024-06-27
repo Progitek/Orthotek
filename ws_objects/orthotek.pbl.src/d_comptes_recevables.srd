@@ -1,0 +1,89 @@
+﻿$PBExportHeader$d_comptes_recevables.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.documentname="compte_recevable" print.orientation = 1 print.margin.left = 110 print.margin.right = 100 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 1 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=328 color="536870912" )
+summary(height=188 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=104 color="536870912"  height.autosize=yes)
+table(column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=decimal(2) updatewhereclause=yes name=traitements_montant_du dbname="traitements.montant_du" )
+ column=(type=long updatewhereclause=yes identity=yes name=traitements_traitement_id dbname="traitements.traitement_id" )
+ column=(type=decimal(2) updatewhereclause=yes name=traitements_montant_paye dbname="traitements.montant_paye" )
+ column=(type=decimal(2) updatewhereclause=yes name=traitements_total_cpd dbname="traitements.total_cpd" )
+ column=(type=decimal(2) updatewhereclause=yes name=traitements_cpd_venir dbname="traitements.cpd_venir" )
+ column=(type=date updatewhereclause=yes name=traitements_cpd_venir_date dbname="traitements.cpd_venir_date" )
+ column=(type=date updatewhereclause=yes name=traitements_prochain_paiement_date dbname="traitements.prochain_paiement_date" )
+ column=(type=decimal(2) updatewhereclause=yes name=traitements_frais dbname="traitements.frais" )
+ retrieve="SELECT  patient.patient_nom ,
+        patient.patient_prenom ,
+        ortho_id.dr_nom_complet ,
+        traitements.montant_du ,
+        traitements.traitement_id ,
+        traitements.montant_paye ,
+        traitements.total_cpd ,
+        traitements.cpd_venir ,
+        traitements.cpd_venir_date ,
+        traitements.prochain_paiement_date ,
+        traitements.frais   
+  
+  FROM  ortho_id ,
+	     patient ,
+	     traitements  
+   
+  WHERE ortho_id.ortho_id = patient.no_ortho  AND 
+	     patient.patient_id = traitements.patient_id  AND
+	     ortho_id.ortho_id = :ra_ortho_id  AND 
+		  (traitements.frais <> traitements.montant_paye  OR       
+	     (traitements.montant_du = 0  AND       
+	     traitements.frais - traitements.montant_paye > 0 ) )
+
+ORDER BY patient.patient_nom          ASC,
+	      patient.patient_prenom       ASC  " arguments=(("ra_ortho_id", number)) )
+compute(band=header alignment="0" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2825" y="12" height="72" width="535" format="[general]"  name=compute_1  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Nom" border="0" color="0" x="55" y="248" height="64" width="169"  name=patient_patient_nom_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Comptes recevables pour :" border="0" color="0" x="50" y="104" height="80" width="965"  name=t_1  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="2450" y="12" height="72" width="329" format="[general]"  name=compute_2  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Coût du traitement" border="0" color="0" x="786" y="248" height="64" width="530"  name=t_2  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Montant payé" border="0" color="0" x="1321" y="248" height="64" width="425"  name=t_3  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Date" border="0" color="0" x="1760" y="248" height="64" width="352"  name=paiement_date_paiement_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Solde" border="0" color="0" x="2162" y="248" height="64" width="288"  name=t_4  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1019" y="104" height="80" width="1426" format="[general]"  name=ortho_id_dr_nom_complet edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Date CPD" border="0" color="0" x="2528" y="248" height="64" width="288"  name=t_7  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Montant CPD" border="0" color="0" x="2834" y="248" height="64" width="439"  name=t_8  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Total CPD" border="0" color="0" x="3291" y="248" height="64" width="320"  name=t_9  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="CPD à venir" border="0" color="0" x="3634" y="252" height="64" width="411"  name=t_5  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Montant dû" border="0" color="0" x="4087" y="252" height="64" width="357"  name=t_6  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=summary x1="823" y1="0" x2="1285" y2="0"  name=l_1 pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+line(band=summary x1="1298" y1="0" x2="1760" y2="0"  name=l_2 pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+line(band=summary x1="2107" y1="4" x2="2569" y2="4"  name=l_3 pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression=" sum(  traitements_frais for all) "border="0" color="0" x="818" y="12" height="80" width="453" format="#,##0.00 $; (#,##0.00 $)"  name=compute_4  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="2" expression="sum(traitements_montant_paye for all)"border="0" color="0" x="1298" y="12" height="80" width="457" format="#,##0.00 $; (#,##0.00 $)"  name=compute_5  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression=" sum(  traitements_frais -   traitements_montant_paye for all) "border="0" color="0" x="1993" y="24" height="64" width="558" format="#,##0.00 $; (#,##0.00 $)"  name=compute_6  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="4206" y1="4" x2="4485" y2="4"  name=l_4 pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+line(band=summary x1="3831" y1="4" x2="4178" y2="4"  name=l_5 pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+line(band=summary x1="2885" y1="4" x2="3346" y2="4"  name=l_6 pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+line(band=summary x1="3365" y1="4" x2="3826" y2="4"  name=l_7 pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="err" border="0" color="0" x="1947" y="104" height="64" width="50"  name=t_neg visible="1~t0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=summary alignment="0" text="err" border="0" color="0" x="2002" y="104" height="64" width="46"  name=t_pos visible="1~t0"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum(traitements_montant_du for all)"border="0" color="0" x="4128" y="16" height="72" width="352" format="#,##0.00 $; (#,##0.00 $)"  name=compute_7  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum( solde  -   traitements_total_cpd for all) "border="0" color="0" x="3735" y="24" height="64" width="393" format="#,##0.00 $; (#,##0.00 $)"  name=compute_8  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression=" sum(    traitements_cpd_venir for all ) "border="0" color="0" x="2734" y="24" height="64" width="530" format="#,##0.00 $; (#,##0.00 $)"  name=compute_9  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(   traitements_total_cpd for all ) "border="0" color="0" x="3273" y="24" height="64" width="457" format="#,##0.00 $; (#,##0.00 $)"  name=compute_10  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="1" text="Total négatif:" border="0" color="0" x="2720" y="108" height="64" width="384"  name=t_11  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="0" expression="compute_8"border="0" color="0" x="3118" y="108" height="64" width="462" format="#,##0.00 $; (#,##0.00 $)"  name=compute_neg  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=summary alignment="1" text="Total positif:" border="0" color="0" x="3648" y="108" height="64" width="357"  name=t_10  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="0" expression="compute_7"border="0" color="0" x="4018" y="108" height="64" width="462" format="#,##0.00 $; (#,##0.00 $)"  name=compute_pos  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+compute(band=detail alignment="0" expression=" patient_patient_nom +~", ~"+ patient_patient_prenom "border="2" color="0" x="0" y="16" height="76" width="869" format="[general]"  name=nom_complet  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="2" tabsequence=32766 border="2" color="0" x="873" y="12" height="80" width="443" format="#,##0.00 $; (#,##0.00 $)"  name=traitements_frais edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="traitements_frais -  traitements_montant_paye  "border="2" color="0" x="2130" y="12" height="80" width="370" format="#,##0.00 $; (#,##0.00 $)"  name=solde  tag="solde"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="2" tabsequence=32766 border="2" color="0" x="1733" y="12" height="80" width="370" format="dd/mm/yyyy"  name=traitements_prochain_paiement_date edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="2" color="0" x="1321" y="12" height="80" width="398" format="#,##0.00 $; (#,##0.00 $)"  name=traitements_montant_paye edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="2" tabsequence=32766 border="2" color="0" x="2523" y="12" height="80" width="320" format="[general]"  name=traitements_cpd_venir_date edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="2" tabsequence=32766 border="2" color="0" x="2857" y="8" height="80" width="407" format="[general]"  name=traitements_cpd_venir edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="2" tabsequence=32766 border="2" color="0" x="3296" y="12" height="80" width="315" format="[general]"  name=traitements_total_cpd edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression=" solde -   traitements_total_cpd "border="2" color="0" x="3671" y="20" height="64" width="443" format="#,##0.00 $; (#,##0.00 $)"  name=compute_3  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="2" color="0" x="4133" y="12" height="76" width="352" format="#,##0.00 $; (#,##0.00 $)"  name=traitements_montant_du edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

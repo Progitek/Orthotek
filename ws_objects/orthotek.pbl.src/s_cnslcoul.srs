@@ -1,0 +1,6 @@
+﻿$PBExportHeader$s_cnslcoul.srs
+global type s_cnslcoul from structure
+	long		l_couleur
+	integer		i_action
+end type
+

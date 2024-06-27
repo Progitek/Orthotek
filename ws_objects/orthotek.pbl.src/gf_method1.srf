@@ -1,0 +1,112 @@
+﻿$PBExportHeader$gf_method1.srf
+global type gf_method1 from function_object
+end type
+
+forward prototypes
+global function string gf_method1 (string as_language, string as_mod)
+end prototypes
+
+global function string gf_method1 (string as_language, string as_mod);string ls_return
+//messagebox('as_mod',as_mod)
+if as_language = 'an' or as_language = 'A' then
+	choose case as_mod
+		case '$'
+			ls_return = 'Cash'
+		case 'C'
+			ls_return = 'Cheque'
+		case 'Visa'
+			ls_return = 'Visa'
+		case 'MC'
+			ls_return = 'MasterCard'
+		case 'AmEx'
+			ls_return = 'AmericanExpress'
+		case 'PD'
+			ls_return = 'Interact'
+		case 'NSF'
+			ls_return = 'N.S.F.'
+		case 'credit'
+			ls_return = 'Credit'
+		case 'trans'
+			ls_return = 'Transfer'
+		case 'perte'
+			ls_return = 'Loss'
+		case 'P'
+			ls_return = 'Postdated'
+		case 'mens'
+			ls_return = 'Monthly Charge'
+		case 'Charge mensuel'
+			ls_return = 'Monthly Charge'
+		case 'pVisa'
+			ls_return = 'pVisa'
+		case 'pMC'
+			ls_return = 'pMasterCard'
+		case 'pAmex'
+			ls_return = 'pAmex'
+		case 'pPD'
+			ls_return = 'pDirect payment'
+		case 'A'
+			ls_return = 'Others'
+		case 'mod'
+			ls_return = 'Adjustment'
+		case 'nsfm'
+			ls_return = 'Mastercard N.S.F.'
+		case 'nsfv'
+			ls_return = 'Visa N.S.F'
+		case 'mo'
+			ls_return = 'Money order'
+		case else 
+			ls_return = as_mod
+	end choose
+else
+	choose case as_mod
+		case '$'
+			ls_return = 'Comptant'
+		case 'C'
+			ls_return = 'Chèque'
+		case 'Visa'
+			ls_return = 'Visa'
+		case 'MC'
+			ls_return = 'MasterCard'
+		case 'AmEx'
+			ls_return = 'American Express'
+		case 'PD'
+			ls_return = 'Paiement direct'
+		case 'NSF'
+			ls_return = 'N.S.F.'
+		case 'credit'
+			ls_return = 'Crédit'
+		case 'trans'
+			ls_return = 'Transfert'
+		case 'perte'
+			ls_return = 'Perte'
+		case 'P'
+			ls_return = 'Postdaté'
+		case 'mens'
+			ls_return = 'Mensualité'
+		case 'Monthly charge'
+			ls_return = 'Charge mensuel'
+		case 'pVisa'
+			ls_return = 'pVisa'
+		case 'pMC'
+			ls_return = 'pMasterCard'
+		case 'pAmex'
+			ls_return = 'pAmex'
+		case 'pPD'
+			ls_return = 'pPaiement direct'
+		case 'A'
+			ls_return = 'Autres'
+		case 'mod'
+			ls_return = 'Ajustement'
+		case 'nsfm'
+			ls_return = 'Mastercard N.S.F.'
+		case 'nsfv'
+			ls_return = 'Visa N.S.F'			
+		case 'mo'
+			ls_return = 'Mendat poste'
+		case else 
+			ls_return = as_mod
+	end choose
+end if
+return ls_return
+end function
+

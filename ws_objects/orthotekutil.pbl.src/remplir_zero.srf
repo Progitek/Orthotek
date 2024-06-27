@@ -1,0 +1,21 @@
+﻿$PBExportHeader$remplir_zero.srf
+global type remplir_zero from function_object
+end type
+
+forward prototypes
+global function string remplir_zero (long nbzero, decimal montant)
+end prototypes
+
+global function string remplir_zero (long nbzero, decimal montant);string ls_newstring, ls_montant
+int i
+long ll_nbcarac
+
+ls_montant = replace(string(montant),len(string(montant))-2,1,"")
+ll_nbcarac = len(ls_montant)
+ls_newstring = ls_montant
+for i = ll_nbcarac to nbzero - 1
+	ls_newstring = "0" + ls_newstring
+next
+return ls_newstring
+end function
+

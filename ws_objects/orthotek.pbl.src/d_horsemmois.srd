@@ -1,0 +1,152 @@
+﻿$PBExportHeader$d_horsemmois.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=16 color="536870912" )
+table(column=(type=date update=yes updatewhereclause=yes key=yes name=datecal dbname="horaire.datecal" )
+ column=(type=time update=yes updatewhereclause=yes key=yes name=heure dbname="horaire.heure" )
+ column=(type=long update=yes updatewhereclause=yes name=patient_id_1 dbname="horaire.patient_id_1" )
+ column=(type=long update=yes updatewhereclause=yes name=patient_id_2 dbname="horaire.patient_id_2" )
+ column=(type=long update=yes updatewhereclause=yes name=patient_id_3 dbname="horaire.patient_id_3" )
+ column=(type=long update=yes updatewhereclause=yes name=patient_id_4 dbname="horaire.patient_id_4" )
+ column=(type=long updatewhereclause=yes name=horaire_patient_id_5 dbname="horaire.patient_id_5" )
+ column=(type=long updatewhereclause=yes name=patient_id_6 dbname="horaire.patient_id_6" )
+ column=(type=long updatewhereclause=yes name=patient_id_7 dbname="horaire.patient_id_7" )
+ column=(type=long updatewhereclause=yes name=patient_id_8 dbname="horaire.patient_id_8" )
+ column=(type=long updatewhereclause=yes name=patient_id_9 dbname="horaire.patient_id_9" )
+ column=(type=long updatewhereclause=yes name=patient_id_10 dbname="horaire.patient_id_10" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=patient_nom_1 dbname="horaire.patient_nom_1" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=patient_nom_2 dbname="horaire.patient_nom_2" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=patient_nom_3 dbname="horaire.patient_nom_3" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=patient_nom_4 dbname="horaire.patient_nom_4" )
+ column=(type=char(100) updatewhereclause=yes name=horaire_patient_nom_5 dbname="horaire.patient_nom_5" )
+ column=(type=char(100) updatewhereclause=yes name=patient_nom_6 dbname="horaire.patient_nom_6" )
+ column=(type=char(100) updatewhereclause=yes name=patient_nom_7 dbname="horaire.patient_nom_7" )
+ column=(type=char(100) updatewhereclause=yes name=patient_nom_8 dbname="horaire.patient_nom_8" )
+ column=(type=char(100) updatewhereclause=yes name=patient_nom_9 dbname="horaire.patient_nom_9" )
+ column=(type=char(100) updatewhereclause=yes name=patient_nom_10 dbname="horaire.patient_nom_10" )
+ column=(type=long updatewhereclause=yes name=duree1 dbname="horaire.duree1" )
+ column=(type=long updatewhereclause=yes name=duree2 dbname="horaire.duree2" )
+ column=(type=long updatewhereclause=yes name=duree3 dbname="horaire.duree3" )
+ column=(type=long updatewhereclause=yes name=duree4 dbname="horaire.duree4" )
+ column=(type=long updatewhereclause=yes name=duree5 dbname="horaire.duree5" )
+ column=(type=long updatewhereclause=yes name=duree6 dbname="horaire.duree6" )
+ column=(type=long updatewhereclause=yes name=duree7 dbname="horaire.duree7" )
+ column=(type=long updatewhereclause=yes name=duree8 dbname="horaire.duree8" )
+ column=(type=long updatewhereclause=yes name=duree9 dbname="horaire.duree9" )
+ column=(type=long updatewhereclause=yes name=duree10 dbname="horaire.duree10" )
+ column=(type=char(1) updatewhereclause=yes name=case_1 dbname="horaire.case_1" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=case_2 dbname="horaire.case_2" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=case_3 dbname="horaire.case_3" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=case_4 dbname="horaire.case_4" )
+ column=(type=char(1) updatewhereclause=yes name=case_5 dbname="horaire.case_5" )
+ column=(type=char(1) updatewhereclause=yes name=case_6 dbname="horaire.case_6" )
+ column=(type=char(1) updatewhereclause=yes name=case_7 dbname="horaire.case_7" )
+ column=(type=char(1) updatewhereclause=yes name=case_8 dbname="horaire.case_8" )
+ column=(type=char(1) updatewhereclause=yes name=case_9 dbname="horaire.case_9" )
+ column=(type=char(1) updatewhereclause=yes name=case_10 dbname="horaire.case_10" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=no_ortho dbname="horaire.no_ortho" )
+ column=(type=long updatewhereclause=yes name=horaire_couleur_text_1 dbname="horaire.couleur_text_1" )
+ column=(type=long updatewhereclause=yes name=horaire_couleur_text_2 dbname="horaire.couleur_text_2" )
+ column=(type=long updatewhereclause=yes name=horaire_couleur_text_3 dbname="horaire.couleur_text_3" )
+ column=(type=long updatewhereclause=yes name=horaire_couleur_text_4 dbname="horaire.couleur_text_4" )
+ column=(type=long updatewhereclause=yes name=horaire_couleur_text_5 dbname="horaire.couleur_text_5" )
+ column=(type=long updatewhereclause=yes name=couleur_text_6 dbname="horaire.couleur_text_6" )
+ column=(type=long updatewhereclause=yes name=couleur_text_7 dbname="horaire.couleur_text_7" )
+ column=(type=long updatewhereclause=yes name=couleur_text_8 dbname="horaire.couleur_text_8" )
+ column=(type=long updatewhereclause=yes name=couleur_text_9 dbname="horaire.couleur_text_9" )
+ column=(type=long updatewhereclause=yes name=couleur_text_10 dbname="horaire.couleur_text_10" )
+ column=(type=long updatewhereclause=yes name=horaire_colortemplate1 dbname="horaire.colortemplate1" )
+ column=(type=long updatewhereclause=yes name=horaire_colortemplate2 dbname="horaire.colortemplate2" )
+ column=(type=long updatewhereclause=yes name=horaire_colortemplate3 dbname="horaire.colortemplate3" )
+ column=(type=long updatewhereclause=yes name=horaire_colortemplate4 dbname="horaire.colortemplate4" )
+ column=(type=long updatewhereclause=yes name=horaire_colortemplate5 dbname="horaire.colortemplate5" )
+ column=(type=long updatewhereclause=yes name=colortemplate6 dbname="horaire.colortemplate6" )
+ column=(type=long updatewhereclause=yes name=colortemplate7 dbname="horaire.colortemplate7" )
+ column=(type=long updatewhereclause=yes name=colortemplate8 dbname="horaire.colortemplate8" )
+ column=(type=long updatewhereclause=yes name=colortemplate9 dbname="horaire.colortemplate9" )
+ column=(type=long updatewhereclause=yes name=colortemplate10 dbname="horaire.colortemplate10" )
+ column=(type=long updatewhereclause=yes name=backcolor dbname="backcolor" )
+ retrieve="  SELECT horaire.datecal,   
+         horaire.heure,   
+         horaire.patient_id_1, 
+			horaire.patient_id_2,  
+         horaire.patient_id_3,   
+         horaire.patient_id_4,
+			horaire.patient_id_5,   
+			horaire.patient_id_6, 
+			horaire.patient_id_7,  
+         horaire.patient_id_8,   
+         horaire.patient_id_9,
+			horaire.patient_id_10,   
+         horaire.patient_nom_1,   
+         horaire.patient_nom_2,   
+         horaire.patient_nom_3,   
+         horaire.patient_nom_4,
+			horaire.patient_nom_5,  
+			horaire.patient_nom_6,   
+         horaire.patient_nom_7,   
+         horaire.patient_nom_8,   
+         horaire.patient_nom_9,
+			horaire.patient_nom_10,
+			horaire.duree1,   
+			horaire.duree2,  
+			horaire.duree3,  
+			horaire.duree4,  
+			horaire.duree5,  
+			horaire.duree6,  
+			horaire.duree7,  
+			horaire.duree8,  
+			horaire.duree9,  
+			horaire.duree10,  
+			horaire.case_1, 
+         horaire.case_2,   
+         horaire.case_3,   
+         horaire.case_4, 
+			horaire.case_5,
+			horaire.case_6,   
+         horaire.case_7,   
+         horaire.case_8,   
+         horaire.case_9, 
+			horaire.case_10,
+         horaire.no_ortho,   
+         horaire.couleur_text_1,   
+         horaire.couleur_text_2,   
+         horaire.couleur_text_3,   
+         horaire.couleur_text_4,   
+         horaire.couleur_text_5,   
+			horaire.couleur_text_6,   
+         horaire.couleur_text_7,   
+         horaire.couleur_text_8,   
+         horaire.couleur_text_9,   
+         horaire.couleur_text_10, 
+         horaire.colortemplate1,   
+         horaire.colortemplate2,
+         horaire.colortemplate3,
+         horaire.colortemplate4,
+         horaire.colortemplate5,
+			horaire.colortemplate6,   
+         horaire.colortemplate7,
+         horaire.colortemplate8,
+         horaire.colortemplate9,
+         horaire.colortemplate10,
+			(select color from t_color where ortho_id = :ra_ortho and hor = 1) as backcolor
+    FROM horaire  
+   WHERE horaire.no_ortho = :ra_ortho AND
+			horaire.datecal = :ra_date AND
+         horaire.heure between :ra_start AND :ra_end
+ORDER BY horaire.heure ASC   
+" update="horaire" updatewhere=0 updatekeyinplace=no arguments=(("ra_ortho", number),("ra_date", date),("ra_start", time),("ra_end", time)) )
+column(band=detail id=39 alignment="0" tabsequence=32766 border="2" color="0" x="238" y="4" height="12" width="32" format="[general]" html.valueishtml="0"  name=case_7 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~t couleur_text_7 " )
+column(band=detail id=38 alignment="0" tabsequence=32766 border="2" color="0" x="201" y="4" height="12" width="32" format="[general]" html.valueishtml="0"  name=case_6 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~t couleur_text_6 " )
+column(band=detail id=41 alignment="0" tabsequence=32766 border="2" color="0" x="311" y="4" height="12" width="32" format="[general]" html.valueishtml="0"  name=case_9 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~t couleur_text_9 " )
+column(band=detail id=40 alignment="0" tabsequence=32766 border="2" color="0" x="274" y="4" height="12" width="32" format="[general]" html.valueishtml="0"  name=case_8 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~t couleur_text_8 " )
+column(band=detail id=33 alignment="0" tabsequence=32766 border="2" color="0" x="18" y="4" height="12" width="32" format="[general]" html.valueishtml="0"  name=case_1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=34 alignment="0" tabsequence=32766 border="2" color="0" x="55" y="4" height="12" width="32" format="[general]" html.valueishtml="0"  name=case_2 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~thoraire_couleur_text_2" )
+column(band=detail id=35 alignment="0" tabsequence=32766 border="2" color="0" x="91" y="4" height="12" width="32" format="[general]" html.valueishtml="0"  name=case_3 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~thoraire_couleur_text_3" )
+column(band=detail id=36 alignment="0" tabsequence=32766 border="2" color="0" x="128" y="4" height="12" width="32" format="[general]" html.valueishtml="0"  name=case_4 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~thoraire_couleur_text_4" )
+column(band=detail id=37 alignment="0" tabsequence=32766 border="2" color="0" x="165" y="4" height="12" width="32" format="[general]" html.valueishtml="0"  name=case_5 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~thoraire_couleur_text_5" )
+column(band=detail id=42 alignment="0" tabsequence=32766 border="2" color="0" x="347" y="4" height="12" width="32" format="[general]" html.valueishtml="0"  name=case_10 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~t couleur_text_10 " )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

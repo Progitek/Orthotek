@@ -1,0 +1,28 @@
+﻿$PBExportHeader$d_hortrans.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=67108864 processing=1 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no grid.lines=0 )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=id_hortrans dbname="t_hortrans.id_hortrans" )
+ column=(type=char(102) updatewhereclause=yes name=patnom dbname="patnom" )
+ column=(type=date updatewhereclause=yes name=datecal dbname="t_hortrans.datecal" )
+ column=(type=time updatewhereclause=yes name=heure dbname="t_hortrans.heure" )
+ retrieve="  SELECT t_hortrans.id_hortrans,
+			(select patient_nom + ', ' + patient_prenom from patient where patient_id = t_hortrans.patid) as patnom,
+			t_hortrans.datecal,
+			t_hortrans.heure
+    FROM t_hortrans
+	WHERE t_hortrans.idpers = :ra_idpers" arguments=(("ra_idpers", number)) )
+text(band=header alignment="0" text="Patient" border="6" color="33554432" x="9" y="4" height="64" width="837" html.valueishtml="0"  name=patnom_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Heure" border="6" color="33554432" x="1298" y="4" height="64" width="352" html.valueishtml="0"  name=heure_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Date" border="6" color="33554432" x="855" y="4" height="64" width="434" html.valueishtml="0"  name=datecal_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=2 alignment="0" tabsequence=10 border="0" color="33554432" x="9" y="0" height="64" width="837" format="[general]" html.valueishtml="0"  name=patnom visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=30 border="0" color="33554432" x="1298" y="4" height="60" width="352" format="[time]" html.valueishtml="0"  name=heure visible="1" editmask.mask="hh:mm" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=20 border="0" color="33554432" x="855" y="4" height="60" width="434" format="[general]" html.valueishtml="0"  name=datecal visible="1" editmask.mask="[date]" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

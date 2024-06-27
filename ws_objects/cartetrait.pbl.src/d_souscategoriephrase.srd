@@ -1,0 +1,47 @@
+﻿$PBExportHeader$d_souscategoriephrase.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=15780518 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=100 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=224 color="536870912" )
+table(column=(type=char(3500) update=yes updatewhereclause=yes name=souscategoriephrase dbname="t_souscategoriephrase.souscategoriephrase" dbalias=".souscategoriephrase" )
+ column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=id_souscategoriephrase dbname="t_souscategoriephrase.id_souscategoriephrase" dbalias=".id_souscategoriephrase" )
+ column=(type=long update=yes updatewhereclause=yes name=id_categoriephrase dbname="t_souscategoriephrase.id_categoriephrase" dbalias=".id_categoriephrase" )
+ column=(type=long update=yes updatewhereclause=yes name=id_souscategoriephrasefils dbname="t_souscategoriephrase.id_souscategoriephrasefils" dbalias=".id_souscategoriephrasefils" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=demanderargument dbname="t_souscategoriephrase.demanderargument" dbalias=".demanderargument" initial="n" values="Oui	o/Non	n/" )
+ column=(type=long update=yes updatewhereclause=yes name=couleur dbname="t_souscategoriephrase.couleur" dbalias=".couleur" )
+ column=(type=long update=yes updatewhereclause=yes name=ordre dbname="t_souscategoriephrase.ordre" dbalias=".ordre" )
+ retrieve="select  souscategoriephrase,
+        id_souscategoriephrase,
+        id_categoriephrase,
+        id_souscategoriephrasefils,
+		  demanderargument,
+		  couleur,
+		  ordre
+from t_souscategoriephrase
+where (if :ra_type = 'G' then id_categoriephrase else id_souscategoriephrasefils endif) = :ra_idgroup
+order by isnull(ordre,10000) ASC" update="t_souscategoriephrase" updatewhere=0 updatekeyinplace=no arguments=(("ra_idgroup", number),("ra_type", string)) )
+line(band=header x1="137" y1="80" x2="2469" y2="80"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="137" y1="88" x2="2469" y2="88"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="15793151"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Phrase" border="0" color="33554432" x="137" y="12" height="64" width="1440" html.valueishtml="0"  name=categoriephrase_t visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Demander argument" border="0" color="33554432" x="1600" y="4" height="64" width="608" html.valueishtml="0"  name=t_raccourci visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="2743" y="276" height="76" width="521" format="[general]" html.valueishtml="0"  name=id_souscategoriephrase visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="2871" y="308" height="76" width="718" format="[general]" html.valueishtml="0"  name=id_categoriephrase visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="5" color="0" x="297" y="488" height="76" width="2528" format="[general]" html.valueishtml="0"  name=couleur visible="0" editmask.mask="###,###.00" editmask.focusrectangle=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="Changer la couleur..." border="0" color="16711680" x="1993" y="16" height="52" width="466" html.valueishtml="0"  name=shl_changer pointer="HyperLink!" visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="5" color="33554432" x="137" y="8" height="208" width="1504" format="[general]" html.valueishtml="0"  name=souscategoriephrase visible="1" edit.limit=3500 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes edit.autovscroll=yes edit.hscrollbar=yes edit.vscrollbar=yes  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="1073741824~t couleur " )
+column(band=detail id=5 alignment="2" tabsequence=20 border="5" color="33554432" x="1673" y="8" height="72" width="302" format="[general]" html.valueishtml="0"  name=toucheraccourci visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.vscrollbar=yes ddlb.useasborder=yes  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=7 alignment="2" tabsequence=30 border="5" color="0" x="1861" y="120" height="76" width="302" format="[general]" html.valueishtml="0"  name=ordre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="Ordre " border="0" color="0" x="1691" y="120" height="76" width="142" html.valueishtml="0"  name=t_1 visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

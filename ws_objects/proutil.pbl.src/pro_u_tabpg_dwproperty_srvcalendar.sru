@@ -1,0 +1,34 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_srvcalendar.sru
+$PBExportComments$(PRO) DataWindow Property - The Calendar service tabpage 1
+forward
+global type pro_u_tabpg_dwproperty_srvcalendar from pfc_u_tabpg_dwproperty_srvcalendar
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_srvcalendar from pfc_u_tabpg_dwproperty_srvcalendar
+end type
+global pro_u_tabpg_dwproperty_srvcalendar pro_u_tabpg_dwproperty_srvcalendar
+
+on pro_u_tabpg_dwproperty_srvcalendar.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_srvcalendar.destroy
+call super::destroy
+end on
+
+type cbx_initialvalue from pfc_u_tabpg_dwproperty_srvcalendar`cbx_initialvalue within pro_u_tabpg_dwproperty_srvcalendar
+end type
+
+type cbx_closeonclick from pfc_u_tabpg_dwproperty_srvcalendar`cbx_closeonclick within pro_u_tabpg_dwproperty_srvcalendar
+end type
+
+type cbx_closeondoubleclick from pfc_u_tabpg_dwproperty_srvcalendar`cbx_closeondoubleclick within pro_u_tabpg_dwproperty_srvcalendar
+end type
+
+type dw_register from pfc_u_tabpg_dwproperty_srvcalendar`dw_register within pro_u_tabpg_dwproperty_srvcalendar
+end type
+
+type cbx_alwaysredraw from pfc_u_tabpg_dwproperty_srvcalendar`cbx_alwaysredraw within pro_u_tabpg_dwproperty_srvcalendar
+end type
+

@@ -1,0 +1,10 @@
+﻿$PBExportHeader$str_paiecredrep.srs
+global type str_paiecredrep from structure
+	string		s_receiptid
+	integer		i_complete
+	string		s_message
+	integer		i_timedout
+	integer		i_recursuccess
+	string		s_txnnbr
+end type
+

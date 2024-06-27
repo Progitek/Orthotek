@@ -1,0 +1,7 @@
+﻿$PBExportHeader$str_inputbox.srs
+global type str_inputbox from structure
+	string		as_title
+	string		as_question
+	string		as_defautchaine
+end type
+

@@ -1,0 +1,73 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_srvcalendar2.sru
+$PBExportComments$(PRO) DataWindow Property - The Calendar service tabpage 2
+forward
+global type pro_u_tabpg_dwproperty_srvcalendar2 from pfc_u_tabpg_dwproperty_srvcalendar2
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_srvcalendar2 from pfc_u_tabpg_dwproperty_srvcalendar2
+end type
+global pro_u_tabpg_dwproperty_srvcalendar2 pro_u_tabpg_dwproperty_srvcalendar2
+
+on pro_u_tabpg_dwproperty_srvcalendar2.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_srvcalendar2.destroy
+call super::destroy
+end on
+
+type cbx_boldsaturdays from pfc_u_tabpg_dwproperty_srvcalendar2`cbx_boldsaturdays within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type cbx_boldsundays from pfc_u_tabpg_dwproperty_srvcalendar2`cbx_boldsundays within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type cbx_boldholidays from pfc_u_tabpg_dwproperty_srvcalendar2`cbx_boldholidays within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type cbx_boldmarkeddays from pfc_u_tabpg_dwproperty_srvcalendar2`cbx_boldmarkeddays within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type dw_holidays from pfc_u_tabpg_dwproperty_srvcalendar2`dw_holidays within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type dw_markeddays from pfc_u_tabpg_dwproperty_srvcalendar2`dw_markeddays within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type em_colorsaturday from pfc_u_tabpg_dwproperty_srvcalendar2`em_colorsaturday within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type st_colorsaturdary from pfc_u_tabpg_dwproperty_srvcalendar2`st_colorsaturdary within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type em_colorsunday from pfc_u_tabpg_dwproperty_srvcalendar2`em_colorsunday within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type st_colorsunday from pfc_u_tabpg_dwproperty_srvcalendar2`st_colorsunday within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type em_colorholiday from pfc_u_tabpg_dwproperty_srvcalendar2`em_colorholiday within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type st_colorholiday from pfc_u_tabpg_dwproperty_srvcalendar2`st_colorholiday within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type em_colormarkedday from pfc_u_tabpg_dwproperty_srvcalendar2`em_colormarkedday within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type st_colormarkedday from pfc_u_tabpg_dwproperty_srvcalendar2`st_colormarkedday within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type gb_holiday from pfc_u_tabpg_dwproperty_srvcalendar2`gb_holiday within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type gb_markedday from pfc_u_tabpg_dwproperty_srvcalendar2`gb_markedday within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type gb_saturday from pfc_u_tabpg_dwproperty_srvcalendar2`gb_saturday within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+
+type gb_sunday from pfc_u_tabpg_dwproperty_srvcalendar2`gb_sunday within pro_u_tabpg_dwproperty_srvcalendar2
+end type
+

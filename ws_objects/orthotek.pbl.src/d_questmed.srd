@@ -1,0 +1,49 @@
+﻿$PBExportHeader$d_questmed.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=char(50) update=yes updatewhereclause=yes name=patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=patient_nom dbname="patient.patient_nom" )
+ column=(type=char(36) update=yes updatewhereclause=yes name=adresse dbname="patient.adresse" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=ville dbname="patient.ville" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=province dbname="patient.province" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=code_postale dbname="patient.code_postale" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=tel_maison dbname="patient.tel_maison" )
+ column=(type=long update=yes updatewhereclause=yes name=no_dossier dbname="patient.no_dossier" )
+ column=(type=char(15) updatewhereclause=yes name=new_dossier dbname="patient.new_dossier" )
+ column=(type=date updatewhereclause=yes name=date_naissance dbname="patient.date_naissance" )
+ retrieve="  SELECT patient.patient_prenom,   
+         patient.patient_nom,   
+         patient.adresse,   
+         patient.ville,   
+         patient.province,   
+         patient.code_postale,   
+         patient.tel_maison,   
+         patient.no_dossier,
+			patient.new_dossier,
+			patient.date_naissance
+    FROM patient  
+   WHERE patient.patient_id = :ra_patid" arguments=(("ra_patid", number)) )
+text(band=header alignment="2" text="Patient Prenom" border="0" color="33554432" x="0" y="4" height="64" width="1399" html.valueishtml="0"  name=patient_prenom_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Patient Nom" border="0" color="33554432" x="1403" y="4" height="64" width="1399" html.valueishtml="0"  name=patient_nom_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Adresse" border="0" color="33554432" x="2807" y="4" height="64" width="1015" html.valueishtml="0"  name=adresse_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Ville" border="0" color="33554432" x="3831" y="4" height="64" width="1399" html.valueishtml="0"  name=ville_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Province" border="0" color="33554432" x="5234" y="4" height="64" width="713" html.valueishtml="0"  name=province_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Code Postale" border="0" color="33554432" x="5952" y="4" height="64" width="439" html.valueishtml="0"  name=code_postale_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Tel Maison" border="0" color="33554432" x="6395" y="4" height="64" width="439" html.valueishtml="0"  name=tel_maison_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="No Dossier" border="0" color="33554432" x="6839" y="4" height="64" width="329" html.valueishtml="0"  name=no_dossier_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="33554432" x="0" y="4" height="76" width="1399" format="[general]" html.valueishtml="0"  name=patient_prenom visible="1" edit.limit=50 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="33554432" x="1403" y="4" height="76" width="1399" format="[general]" html.valueishtml="0"  name=patient_nom visible="1" edit.limit=50 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="0" color="33554432" x="2807" y="4" height="76" width="1015" format="[general]" html.valueishtml="0"  name=adresse visible="1" edit.limit=36 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=40 border="0" color="33554432" x="3831" y="4" height="76" width="1399" format="[general]" html.valueishtml="0"  name=ville visible="1" edit.limit=50 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=50 border="0" color="33554432" x="5234" y="4" height="76" width="713" format="[general]" html.valueishtml="0"  name=province visible="1" edit.limit=25 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=60 border="0" color="33554432" x="5952" y="4" height="76" width="439" format="[general]" html.valueishtml="0"  name=code_postale visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=70 border="0" color="33554432" x="6395" y="4" height="76" width="439" format="[general]" html.valueishtml="0"  name=tel_maison visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=80 border="0" color="33554432" x="6839" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=no_dossier visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=0 border="0" color="33554432" x="7168" y="0" height="64" width="407" html.valueishtml="0"  name=new_dossier visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=0 border="0" color="33554432" x="7575" y="0" height="64" width="270" html.valueishtml="0"  name=date_naissance visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

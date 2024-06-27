@@ -1,0 +1,15 @@
+﻿$PBExportHeader$gf_method.srf
+global type gf_method from function_object
+end type
+
+forward prototypes
+global function string gf_method (string as_language)
+end prototypes
+
+global function string gf_method (string as_language);if as_language = 'an' then
+	return 'Cash~t$/Cheque~tC/Visa~tVisa/MasterCard~tMC/AmericanExpress~tAmEx/Direct payment~tPD/N.S.F.~tNSF/Credit~tcredit/Transfer~ttrans/Loss~tperte/Postdated~tP/Monthly Charge~tmens/pVisa~tpVisa/pMasterCard~tpMC/pAmex~tpAmex/pDirect payment~tpPD/Others~tA/Adjustment~tmod/N.S.F. Visa~tnsfv/N.S.F. Mastercard~tmsfm/Money Order~tmo/Remboursement assurance~tra'
+else
+	return 'Comptant~t$/Chèque~tC/Visa~tVisa/MasterCard~tMC/American Express~tAmEx/Paiement Direct~tPD/N.S.F.~tNSF/Crédit~tcredit/Transfert~ttrans/Perte~tperte/Postdaté~tP/Mensualité~tmens/pVisa~tpVisa/pMasterCard~tpMC/pAmex~tpAmex/ Paiement Pré-Autorisé~tpPD/Autres~tA/Ajustement~tmod/N.S.F. Visa~tnsfv/N.S.F. Mastercard~tmsfm/Mandat poste~tmo/Insurance refund~tra'
+end if
+end function
+

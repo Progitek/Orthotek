@@ -1,0 +1,38 @@
+﻿$PBExportHeader$d_assurance_ajoutlistimp.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.documentname="Condition de traitement" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=528 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=96 color="536870912" )
+detail(height=260 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=code dbname="t_assurance.code" )
+ column=(type=long update=yes updatewhereclause=yes identity=yes name=id dbname="t_assurance.id" )
+ column=(type=char(600) update=yes updatewhereclause=yes name=description dbname="t_assurance.description" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=langue dbname="t_assurance.langue" )
+ column=(type=long update=yes updatewhereclause=yes name=ortho_id dbname="t_assurance.ortho_id" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ retrieve="  SELECT t_assurance.code,   
+         t_assurance.id,   
+         t_assurance.description,   
+         t_assurance.langue,   
+         t_assurance.ortho_id,
+         ortho_id.dr_nom_complet
+    FROM t_assurance INNER JOIN ortho_id ON t_assurance.ortho_id = ortho_id.ortho_id
+   WHERE t_assurance.ortho_id = :ra_no_ortho
+ORDER BY t_assurance.code asc,
+			t_assurance.langue asc" arguments=(("ra_no_ortho", number)) )
+text(band=header alignment="2" text="Code" border="0" color="0" x="5" y="424" height="64" width="137"  name=code_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Description" border="0" color="0" x="247" y="424" height="64" width="1595"  name=description_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=6 alignment="2" tabsequence=32766 border="0" color="0" x="1285" y="224" height="64" width="1093" format="[general]"  name=ortho_id_dr_nom_complet edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Condition de traitement" border="0" color="0" x="1285" y="16" height="100" width="1093"  name=t_4  font.face="Arial" font.height="-16" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="de" border="0" color="0" x="1733" y="140" height="64" width="87"  name=t_5  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="0" x="14" y="4" height="64" width="105" format="##"  name=code editmask.mask="##" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="0" color="0" x="247" y="4" height="248" width="3186" format="[general]"  name=description edit.limit=600 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.autovscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=20 border="0" color="0" x="160" y="4" height="64" width="69" format="[general]"  name=langue edit.limit=0 edit.case=upper edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="-" border="0" color="0" x="133" y="0" height="64" width="18"  name=t_1  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2903" y="12" height="72" width="526" format="[general]"  name=page_1  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Imprimé le :" border="0" color="0" x="32" y="16" height="64" width="334"  name=t_2  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="389" y="16" height="64" width="658" format="[SHORTDATE]"  name=compute_1  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="©Orthotek " border="0" color="0" x="1070" y="16" height="64" width="411"  name=t_3  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

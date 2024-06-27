@@ -1,0 +1,51 @@
+﻿$PBExportHeader$d_rapppaieimp.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=836 color="536870912" )
+summary(height=104 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=date updatewhereclause=yes name=date_paiement dbname="date_paiement" )
+ column=(type=decimal(2) updatewhereclause=yes name=montant_recu dbname="montant_recu" )
+ column=(type=char(20) updatewhereclause=yes name=paiement dbname="paiement" )
+ retrieve="  SELECT paiement.date_paiement,
+			paiement.montant_recu,
+			paiement.paiement
+	 FROM paiement
+	WHERE paiement.traitement_patient_id = :ra_traitid and
+			(paiement.id_contact = :ra_idcont or :ra_idcont is null)
+
+union all
+
+  SELECT cheques_postdates.date_cheque,
+			cheques_postdates.paiement,
+			cheques_postdates.modalite
+	 FROM cheques_postdates
+	WHERE cheques_postdates.traitement_patient_id = :ra_traitid and
+			cheques_postdates.indicateur <> '1' and
+			(cheques_postdates.id_contact = :ra_idcont or :ra_idcont is null) and
+			:ra_pd = 1" arguments=(("ra_traitid", number),("ra_idcont", number),("ra_pd", number))  sort="date_paiement A " )
+rectangle(band=header x="0" y="748" height="88" width="1623"  name=r_1 visible="1" brush.hatch="6" brush.color="16777215" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Method" border="0" color="33554432" x="1070" y="760" height="64" width="526" html.valueishtml="0"  name=mod_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Amount" border="0" color="33554432" x="530" y="760" height="64" width="489" html.valueishtml="0"  name=montant_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+roundrectangle(band=header ellipseheight="36" ellipsewidth="41"x="41" y="4" height="432" width="1582"  name=rr_1 visible="1" brush.hatch="6" brush.color="16777215" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="64" y="20" height="76" width="1541" html.valueishtml="0"  name=t_ortho visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="" border="0" color="0" x="64" y="100" height="76" width="1541" html.valueishtml="0"  name=t_orthoadd visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="" border="0" color="0" x="64" y="340" height="76" width="1541" html.valueishtml="0"  name=t_orthotel visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+line(band=header x1="498" y1="752" x2="498" y2="848"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+line(band=header x1="1042" y1="752" x2="1042" y2="848"  name=l_5 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+text(band=header alignment="2" text="Payment date " border="0" color="33554432" x="23" y="760" height="64" width="457" html.valueishtml="0"  name=datepaie_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=detail x1="498" y1="4" x2="498" y2="100"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="0" color="33554432" x="23" y="4" height="76" width="457" format="[general]" html.valueishtml="0"  name=datepaie visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=detail x1="1042" y1="0" x2="1042" y2="96"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="0" color="33554432" x="1070" y="4" height="76" width="526" format="[general]" html.valueishtml="0"  name=mod visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=detail x1="1618" y1="0" x2="1618" y2="96"  name=l_6 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+column(band=detail id=2 alignment="2" tabsequence=32766 border="0" color="33554432" x="530" y="4" height="76" width="489" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=montant visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=detail x1="0" y1="0" x2="0" y2="96"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+text(band=summary alignment="0" text="Payments total: " border="0" color="0" x="9" y="28" height="64" width="494" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+line(band=summary x1="0" y1="0" x2="1623" y2="0"  name=l_7 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=summary alignment="0" expression="sum(montant_recu for all)"border="0" color="33554432" x="530" y="24" height="76" width="489" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="" border="0" color="0" x="64" y="180" height="76" width="1541" html.valueishtml="0"  name=t_orthoville visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="" border="0" color="0" x="64" y="260" height="76" width="1541" html.valueishtml="0"  name=t_orthozip visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

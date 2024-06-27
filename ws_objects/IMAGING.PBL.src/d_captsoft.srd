@@ -1,0 +1,29 @@
+﻿$PBExportHeader$d_captsoft.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" height.autosize=yes )
+table(column=(type=number update=yes updatewhereclause=yes key=yes name=id_cptrconf dbname="t_cptrconf.id_cptrconf" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=cptrpath dbname="t_cptrconf.cptrpath" )
+ column=(type=number update=yes updatewhereclause=yes name=cptrsoft dbname="t_cptrconf.cptrsoft" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=cptrnom dbname="t_cptrconf.cptrnom" )
+ retrieve="  SELECT t_cptrconf.id_cptrconf,
+			t_cptrconf.cptrpath,
+			t_cptrconf.cptrsoft,
+			t_cptrconf.cptrnom
+	 FROM t_cptrconf
+ORDER BY t_cptrconf.cptrsoft ASC,
+			t_cptrconf.cptrnom ASC" update="t_captrconf" updatewhere=0 updatekeyinplace=no )
+compute(band=detail alignment="0" expression="if( cptrnom = '', case( cptrsoft when 1 then 'CaptureLink' when 2 then 'Image Adstra' when 3 then 'VixWin' when 4 then 'Schick CDR DICOM' when 5 then 'Patient Gallery' when 6 then 'Image FX' when 7 then 'TigerView' when 8 then 'ProImage' when 9 then 'Sidexis' when 10 then 'Kodak Dental Imaging' when 11 then 'Cliniview'), cptrnom )"border="0" color="33554432" x="137" y="4" height="56" width="997" format="[GENERAL]" html.valueishtml="0"  name=cp_nom visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

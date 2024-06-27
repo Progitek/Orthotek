@@ -1,0 +1,33 @@
+﻿$PBExportHeader$d_dentistslist.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=72 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=id_dentist dbname="t_dentists.id_dentist" dbalias=".id_dentist" )
+ column=(type=char(30) updatewhereclause=yes name=det_nom dbname="t_dentists.det_nom" dbalias=".det_nom" )
+ column=(type=char(30) updatewhereclause=yes name=det_prenom dbname="t_dentists.det_prenom" dbalias=".det_prenom" )
+ column=(type=long updatewhereclause=yes name=ortho_id dbname="t_dentists.ortho_id" dbalias=".ortho_id" )
+ column=(type=number updatewhereclause=yes name=actif dbname="t_dentists.actif" dbalias=".actif" )
+ retrieve="SELECT   t_dentists.id_dentist,
+         t_dentists.det_nom,
+         t_dentists.det_prenom,
+         t_dentists.ortho_id,
+			t_dentists.actif    
+FROM     t_dentists
+WHERE    t_dentists.ortho_id = :ra_ortho_id
+ORDER BY t_dentists.det_nom ASC  " arguments=(("ra_ortho_id", number)) )
+compute(band=detail alignment="0" expression="if ( isnull ( det_nom ) , '' , det_nom  ) + if ( isnull (  det_prenom ) , '' , ~", ~" + det_prenom ) "border="5~tif(currentrow()=getrow(),6,5)" color="16777215~tif(currentrow()=getrow(),rgb(0,0,200),rgb(255,255,255))" x="119" y="12" height="72" width="1083" format="[GENERAL]" html.valueishtml="0"  name=referent_nom_complet visible="1"  font.face="Arial" font.height="-10" font.weight="700~tif(currentrow()=getrow(),700,400)"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="8421504" )
+compute(band=footer alignment="1" expression="'Total : ' + count( id_dentist for all ) + ' dentistes'"border="0" color="0" x="480" y="4" height="64" width="731" format="[General]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

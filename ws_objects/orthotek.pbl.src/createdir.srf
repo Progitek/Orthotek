@@ -1,0 +1,13 @@
+﻿$PBExportHeader$createdir.srf
+global type createdir from function_object
+end type
+
+forward prototypes
+global subroutine createdir ()
+end prototypes
+
+global subroutine createdir ();//if fileExists('C:\toto\') = false then
+//	CreateDirectoryA('C:\toto',0)
+//end if
+end subroutine
+

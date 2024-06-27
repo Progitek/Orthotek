@@ -1,0 +1,62 @@
+﻿$PBExportHeader$d_status_patients.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=304 color="536870912" )
+summary(height=4 color="536870912" )
+footer(height=60 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=long updatewhereclause=yes name=patient_no_ortho dbname="patient.no_ortho" )
+ column=(type=char(15) updatewhereclause=yes name=patient_new_dossier dbname="patient.new_dossier" )
+ column=(type=date updatewhereclause=yes name=factures_traitements_date_facture dbname="factures_traitements.date_facture" )
+ column=(type=char(30) updatewhereclause=yes name=t_status_description dbname="t_status.description" )
+ column=(type=long updatewhereclause=yes identity=yes name=traitements_traitement_id dbname="traitements.traitement_id" )
+ column=(type=long updatewhereclause=yes name=t_status_ordrepaie dbname="t_status.ordrepaie" )
+ retrieve="SELECT   ortho_id.dr_nom_complet ,
+		   patient.patient_nom ,
+		   patient.patient_prenom ,
+		   patient.no_ortho ,
+		   patient.new_dossier ,
+		   factures_traitements.date_facture ,
+		   t_status.description ,
+		   traitements.traitement_id  ,
+			t_status.ordrepaie
+   FROM  patient INNER JOIN ortho_id ON ortho_id.ortho_id = patient.no_ortho
+		  			  INNER JOIN traitements ON patient.patient_id = traitements.patient_id,
+		   factures_traitements INNER JOIN traitements ON traitements.traitement_id = factures_traitements.traitement_id
+		  							   INNER JOIN t_status ON factures_traitements.status_id = t_status.status_id    
+   WHERE ortho_id.ortho_id = :ra_no_ortho and
+         factures_traitements.date_facture between :ra_debut and :ra_fin
+ORDER BY t_status.code ASC,
+	 		patient.patient_nom ASC,
+	  		patient.patient_prenom ASC  " arguments=(("ra_no_ortho", number),("ra_debut", date),("ra_fin", date)) )
+group(level=1 header.height=88 trailer.height=72 by=("t_status_description" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="2" text="Statut" border="0" color="0" x="9" y="232" height="64" width="837" html.valueishtml="0"  name=t_status visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Patient Nom" border="0" color="0" x="846" y="232" height="64" width="1915" html.valueishtml="0"  name=t_pat visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="De" border="0" color="0" x="1934" y="120" height="64" width="183" html.valueishtml="0"  name=t_from visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="" border="0" color="0" x="2149" y="120" height="64" width="366" html.valueishtml="0"  name=date_debut visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="à" border="0" color="0" x="2647" y="120" height="64" width="82" html.valueishtml="0"  name=t_to visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="" border="0" color="0" x="2816" y="120" height="64" width="366" html.valueishtml="0"  name=date_fin visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Date" border="0" color="0" x="2830" y="232" height="64" width="370" html.valueishtml="0"  name=t_date visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+button(band=header text="Nom du patient" filename="" enabled=yes action="0" border="0" color="0" x="846" y="228" height="72" width="1915" vtextalign="0" htextalign="0"  name=b_patnom visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=header text="Statut" filename="" enabled=yes action="0" border="0" color="0" x="5" y="228" height="72" width="837" vtextalign="0" htextalign="0"  name=b_status visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="1" text="Statuts par patient pour :" border="0" color="8388608" x="0" y="0" height="80" width="914" html.valueishtml="0"  name=t_titre visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=1 alignment="0" tabsequence=32766 border="0" color="8388608" x="928" y="0" height="80" width="2254" format="[general]" html.valueishtml="0"  name=ortho_id_dr_nom_complet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+button(band=header text="Date facture" filename="" enabled=yes action="0" border="0" color="0" x="2766" y="228" height="72" width="434" vtextalign="0" htextalign="0"  name=b_date visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=header.1 id=7 alignment="0" tabsequence=32766 border="0" color="0" x="5" y="16" height="64" width="837" format="[general]" html.valueishtml="0"  name=t_status_description visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header.1 x1="0" y1="0" x2="3205" y2="0"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression=" patient_patient_nom +~",~"+ patient_patient_prenom + if ( isnull ( patient_new_dossier ) , '' , ' (' +  patient_new_dossier + ')' )"border="0" color="0" x="846" y="4" height="64" width="1915" format="[general]" html.valueishtml="0"  name=nom_patient visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="2766" y="4" height="64" width="434" format="[general]" html.valueishtml="0"  name=factures_traitements_date_facture visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="0" expression="count( patient_patient_nom +~",~"+ patient_patient_prenom + if ( isnull ( patient_new_dossier ) , '' , ' (' +  patient_new_dossier + ')' ) for group 1)"border="0" color="0" x="142" y="0" height="64" width="311" format="[general]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=trailer.1 alignment="0" text="Qté:" border="0" color="0" x="0" y="0" height="64" width="137" html.valueishtml="0"  name=t_qty visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Imprimé le" border="0" color="0" x="5" y="0" height="56" width="325" html.valueishtml="0"  name=t_printedon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="389" y="0" height="56" width="366" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2697" y="0" height="56" width="503" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="© Orthotek" border="0" color="0" x="1573" y="0" height="56" width="238" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

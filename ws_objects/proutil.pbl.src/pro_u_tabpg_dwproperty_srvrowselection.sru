@@ -1,0 +1,28 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_srvrowselection.sru
+$PBExportComments$(PRO) DataWindow Property - The RowSelection service tabpage
+forward
+global type pro_u_tabpg_dwproperty_srvrowselection from pfc_u_tabpg_dwproperty_srvrowselection
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_srvrowselection from pfc_u_tabpg_dwproperty_srvrowselection
+end type
+global pro_u_tabpg_dwproperty_srvrowselection pro_u_tabpg_dwproperty_srvrowselection
+
+on pro_u_tabpg_dwproperty_srvrowselection.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_srvrowselection.destroy
+call super::destroy
+end on
+
+type st_style from pfc_u_tabpg_dwproperty_srvrowselection`st_style within pro_u_tabpg_dwproperty_srvrowselection
+end type
+
+type cbx_keyboard from pfc_u_tabpg_dwproperty_srvrowselection`cbx_keyboard within pro_u_tabpg_dwproperty_srvrowselection
+end type
+
+type ddlb_style from pfc_u_tabpg_dwproperty_srvrowselection`ddlb_style within pro_u_tabpg_dwproperty_srvrowselection
+end type
+

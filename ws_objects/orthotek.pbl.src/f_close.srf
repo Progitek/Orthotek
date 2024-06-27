@@ -1,0 +1,516 @@
+﻿$PBExportHeader$f_close.srf
+global type f_close from function_object
+end type
+
+forward prototypes
+global subroutine f_close ()
+end prototypes
+
+global subroutine f_close ();/* Cette fonction permet de s'assurer que toutes les fenêtres ouvertes ont été bien sauvegardées.
+   Auteur: Dave Tremblay
+	Compagnie: II4net Inc.
+	Date: 05-03-2002
+	Derniere modification: 15-04-2002
+*/
+
+if IsValid(w_ajustement) then
+	w_ajustement.setfocus()
+	close(w_ajustement)
+end if
+
+//if IsValid(w_ajustement_montant_du) then
+//	w_ajustement.setfocus()
+//	close(w_ajustement_montant_du)
+//end if
+
+if IsValid(w_assurance) then
+	w_assurance.setfocus()
+	if w_assurance.change then 
+      if error_type(200) = 1 then
+	      w_assurance.sauve()
+		end if
+	end if
+	close(w_assurance)
+end if
+
+if IsValid(w_assurance_ajout) then
+	w_assurance_ajout.setfocus()
+	if w_assurance_ajout.vchange = 1 then
+		if error_type(200) = 1 then
+         w_assurance_ajout.sauve()
+		end if
+	end if
+   close(w_assurance_ajout)
+end if
+
+if IsValid(w_billet_an) then
+	w_billet_an.setfocus()
+	if w_billet_an.changement = 1 then 
+     if error_type(200) = 1 then
+	      w_billet_an.sauve()
+		end if
+	end if
+   close(w_billet_an)	
+end if
+
+if IsValid(w_billet_fr) then
+	w_billet_fr.setfocus()
+	if w_billet_fr.changement = 1 then 
+    	if error_type(200) = 1 then
+	      w_billet_fr.sauve()
+		end if
+	end if
+   close(w_billet_fr)	
+end if
+
+if IsValid(w_cacher_factures_paiements) then
+	w_cacher_factures_paiements.setfocus()
+	close(w_cacher_factures_paiements)
+end if
+
+if IsValid(w_cacher_factures_rapport) then
+	w_cacher_factures_rapport.setfocus()
+	close(w_cacher_factures_rapport)
+end if
+
+if IsValid(w_cpd) then
+	w_cpd.setfocus() //rendre visible 
+	if w_cpd.changement = 1 then 
+   	w_cpd.if_close()
+	end if	
+end if
+
+if IsValid(w_cheques_postdates_rapport) then
+	w_cheques_postdates_rapport.setfocus() //rendre visible 
+	close(w_cheques_postdates_rapport)
+end if
+
+if IsValid(w_choixlangue) then
+	w_choixlangue.setfocus() //rendre visible 
+	close(w_choixlangue)
+end if
+
+if IsValid(w_comptes_clients) then
+	w_comptes_clients.setfocus() //rendre visible 
+	close(w_comptes_clients)
+end if
+
+if IsValid(w_comptes_recevables) then
+	w_comptes_recevables.setfocus() //rendre visible 
+	close(w_comptes_recevables)
+end if
+
+//if IsValid(w_description) then
+//	w_description.setfocus() //rendre visible 
+//	if w_description.changement = 1 then 
+//     if error_type(200) = 1 then
+//	      w_description.sauvegarde()
+//		end if
+//	end if
+//   close(w_description)	
+//end if
+
+if IsValid(w_destroy) then
+	w_destroy.setfocus() //rendre visible 
+	close(w_destroy)
+end if
+
+if IsValid(w_dossier_patients) then
+	w_dossier_patients.setfocus() //rendre visible 
+	if w_dossier_patients.change then 
+     if error_type(200) = 1 then
+	      w_dossier_patients.sauve(w_dossier_patients.il_patid)
+		end if
+	end if
+   close(w_dossier_patients)	
+end if
+
+if IsValid(w_entente_financiere) then
+	w_entente_financiere.setfocus() //rendre visible 
+	if w_entente_financiere.changement = 1 then 
+     if error_type(200) = 1 then
+	      w_entente_financiere.sauve()
+		end if
+	end if
+   close(w_entente_financiere)	
+end if
+
+if IsValid(w_entrer_ortho) then
+	w_entrer_ortho.setfocus() //rendre visible 
+	if w_entrer_ortho.changement = 1 then 
+     if error_type(200) = 1 then
+	      w_entrer_ortho.maj()
+		end if
+	end if
+   close(w_entrer_ortho)	
+end if
+
+if IsValid(w_error) then
+	w_error.setfocus() //rendre visible 
+	close(w_error)
+end if
+
+if IsValid(w_etat) then
+	w_etat.setfocus() //rendre visible 
+	close(w_etat)
+end if
+
+if IsValid(w_etiquettes) then
+	w_etiquettes.setfocus() //rendre visible 
+	close(w_etiquettes)
+end if
+
+if IsValid(w_factures_imp) then
+	w_factures_imp.setfocus() //rendre visible 
+	close(w_factures_imp)
+end if
+
+if IsValid(w_factures_traitement) then
+	w_factures_traitement.setfocus()  //rendre visible 
+	w_factures_traitement.if_close()
+end if
+
+if IsValid(w_formulaire_normalise) then
+	w_formulaire_normalise.setfocus() //rendre visible 
+	close(w_formulaire_normalise)
+end if
+
+if IsValid(w_gestioncouleurs) then
+	w_gestioncouleurs.setfocus() //rendre visible 
+	if w_gestioncouleurs.change then 
+     if error_type(200) = 1 then
+	      w_gestioncouleurs.sauve()
+		end if
+	end if
+   close(w_gestioncouleurs)	
+end if
+
+//if IsValid(w_horaire) then
+//	w_horaire.setfocus() //rendre visible 
+//	if w_horaire.change then 
+//   	if error_type(200) = 1 then
+//			w_horaire.sauve()
+//		end if
+//	end if
+//   close(w_horaire)	
+//   m_principal.m_couleurs.enabled = false
+//end if
+
+if IsValid(w_horaire_couleurs) then
+	w_horaire_couleurs.setfocus()
+	if w_horaire_couleurs.changement = 1 then 
+     if error_type(200) = 1 then
+	      w_horaire_couleurs.sauve()
+		end if
+	end if
+   close(w_horaire_couleurs)	
+end if
+
+if IsValid(w_horaire_find) then
+	w_horaire_find.setfocus()
+	close(w_horaire_find)
+end if
+
+if IsValid(w_horaire_semaine) then
+	w_horaire_semaine.setfocus()
+	close(w_horaire_semaine)
+end if
+
+if IsValid(w_horaire_template) then
+	w_horaire_template.setfocus()
+	close(w_horaire_template)
+end if
+
+//if IsValid(w_horaire_template1) then
+//	w_horaire_template1.setfocus()
+//	close(w_horaire_template1)
+//end if
+
+if IsValid(w_imp_horaire_couleurs) then
+	w_imp_horaire_couleurs.setfocus()
+	close(w_imp_horaire_couleurs)
+end if
+
+if IsValid(w_info_rendez_vous) then
+	w_info_rendez_vous.setfocus()
+	close(w_info_rendez_vous)
+end if
+
+if IsValid(w_journal_depot) then
+	w_journal_depot.setfocus()
+	close(w_journal_depot)
+end if
+
+if IsValid(w_journal_encaissements) then
+	w_journal_encaissements.setfocus()
+	close(w_journal_encaissements)
+end if
+
+if IsValid(w_journal_honoraires) then
+	w_journal_honoraires.setfocus()
+	close(w_journal_honoraires)
+end if
+
+if IsValid(w_journal_revenus) then
+	w_journal_revenus.setfocus()
+	close(w_journal_revenus)
+end if
+
+if IsValid(w_lettres_patients) then
+	w_lettres_patients.setfocus()
+	close(w_lettres_patients)
+end if
+
+if IsValid(w_liste_anniversaires) then
+	w_liste_anniversaires.setfocus()
+	close(w_liste_anniversaires)
+end if
+
+if IsValid(w_liste_des_rappels_retentions) then
+	w_liste_des_rappels_retentions.setfocus()
+	if w_liste_des_rappels_retentions.changement = 1 then 
+     if error_type(200) = 1 then
+	      w_liste_des_rappels_retentions.sauvegarde()
+		end if
+	end if
+   close(w_liste_des_rappels_retentions)	
+end if
+
+if IsValid(w_liste_descr) then
+	w_liste_descr.setfocus()
+	if w_liste_descr.change then 
+     if error_type(200) = 1 then
+	      w_liste_descr.sauvegarde()
+		end if
+	end if
+   close(w_liste_descr)	
+end if
+
+if IsValid(w_liste_no_dossier) then
+	w_liste_no_dossier.setfocus()
+	close(w_liste_no_dossier)
+end if
+
+if IsValid(w_liste_rappels_retentions_nb_mois) then
+	w_liste_rappels_retentions_nb_mois.setfocus()
+	close(w_liste_rappels_retentions_nb_mois)
+end if
+
+if IsValid(w_liste_rappels_retentions_periode) then
+	w_liste_rappels_retentions_periode.setfocus()
+	close(w_liste_rappels_retentions_periode)
+end if
+
+if IsValid(w_liste_referants) then
+	w_liste_referants.setfocus()
+	close(w_liste_referants)
+end if
+
+if IsValid(w_mailer) then
+	w_mailer.setfocus()
+	close(w_mailer)
+end if
+
+if IsValid(w_migrate_eval_meb) then
+	w_migrate_eval_meb.setfocus()
+	close(w_migrate_eval_meb)
+end if
+
+if IsValid(w_options) then
+	w_options.setfocus()
+   w_options.cb_update_close.event clicked()
+   close(w_options)	
+end if
+
+if IsValid(w_paiement) then
+	w_paiement.setfocus()
+	if w_paiement.changement = 1 then 
+   	w_paiement.if_close()
+	end if
+end if
+
+if IsValid(w_paiement_batch) then
+	w_paiement_batch.setfocus()
+	if w_paiement_batch.changement = 1 then 
+     if error_type(200) = 1 then
+	      w_paiement_batch.maj()
+		end if
+	end if
+   close(w_paiement_batch)
+end if
+
+if IsValid(w_password) then
+	w_password.setfocus()
+	close(w_password)
+end if
+
+if IsValid(w_password_logon) then
+	w_password_logon.setfocus()
+	close(w_password_logon)
+end if
+
+if IsValid(w_password_ortho) then
+	w_password_ortho.setfocus()
+	close(w_password_ortho)
+end if
+
+if IsValid(w_password_ortho) then
+	w_password_ortho.setfocus()
+	close(w_password_ortho)
+end if
+
+if IsValid(w_password_paiement) then
+	w_password_paiement.setfocus()
+	close(w_password_paiement)
+end if
+
+if IsValid(w_password_supp) then
+	w_password_supp.setfocus()
+	close(w_password_supp)
+end if
+
+if IsValid(w_password_supp_paiement) then
+	w_password_supp_paiement.setfocus()
+	close(w_password_supp_paiement)
+end if
+
+if IsValid(w_patient) then
+	w_patient.setfocus()
+	close(w_patient)
+end if
+
+if IsValid(w_patients_status) then
+	w_patients_status.setfocus()
+	close(w_patients_status)
+end if
+
+if IsValid(w_pour_fact) then
+	w_pour_fact.setfocus()
+	close(w_pour_fact)
+end if
+
+if IsValid(w_pourcentage_entrer) then
+	w_pourcentage_entrer.setfocus()
+	if w_pourcentage_entrer.ii_change = 1 then 
+     if error_type(200) = 1 then
+	      w_pourcentage_entrer.sauve()
+		end if
+	end if
+   close(w_pourcentage_entrer)
+end if
+
+if IsValid(w_pourcprotect) then
+	w_pourcprotect.setfocus()
+	close(w_pourcprotect)
+end if
+
+if IsValid(w_print_assurance) then
+	w_print_assurance.setfocus()
+	close(w_print_assurance)
+end if
+
+if IsValid(w_productivite_comp) then
+	w_productivite_comp.setfocus()
+	close(w_productivite_comp)
+end if
+
+if IsValid(w_rappels_retention_imp) then
+	w_rappels_retention_imp.setfocus()
+	close(w_rappels_retention_imp)
+end if
+
+if IsValid(w_rapport_annuel_statuts) then
+	w_rapport_annuel_statuts.setfocus()
+	close(w_rapport_annuel_statuts)
+end if
+
+if IsValid(w_rapport_paiement) then
+	w_rapport_paiement.setfocus()
+	close(w_rapport_paiement)
+end if
+
+if IsValid(w_rech_patient) then
+	w_rech_patient.setfocus()
+	close(w_rech_patient)
+end if
+
+if IsValid(w_rech_patient_rappels) then
+	w_rech_patient_rappels.setfocus()
+	close(w_rech_patient_rappels)
+end if
+
+if IsValid(w_recu) then
+   close(w_recu)
+end if
+
+if IsValid(w_recuautodate) then
+	w_recuautodate.setfocus()
+	close(w_recuautodate)
+end if
+
+if IsValid(w_referents) then
+	w_referents.setfocus()
+	if w_referents.changement = 1 then 
+     if error_type(200) = 1 then
+	      w_referents.save()
+		end if
+	end if
+   close(w_referents)
+end if
+
+if IsValid(w_registration) then
+	w_registration.setfocus()
+	close(w_registration)
+end if
+
+If IsValid(w_selection) then
+	w_selection.setfocus()
+	close(w_selection)
+end if
+
+if IsValid(w_status) then
+	w_status.setfocus()
+	if w_status.changement = 1 then 
+     if error_type(200) = 1 then
+	      w_status.save()
+		end if
+	end if
+   close(w_status)
+end if
+
+if IsValid(w_status_patients) then
+	w_status_patients.setfocus()
+	close(w_status_patients)
+end if
+
+if IsValid(w_traitements) then
+	w_traitements.setfocus()
+	if w_traitements.changement = 1 then 
+     if error_type(200) = 1 then
+	      w_traitements.sauve()
+		end if
+	end if
+	close(w_traitements)
+end  if
+
+if IsValid(w_type_traitements) then
+	w_type_traitements.setfocus()
+	if w_type_traitements.changement = 1 then 
+     if error_type(200) = 1 then
+	      w_type_traitements.maj()
+		end if
+	end if
+	close(w_type_traitements)
+end  if
+
+//if isvalid(w_cincout) then
+//	close(w_cincout)
+//end if
+
+if isvalid(w_cincoutpatrelache) then
+	close(w_cincoutpatrelache)
+end if
+
+Close (w_principal)
+end subroutine
+

@@ -1,0 +1,74 @@
+﻿$PBExportHeader$gf_enleveraccents.srf
+global type gf_enleveraccents from function_object
+end type
+
+forward prototypes
+global function string gf_enleveraccents (string as_string)
+end prototypes
+
+global function string gf_enleveraccents (string as_string);string ls_caract[]
+int i, li_nb
+
+ls_caract[1] = 'À'
+ls_caract[2] = 'Â'
+ls_caract[3] = 'Ä'
+ls_caract[4] = 'É'
+ls_caract[5] = 'È'
+ls_caract[6] = 'Ë'
+ls_caract[7] = 'Ê'
+ls_caract[8] = 'Î'
+ls_caract[9] = 'Ï'
+ls_caract[10] = 'Ô'
+ls_caract[11] = 'Ö'
+ls_caract[12] = 'Û'
+ls_caract[13] = 'Ü'
+
+ls_caract[14] = 'à'
+ls_caract[15] = 'â'
+ls_caract[16] = 'ä'
+ls_caract[17] = 'é'
+ls_caract[18] = 'è'
+ls_caract[19] = 'ë'
+ls_caract[20] = 'ê'
+ls_caract[21] = 'î'
+ls_caract[22] = 'ï'
+ls_caract[23] = 'ô'
+ls_caract[24] = 'ö'
+ls_caract[25] = 'û'
+ls_caract[26] = 'ü'
+
+ls_caract[27] = 'A'
+ls_caract[28] = 'A'
+ls_caract[29] = 'A'
+ls_caract[30] = 'E'
+ls_caract[31] = 'E'
+ls_caract[32] = 'E'
+ls_caract[33] = 'E'
+ls_caract[34] = 'I'
+ls_caract[35] = 'I'
+ls_caract[36] = 'O'
+ls_caract[37] = 'O'
+ls_caract[38] = 'U'
+ls_caract[39] = 'U'
+
+ls_caract[40] = 'a'
+ls_caract[41] = 'a'
+ls_caract[42] = 'a'
+ls_caract[43] = 'e'
+ls_caract[44] = 'e'
+ls_caract[45] = 'e'
+ls_caract[46] = 'e'
+ls_caract[47] = 'i'
+ls_caract[48] = 'i'
+ls_caract[49] = 'o'
+ls_caract[50] = 'o'
+ls_caract[51] = 'u'
+ls_caract[52] = 'u'
+
+for i = 1 to 26
+	as_string = rep(as_string, ls_caract[i], ls_caract[i + 26])
+next
+
+return as_string
+end function
+

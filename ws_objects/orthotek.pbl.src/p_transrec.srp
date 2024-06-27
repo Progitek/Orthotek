@@ -1,0 +1,13 @@
+﻿$PBExportHeader$p_transrec.srp
+PIPELINE(source_connect=autre,destination_connect=orthotek,type=create,commit=100,errors=100)
+SOURCE(name="transactionsrecs",COLUMN(type=varchar,name="numero",dbtype="VARCHAR(12)",nulls_allowed=yes)
+ COLUMN(type=datetime,name="datetr",dbtype="DATETIME",nulls_allowed=yes)
+ COLUMN(type=varchar,name="typetr",dbtype="VARCHAR(8)",nulls_allowed=yes)
+ COLUMN(type=varchar,name="reference",dbtype="VARCHAR(19)",nulls_allowed=yes)
+ COLUMN(type=decimal,name="montant",dbtype="CURRENCY",nulls_allowed=yes))
+RETRIEVE(statement="PBSELECT(TABLE(NAME=~"transactionsrecs~") COLUMN(NAME=~"transactionsrecs.numero~")COLUMN(NAME=~"transactionsrecs.datetr~")COLUMN(NAME=~"transactionsrecs.typetr~")COLUMN(NAME=~"transactionsrecs.reference~")COLUMN(NAME=~"transactionsrecs.montant~"))")
+DESTINATION(name="transactionsrecs",COLUMN(type=varchar,name="numero",dbtype="char(12)",nulls_allowed=yes)
+ COLUMN(type=datetime,name="datetr",dbtype="timestamp",nulls_allowed=yes)
+ COLUMN(type=varchar,name="typetr",dbtype="char(8)",nulls_allowed=yes)
+ COLUMN(type=varchar,name="reference",dbtype="char(19)",nulls_allowed=yes)
+ COLUMN(type=decimal,name="montant",dbtype="decimal(19,4)",nulls_allowed=yes))

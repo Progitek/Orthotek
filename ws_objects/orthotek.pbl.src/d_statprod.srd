@@ -1,0 +1,114 @@
+﻿$PBExportHeader$d_statprod.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=134217750 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=640 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=64 color="536870912" )
+detail(height=1064 color="536870912" )
+table(column=(type=decimal(2) updatewhereclause=yes name=janvier1 dbname="janvier1" )
+ column=(type=decimal(2) updatewhereclause=yes name=janvier dbname="janvier" )
+ column=(type=decimal(2) updatewhereclause=yes name=fevrier1 dbname="fevrier1" )
+ column=(type=decimal(2) updatewhereclause=yes name=fevrier dbname="fevrier" )
+ column=(type=decimal(2) updatewhereclause=yes name=mars1 dbname="mars1" )
+ column=(type=decimal(2) updatewhereclause=yes name=mars dbname="mars" )
+ column=(type=decimal(2) updatewhereclause=yes name=avril1 dbname="avril1" )
+ column=(type=decimal(2) updatewhereclause=yes name=avril dbname="avril" )
+ column=(type=decimal(2) updatewhereclause=yes name=mai1 dbname="mai1" )
+ column=(type=decimal(2) updatewhereclause=yes name=mai dbname="mai" )
+ column=(type=decimal(2) updatewhereclause=yes name=juin1 dbname="juin1" )
+ column=(type=decimal(2) updatewhereclause=yes name=juin dbname="juin" )
+ column=(type=decimal(2) updatewhereclause=yes name=juillet1 dbname="juillet1" )
+ column=(type=decimal(2) updatewhereclause=yes name=juillet dbname="juillet" )
+ column=(type=decimal(2) updatewhereclause=yes name=aout1 dbname="aout1" )
+ column=(type=decimal(2) updatewhereclause=yes name=aout dbname="aout" )
+ column=(type=decimal(2) updatewhereclause=yes name=septembre1 dbname="septembre1" )
+ column=(type=decimal(2) updatewhereclause=yes name=septembre dbname="septembre" )
+ column=(type=decimal(2) updatewhereclause=yes name=octobre1 dbname="octobre1" )
+ column=(type=decimal(2) updatewhereclause=yes name=octobre dbname="octobre" )
+ column=(type=decimal(2) updatewhereclause=yes name=novembre1 dbname="novembre1" )
+ column=(type=decimal(2) updatewhereclause=yes name=novembre dbname="novembre" )
+ column=(type=decimal(2) updatewhereclause=yes name=decembre1 dbname="decembre1" )
+ column=(type=decimal(2) updatewhereclause=yes name=decembre dbname="decembre" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_adresse dbname="ortho_id.dr_adresse" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_ville dbname="ortho_id.dr_ville" )
+ column=(type=char(7) updatewhereclause=yes name=ortho_id_dr_code_postal dbname="ortho_id.dr_code_postal" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_province dbname="ortho_id.dr_province" )
+ column=(type=char(15) updatewhereclause=yes name=ortho_id_dr_tel_bur dbname="ortho_id.dr_tel_bur" )
+ retrieve="  SELECT DISTINCT (select sum(montant_original) from traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id where patient.no_ortho = :ra_orthoid and year(debut_traitement) = :ra_year and month(debut_traitement) = 1) as janvier1,
+			(if janvier1 is null then 0 else janvier1 endif) as janvier,
+			(select sum(montant_original) from traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id where patient.no_ortho = :ra_orthoid and year(debut_traitement) = :ra_year and month(debut_traitement) = 2) as fevrier1,
+         (if fevrier1 is null then 0 else fevrier1 endif) as fevrier,
+			(select sum(montant_original) from traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id where patient.no_ortho = :ra_orthoid and year(debut_traitement) = :ra_year and month(debut_traitement) = 3) as mars1,
+         (if mars1 is null then 0 else mars1 endif) as mars,
+			(select sum(montant_original) from traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id where patient.no_ortho = :ra_orthoid and year(debut_traitement) = :ra_year and month(debut_traitement) = 4) as avril1,
+         (if avril1 is null then 0 else avril1 endif) as avril,
+			(select sum(montant_original) from traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id where patient.no_ortho = :ra_orthoid and year(debut_traitement) = :ra_year and month(debut_traitement) = 5) as mai1,
+         (if mai1 is null then 0 else mai1 endif) as mai,
+			(select sum(montant_original) from traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id where patient.no_ortho = :ra_orthoid and year(debut_traitement) = :ra_year and month(debut_traitement) = 6) as juin1,
+         (if juin1 is null then 0 else juin1 endif) as juin, 
+			(select sum(montant_original) from traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id where patient.no_ortho = :ra_orthoid and year(debut_traitement) = :ra_year and month(debut_traitement) = 7) as juillet1,
+         (if juillet1 is null then 0 else juillet1 endif) as juillet,
+			(select sum(montant_original) from traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id where patient.no_ortho = :ra_orthoid and year(debut_traitement) = :ra_year and month(debut_traitement) = 8) as aout1,
+         (if aout1 is null then 0 else aout1 endif) as aout,
+			(select sum(montant_original) from traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id where patient.no_ortho = :ra_orthoid and year(debut_traitement) = :ra_year and month(debut_traitement) = 9) as septembre1,
+         (if septembre1 is null then 0 else septembre1 endif) as septembre,
+			(select sum(montant_original) from traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id where patient.no_ortho = :ra_orthoid and year(debut_traitement) = :ra_year and month(debut_traitement) = 10) as octobre1,
+         (if octobre1 is null then 0 else octobre1 endif) as octobre,
+			(select sum(montant_original) from traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id where patient.no_ortho = :ra_orthoid and year(debut_traitement) = :ra_year and month(debut_traitement) = 11) as novembre1,
+         (if novembre1 is null then 0 else novembre1 endif) as novembre,
+			(select sum(montant_original) from traitements INNER JOIN patient ON traitements.patient_id = patient.patient_id where patient.no_ortho = :ra_orthoid and year(debut_traitement) = :ra_year and month(debut_traitement) = 12) as decembre1,
+   		(if decembre1 is null then 0 else decembre1 endif) as decembre,
+         ortho_id.dr_nom_complet,
+         ortho_id.dr_adresse,
+         ortho_id.dr_ville,
+         ortho_id.dr_code_postal,
+         ortho_id.dr_province,
+         ortho_id.dr_tel_bur 
+	FROM  patient INNER JOIN traitements ON patient.patient_id = traitements.patient_id
+                 INNER JOIN ortho_id ON patient.no_ortho = ortho_id.ortho_id
+	WHERE ortho_id = :ra_orthoid" arguments=(("ra_year", number),("ra_orthoid", number)) )
+column(band=header id=25 alignment="0" tabsequence=32766 border="0" color="33554432" x="55" y="28" height="64" width="1353" format="[general]" html.valueishtml="0"  name=ortho_id_dr_nom_complet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=26 alignment="0" tabsequence=32766 border="0" color="33554432" x="55" y="124" height="64" width="1353" format="[general]" html.valueishtml="0"  name=ortho_id_dr_adresse visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression=" ortho_id_dr_ville + ' ( ' + ortho_id_dr_province + ' ) '"border="0" color="33554432" x="55" y="220" height="64" width="1353" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=28 alignment="0" tabsequence=32766 border="0" color="33554432" x="55" y="316" height="64" width="1353" format="[general]" html.valueishtml="0"  name=ortho_id_dr_code_postal visible="1" editmask.mask="XXX XXX" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=30 alignment="0" tabsequence=32766 border="0" color="33554432" x="55" y="412" height="64" width="1353" format="[general]" html.valueishtml="0"  name=ortho_id_dr_tel_bur visible="1" editmask.mask="(###) ###-####" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Montant des traitements facturés" border="0" color="33554432" x="713" y="564" height="64" width="942" html.valueishtml="0"  name=t_traitfact visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Mois" border="0" color="33554432" x="55" y="564" height="64" width="206" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="14" y1="632" x2="2007" y2="632"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="713" y="8" height="64" width="571" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=janvier visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="33554432" x="713" y="92" height="64" width="571" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=fevrier visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="713" y="172" height="64" width="571" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=mars visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="33554432" x="713" y="252" height="64" width="571" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=avril visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="33554432" x="713" y="332" height="64" width="571" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=mai visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="33554432" x="713" y="412" height="64" width="571" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=juin visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="1" tabsequence=32766 border="0" color="33554432" x="713" y="492" height="64" width="571" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=juillet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="1" tabsequence=32766 border="0" color="33554432" x="713" y="572" height="64" width="571" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=aout visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=18 alignment="1" tabsequence=32766 border="0" color="33554432" x="713" y="652" height="64" width="571" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=septembre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=20 alignment="1" tabsequence=32766 border="0" color="33554432" x="713" y="732" height="64" width="571" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=octobre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=22 alignment="1" tabsequence=32766 border="0" color="33554432" x="713" y="812" height="64" width="571" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=novembre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=24 alignment="1" tabsequence=32766 border="0" color="33554432" x="713" y="892" height="64" width="571" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=decembre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Total" border="0" color="33554432" x="14" y="988" height="64" width="146" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression=" janvier + fevrier + mars + avril + mai + juin + juillet  + aout + septembre + octobre  + novembre + decembre "border="0" color="33554432" x="709" y="988" height="64" width="571" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="JANVIER" border="0" color="33554432" x="14" y="12" height="64" width="416" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="FÉVRIER" border="0" color="33554432" x="14" y="92" height="64" width="416" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="MARS" border="0" color="33554432" x="14" y="172" height="64" width="416" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="AVRIL" border="0" color="33554432" x="14" y="252" height="64" width="416" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="MAI" border="0" color="33554432" x="14" y="332" height="64" width="416" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="JUIN" border="0" color="33554432" x="14" y="412" height="64" width="416" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="JUILLET" border="0" color="33554432" x="14" y="492" height="64" width="416" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="AOÛT" border="0" color="33554432" x="14" y="572" height="64" width="416" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="SEPTEMBRE" border="0" color="33554432" x="14" y="652" height="64" width="416" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="OCTOBRE" border="0" color="33554432" x="14" y="732" height="64" width="416" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="NOVEMBRE" border="0" color="33554432" x="14" y="812" height="64" width="416" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="DÉCEMBRE" border="0" color="33554432" x="14" y="892" height="64" width="416" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=detail x1="5" y1="972" x2="1998" y2="972"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=footer alignment="0" text="Imprimé le: " border="0" color="0" x="18" y="4" height="56" width="311" html.valueishtml="0"  name=t_printedon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="347" y="4" height="56" width="411" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="© Orthotek" border="0" color="0" x="1435" y="4" height="56" width="343" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2427" y="4" height="56" width="686" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

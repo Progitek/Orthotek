@@ -1,0 +1,94 @@
+﻿$PBExportHeader$m_paiement.srm
+forward
+global type m_paiement from menu
+end type
+type m_choix from menu within m_paiement
+end type
+type m_dtruirepaiement from menu within m_choix
+end type
+type m_choix from menu within m_paiement
+m_dtruirepaiement m_dtruirepaiement
+end type
+global type m_paiement from menu
+m_choix m_choix
+end type
+end forward
+
+global type m_paiement from menu
+m_choix m_choix
+end type
+global m_paiement m_paiement
+
+on m_paiement.create
+m_paiement=this
+call super::create
+this.m_choix=create m_choix
+this.Item[UpperBound(this.Item)+1]=this.m_choix
+end on
+
+on m_paiement.destroy
+call super::destroy
+destroy(this.m_choix)
+end on
+
+type m_choix from menu within m_paiement
+m_dtruirepaiement m_dtruirepaiement
+end type
+
+on m_choix.create
+call super::create
+this.text = "Choix"
+this.m_dtruirepaiement=create m_dtruirepaiement
+this.Item[UpperBound(this.Item)+1]=this.m_dtruirepaiement
+end on
+
+on m_choix.destroy
+call super::destroy
+destroy(this.m_dtruirepaiement)
+end on
+
+type m_dtruirepaiement from menu within m_choix
+end type
+
+on m_dtruirepaiement.create
+call super::create
+this.text = "Supprimer paiement"
+end on
+
+event clicked;long enr
+string coche, v_password, montant, v_montant
+
+enr = w_traitements.tab_sommaires.tabpage_paiements.dw_sommaire_paiement.getrow()
+coche = w_traitements.tab_sommaires.tabpage_paiements.dw_sommaire_paiement.getitemstring(enr,"recu")
+if coche = "1" then
+	if messagebox("Avertissement","Vous ne pouvez pas supprimer un paiement pour lequel un reçu a été émis sauf si vous en avez eu l'autorisation!",Question!,OkCancel!,2) = 1 then
+		select password into :v_password from password where typepass = 'paiement';
+		if isnull(v_password) = true or v_password = "" then
+			messagebox("Avertissement!","Le mot de passe est 'paiement', vous devez le changer!",Information!)
+			insert into password (password, typepass, ortho_id) values ('paiement', 'paiement',0);
+			commit;
+		end if
+		openwithparm(w_password_supp_paiement,"paiement")
+		if message.stringparm = "ok" then
+			if enr > 0 then
+				w_traitements.tab_sommaires.tabpage_paiements.dw_sommaire_paiement.deleterow(enr)
+				w_traitements.changement = 1
+			end if
+		end if
+	end if
+else
+	if enr > 0 then
+		montant = string(w_traitements.tab_sommaires.tabpage_paiements.dw_sommaire_paiement.getitemdate(enr,"date_paiement"))
+		v_montant = string(w_traitements.tab_sommaires.tabpage_paiements.dw_sommaire_paiement.getitemnumber(enr,"montant_recu"))
+		if messagebox("Avertissement","Êtes-vous sur de vouloir supprimer le paiement du "+montant+" de " + v_montant +"$",Question!,OkCancel!,2) = 1 then
+			w_traitements.tab_sommaires.tabpage_paiements.dw_sommaire_paiement.deleterow(enr)
+			w_traitements.changement = 1
+		end if
+	end if
+end if
+end event
+
+on m_dtruirepaiement.destroy
+call super::destroy
+end on
+

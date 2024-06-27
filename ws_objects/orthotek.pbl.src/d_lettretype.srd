@@ -1,0 +1,17 @@
+﻿$PBExportHeader$d_lettretype.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=char(50) updatewhereclause=yes name=nomlettre dbname="t_lettretype.nomlettre" )
+ column=(type=date updatewhereclause=yes name=lettredate dbname="t_lettretype.lettredate" )
+ column=(type=long updatewhereclause=yes name=id_lettre dbname="t_lettretype.id_lettre" )
+ retrieve="select t_lettretype.nomlettre,
+       t_lettretype.lettredate,
+       t_lettretype.id_lettre
+from   t_lettretype" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="137" y="4" height="64" width="1042" format="[general]" html.valueishtml="0"  name=nomlettre visible="1" edit.limit=50 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="1193" y="4" height="64" width="329" format="[general]" html.valueishtml="0"  name=lettredate visible="1" editmask.mask="dd/mm/yyyy" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

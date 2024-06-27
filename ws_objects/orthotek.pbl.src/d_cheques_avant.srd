@@ -1,0 +1,81 @@
+﻿$PBExportHeader$d_cheques_avant.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=104 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=traitement_patient_id dbname="cheques_postdates.traitement_patient_id" dbalias=".traitement_patient_id" )
+ column=(type=decimal(2) updatewhereclause=yes name=solde_ligne dbname="cheques_postdates.solde_ligne" dbalias=".solde_ligne" )
+ column=(type=decimal(2) updatewhereclause=yes name=paiement dbname="cheques_postdates.paiement" dbalias=".paiement" )
+ column=(type=date updatewhereclause=yes name=date_cheque dbname="cheques_postdates.date_cheque" dbalias=".date_cheque" )
+ column=(type=long updatewhereclause=yes key=yes identity=yes name=cheques_postdates_id dbname="cheques_postdates.cheques_postdates_id" dbalias=".cheques_postdates_id" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=indicateur dbname="cheques_postdates.indicateur" dbalias=".indicateur" )
+ column=(type=number updatewhereclause=yes name=affect dbname="cheques_postdates.affect" dbalias=".affect" )
+ column=(type=char(1) updatewhereclause=yes name=recu dbname="cheques_postdates.recu" dbalias=".recu" )
+ column=(type=long updatewhereclause=yes name=nocheque dbname="cheques_postdates.nocheque" dbalias=".nocheque" )
+ column=(type=char(50) updatewhereclause=yes name=nomresp dbname="cheques_postdates.nomresp" dbalias=".nomresp" )
+ column=(type=long updatewhereclause=yes name=id_contact dbname="cheques_postdates.id_contact" dbalias=".id_contact" )
+ column=(type=char(20) updatewhereclause=yes name=modalite dbname="cheques_postdates.modalite" dbalias=".modalite" )
+ column=(type=char(20) updatewhereclause=yes name=nocarte dbname="cheques_postdates.nocarte" dbalias=".nocarte" )
+ column=(type=date updatewhereclause=yes name=datecarte dbname="cheques_postdates.datecarte" dbalias=".datecarte" )
+ column=(type=number updatewhereclause=yes name=ind dbname="cheques_postdates.ind" dbalias=".ind" )
+ column=(type=long updatewhereclause=yes name=id_lot dbname="cheques_postdates.id_lot" dbalias=".id_lot" )
+ column=(type=number updatewhereclause=yes name=taxe dbname="cheques_postdates.taxe" dbalias=".taxe" )
+ column=(type=long updatewhereclause=yes name=id_satellite dbname="cheques_postdates.id_satellite" dbalias=".id_satellite" )
+ retrieve="  SELECT cheques_postdates.traitement_patient_id,   
+         cheques_postdates.solde_ligne,   
+         cheques_postdates.paiement,   
+         cheques_postdates.date_cheque,   
+         cheques_postdates.cheques_postdates_id,   
+         cheques_postdates.indicateur,   
+         cheques_postdates.affect,   
+         cheques_postdates.recu,   
+         cheques_postdates.nocheque,   
+         cheques_postdates.nomresp,   
+         cheques_postdates.id_contact,   
+         cheques_postdates.modalite,   
+         cheques_postdates.nocarte,   
+         cheques_postdates.datecarte,   
+         cheques_postdates.ind,   
+         cheques_postdates.id_lot,
+			cheques_postdates.taxe,
+			cheques_postdates.id_satellite  
+    FROM cheques_postdates  
+WHERE 	cheques_postdates.indicateur <> '1' and date_cheque <= today()
+ORDER BY cheques_postdates.traitement_patient_id ASC,   
+         cheques_postdates.date_cheque ASC   
+" update="cheques_postdates" updatewhere=0 updatekeyinplace=yes )
+text(band=header alignment="2" text="Date" border="0" color="0" x="233" y="8" height="64" width="201" html.valueishtml="0"  name=date_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Paiement" border="0" color="0" x="576" y="8" height="64" width="251" html.valueishtml="0"  name=paiement_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="2661" y="4" height="64" width="1202" format="[General]" html.valueishtml="0"  name=traitement_patient_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="4197" y="0" height="64" width="1202" format="[General]" html.valueishtml="0"  name=solde_ligne visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="5399" y="0" height="64" width="1202" format="[General]" html.valueishtml="0"  name=cheques_postdates_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="6601" y="0" height="64" width="73" format="[general]" html.valueishtml="0"  name=indicateur visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="1" tabsequence=20 border="5" color="16777215" x="544" y="4" height="64" width="311" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=paiement visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="8421504" )
+compute(band=detail alignment="0" expression="sum(  paiement  for all )"border="0" color="0" x="901" y="8" height="64" width="329" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=total_cheques visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="6674" y="0" height="64" width="279" format="[general]" html.valueishtml="0"  name=date_cheque visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="6953" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=affect visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="8114" y="0" height="64" width="27" format="[general]" html.valueishtml="0"  name=recu visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="8142" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=nocheque visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="9303" y="0" height="64" width="1353" format="[general]" html.valueishtml="0"  name=nomresp visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="10656" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=id_contact visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="11817" y="0" height="64" width="539" format="[general]" html.valueishtml="0"  name=modalite visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="12357" y="0" height="64" width="539" format="[general]" html.valueishtml="0"  name=nocarte visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="12896" y="0" height="64" width="512" format="[general]" html.valueishtml="0"  name=datecarte visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="13408" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=ind visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="0" x="14569" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=id_lot visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="0" tabsequence=30 border="0" color="0" x="15730" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=taxe visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=footer x1="0" y1="8" x2="1641" y2="8"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="79741120" )
+text(band=footer alignment="0" text="Total:" border="0" color="0" x="261" y="20" height="76" width="174" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+column(band=detail id=18 alignment="0" tabsequence=40 border="0" color="0" x="16891" y="0" height="64" width="2135" html.valueishtml="0"  name=id_satellite visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

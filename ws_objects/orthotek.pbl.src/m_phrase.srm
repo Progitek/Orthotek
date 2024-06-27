@@ -1,0 +1,162 @@
+﻿$PBExportHeader$m_phrase.srm
+forward
+global type m_phrase from menu
+end type
+type m_changercouleur from menu within m_phrase
+end type
+type m_changerlenom from menu within m_phrase
+end type
+type m_changerordre from menu within m_phrase
+end type
+global type m_phrase from menu
+m_changercouleur m_changercouleur
+m_changerlenom m_changerlenom
+m_changerordre m_changerordre
+end type
+end forward
+
+global type m_phrase from menu
+m_changercouleur m_changercouleur
+m_changerlenom m_changerlenom
+m_changerordre m_changerordre
+end type
+global m_phrase m_phrase
+
+type variables
+public long il_handle
+end variables
+
+forward prototypes
+public subroutine of_translate ()
+end prototypes
+
+public subroutine of_translate ();if gnv_app.of_getlangue() = 'an' then
+	m_phrase.m_changercouleur.text = "Change color"
+	m_phrase.m_changerlenom.text = "Change name"
+	m_phrase.m_changerordre.text = "Changer order"
+end if
+end subroutine
+
+on m_phrase.create
+m_phrase=this
+call super::create
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_changercouleur=create m_changercouleur
+this.m_changerlenom=create m_changerlenom
+this.m_changerordre=create m_changerordre
+this.Item[UpperBound(this.Item)+1]=this.m_changercouleur
+this.Item[UpperBound(this.Item)+1]=this.m_changerlenom
+this.Item[UpperBound(this.Item)+1]=this.m_changerordre
+end on
+
+on m_phrase.destroy
+call super::destroy
+destroy(this.m_changercouleur)
+destroy(this.m_changerlenom)
+destroy(this.m_changerordre)
+end on
+
+type m_changercouleur from menu within m_phrase
+end type
+
+on m_changercouleur.create
+call super::create
+this.text = "Changer couleur"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_changercouleur.destroy
+call super::destroy
+end on
+
+event clicked;w_phrasegroupe.uo_listcode.of_changercouleur(il_handle)
+end event
+
+type m_changerlenom from menu within m_phrase
+end type
+
+on m_changerlenom.create
+call super::create
+this.text = "Changer le nom"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_changerlenom.destroy
+call super::destroy
+end on
+
+event clicked;w_phrasegroupe.uo_listcode.of_changernom(il_handle)
+end event
+
+type m_changerordre from menu within m_phrase
+end type
+
+on m_changerordre.create
+call super::create
+this.text = "Changer Ordre"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_changerordre.destroy
+call super::destroy
+end on
+
+event clicked;w_phrasegroupe.uo_listcode.of_changerordre(il_handle)
+end event
+

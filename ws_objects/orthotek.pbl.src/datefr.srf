@@ -1,0 +1,59 @@
+﻿$PBExportHeader$datefr.srf
+global type datefr from function_object
+end type
+
+forward prototypes
+global function string datefr (date lf_date)
+end prototypes
+
+global function string datefr (date lf_date);string n,j,m,a
+
+choose case DayName(lf_date)
+	case "Monday"
+		n = "Lundi"
+	case "Tuesday"
+		n = "Mardi"
+	case "Wednesday"
+		n = "Mercredi"
+	case "Thursday"
+		n = "Jeudi"
+	case "Friday"
+		n = "Vendredi"
+	case "Saturday"
+		n = "Samedi"
+	case "Sunday"
+		n = "Dimanche"
+end choose
+
+j = string(Day(lf_date))
+
+choose case string(Month(lf_date))
+case "1"
+	m = "janvier"
+case "2"
+	m = "février"
+case "3"
+	m = "mars"
+case "4"
+	m = "avril"
+case "5"
+	m = "mai"
+case "6"
+	m = "juin"
+case "7"
+	m = "juillet"
+case "8"
+	m = "août"
+case "9"
+	m = "septembre"
+case "10"
+	m = "octobre"
+case "11"
+	m = "novembre"
+case "12"
+	m = "décembre"
+end choose
+a = string(year(lf_date))
+return  "Le " + j + " " + m + "  " + a
+end function
+

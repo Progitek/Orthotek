@@ -1,0 +1,55 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_status.sru
+$PBExportComments$(PRO) DataWindow Property - The status tabpage
+forward
+global type pro_u_tabpg_dwproperty_status from pfc_u_tabpg_dwproperty_status
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_status from pfc_u_tabpg_dwproperty_status
+end type
+global pro_u_tabpg_dwproperty_status pro_u_tabpg_dwproperty_status
+
+on pro_u_tabpg_dwproperty_status.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_status.destroy
+call super::destroy
+end on
+
+type gb_column from pfc_u_tabpg_dwproperty_status`gb_column within pro_u_tabpg_dwproperty_status
+end type
+
+type dw_requestorview from pfc_u_tabpg_dwproperty_status`dw_requestorview within pro_u_tabpg_dwproperty_status
+end type
+
+type st_rownumber_t from pfc_u_tabpg_dwproperty_status`st_rownumber_t within pro_u_tabpg_dwproperty_status
+end type
+
+type st_rowstatus from pfc_u_tabpg_dwproperty_status`st_rowstatus within pro_u_tabpg_dwproperty_status
+end type
+
+type st_columnname_t from pfc_u_tabpg_dwproperty_status`st_columnname_t within pro_u_tabpg_dwproperty_status
+end type
+
+type st_columnstatus from pfc_u_tabpg_dwproperty_status`st_columnstatus within pro_u_tabpg_dwproperty_status
+end type
+
+type ddlb_rowstatus from pfc_u_tabpg_dwproperty_status`ddlb_rowstatus within pro_u_tabpg_dwproperty_status
+end type
+
+type ddlb_columnstatus from pfc_u_tabpg_dwproperty_status`ddlb_columnstatus within pro_u_tabpg_dwproperty_status
+end type
+
+type st_rownumber from pfc_u_tabpg_dwproperty_status`st_rownumber within pro_u_tabpg_dwproperty_status
+end type
+
+type st_columnname from pfc_u_tabpg_dwproperty_status`st_columnname within pro_u_tabpg_dwproperty_status
+end type
+
+type cbx_assistrow from pfc_u_tabpg_dwproperty_status`cbx_assistrow within pro_u_tabpg_dwproperty_status
+end type
+
+type gb_row from pfc_u_tabpg_dwproperty_status`gb_row within pro_u_tabpg_dwproperty_status
+end type
+

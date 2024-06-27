@@ -1,0 +1,20 @@
+﻿$PBExportHeader$remplir_string.srf
+global type remplir_string from function_object
+end type
+
+forward prototypes
+global function string remplir_string (long nbblanc, string oristring)
+end prototypes
+
+global function string remplir_string (long nbblanc, string oristring);string ls_newstring
+int i
+long ll_nbcarac
+
+ll_nbcarac = len(oristring)
+ls_newstring = oristring
+for i = ll_nbcarac to nbblanc - 1
+	ls_newstring += " "
+next
+return ls_newstring
+end function
+

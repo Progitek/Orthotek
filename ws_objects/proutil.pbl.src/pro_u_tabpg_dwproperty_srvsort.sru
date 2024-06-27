@@ -1,0 +1,46 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_srvsort.sru
+$PBExportComments$(PRO) DataWindow Property - The Sort service tabpage
+forward
+global type pro_u_tabpg_dwproperty_srvsort from pfc_u_tabpg_dwproperty_srvsort
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_srvsort from pfc_u_tabpg_dwproperty_srvsort
+end type
+global pro_u_tabpg_dwproperty_srvsort pro_u_tabpg_dwproperty_srvsort
+
+on pro_u_tabpg_dwproperty_srvsort.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_srvsort.destroy
+call super::destroy
+end on
+
+type st_style from pfc_u_tabpg_dwproperty_srvsort`st_style within pro_u_tabpg_dwproperty_srvsort
+end type
+
+type cbx_columnheader from pfc_u_tabpg_dwproperty_srvsort`cbx_columnheader within pro_u_tabpg_dwproperty_srvsort
+end type
+
+type cbx_visibleonly from pfc_u_tabpg_dwproperty_srvsort`cbx_visibleonly within pro_u_tabpg_dwproperty_srvsort
+end type
+
+type cbx_usedisplayvalue from pfc_u_tabpg_dwproperty_srvsort`cbx_usedisplayvalue within pro_u_tabpg_dwproperty_srvsort
+end type
+
+type st_excludecols from pfc_u_tabpg_dwproperty_srvsort`st_excludecols within pro_u_tabpg_dwproperty_srvsort
+end type
+
+type ddlb_style from pfc_u_tabpg_dwproperty_srvsort`ddlb_style within pro_u_tabpg_dwproperty_srvsort
+end type
+
+type lb_excludecols from pfc_u_tabpg_dwproperty_srvsort`lb_excludecols within pro_u_tabpg_dwproperty_srvsort
+end type
+
+type st_headersuffix from pfc_u_tabpg_dwproperty_srvsort`st_headersuffix within pro_u_tabpg_dwproperty_srvsort
+end type
+
+type sle_headersuffix from pfc_u_tabpg_dwproperty_srvsort`sle_headersuffix within pro_u_tabpg_dwproperty_srvsort
+end type
+

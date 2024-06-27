@@ -1,0 +1,30 @@
+﻿$PBExportHeader$d_migraterecuresp.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=136 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes identity=yes name=paiement_paiement_id dbname="paiement.paiement_id" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=paiement_nomresp dbname="paiement.nomresp" )
+ column=(type=long updatewhereclause=yes name=paiement_traitement_patient_id dbname="paiement.traitement_patient_id" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"paiement~" )  TABLE(NAME=~"traitements~" )  TABLE(NAME=~"patient~" ) COLUMN(NAME=~"paiement.paiement_id~") COLUMN(NAME=~"paiement.nomresp~") COLUMN(NAME=~"paiement.traitement_patient_id~") COLUMN(NAME=~"patient.patient_prenom~") COLUMN(NAME=~"patient.patient_nom~")    JOIN (LEFT=~"paiement.traitement_patient_id~"    OP =~"=~"RIGHT=~"traitements.traitement_id~" )    JOIN (LEFT=~"traitements.patient_id~"    OP =~"=~"RIGHT=~"patient.patient_id~" )) " update="paiement" updatewhere=0 updatekeyinplace=no )
+text(band=header alignment="2" text="Paiement
+Paiement Id" border="0" color="0" x="5" y="4" height="128" width="329"  name=paiement_paiement_id_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Paiement
+Nomresp" border="0" color="0" x="338" y="4" height="128" width="1399"  name=paiement_nomresp_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Paiement
+Traitement Patient Id" border="0" color="0" x="1742" y="4" height="128" width="549"  name=paiement_traitement_patient_id_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Patient
+Patient Prenom" border="0" color="0" x="2295" y="4" height="128" width="1403"  name=patient_patient_prenom_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Patient
+Patient Nom" border="0" color="0" x="3703" y="4" height="128" width="1399"  name=patient_patient_nom_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="5" y="4" height="76" width="329" format="[general]"  name=paiement_paiement_id edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="338" y="4" height="76" width="1399" format="[general]"  name=paiement_nomresp edit.limit=50 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="0" x="1742" y="4" height="76" width="329" format="[general]"  name=paiement_traitement_patient_id edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="2295" y="4" height="76" width="1403" format="[general]"  name=patient_patient_prenom edit.limit=50 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="3703" y="4" height="76" width="1399" format="[general]"  name=patient_patient_nom edit.limit=50 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

@@ -1,0 +1,36 @@
+﻿$PBExportHeader$d_hortmp.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=124 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=idpat dbname="t_hortrans.idpat" )
+ column=(type=char(101) updatewhereclause=yes name=patnom dbname="compute_0002" )
+ column=(type=date updatewhereclause=yes name=datecal dbname="t_hortrans.datecal" )
+ column=(type=time updatewhereclause=yes name=heure dbname="t_hortrans.heure" )
+ column=(type=char(40) updatewhereclause=yes name=traitnom dbname="traitnom" )
+ column=(type=long updatewhereclause=yes name=duree dbname="t_hortrans.duree" )
+ column=(type=long updatewhereclause=yes name=col dbname="t_hortrans.col" )
+ column=(type=long updatewhereclause=yes name=backcolor dbname="t_hortrans.backcolor" )
+ retrieve="  SELECT t_hortrans.patid as idpat,
+			(select patient_prenom + ' ' + patient_nom from patient where patient_id = idpat),
+			datecal,
+			heure,
+			(select nom_traitement from type_de_traitement where type_traitement_id = idtrait and ortho_id = :ra_orthoid) as traitnom,
+			duree,
+			col,
+			backcolor
+    FROM t_hortrans 
+	WHERE id_specialist = :ra_orthoid;" arguments=(("ra_orthoid", number)) )
+line(band=detail x1="0" y1="120" x2="663" y2="120"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="8421376" x="0" y="0" height="56" width="457" format="[general]" html.valueishtml="0"  name=patnom visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="'d: ' +  duree "border="0" color="8421376" x="462" y="0" height="56" width="91" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="'c: ' +  col"border="0" color="8421376" x="558" y="0" height="56" width="91" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="8421376" x="0" y="60" height="56" width="297" format="[general]" html.valueishtml="0"  name=traitnom visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="0" color="8421376" x="302" y="60" height="56" width="192" format="[general]" html.valueishtml="0"  name=datecal visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="8421376" x="498" y="60" height="56" width="151" format="[time]" html.valueishtml="0"  name=heure visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

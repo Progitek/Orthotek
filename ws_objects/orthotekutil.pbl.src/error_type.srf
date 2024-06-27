@@ -1,0 +1,801 @@
+﻿$PBExportHeader$error_type.srf
+global type error_type from function_object
+end type
+
+forward prototypes
+global subroutine error (integer num)
+global function integer error_type (integer num)
+end prototypes
+
+global subroutine error (integer num);CHOOSE CASE num
+
+CASE 0
+		messagebox("ERREUR!","Erreur système",stopsign!)
+
+CASE 1
+		messagebox("ERREUR!","Erreur pendant la sauvegarde!",stopsign!)
+
+CASE ELSE
+		messagebox("ERREUR!","fonction error()!",stopsign!)
+END CHOOSE
+
+
+end subroutine
+
+global function integer error_type (integer num);if v_langue = 'fr' then 
+	CHOOSE CASE num
+	CASE -1
+		if (SQLCA.sqlCode <> 0) then
+			if not SQLCA.SQLDBCode = -210 then // enlever row locked ds horaire
+				messagebox("ERREUR "+string(SQLCA.SQLDBCode),SQLCA.SQLErrText)
+			end if
+			return 0
+		else
+			return 1
+		end if
+	CASE 0
+		messagebox("ERREUR!","Erreur système",stopsign!)	
+	//ERREUR FROM 50 to 99
+	CASE 50
+		messagebox("Erreur 50","Aucune modification n'a été enregistrée!",stopsign!)
+	CASE 51
+		MessageBox("Erreur 51","Une information est manquante",stopsign!)
+	CASE 52
+		Messagebox("Erreur 52","Une Erreur d'impression est survenue!",stopsign!)
+	CASE 53
+		messagebox("Erreur 53","L'enregistrement des chèques postdatés n'a pas été effectuée!",StopSign!)
+	CASE 54
+		messagebox("Erreur 54","Aucun Orthodontiste sélectionné!",StopSign!)
+	CASE 55
+		messagebox("Erreur 55","Aucun patient sélectionné!",StopSign!)
+	CASE 56
+		messagebox("Erreur 56","Raccourci vers Windows Word introuvable!",StopSign!)
+	CASE 57
+		messagebox("Erreur 57","Impossible d'émettre le reçu!",StopSign!)
+	CASE 58
+		messagebox("Erreur 58","Getrow() in dw_patient_master not found!",StopSign!)
+	CASE 59
+		messagebox("Erreur 59","Le dentiste ne peut être supprimé, car il réfère un patient")
+	CASE 60
+		messagebox("Erreur 60","La variable horstep est null dans t_options!",StopSign!)
+	CASE 61
+		messagebox("Erreur 61","Une erreur est survenue pendant la mise à jour, voir le fichier log pour plus d'information!",StopSign!)
+	CASE 62
+		messagebox("Erreur 62","Le patient est déjà dans la liste des rendez-vous.",StopSign!)
+	CASE 63
+		messagebox("Erreur 63","Le patient n'est pas dans la liste des rendez-vous.",StopSign!)
+	CASE 64
+		messagebox("Erreur 64","Orthotek n'est pas capable d'ouvrir le fichier pat.txt. Vérifiez s'il n'est pas en cour d'utilisation.",StopSign!)
+	CASE 65
+		messagebox("Erreur 65","Orthotek n'est pas capable d'ouvrir le fichier img.xml. Vérifiez s'il n'est pas en cour d'utilisation.",StopSign!)
+	CASE 66
+		messagebox("Erreur 66","Impossible de copier les fichiers pour la mise-à-jour.",StopSign!)
+	CASE 67
+		messagebox("Erreur 67","Impossible de créer le fichier de configurations.",StopSign!)
+	//INFORMATION FROM 100 to 199
+	CASE 100
+		messagebox("Avertissement!","Fonction non disponible!",information!,OK!)
+	CASE 101
+		messagebox("Avertissement!","Il doit y avoir au moins un statut d'entré pour pouvoir faire une facture!",information!,OK!)
+	CASE 102
+		messagebox("Avertissement!","Initialisation des options par défaut",information!,OK!) 
+	CASE 103
+		messagebox("Avertissement!","Veuillez sauvegarder la phase.",information!,OK!)
+	CASE 104
+		messagebox("Avertissement!","Vous devez configurer votre palette de couleur",Information!,OK!)
+	CASE 105
+		messagebox("Avertissement!","Aucun orthodondiste n'a été sélectionné.",Information!,OK!)
+	CASE 106
+		messagebox("Avertissement!","Vous devez entrer vos coordonnées afin de vous enregistrer!",Information!,OK!)
+	CASE 107
+		messagebox("Avertissement!","Les changements seront pris en considération au prochain démarrage!",Information!,OK!)
+	CASE 108
+		messagebox("Avertissement!","Impossible de supprimer le statut mensualité!",Information!,OK!)
+	CASE 109
+		messagebox("Avertissement","Vous devez faire une sauvegarde avant d'imprimer!",Information!,OK!)
+	CASE 110
+		messagebox("Avertissement","Le nombre de factures cochées ne doit pas excéder huit!",Information!,OK!)
+	CASE 111
+		MessageBox ("Avertissement!","Vérifiez l'information suivante dans le dossier du patient: date de naissance.",Information!,OK!)
+	CASE 112
+		MessageBox ("Avertissement!","Vérifiez l'information suivante dans le dossier du patient: langue.",Information!,OK!)
+	CASE 113
+		MessageBox ("Avertissement!","Il n'y a aucun traitement pour ce patient!",Information!,OK!)
+	CASE 114
+		MessageBox ("Avertissement!","Il n'y a aucun coût de traitement associé à ce patient!",Information!,OK!)
+	case 115
+		MessageBox ("Avertissement!","Cette plage est présentement en cour d'utilisation!",Information!,OK!)
+	case 116
+		MessageBox ("Avertissement!","Vous devez sélectionner un patient!",Information!,OK!)
+	case 117
+		MessageBox ("Avertissement!","Les plages AM et PM se supperposent!",Information!,OK!)
+	case 118
+		messagebox ("Avertissement!","Aucun chèque postdaté!!!",Information!,OK!)
+	case 119
+		MessageBox ("Avertissement!","Vous devez sélectionner le type d'étiquette!",Information!,OK!)
+	case 120
+		messagebox ("Avertissement!","Fin des rendez-vous!",Information!,OK!)
+	case 121
+		messagebox ("Avertissement!","Le patient est déjà dans la liste!",Information!,OK!)
+	case 122
+		messagebox ("Avertissement!","Nom du patient incorrecte",Information!,OK!)
+	case 123
+		messagebox ("Avertissement!","Prenom du patient incorrecte",Information!,OK!)
+	case 124
+		messagebox ("Avertissement!","Vous devez sélectionner un traitement",Information!,OK!)
+	case 125
+		messagebox ("Avertissement!","Vous devez sélectionner un document",Information!,OK!)
+	case 126
+		messagebox ("Avertissement!","Cette case possède déjà des informations, le template ne peut être appliqué",Information!,OK!)
+	case 127
+		messagebox ("Avertissement!","Vous devez faire une mise à jour avant de supprimer",Information!,OK!)
+	case 128
+		messagebox ("Avertissement!","Il y a un ou des traitements pour ce patient, impossible de supprimer ce patient",Information!,OK!)
+	case 129
+		messagebox ("Avertissement!","Le mot de passe est éronné",Information!,OK!)
+	case 130	
+		messagebox ("Avertissement!","Veuillez entrer un mot de passe.",Information!,OK!)
+	case 131	
+		messagebox ("Avertissement!","Impossible de supprimer la phase car elle contient des chèques postdatés",Information!,OK!)
+	case 132	
+		messagebox ("Avertissement!","Impossible de supprimer la phase car elle contient des factures",Information!,OK!)
+	case 133
+		messagebox ("Avertissement!","Impossible de supprimer la phase car elle contient des paiements",Information!,OK!)
+	case 134
+		messagebox ("Avertissement!","La date que vous essayez d'entrer est inférieure ou égale à celle d'aujourd'hui",Information!,OK!)
+	case 135
+		messagebox ("Avertissement!","La date et le paiement ne peuvent pas être nulle",Information!,OK!)
+	case 136
+		messagebox ("Avertissement!","Le mot de passe inscrit ne conrrespond pas à la confirmation",Information!,OK!)
+	case 137
+		messagebox ("Avertissement!","Le mot de passe doit contenir au moins 3 caractères",Information!,OK!)
+	case 138
+		messagebox ("Avertissement!","Le mot de passe est 'paiement', vous devez le changer!",Information!,OK!)
+	case 139
+		messagebox ("Avertissement!","Cette couleur à déjà été utilisé.",Information!,Ok!)
+	case 140
+		messagebox ("Avertissement!","Le nombre de template ne peut excéder trois pour la même journée.",Information!,Ok!)
+	case 141
+		messagebox ("Avertissement!","Le template existe déjà pour cette journée.",Information!,Ok!)
+	case 142
+		messagebox ("Avertissement!","Le patient n'a pas de numéro de dossier.",Information!,Ok!)
+	case 143
+		messagebox ("Avertissement!","Cette couleur est présentement utilisé pour un traitement",Information!,Ok!)
+	case 144
+		messagebox ("Avertissement!","Vous devez donner un nom à votre lettre",Information!,OK!)
+	CASE 145
+		messagebox ("Avertissement!","La plage est trop courte pour insérer le bloc sélectionné",Information!,OK!)
+	CASE 146
+		messagebox ("Avertissement!","Il manque soit une introduction, une conclusion ou il n'y a pas de catégorie",Information!,OK!)
+	CASE 147
+		messagebox ("Avertissement!","Cette option n'est pas valide",Information!,OK!)
+	CASE 148
+		messagebox ("Avertissement!","Ce traitement est en cour d'utilisation",Information!,OK!)
+	CASE 149
+		messagebox ("Avertissement!","Nombre de colonnes est indéterminé. Voir les options système",Information!,OK!)
+	CASE 150
+		messagebox ("Avertissement!","Vous ne pouvez supprimer cet enregistrement car il est présentement en cour d'utilisation.",Information!,OK!)
+	CASE 151
+		messagebox ("Avertissement!","Le patient ne possède aucun responsable financier.",Information!,OK!)
+	CASE 152
+		messagebox ("Avertissement!","Vous devez supprimer ce patient pour modifier ce champ.",Information!,Ok!)
+	CASE 153
+		messagebox ("Avertissement!","Vistadent introuvable.",Information!,Ok!)
+	CASE 154
+		messagebox ("Avertissement!","Vous devez installer la library Imaging",Information!,Ok!)
+	CASE 155
+		messagebox ("Avertissement!","Le dossier Vistadent a été créé avec succès",Information!,Ok!)
+	CASE 156
+		messagebox ("Avertissement!","Cette transaction est protégée contre les modifications.",Information!,Ok!)
+	CASE 157
+		messagebox ("Avertissement!","Répertoire introuvable: c:\ii4net\orthotek",Information!,Ok!)
+	CASE 158
+		messagebox ("Avertissement!","Le patient est inscrit comme étant arrivé",Information!,Ok!)
+	CASE 159
+		messagebox ("Avertissement!","Le patient est déjà inscrit comme étant arrivé",Information!,Ok!)
+	CASE 160
+		messagebox ("Avertissement!","Document introuvable.",Information!,Ok!)
+	CASE 161
+		messagebox('Avertissement!',"Il faut renseigner le numéro de client RBC ainsi que le nom dans les options",Information!,OK!)
+	CASE 162
+		messagebox('Avertissement!',"Les noms qui apparaissent en rouge n'ont pas été ajouté au fichier.~n- Les informations bancaires du patient sont peut être absentes. ~n- La date est inférieure à celle d'aujourd'hui. ~n- La modalité ne correspond pas",Information!,Ok!)
+	CASE 163
+		messagebox('Avertissement!', "Le fichier n'a pas été créé car les paiements pré-autorisés sélectionnés sont déjà envoyés",Information!,OK!)
+	CASE 188
+		messagebox('Avertissement!',"Le patient est présentement en transfert, double cliquez sur le nouvel endroit désiré.",Information!,OK!)
+	CASE 190
+		messagebox('Avertissement!',"Le patient est déjà en transfert.",Information!,OK!)
+	CASE 191
+		messagebox('Avertissement!',"Le répertoire de photo est inexistant.", Information!, OK!)
+	CASE 192
+		messagebox('Avertissement!',"Vous devez entrer une date au montage", Information!, OK!)
+	CASE 193
+		messagebox('Avertissement!',"Le patient n'a pas été relâché.", Information!, OK!)
+	CASE 194
+		messagebox('Avertissement!',"Ce paiement a déjà été déposé", Information!, OK!)
+	CASE 195
+		messagebox('Avertissement!',"Un dentiste doit être lié au rapport pour pouvoir imprimer",Information!,Ok!)
+	CASE 196
+		messagebox("Avertissement!","Vous n'avez pas les droits nécessaires pour supprimer un paiement.",information!,OK!)
+	CASE 197
+		messagebox("Avertissement!","Certains paiements comportent des erreurs, aucun n'a été envoyé.~r~nVeuillez consulter le fichier 'C:\ii4net\erreur.log' pour plus de détails.",StopSign!,OK!)
+	CASE 198
+		messagebox("Avertissement!","Assurez-vous que Bitvise Tunnelier est bien installé.",StopSign!,OK!)
+	CASE 199
+		messagebox("Avertissement!","Ce patient a été ajouté à la liste noire",Question!,Ok!)
+	CASE 1000
+		messagebox("Avertissement!","Ce patient a été retiré de la liste noire",Question!,Ok!)
+	CASE 1001
+		messagebox("Avertissement!","Aucun groupe sélectionné.",Question!,Ok!)
+	CASE 1002
+		messagebox("Avertissement!","Vous ne pouvez pas supprimer de personnel à partir de cette page.",Question!,Ok!)
+	CASE 1003
+		messagebox("Avertissement!","Vous devez cocher un sujet pour utiliser cette fonction.",Question!,Ok!)
+	CASE 1004
+		messagebox("Avertissement!","Un groupe de ce nom existe déjà.",Question!,Ok!)
+	CASE 1005
+		messagebox("Avertissement!","L'angle doit être numérique.",Question!,Ok!)
+	CASE 1006
+		messagebox("Avertissement!","Vous n'avez pas accès au module d'imagerie. Veuillez contacter le service à la clientèle pour y avoir accès.",Information!,Ok!)	
+	CASE 1007
+		messagebox("Avertissement!","Vous devez spécifier la date du début de contrat et la date de la première mensualité.",Information!,Ok!)	
+	CASE 1008
+		messagebox("Avertissement","La carte ne peut être produite puisque le patient n'a pas de rendez-vous dans le futur.",Information!,Ok!)	
+	CASE 1009
+		messagebox("Avertissement","Il est impossible de faire le pont, car l'un des paramètres suivants est absent: (nom, prenom, numéro de dossier, date de naissance ou le nom de l'orthodontiste.)",Information!,Ok!)	
+	CASE 1010
+		messagebox("Avertissement","Vous devez attribuer un responsable aux paiements, factures et cheques postdates",Information!,Ok!)
+	CASE 1011
+		messagebox("Avertissement","Le chemin du logiciel externe n'est pas configuré correctement.",Information!,Ok!)
+	CASE 1012
+		messagebox("Avertissement!","Il est impossible d'effacer cette category car il y a des sous-catégories liées.",Information!,Ok!)
+	CASE 1013
+		messagebox("Avertissement!","La mise à jour a échoué (récupération de la version locale de la bd). Il y a peut-être un problème avec votre ordinateur, votre réseau ou votre disque dur est plein, veuillez réessayer plus tard.",Exclamation!,Ok!)
+	CASE 1014
+		messagebox("Avertissement!","La mise à jour a échouée (écriture du fichier). Il y a peut-être un problème avec votre ordinateur, votre réseau ou votre disque dur est plein, veuillez réessayer plus tard.",Exclamation!,Ok!)
+	CASE 1015
+		messagebox("Avertissement!","La mise à jour a échouée. Il y a peut-être un problème avec votre réseau ou votre connexion Internet, veuillez réessayer plus tard.",Exclamation!,Ok!)
+	CASE 1016
+		messagebox("Information","La mise à jour a été un succès. Veuillez fermer l''application pour compléter le processus.",Information!,Ok!)
+	CASE 1017
+		messagebox("Information","Vous possédez déjà la plus récente version.",Information!,Ok!)
+	CASE 1018
+		messagebox("Avertissement!","La mise à jour a échouée (téléchargement dans la version locale de la bd). Il y a peut-être un problème avec votre réseau, veuillez réessayer plus tard.",Exclamation!,Ok!)
+	CASE 1019
+		messagebox("Avertissement","Vous devez enregistrer ce traitement avant de lui attribuer un temps docteur.",Information!,Ok!)
+	CASE 1020
+		messagebox("Avertissement","La date entrée est invalide.",Information!,Ok!)
+	CASE 1021
+		messagebox("Avertissement","Envoi des courriels avec succès.",Information!,Ok!)
+	CASE 1022
+		messagebox("Warning!","Il est impossible de confirmer une date plus petite ou égale a aujourd'hui",Information!,Ok!)
+	
+	//QUESTION FROM 200 to ...	
+	CASE 200
+		return messagebox("Question!","Voulez-vous enregistrer les modifications?",Question!,YesNo!,1)
+	CASE 201
+		return messagebox("Question!","Vous-êtes sur le point de faire un paiement d'une date antérieure à celle d'aujourd'hui, voulez-vous continuer?",Question!,YesNo!,2)
+	CASE 202
+		return messagebox("Question!","La date système est incorrecte, voulez-vous que Orthotek corrige la situation?",Question!,YesNo!,1)
+	CASE 203
+		return messagebox("Transaction effectuée!","Appuyez sur OK pour vérifier cette transaction",Question!,OkCancel!,1)
+	CASE 204
+		return messagebox("Question!","Voulez-vous imprimer les reçus automatiques?",Question!,YesNo!,1)
+	CASE 205
+		return messagebox("Question!","Les reçus se sont-ils bien imprimés?",Question!,YesNo!,1)
+	CASE 206
+		return messagebox("Question!","Voulez-vous effacer le patient de la liste des rappels?",Question!,YesNoCancel!,1)
+	CASE 207
+		return messagebox("Question!","Aucun patient sélectionné, voulez-vous quand même ouvrir Windows WORD?",Question!,YESNO!)
+	CASE 208 
+		return messagebox("Question!","Voulez-vous effacer ce template de l'horaire?",Question!,YesNo!)
+	CASE 209
+		return messagebox("Question!","Les reçus postdatés se sont-ils bien imprimés?",Question!,YesNo!,1)
+	CASE 210
+		return messagebox("Question!","Êtes-vous sûr de vouloir changer les pourcentages automatiquement",Question!,YesNo!)
+	CASE 211
+		return messagebox("Question!","Voulez-vous avoir la liste téléphonique?",Question!,YesNo!)
+	CASE 212
+		return messagebox("Question!","Voulez-vous enregistrer les pourcentages?",Question!,YesNo!)
+	CASE 213
+		return messagebox("Question!","Voulez-vous vraiement cocher le reçu?",Question!,YesNo!)
+	CASE 214	
+		return messagebox('Question!','Voulez-vous compléter les informations que vous avez commencé à saisir dans ~r~n' + w_traitements.title + '?',Question!,YesNo!,1)
+	CASE 215
+		return messagebox('Question!','Voulez-vous compléter les informations que vous avez commencé à saisir dans ~r~n' + w_factures_traitement.title + '?',Question!,YesNo!,1)
+	CASE 216
+		return messagebox('Question!','Voulez-vous compléter les informations que vous avez commencé à saisir dans ~r~n' + w_paiement.title + '?',Question!,YesNo!,1)
+	CASE 217
+		return messagebox('Question!','Voulez-vous compléter les informations que vous avez commencé à saisir dans ~r~n' + w_cpd.title + '?',Question!,YesNo!,1)
+	CASE 218
+		return messagebox('Question!','Voulez-vous insérer ce template?',Question!,YesNo!,1)
+	CASE 219
+		return messagebox('Question!','Voulez-vous supprimer ce template?',Question!,YesNo!,1)
+	CASE 220
+		return messagebox('Question!','Voulez-vous appliquer ce template pour le mois en cour?',Question!,YesNo!,1)
+	CASE 221
+		return messagebox('Question!',"Vous ne pouvez pas supprimer un paiement pour lequel un reçu a été émis sauf si vous en avez eu l'autorisation!",Question!,OkCancel!,2)
+	CASE 222
+		return messagebox('Question!',"Voulez-vous vraiment ajouter une nouvelle phase!",Question!,OkCancel!,2)
+	CASE 223
+		return messagebox("Question!","Il y a déjà un patient, voulez-vous continuer?",Question!,OkCancel!,2)
+	CASE 224
+		return messagebox("Question!","Voulez-vous vraiment initailiser les pourcentages pour l'année suivante?",Question!,OkCancel!,2)
+	CASE 225
+		return messagebox("Question!","Ce dentiste est déjà existant voulez-vous quand même le rajouter à la liste?",Question!,YesNo!,2)
+	CASE 226
+		return messagebox("Question!","Ce numéro de patient existe déjà au nom de " + w_dossier_patients.is_nom + ", êtes-vous sûr de vouloir continuer?",Question!,YesNo!,2)
+	CASE 227
+		return messagebox("Question!","Ce numéro de téléphone existe déjà au nom de " + w_dossier_patients.is_nom + ", êtes-vous sûr de vouloir continuer?",Question!,YesNo!,2)
+   CASE 228
+		return messagebox("Question!","Exportation vers Excel effectué. Voulez-vous ouvrir le fichier?",Question!,YesNo!,2)
+	CASE 229
+		return messagebox("Question!","Désirez-vous ajouter cette lettre au dossier du patient",Question!,YesNo!,1)
+	CASE 230
+		return messagebox("Question!","Ce référent est déjà existant voulez-vous quand même le rajouter à la liste?",Question!,YesNo!,2)
+	CASE 231
+		return messagebox("Question!","Inscrire le rendez-vous de " + w_cincoutconsole.is_nom + " comme rendez-vous manqué?",Question!,YesNo!,2)
+	CASE 232
+		return messagebox("Question!","Inscrire le rendez-vous de " + w_cincoutconsole.is_nom + " comme rendez-vous en retard?",Question!,YesNo!,2)
+	CASE 233
+		return messagebox("Question!","Voulez-vous inscrire le rendez-vous comme étant manqué dans son dossier?",Question!,YesNo!,1)
+	CASE 234
+		return messagebox("Question!","Voulez-vous détruire ce rendez-vous?",stopsign!,YesNo!,2)
+	CASE 235
+		return messagebox("Question!","Voulez-vous inscrire le rendez-vous comme étant en retard dans son dossier?",Question!,YesNo!,1)
+	CASE 236
+		return messagebox("Question!","Ce dentiste a des patients qui lui sont ratachés désirez-vous le supprimer quand même ansi qu'enlever le lien avec le patient?",Question!,YesNo!,2)
+	CASE 237
+		return messagebox("Question!","Ce référent a des patients qui lui sont ratachés désirez-vous le supprimer quand même ansi qu'enlever le lien avec le patient?",Question!,YesNo!,2)
+	CASE 238
+		return messagebox("Question!","Voulez-vous inscrire le rendez-vous comme étant annulé dans son dossier?",Question!,YesNo!,1)
+	CASE 239
+		return messagebox('Question!','Voulez-vous définir ce choix par défaut?',Question!,YesNo!,1)
+	CASE 240
+		return messagebox('Question!','Voulez-vous supprimer cet enregistrement?',Question!,YesNo!,2)
+	CASE 241
+		return messagebox('Question!','Voulez-vous inscrire le patient dans les référents?',Question!,YesNo!,2)
+	CASE 242
+		return messagebox('Question!',"Voulez-vous générer le contrat!",Question!,YesNo!,2)
+	CASE 243
+		return messagebox("Question!","Le nom et le prénom existe déjà, Êtes-vous sûr de vouloir continuer?",Question!,YesNo!,2)
+	CASE 244
+		return messagebox("Question!","Ce numéro de dossier existe déjà au nom de " + w_dossier_patients.is_nom + ", êtes-vous sûr de vouloir continuer?",Question!,YesNo!,2)	
+	CASE 245
+		return messagebox("Question!","Voulez-vous inscrire le rendez-vous comme "+w_horaire.is_hormenuchoix1+" dans son dossier?",Question!,YesNo!,1)
+	CASE 246
+		return messagebox("Question!","Voulez-vous supprimer les patients de la console?",Question!,YesNo!,1)	
+	CASE 247
+		return messagebox("Question!","Vous êtes dans la phase précédente, voulez-vous continuer?",Question!,YesNo!,1)
+	CASE 248
+		return messagebox("Question!","Voulez-vous détruire cette image?",Question!,YesNo!,1)
+	CASE 249
+		return messagebox("Question!","Voulez-vous transférer ce patient?",Question!,YesNo!,1)
+	CASE 250
+		return messagebox("Question!","Voulez-vous créer ce dossier patient dans Dimaxis?",Question!,YesNo!,1)
+	CASE 251
+		return messagebox("Question!","Voulez-vous insérer le patient dans la liste des rappels?",Question!,YesNo!,1)
+	CASE 252
+		return messagebox("Question!","Voulez-vous créer ce dossier patient dans Vistadent?",Question!,YesNo!,1)
+	CASE 253
+		return messagebox("Question!","Voulez-vous créer ce dossier patient dans Dolphin Imaging?",Question!,YesNo!,1)
+	CASE 254
+		return messagebox("Question!","Le numéro Vistadent est inexistant, voulez-vous utiliser le numéro du patient id?",Question!,YesNo!,1)
+	CASE 255	
+		string	ls_patient
+		ls_patient = upper(w_dossier_patients.is_nom)
+		return messagebox('Question!','Voulez-vous complèter les informations que vous avez commencé à saisir dans ~r~n' + w_dossier_patients.title + ": " + ls_patient + '?',Question!,YesNo!,1)
+	CASE 256
+		return messagebox("Question!","Voulez-vous insérer le patient transféré?",Question!,YesNo!,1)
+	CASE 257
+		return messagebox("Question!","Voulez-vous insérer le patient transféré?~r~nOui: Le patient présentement en transfert~r~nNon: Ouverture de la fenètre ajout de rendez-vous~r~nCancel: Enlève le transfert",Question!,YesNoCancel!,1)
+	CASE 258
+		return messagebox("Question!","Désirez-vous faire une copie de ce template?",Question!,YesNo!,2)
+	CASE 259
+		return messagebox("Question!","Voulez-vous enregistrer les modifications?",Question!,YesNoCancel!,1)
+	CASE 260
+		return messagebox("Question!","Ce rendez-vous provenait de la liste des rappels. Voulez-vous y replacer le patient?",Question!,YesNo!,1)
+	CASE 261
+		return messagebox("Question!","Voulez-vous créer ce dossier patient dans CADI?",Question!,YesNo!,1)
+	CASE 262
+		return messagebox("Question!","Êtes-vous sûr de vouloir importer les cartes de crédits?",Question!,YesNo!,1)
+	CASE 263
+		RETURN messagebox("Question!","Désirez-vous supprimer cette catégorie",Question!,YesNo!,2)		
+	CASE 264
+		return messagebox("Question!","Il existe déjà une entrée pour aujourd'hui. Voulez-vous modifier cette entrée?",Question!,YesNo!,1)
+	CASE 265
+		return messagebox("Avertissement","Cette opération peut prendre quelques minutes.~r~nIl est fortement recommandé d'effectuer la mise à jour durant une période plutôt calme.~r~nVoulez-vous procéder à la mise-à jour ?",Question!,YesNo!,2)
+	CASE 266
+		return messagebox("Question!", "Êtes-vous sûr de vouloir exporter les paiements pré-autorisés?",Question!,YesNo!,1)
+	CASE ELSE
+		messagebox("ERREUR!","fonction error()!",stopsign!)
+	END CHOOSE
+	return 0
+	
+//ANGLAIS
+elseif v_langue = 'an' then
+	CHOOSE CASE num
+	CASE -1
+		if (SQLCA.sqlCode <> 0) then
+			messagebox("ERREUR "+string(SQLCA.sqlCode),SQLCA.SQLErrText)
+			return 0
+		else
+			return 1
+		end if
+	CASE 0
+		messagebox("ERROR!","System error!",stopsign!)	
+	//ERREUR FROM 50 to 99
+	CASE 50
+		messagebox("ERROR!","No modification has been saved!",stopsign!)
+	CASE 51
+		MessageBox("ERROR!","There is missing information!",stopsign!)
+	CASE 52
+		Messagebox("ERROR!","There is a printing error!",stopsign!)
+	CASE 53
+		messagebox("ERROR!","The postdated checks saving has not occured!",StopSign!)
+	CASE 54
+		messagebox("ERROR!","No Orthodontist selected!",StopSign!)
+	CASE 55
+		messagebox("ERROR!","No patient selected!",StopSign!)
+	CASE 56
+		messagebox("ERROR!","Windows Word shortcut not found!",StopSign!)
+	CASE 57
+		messagebox("ERROR!","It is impossible to emit receipts!",StopSign!)
+	CASE 58
+		messagebox("ERROR!","Getrow() in dw_patient_master not found!",StopSign!)
+	CASE 59
+		messagebox("Error 59","The specialist can not be deleted since a patient is refered by him",StopSign!)
+	CASE 60
+		messagebox("Error 60","The variable horstep is null in t_options!",StopSign!)
+	CASE 61
+		messagebox("Error 61","Update error, see log file for more information!",StopSign!)
+	CASE 62
+		messagebox("Error 62","This patient is in the appointment list.",StopSign!)
+	CASE 63
+		messagebox("Error 63","This patient is not in the appointment list.",StopSign!)
+	CASE 64
+		messagebox("Error 64","Orthotek could not open pat.txt.",StopSign!)
+	CASE 65
+		messagebox("Error 65","Orthotek could not open img.xml.",StopSign!)
+	CASE 66
+		messagebox("Error 66","Copy of the update files failed.",StopSign!)
+	CASE 67
+		messagebox("Error 67","Creation of the settings file failed.",StopSign!)
+	//INFORMATION FROM 100 to 199
+	CASE 100
+		messagebox("WARNING!","No fonction available!",Information!,OK!)
+	CASE 101
+		messagebox("WARNING!","There as to be a status entered to emit a bill!",information!,OK!)
+	CASE 102
+		messagebox("WARNING!","Default setting for options!",information!,OK!) 
+	CASE 103
+		messagebox("WARNING!","Please save phase!.",information!,OK!)
+	CASE 104
+		messagebox("WARNING!","Please set up the color panel!",Information!,OK!)
+	CASE 105
+		messagebox("WARNING!","No Orthodontist selected!",Information!,OK!)
+	CASE 106
+		messagebox("WARNING!","You must enter your coordonates before registration!",Information!,OK!)
+	CASE 107
+		messagebox("WARNING!","Changes will be considered after reboot!",Information!,OK!)
+	CASE 108
+		messagebox("WARNING!","The monthly status can not be deleted!",Information!,OK!)
+	CASE 109
+		messagebox("WARNING!","You must save before printing!",Information!,OK!)
+	CASE 110
+		messagebox("WARNING!","The number of bills can not exceed 8 !",Information!,OK!)
+	CASE 111
+		MessageBox ("WARNING!","Please verify info in patient's file: Date of birth.",Information!,OK!)
+	CASE 112
+		MessageBox ("WARNING!","Please verify info in patient's file: language!",Information!,OK!)
+	CASE 113
+		MessageBox ("WARNING!","There is no treatment information for this patient!",Information!,OK!)
+	CASE 114
+		MessageBox ("WARNING!","There is no treatment cost for this patient!",Information!,OK!)
+	case 115
+		MessageBox ("WARNING!","This unit is presently being used!",Information!,OK!)
+	case 116
+		MessageBox ("WARNING!","You must select a patient!",Information!,OK!)
+	case 117
+		MessageBox ("WARNING!","The AM & PM periods are presently overlapping!",Information!,OK!)
+	case 118
+		messagebox ("WARNING!","No postdated checks!",Information!,OK!)
+	case 119
+		MessageBox ("WARNING!","Please select a label type!",Information!,OK!)
+	case 120
+		messagebox ("WARNING!","End of appointment!",Information!,OK!)
+	case 121
+		messagebox ("WARNING!","The patient is already in the list!",Information!,OK!)
+	case 122
+		messagebox ("WARNING!","Incorrect patient last name!",Information!,OK!)
+	case 123
+		messagebox ("WARNING!","Incorrect patient first name!",Information!,OK!)
+	case 124
+		messagebox ("WARNING!","Please select a treatment!",Information!,OK!)
+	case 125
+		messagebox ("WARNING!","You must select a document",Information!,OK!)
+	case 126
+		messagebox ("WARNING!","This cell already contains information, the template can not be applied",Information!,OK!)
+	case 127
+		messagebox ("WARNING!","You must save before deleting",Information!,OK!)
+	case 128
+		messagebox ("WARNING!","There is financial data related to this patient. You must delete all phases before deleting the patient",Information!,OK!)
+	case 129
+		messagebox ("WARNING!","The password you entered is not recognized by the system",Information!,OK!)
+	case 130	
+		messagebox ("WARNING!","Please enter a password",Information!,OK!)
+	case 131	
+		messagebox ("WARNING!","There are postdated checks related to this phase. You must delete them first",Information!,OK!)
+	case 132	
+		messagebox ("WARNING!","There are invoices related to this phase",Information!,OK!)
+	case 133
+		messagebox ("WARNING!","There are payments related to this phase. You must delete them first",Information!,OK!)
+	case 134
+		messagebox ("WARNING!","You are entering a due date",Information!,OK!)
+	case 135
+		messagebox ("WARNING!","The date and the payment amount can not be null",Information!,OK!)
+	case 136
+		messagebox ("WARNING!","The entered password does not correspond to confirmation",Information!,OK!)
+	case 137
+		messagebox ("WARNING!","The password must be at least 3 characters long",Information!,OK!)
+	case 138
+		messagebox ("WARNING!","The password is 'paiement', you must change it!",Information!,OK!)
+	case 139
+		messagebox ("WARNING!","This color is already used.",Information!,Ok!)
+	case 140
+		messagebox ("WARNING!","The number of templates must not exceed 3 for the same day.",Information!,Ok!)
+	case 141
+		messagebox ("WARNING!","The template already exist for this day.",Information!,Ok!)	
+	case 142
+		messagebox ("WARNING!","The patient does not have a file number.",Information!,Ok!)
+	case 143
+		messagebox ("WARNING!","This color is assigned to a treatment",Information!,Ok!)
+	case 144
+		messagebox ("WARNING!","You must give a name to your letter",Information!,OK!)
+	CASE 145
+		messagebox ("WARNING!","There is not enough space for the selected appointment",Information!,OK!)
+	CASE 147
+		messagebox ("WARNING!","This option is unavaliable",Information!,OK!)
+	CASE 148
+		messagebox ("WARNING!","This treatment is in use",Information!,OK!)
+	CASE 149
+		messagebox ("WARNING!","Don't know the number of column. See system options",Information!,OK!)
+	CASE 150
+		messagebox ("WARNING!","You can not delete this record because it's presently in use.",Information!,OK!)
+	CASE 151
+		messagebox ("WARNING!","Le patient ne possède aucun responsable financier.",Information!,OK!)
+	CASE 152
+		messagebox ("WARNING!","You need to delete this patient to modify this field.",Information!,Ok!)
+	CASE 153
+		messagebox ("WARNING!","Vistadent not found",Information!,Ok!)
+	CASE 154
+		messagebox ("WARNING!","You need to install the imaging library",Information!,Ok!)
+	CASE 155
+		messagebox ("WARNING!","The Vistadent file was created.",Information!,Ok!)
+	CASE 156
+		messagebox ("WARNING!","This transaction is right protected.",Information!,Ok!)
+	CASE 157
+		messagebox ("WARNING!","Folder not found: c:\ii4net\orthotek",Information!,Ok!)
+	CASE 158
+		messagebox ("WARNING!","This patient is arrived.",Information!,Ok!)
+	CASE 159
+		messagebox ("WARNING!","This patient is already arrived.",Information!,Ok!)
+	CASE 160
+		messagebox ("WARNING!","File not found.",Information!,Ok!)
+	CASE 161
+		messagebox('Warning!',"You must fill in the RBC number and the name in the option window",Information!,OK!)
+	CASE 162
+		messagebox('Warning!',"The names in red haven't been added to the file.~n- The banking informations are maybe missing.~n- The date is lower than today.~n- The payment term is incorrect.",Information!,Ok!)
+	CASE 163
+		messagebox('Warning!', "The file has not been created, the preautorized paiements selected have already been send",Information!,OK!)
+	CASE 188
+		messagebox ('WARNING!',"The patient is in transfer, double click on the new location.",Information!,OK!)
+	CASE 190
+		messagebox ('WARNING!',"This patient is already in transfer.",Information!,OK!)
+	CASE 191
+		messagebox ('WARNING!',"The picture directory is invalid or absent", Information!, OK!)
+	CASE 192
+		messagebox ('WARNING!',"You must enter template date", Information!, OK!)
+	CASE 193
+		messagebox ('WARNING!',"This patient is not released.", Information!, OK!)
+	CASE 194
+		messagebox ('WARNING!',"This payment has already been depositted.", Information!, OK!)
+	CASE 195
+		messagebox('WARNING!',"To print, a dentist must be linked to this report",Information!,Ok!)
+	CASE 196
+		messagebox('WARNING!',"You don't have the rights needed to delete a payment.",information!,OK!)
+	CASE 197
+		messagebox("WARNING!","Some payments contain errors, none were sent.~r~nPlease check the file 'C:\ii4net\erreur.log' for more details.",StopSign!,OK!)
+	CASE 198
+		messagebox("WARNING!","Please make sure that Bitvise Tunnelier is properly installed.",StopSign!,OK!)
+	CASE 199
+		messagebox("WARNING!","This patient has been added to the blacklist",Question!,Ok!)
+	CASE 1000
+		messagebox("WARNING!","This patient has been removed to the blacklist",Question!,Ok!)
+	CASE 1001
+		messagebox("WARNING!","No group selected.",Question!,Ok!)
+	CASE 1002
+		messagebox("WARNING!","You can't delete staff members from this window.",Question!,Ok!)
+	CASE 1003
+		messagebox("WARNING!","You must check a subject to use this function.",Question!,Ok!)
+	CASE 1004
+		messagebox("WARNING!","A group with this name already exists.",Question!,Ok!)
+	CASE 1005
+		messagebox("WARNING!","The angle value must be a number.",Question!,Ok!)
+	CASE 1006
+		messagebox("Warning!","You don't have access to the imaging tool. Contact customers service to get access to it.",Information!,Ok!)
+	CASE 1007
+		messagebox("Warning!","You must give a start contract date and the first monthly payment date.",Information!,Ok!)	
+	CASE 1008
+		messagebox("Warning!","The card can't be produce because the patient doesn't have any appointment in the future.",Information!,Ok!)	
+	CASE 1009
+		messagebox("Warning!","It's impossible to make the bridge, because one of the following parameters is abasent: (lastname, firstname, file number, birthdate or orthodontist name).",Information!,Ok!)	
+	CASE 1010
+		messagebox("Warning!","You must select a responsible party for payments, invoices and postdated cheques",Information!,Ok!)
+	CASE 1011
+		messagebox("Warning!","The path for the external software isn't set properly.",Information!,Ok!)
+	CASE 1012
+		messagebox("Warning!","It's not possible to delete this category because there are sub categories related to it.",Information!,Ok!)
+	CASE 1013
+		messagebox("Warning!","Update failed (retrieve from local db). There may be a problem with your computer, your network or your hard drive is full, please try again later.",Exclamation!,Ok!)
+	CASE 1014
+		messagebox("Warning!","Update failed (writing the file). There may be a problem with your computer, your network or your hard drive is full, please try again later.",Exclamation!,Ok!)
+	CASE 1015
+		messagebox("Warning!","Update failed. There may be a problem with your network or your Internet connection, please try again later.",Exclamation!,Ok!)
+	CASE 1016
+		messagebox("Information","Update Succeeded. Please close the software to complete the operation.",Information!,Ok!)
+	CASE 1017
+		messagebox("Information","You are already running the latest version.",Information!,Ok!)
+	CASE 1018
+		messagebox("Warning!","Update failed (download in the local db). There may be a problem with your network, please try again later.",Exclamation!,Ok!)
+	CASE 1019
+		messagebox("Warning!","You have to save this treatment before you can assign a doctor time to it.",Information!,Ok!)
+	CASE 1020
+		messagebox("Warning!","The entered date is not valid.",Information!,Ok!)
+	CASE 1021
+		messagebox("Warning!","Email sended with success",Information!,Ok!)
+	CASE 1022
+		messagebox("Warning!","It's impossible to confirm the appointment for a date equal or smaller than today",Information!,Ok!)
+	
+	//QUESTION FROM 200 to ...	
+	CASE 200
+		return messagebox("Update","Do you want to keep the modification?",Question!,YesNo!,1)
+	CASE 201
+		return messagebox("Question!","You are about to make a payment from a date prior to today, do you wish to continu?",Question!,YesNo!,2)
+	CASE 202
+		return messagebox("Question!","System date is incorrect, Orthotek may correct this problem?",Question!,YesNo!,1)
+	CASE 203
+		return messagebox("Transaction processed!","Click on OK to verify this transaction",Question!,OkCancel!,1)
+	CASE 204
+		return messagebox("Question!","Do you wish to print the automatic receipts?",Question!,YesNo!,1)
+	CASE 205
+		return messagebox("Question!","The receipts have been printed correctly?",Question!,YesNo!,1)
+	CASE 206
+		return messagebox("Question!","Do you wish to delete the patient from the recalls list?",Question!,YesNoCancel!,1)
+	CASE 207
+		return messagebox("Question!","No patients have been selected, do you still wish to open Windows WORD?",Question!,YESNO!)
+	CASE 208 
+		return messagebox("Question!","Do you wish to delete this template from the schedule?",Question!,YesNo!)
+	CASE 209
+		return messagebox("Question!","Did the printing go well for the postdated receipt?",Question!,YesNo!,1)
+	CASE 210
+		return messagebox("Question!","Do you really wish to change the automatic pewrcentage",Question!,YesNo!)
+	CASE 211
+		return messagebox("Question!","Do you want to print the calling list?",Question!,YesNo!)
+	CASE 212
+		return messagebox("Question!","Do you want to save the percentages?",Question!,YesNo!)
+	CASE 213
+		return messagebox("Question!","Do you want to notify the receipt?",Question!,YesNo!)
+	CASE 214	
+		return messagebox('Question!','Do you want to complete the information you began to fill in ~r~n' + w_traitements.title + '?',Question!,YesNo!,1)
+	CASE 215
+		return messagebox('Question!','Do you want to complete the information you began to fill in ~r~n' + w_factures_traitement.title + '?',Question!,YesNo!,1)
+	CASE 216
+		return messagebox('Question!','Do you want to complete the information you began to fill in ~r~n' + w_paiement.title + '?',Question!,YesNo!,1)
+	CASE 217
+		return messagebox('Question!','Do you want to complete the information you began to fill in ~r~n' + w_cpd.title + '?',Question!,YesNo!,1)
+	CASE 218
+		return messagebox('Question!','Do you want to insert this template?',Question!,YesNo!,1)
+	CASE 219
+		return messagebox('Question!','Do you want to delete this template?',Question!,YesNo!,1)
+	CASE 220
+		return messagebox('Question!','Do you want to apply this template for the current month?',Question!,YesNo!,1)
+	CASE 221
+		return messagebox('Question!',"You can not delete a payment for which a receipt was emitted unless you are allowed to!",Question!,OkCancel!,2)
+	CASE 222
+		return messagebox('Question!',"You are about to add a new phase!",Question!,OkCancel!,2)
+	CASE 223
+		return messagebox("Question!","There is already a patient, do you want to continu with the changes?",Question!,OkCancel!,2)
+	CASE 224
+		return messagebox("Question!","Do you want to initialise the percentages for the coming year?",Question!,OkCancel!,2)
+	CASE 225
+		return messagebox("Question!","This Dentist is already in the list, do you still want to proceed?",Question!,YesNo!,2)
+	CASE 226
+		return messagebox("Question!","This patient number is already assigned for the patient " + w_dossier_patients.is_nom + ", do you want to continue?",Question!,YesNo!,2)
+	CASE 227
+		return messagebox("Question!","This phone number is already assigned for the patient " + w_dossier_patients.is_nom + ", do you want to continue?",Question!,YesNo!,2)
+   CASE 228
+		return messagebox("Question!","The migration to EXCEL is completed, do you want to open the file?",Question!,YesNo!,2)
+	CASE 229
+		return messagebox("Question!","Do you wish to add this letter in the patient's file?",Question!,YesNo!,1)
+	CASE 230
+		return messagebox("Question!","This Referent is already in the list, do you still want to proceed?",Question!,YesNo!,2)
+	CASE 231
+		return messagebox("Question!","Insert the appointment of " + w_cincoutconsole.is_nom + " as a missed appointment?",Question!,YesNo!,2)
+	CASE 232
+		return messagebox("Question!","Insert the appointment of " + w_cincoutconsole.is_nom + " as a late appointment?",Question!,YesNo!,2)
+	CASE 233
+		return messagebox("Question!","Do you want to insert this appointment as a missed appointment in the patient file?",Question!,YesNo!,1)
+	CASE 234
+		return messagebox("Question!","Do you want to cancel this appointment?",stopsign!,YesNo!,2)
+	CASE 235
+		return messagebox("Question!","Do you want to insert this appointment as a late appointment?",Question!,YesNo!,1)
+	CASE 236
+		return messagebox("Question!","This dentist has patients associate with him, Do you want to delete the dentist and all the links anyway?",Question!,YesNo!,2)						
+	CASE 237
+		return messagebox("Question!","This referent has patients associate with him, Do you want to delete the referent and all the links anyway?",Question!,YesNo!,2)
+	CASE 238
+		return messagebox("Question!","Do you want to insert this appointment as a canceled appointment in the patient file?",Question!,YesNo!,1)
+	CASE 239
+		return messagebox("Question!","Choose as default?",Question!,YesNo!,1)
+	CASE 240
+		return messagebox("Question!","Do you want to delete this record?",Question!,YesNo!,2)
+	CASE 241
+		return messagebox('Question!','Do you want to inscribe this patient as referal?',Question!,YesNo!,2)
+	CASE 242
+		return messagebox('Question!',"Do want to generate this contract!",Question!,YesNo!,2)
+	CASE 243
+		return messagebox("Question!","The first and last name is already assigned, do you want to continue",Question!,YesNo!,2)
+	CASE 244
+		return messagebox("Question!","This file number is already assigned for the patient " + w_dossier_patients.is_nom + ", do you want to continue?",Question!,YesNo!,2)	
+	CASE 245
+		return messagebox("Question!","Do you want to insert this appointment as a "+w_horaire.is_hormenuchoix1+" in the patient file?",Question!,YesNo!,2)
+	CASE 246
+		return messagebox("Question!","Do you want to delete the patients from the console?",Question!,YesNo!,1)
+	CASE 247
+		return messagebox("Question!","You are in the previous phase, do you want continu?",Question!,YesNo!,1)
+	CASE 248
+		return messagebox("Question!","Do you want delete this picture?",Question!,YesNo!,1)
+	CASE 249
+		return messagebox("Question!","Do you want transfert this patient?",Question!,YesNo!,1)
+	CASE 250
+		return messagebox("Question!","Do you want to create this patient file in Dimaxis?",Question!,YesNo!,1)
+	CASE 251
+		return messagebox("Question!","Do you want insert this patient in the recall list?",Question!,YesNo!,1)
+	CASE 252
+		return messagebox("Question!","Do you want to create this patient file in Vistadent?",Question!,YesNo!,1)
+	CASE 253
+		return messagebox("Question!","Do you want to create this patient file in Dolphin Imaging?",Question!,YesNo!,1)
+	CASE 254
+		return messagebox("Question!","The Vistadent number doesn't exist, do you want use patient id?",Question!,YesNo!,1)
+	CASE 256
+		return messagebox("Question!","Do you want insert the patient in transfer?",Question!,YesNo!,1)
+	CASE 257
+		return messagebox("Question!","Do you want to transfert the patient?~r~nYes: The patient currently in transfert~r~nNo: Open the take an appointment window~r~nCancel: Remove the transfert",Question!,YesNoCancel!,1)
+	CASE 258
+		return messagebox("Question!","Do you want to copy this template?",Question!,YesNo!,2)
+	CASE 259
+		return messagebox("Update","Do you want to keep the modification?",Question!,YesNoCancel!,1)
+	CASE 260
+		return messagebox("Question!","This appointment came from the recall list. Do you want to put the patient back on it?",Question!,YesNo!,1)
+	CASE 261
+		return messagebox("Question!","Do you want to create this patient file in CADI?",Question!,YesNo!,1)
+	CASE 262
+		return messagebox("Question!","Are you sure that you want to export this postdated card?",Question!,YesNo!,2)
+	CASE 263
+		return messagebox("Question!","Do you want to delete this category?",Question!,YesNo!,2)
+	CASE 264
+		return messagebox("Question!","There is already an entry for today. Do you want to modify the entry?",Question!,YesNo!,1)
+	CASE 265
+		return messagebox("Warning","The update process may take a few minutes.~r~nIt is strongly recommended to apply the update during a time of low activity.~r~nDo you want to proceed ?",Question!,YesNo!,2)
+	CASE 266
+		return messagebox("Question!", "Are you sure that you want to export preautorized paiement?",Question!,YesNo!,1)
+	CASE ELSE
+		messagebox("ERREUR!","fonction error()!",stopsign!)
+	END CHOOSE
+	return 0
+else
+	return 0
+end if
+end function
+

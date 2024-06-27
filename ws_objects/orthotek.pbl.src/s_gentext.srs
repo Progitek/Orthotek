@@ -1,0 +1,31 @@
+﻿$PBExportHeader$s_gentext.srs
+global type s_gentext from structure
+	string		as_band
+	string		as_alignment
+	string		as_text
+	string		as_border
+	string		as_color
+	string		as_x
+	string		as_y
+	string		as_height
+	string		as_width
+	string		as_html
+	string		as_name
+	string		as_visible
+	string		as_resizeable
+	string		as_moveable
+	string		as_fontface
+	string		as_fontheight
+	string		as_fontweight
+	string		as_fontfamily
+	string		as_fontpitch
+	string		as_fontcharset
+	string		as_backmode
+	string		as_backcolor
+	string		as_fontitalic
+	string		as_fontunderline
+	string		as_id
+	string		as_tabsequence
+	string		as_format
+end type
+

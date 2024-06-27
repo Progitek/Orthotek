@@ -1,0 +1,67 @@
+﻿$PBExportHeader$d_etiqfourn.srd
+release 10.5;
+datawindow(units=1 timer_interval=10 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="Étiquette patient" print.orientation = 0 print.margin.left = 24 print.margin.right = 0 print.margin.top = 24 print.margin.bottom = 0 print.paper.source = 8 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=70 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes name=id_fournisseur dbname="t_fournisseurs.id_fournisseur" )
+ column=(type=char(50) updatewhereclause=yes name=compagnie dbname="t_fournisseurs.compagnie" )
+ column=(type=char(35) updatewhereclause=yes name=adresse dbname="t_fournisseurs.adresse" )
+ column=(type=char(25) updatewhereclause=yes name=ville dbname="t_fournisseurs.ville" )
+ column=(type=char(30) updatewhereclause=yes name=province dbname="t_fournisseurs.province" )
+ column=(type=char(10) updatewhereclause=yes name=zip dbname="t_fournisseurs.zip" )
+ column=(type=char(15) updatewhereclause=yes name=telautre dbname="t_fournisseurs.telautre" )
+ column=(type=char(15) updatewhereclause=yes name=tel2 dbname="t_fournisseurs.tel2" )
+ column=(type=char(15) updatewhereclause=yes name=fax dbname="t_fournisseurs.fax" )
+ column=(type=char(32000) updatewhereclause=yes name=note1 dbname="t_fournisseurs.note1" )
+ column=(type=char(150) updatewhereclause=yes name=contact2 dbname="t_fournisseurs.contact2" )
+ column=(type=char(150) updatewhereclause=yes name=contact1 dbname="t_fournisseurs.contact1" )
+ column=(type=char(10) updatewhereclause=yes name=telpos dbname="t_fournisseurs.telpos" )
+ column=(type=char(10) updatewhereclause=yes name=tel2pos dbname="t_fournisseurs.tel2pos" )
+ column=(type=char(10) updatewhereclause=yes name=faxpos dbname="t_fournisseurs.faxpos" )
+ column=(type=char(200) updatewhereclause=yes name=courriel dbname="t_fournisseurs.courriel" )
+ column=(type=char(10) updatewhereclause=yes name=autpos dbname="t_fournisseurs.autpos" )
+ column=(type=char(15) updatewhereclause=yes name=tel dbname="t_fournisseurs.tel" )
+ column=(type=long updatewhereclause=yes name=ortho_id dbname="t_fournisseurs.ortho_id" )
+ column=(type=char(50) updatewhereclause=yes name=compte dbname="t_fournisseurs.compte" )
+ column=(type=char(255) updatewhereclause=yes name=siteweb dbname="t_fournisseurs.siteweb" )
+ retrieve="SELECT   t_fournisseurs.id_fournisseur,   
+         t_fournisseurs.compagnie,   
+         t_fournisseurs.adresse,   
+         t_fournisseurs.ville,   
+         t_fournisseurs.province,   
+         t_fournisseurs.zip,   
+         t_fournisseurs.telautre,   
+         t_fournisseurs.tel2,   
+         t_fournisseurs.fax,   
+         t_fournisseurs.note1,   
+         t_fournisseurs.contact2,   
+         t_fournisseurs.contact1,   
+         t_fournisseurs.telpos,   
+         t_fournisseurs.tel2pos,   
+         t_fournisseurs.faxpos,   
+         t_fournisseurs.courriel,   
+         t_fournisseurs.autpos,   
+         t_fournisseurs.tel,   
+         t_fournisseurs.ortho_id,   
+         t_fournisseurs.compte,   
+         t_fournisseurs.siteweb  
+    FROM t_fournisseurs  
+   WHERE t_fournisseurs.id_fournisseur = :ra_fourn    
+" update="t_fournisseurs" updatewhere=0 updatekeyinplace=no arguments=(("ra_fourn", number)) )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="0" y="0" height="16" width="286" format="[general]" html.valueishtml="0"  name=compagnie visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="0" y="17" height="16" width="286" format="[general]" html.valueishtml="0"  name=adresse visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="ville + '  ' +   province"border="0" color="0" x="0" y="34" height="16" width="286" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="0" y="51" height="16" width="286" format="[general]" html.valueishtml="0"  name=zip visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,1383 @@
+﻿$PBExportHeader$gf_autoupdate3.srf
+global type gf_autoupdate3 from function_object
+end type
+
+forward prototypes
+global subroutine gf_autoupdate3 ()
+end prototypes
+
+global subroutine gf_autoupdate3 ();integer li_curver, li_FileNum, li_nbconn
+long ll_ver
+string ls_sql, ls_ver
+w_progressbar iw_progressbar
+
+SetPointer(HourGlass!)
+li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj.log",LineMode!,Write!,LockReadWrite!,Append!)
+select ver into :li_curver from t_ver;
+
+if li_curver < 793 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 7.9.3 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 7.9.3')
+iw_progressbar.of_max(18)
+iw_progressbar.of_position(0)
+// t_options
+ls_sql = "ALTER TABLE t_options 	ADD defhoram3 TIME NULL, ADD defhoram4 TIME NULL, ADD defhorpm3 TIME NULL, &
+											ADD defhorpm4 TIME NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+// t_dentists
+ls_sql = "ALTER TABLE t_dentists ADD FOREIGN KEY fk_idintro (id_intro) REFERENCES t_introconcl (id_introconcl)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(2)
+// t_dentists
+ls_sql = "ALTER TABLE t_dentists ADD FOREIGN KEY fk_icconcl (id_concl) REFERENCES t_introconcl (id_introconcl)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(3)
+// t_imgsettings
+ls_sql = "CREATE TABLE t_imgsettings (	x1 VARCHAR(10) NULL, &
+											   	x2 VARCHAR(10) NULL, &
+											   	x3 VARCHAR(10) NULL, &
+											   	x4 VARCHAR(10) NULL, &
+											   	x5 VARCHAR(10) NULL, &
+											   	x6 VARCHAR(10) NULL, &
+											   	x7 VARCHAR(10) NULL, &
+											   	x8 VARCHAR(10) NULL, &
+											   	x9 VARCHAR(10) NULL, &
+													y1 VARCHAR(10) NULL, &
+													y2 VARCHAR(10) NULL, &
+													y3 VARCHAR(10) NULL, &
+													y4 VARCHAR(10) NULL, &
+													y5 VARCHAR(10) NULL, &
+													y6 VARCHAR(10) NULL, &
+													y7 VARCHAR(10) NULL, &
+													y8 VARCHAR(10) NULL, &
+													y9 VARCHAR(10) NULL, &
+													y10 VARCHAR(10) NULL)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(4)
+// t_rapport
+ls_sql = "CREATE TABLE t_rapport 	(	id_rapport INTEGER NOT NULL DEFAULT AUTOINCREMENT, &
+											   	nom 		VARCHAR(50) NULL, &
+											   	donnee   texte NULL, &
+											   	textid 	INTEGER NULL, &
+											   	colid		INTEGER NULL, &
+											   	rectid	INTEGER NULL, &
+											   	ovalid 	INTEGER NULL, &
+											   	lineid	INTEGER NULL)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(5)
+// t_rapport
+ls_sql = "ALTER TABLE t_rapport ADD FOREIGN KEY fk_idrapp (ortho_id) REFERENCES ortho_id (ortho_id)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(6)
+// t_rapport
+ls_sql = "ALTER TABLE t_rapport ADD PRIMARY KEY(id_rapport)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(7)
+// t_rappchamps
+ls_sql = "CREATE TABLE t_rappchamps	(	id_table INTEGER NOT NULL, &
+											   	id_column INTEGER NOT NULL, &
+											   	column_name	VARCHAR(50) NULL)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(8)
+// t_rappchamps
+ls_sql = "ALTER TABLE t_rappchamps ADD FOREIGN KEY fk_idrapport (id_rapport) REFERENCES t_rapport (id_rapport)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(9)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD cachechart BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(10)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD monerishost VARCHAR(50) NULL, &
+										  ADD monerisport INTEGER NULL, &
+										  ADD monerisuser VARCHAR(50) NULL, &
+										  ADD monerispw VARCHAR(50) NULL, &
+										  ADD monerisstore VARCHAR(50) NULL, &
+										  ADD monerisapit VARCHAR(50) NULL, &
+										  ADD moneristransno UNSIGNED INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(11)
+// t_transferts
+ls_sql = "ALTER TABLE t_transfert MODIFY mntrstdu VARCHAR(50) NULL, &
+											 MODIFY transfert_id default autoincrement"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(12)
+// cheques_postdates
+ls_sql = "ALTER TABLE cheques_postdates ADD envmon BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(13)
+// traitements phasetype e: estétique , f: fonctionnel
+ls_sql = "ALTER TABLE traitements ADD phasetype CHAR(1) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+update traitements set phasetype = 'f';
+ls_sql = "ALTER TABLE traitements MODIFY phasetype CHAR(1) NOT NULL DEFAULT 'f'"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(14)
+// ortho_id
+ls_sql = "ALTER TABLE ortho_id ADD tps VARCHAR(25) NULL, &
+										 ADD tvq VARCHAR(25) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(15)
+// paiement
+ls_sql = "ALTER TABLE paiement ADD taxe BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+update paiement set taxe = 0;
+ls_sql = "ALTER TABLE paiement MODIFY taxe BIT NOT NULL DEFAULT 0"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(16)
+// cheques_postdates
+ls_sql = "ALTER TABLE cheques_postdates ADD taxe BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+update cheques_postdates set taxe = 0;
+ls_sql = "ALTER TABLE cheques_postdates MODIFY taxe BIT NOT NULL DEFAULT 0"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(17)
+// t_blacklist
+ls_sql = "CREATE TABLE t_blacklist	(	id_blacklist INTEGER NOT NULL DEFAULT AUTOINCREMENT, &
+											   	enterdate DATE NULL, &
+											   	exitdate DATE NULL, &
+													primary key(id_blacklist))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(18)
+ls_sql = "ALTER TABLE t_blacklist ADD FOREIGN KEY fk_patid (patient_id) REFERENCES patient (patient_id)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+end if
+iw_progressbar.of_position(18)
+
+if ib_updateok then
+	update t_ver set ver = 793;
+end if
+end if
+/// END VERSION 7.9.3 ///
+/////////////////////////
+if li_curver < 800 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.0.0 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.0.0')
+iw_progressbar.of_max(8)
+iw_progressbar.of_position(0)
+// t_catplans
+ls_sql = "ALTER TABLE t_catplans ADD word BIT NULL, &
+											ADD haut BIT NULL, &
+											ADD bas BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+else
+	update t_catplans set word = 1;
+end if
+iw_progressbar.of_position(1)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD chemcaplink VARCHAR(100) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+// cheques_postdates
+ls_sql = "ALTER TABLE cheques_postdates ADD monorderid VARCHAR(99) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+// t_sujets
+ls_sql = "ALTER TABLE t_sujets ADD rappconsult BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD xray INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+// cheques_postdates
+ls_sql = "ALTER TABLE cheques_postdates MODIFY nocarte VARCHAR(20) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+// paiement
+ls_sql = "ALTER TABLE paiement MODIFY nocarte VARCHAR(20) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(7)
+ls_sql = "ALTER TABLE t_options ADD affchoixmenuhor BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(8)
+
+if ib_updateok then
+	update t_ver set ver = 800;
+end if
+end if
+/// END VERSION 8.0.0 ///
+/////////////////////////
+if li_curver < 801 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.0.1 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.0.1')
+iw_progressbar.of_max(6)
+iw_progressbar.of_position(0)
+// t_empentsor
+ls_sql = "CREATE TABLE t_empentsor (id_personnel INTEGER NOT NULL,&
+												entree TIMESTAMP NOT NULL,&
+												sortie TIMESTAMP NULL,&
+												FOREIGN KEY fk_perso (id_personnel) REFERENCES t_personnels (id_personnel) ON UPDATE CASCADE ON DELETE CASCADE)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+// paiement
+ls_sql = "ALTER TABLE paiement ADD FOREIGN KEY fk_idsat (id_satellite) REFERENCES t_satellites (id_satellite)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+// factures_traitements
+ls_sql = "ALTER TABLE factures_traitements ADD FOREIGN KEY fk_idsat (id_satellite) REFERENCES t_satellites (id_satellite)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+// cheques_postdates
+ls_sql = "ALTER TABLE cheques_postdates ADD FOREIGN KEY fk_idsat (id_satellite) REFERENCES t_satellites (id_satellite)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+// t_cincoutpos
+ls_sql = "CREATE TABLE t_cincoutpos (ortho_id INTEGER NOT NULL,&
+												wPat INTEGER NULL, &
+												wRDV INTEGER NULL, &
+												wArrive INTEGER NULL, &
+												wRdvetat INTEGER NULL, &
+												wAttente INTEGER NULL, &
+												wTrait INTEGER NULL, &
+												wDuree INTEGER NULL, &
+												wSalle INTEGER NULL, &
+												sSalle INTEGER NULL, &
+												sPat INTEGER NULL, &
+												sAssis INTEGER NULL, &
+												sReady INTEGER NULL, &
+												sAttente INTEGER NULL, &
+												sTrait INTEGER NULL, &
+												sDuree INTEGER NULL, &
+												sNote INTEGER NULL, &
+												sHeure INTEGER NULL, &
+												rPat INTEGER NULL, &
+												rFinTrait INTEGER NULL, &
+												rAttente INTEGER NULL, &
+												rNote INTEGER NULL, &
+												FOREIGN KEY fk_orthoid (ortho_id) REFERENCES ortho_id (ortho_id))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD generalist BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+if ib_updateok then
+	update t_ver set ver = 801;
+end if
+end if
+/// END VERSION 8.0.1 ///
+/////////////////////////
+if li_curver < 802 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.0.2 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.0.2')
+iw_progressbar.of_max(1)
+iw_progressbar.of_position(0)
+// t_patassur
+//ls_sql = "CREATE TABLE t_patassur (id_assurance INTEGER NOT NULL DEFAULT AUTOINCREMENT,&
+//											  id_patient INETEGER NOT NULL,&
+//											  nomassureur VARCHAR(50) NOT NULL,&
+//											  noregime VARCHAR(20) NOT NULL,&
+//											  nosecdiv VARCHAR(20) NULL,&
+//											  nomassure VARCHAR(50) NOT NULL,&
+//											  prenomassure VARCHAR(50) NOT NULL,&
+//											  )"
+//execute immediate :ls_sql using sqlca;
+//if (SQLCA.sqlCode <> 0) then
+//	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+//	ib_updateok = false
+//end if
+//iw_progressbar.of_position(1)
+if ib_updateok then
+	update t_ver set ver = 802;
+end if
+end if
+/// END VERSION 8.0.2 ///
+/////////////////////////
+if li_curver < 810 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.1.0 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.1.0')
+iw_progressbar.of_max(5)
+iw_progressbar.of_position(0)
+// t_personnels valeur par défaut dans la langue
+ls_sql = "ALTER TABLE t_personnels MODIFY langue DEFAULT 'fr'"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+// t_personnels groupe
+ls_sql = "ALTER TABLE t_personnels ADD groupe BIT NULL DEFAULT 0"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+else
+	update t_personnels set groupe = 0;
+end if
+iw_progressbar.of_position(2)
+// t_personnels groupe
+ls_sql = "ALTER TABLE t_personnels MODIFY groupe NOT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+// t_groupeusagers
+ls_sql = "CREATE TABLE t_groupeusagers (id_user INTEGER NOT NULL,&
+													 id_group INTEGER NOT NULL,&
+													 PRIMARY KEY(id_user, id_group),&
+													 FOREIGN KEY fk_usager (id_user) REFERENCES t_personnels (id_personnel) ON DELETE CASCADE ON UPDATE CASCADE,&
+													 FOREIGN KEY fk_groupe (id_group) REFERENCES t_personnels (id_personnel) ON DELETE CASCADE ON UPDATE CASCADE)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+ls_sql = "ALTER TABLE t_rdv ADD memo VARCHAR(1000) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+if ib_updateok then
+	update t_ver set ver = 810;
+end if
+end if
+/// END VERSION 8.1.0 ///
+/////////////////////////
+if li_curver < 811 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.1.1 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.1.1')
+iw_progressbar.of_max(8)
+iw_progressbar.of_position(0)
+// t_persdroits
+ls_sql = "CREATE TABLE t_persdroits (id_personnel INTEGER NOT NULL,&
+												 objet VARCHAR(200) NOT NULL,&
+												 PRIMARY KEY (id_personnel, objet),&
+												 FOREIGN KEY fk_perso (id_personnel) REFERENCES t_personnels (id_personnel) ON DELETE CASCADE ON UPDATE CASCADE)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+// t_personnels Permetre les null
+ls_sql = "ALTER TABLE t_personnels MODIFY prenom NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+// t_personnels Permetre les null
+ls_sql = "ALTER TABLE t_personnels MODIFY initial NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+// t_personnels Permetre les null
+ls_sql = "ALTER TABLE t_personnels MODIFY password NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+// t_personnels Permetre les null
+ls_sql = "ALTER TABLE t_personnels MODIFY ortho_id NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+// t_personnels Permetre les null
+ls_sql = "ALTER TABLE t_personnels MODIFY postocc NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+// t_personnels détruire la clé secondaire
+ls_sql = "ALTER TABLE t_personnels DELETE FOREIGN KEY fk_orthoid"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(7)
+// t_personnels refaire la clé secondaire avec droit aux nulls
+ls_sql = "ALTER TABLE t_personnels ADD FOREIGN KEY fk_orthoid (ortho_id) REFERENCES ortho_id (ortho_id)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(8)
+if ib_updateok then
+	update t_ver set ver = 811;
+end if
+end if
+/// END VERSION 8.1.1 ///
+/////////////////////////
+if li_curver < 812 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.1.2 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.1.2')
+iw_progressbar.of_max(6)
+iw_progressbar.of_position(0)
+// rendezvous lien avec t_rdv
+ls_sql = "ALTER TABLE rendezvous ADD id_rdv INTEGER,&
+											ADD FOREIGN KEY fk_rdv (id_rdv) REFERENCES t_rdv (id_rdv) ON UPDATE CASCADE ON DELETE SET NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+// t_hortrans lien avec t_rdv
+ls_sql = "ALTER TABLE t_hortrans ADD rv_id INTEGER,&
+											ADD FOREIGN KEY fk_rv (rv_id) REFERENCES rendezvous (rv_id) ON UPDATE CASCADE ON DELETE SET NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+// t_dentists actif
+ls_sql = "ALTER TABLE t_dentists ADD actif BIT NULL DEFAULT 1"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+else
+	update t_dentists set actif = 1;
+end if
+iw_progressbar.of_position(3)
+ls_sql = "ALTER TABLE t_dentists MODIFY actif NOT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+// t_referents actif
+ls_sql = "ALTER TABLE t_referents ADD actif BIT NULL DEFAULT 1"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+else
+	update t_referents set actif = 1;
+end if
+iw_progressbar.of_position(5)
+ls_sql = "ALTER TABLE t_referents MODIFY actif NOT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+if ib_updateok then
+	update t_ver set ver = 812;
+end if
+end if
+/// END VERSION 8.1.2 ///
+/////////////////////////
+if li_curver < 813 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.1.3 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.1.3')
+iw_progressbar.of_max(6)
+iw_progressbar.of_position(0)
+// t_imagerie
+ls_sql = "ALTER TABLE t_imagerie ADD imagesupp VARCHAR(100) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+// t_imgsettings
+ls_sql = "ALTER TABLE t_imgsettings ADD x10 VARCHAR(10) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+// t_imgsettings
+ls_sql = "ALTER TABLE t_printers ADD etqmargeg INTEGER NULL,&
+											ADD etqmargeh INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+// t_dentists
+ls_sql = "ALTER TABLE t_dentists ADD inclist BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+else
+	update t_dentists set inclist = 1;
+end if
+iw_progressbar.of_position(4)
+// t_referents
+ls_sql = "ALTER TABLE t_referents ADD inclist BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+else
+	update t_referents set inclist = 1;
+end if
+iw_progressbar.of_position(5)
+// t_fournisseurs
+ls_sql = "ALTER TABLE t_fournisseurs ADD telpos VARCHAR(10) NULL,&
+												 ADD tel2pos VARCHAR(10) NULL,&
+												 ADD faxpos VARCHAR(10) NULL,&
+												 ADD autpos VARCHAR(10) NULL,&
+												 ADD courriel VARCHAR(200) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+if ib_updateok then
+	update t_ver set ver = 813;
+end if
+end if
+/// END VERSION 8.1.3 ///
+/////////////////////////
+if li_curver < 814 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.1.4 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.1.4')
+iw_progressbar.of_max(1)
+iw_progressbar.of_position(0)
+// t_backup
+ls_sql = "ALTER TABLE t_backup ADD adrserv VARCHAR(50) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+if ib_updateok then
+	update t_ver set ver = 814;
+end if
+end if
+/// END VERSION 8.1.4 ///
+/////////////////////////
+if li_curver < 815 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.1.5 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.1.5')
+iw_progressbar.of_max(2)
+iw_progressbar.of_position(0)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD defdurformass UNSIGNED SMALLINT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+// ortho_id
+ls_sql = "ALTER TABLE ortho_id ADD dr_sfx VARCHAR(50) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+if ib_updateok then
+	update t_ver set ver = 815;
+end if
+end if
+/// END VERSION 8.1.5 ///
+/////////////////////////
+if li_curver < 816 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.1.6 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.1.6')
+iw_progressbar.of_max(3)
+iw_progressbar.of_position(0)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD prgmdl3d CHAR(1) NULL DEFAULT 'A',&
+										  ADD chprogmdl3d VARCHAR(200) NULL,&
+										  ADD chmdl3d VARCHAR(200) NULL,&
+										  ADD pret1 UNSIGNED SMALLINT NULL,&
+										  ADD pret2 UNSIGNED SMALLINT NULL,&
+										  ADD pret3 UNSIGNED SMALLINT NULL,&
+										  ADD pret4 UNSIGNED SMALLINT NULL,&
+										  ADD pret5 UNSIGNED SMALLINT NULL,&
+										  ADD pret6 UNSIGNED SMALLINT NULL,&
+										  ADD pret7 UNSIGNED SMALLINT NULL,&
+										  ADD pret8 UNSIGNED SMALLINT NULL,&
+										  ADD tripret BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+else
+	update t_options set prgmdl3d = 'A';
+end if
+iw_progressbar.of_position(1)
+// t_options
+ls_sql = "ALTER TABLE t_options MODIFY prgmdl3d NOT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+// t_options
+ls_sql = "ALTER TABLE absence ADD description1 TEXT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+if ib_updateok then
+	update t_ver set ver = 816;
+end if
+end if
+/// END VERSION 8.1.6 ///
+/////////////////////////
+if li_curver < 817 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.1.7 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.1.7')
+iw_progressbar.of_max(2)
+iw_progressbar.of_position(0)
+// t_patstatus
+ls_sql = "ALTER TABLE t_patstatus ADD ordre INTEGER NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+ls_sql = "ALTER TABLE t_fournisseurs ADD compte VARCHAR(50) NULL, &
+												 ADD siteweb VARCHAR(255) NULL, &
+												 MODIFY adresse NULL, &
+												 MODIFY ville NULL, &
+												 MODIFY province NULL, &
+												 MODIFY zip NULL, &
+												 MODIFY tel NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+ls_sql = "CREATE TABLE t_fourncontact (id_fourncontact INTEGER NOT NULL DEFAULT AUTOINCREMENT,&
+													 nom VARCHAR(100) NOT NULL,&
+													 tel VARCHAR(15) NULL,&
+													 ext VARCHAR(10) NULL,&
+													 dept VARCHAR(100) NULL,&
+													 FOREIGN KEY fk_idfourn (id_fournisseur) REFERENCES t_fournisseurs (id_fournisseur) ON DELETE CASCADE ON UPDATE CASCADE)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+if ib_updateok then
+	update t_ver set ver = 817;
+end if
+end if
+/// END VERSION 8.1.7 ///
+/////////////////////////
+if li_curver < 818 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.1.8 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.1.8')
+iw_progressbar.of_max(1)
+iw_progressbar.of_position(0)
+// t_patstatus
+ls_sql = "ALTER TABLE t_options ADD imgpath VARCHAR(150) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+
+if ib_updateok then
+	update t_ver set ver = 818;
+end if
+end if
+/// END VERSION 8.1.8 ///
+/////////////////////////
+if li_curver < 819 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.1.9 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.1.9')
+iw_progressbar.of_max(6)
+iw_progressbar.of_position(0)
+// assurance_formulaire
+ls_sql = "ALTER TABLE assurance_formulaire ADD dateassurance DATE NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+// t_options
+ls_sql = "ALTER TABLE t_options ADD hidemedical BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+
+// série d'update pour l'imagerie
+ls_sql = "ALTER table t_imagingconf ADD pos integer null"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+
+ls_sql = "ALTER table t_imagerie ADD xray3_2 varchar(100) null"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+
+ls_sql = "CREATE TABLE t_image_non_montage (	id_image INTEGER NOT NULL DEFAULT AUTOINCREMENT,	patient_id	integer	not null, sequence	integer	not null, titre_image 	VARCHAR(255) NOT NULL, repertoire_image VARCHAR(255) NOT NULL, id_user_modifie	integer null, PRIMARY KEY (id_image))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+
+ls_sql = "ALTER TABLE t_options ADD acces_img CHAR(1) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+
+
+if ib_updateok then
+	update t_ver set ver = 819;
+end if
+end if
+/// END VERSION 8.1.9 ///
+/////////////////////////
+
+if li_curver < 820 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.2.0 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.2.0')
+iw_progressbar.of_max(1)
+iw_progressbar.of_position(0)
+// assurance_formulaire
+ls_sql = "ALTER TABLE t_personnels ADD acces_modif_corr char(1) DEFAULT 'n'"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+
+if ib_updateok then
+	update t_ver set ver = 820;
+end if
+end if
+/// END VERSION 8.2.0 ///
+/////////////////////////
+
+if li_curver < 821 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.2.1 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.2.1')
+iw_progressbar.of_max(3)
+iw_progressbar.of_position(0)
+
+// Rapport préliminaire (consultation)
+ls_sql = "ALTER TABLE t_consultations ADD devligmed BIT NULL, &
+												  ADD occantnote VARCHAR(35) NULL, &
+												  ADD occposnote VARCHAR(35) NULL, &
+												  ADD surveru CHAR(1) NULL, &
+												  ADD surhoru CHAR(1) NULL, &
+												  ADD artouvu CHAR(1) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+else
+	update t_consultations set surveru = 'p',
+										surhoru = 't',
+										artouvu = 't';
+end if
+iw_progressbar.of_position(1)
+
+// Rapport préliminaire (consultation)
+ls_sql = "ALTER TABLE t_consultations MODIFY surveru NOT NULL, &
+												  MODIFY surhoru NOT NULL, &
+												  MODIFY artouvu NOT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+
+// Rapport préliminaire (consultation)
+ls_sql = "ALTER TABLE t_options ADD surveru CHAR(1) NULL, &
+										  ADD surhoru CHAR(1) NULL, &
+										  ADD artouvu CHAR(1) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+
+if ib_updateok then
+	update t_ver set ver = 821;
+end if
+end if
+/// END VERSION 8.2.1 ///
+/////////////////////////
+
+if li_curver < 822 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.2.2 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.2.2')
+iw_progressbar.of_max(2)
+iw_progressbar.of_position(0)
+
+ls_sql = "ALTER TABLE t_options ADD mask_boite CHAR(20) NULL "
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+
+ls_sql = "alter table ortho_id modify dr_nom_complet varchar(100)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+
+
+if ib_updateok then
+	update t_ver set ver = 822;
+end if
+end if
+/// END VERSION 8.2.2 ///
+/////////////////////////
+
+if li_curver < 824 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.2.4 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.2.4')
+iw_progressbar.of_max(2)
+iw_progressbar.of_position(0)
+
+ls_sql = "ALTER TABLE patient MODIFY text1 VARCHAR(100) NULL, &
+										MODIFY text2 VARCHAR(100) NULL, &
+										MODIFY text3 VARCHAR(100) NULL, &
+										MODIFY text4 VARCHAR(100) NULL, &
+										MODIFY text5 VARCHAR(100) NULL, &
+										MODIFY text6 VARCHAR(100) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+
+ls_sql = "alter table t_contact modify telext varchar(100) NULL, &
+										  modify telext1 varchar(100) NULL, &
+										  modify telext5 varchar(100) NULL, &
+										  modify telext6 varchar(100) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+
+
+if ib_updateok then
+	update t_ver set ver = 824;
+end if
+end if
+/// END VERSION 8.2.4 ///
+/////////////////////////
+
+if li_curver < 825 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.2.5 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.2.5')
+iw_progressbar.of_max(6)
+iw_progressbar.of_position(0)
+
+ls_sql = "ALTER TABLE t_options ADD chemin_logo varchar(100) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+
+ls_sql = "ALTER TABLE horaire_patient_id ADD memo varchar(1000) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+
+ls_sql = "alter table ortho_id add site_web varchar(255) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+
+ls_sql = "alter table patient MODIFY note varchar(32767) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+
+ls_sql = "CREATE TABLE t_hornotedate	(hornotedate DATE NOT NULL DEFAULT CURRENT TIME,&
+													commentaire VARCHAR(32767) NULL,&
+													PRIMARY KEY (hornotedate))"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+
+ls_sql = "ALTER TABLE t_contrats	MODIFY date1 NULL, &
+											MODIFY mdate1 NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+
+
+if ib_updateok then
+	update t_ver set ver = 825;
+end if
+end if
+/// END VERSION 8.2.5 ///
+/////////////////////////
+
+if li_curver < 826 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.2.6 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.2.6')
+iw_progressbar.of_max(2)
+iw_progressbar.of_position(0)
+
+ls_sql = "ALTER TABLE t_contrats MODIFY pourcentage DECIMAL(5,2)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+
+ls_sql = "alter table t_options add pourcapp decimal(5,4) NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+
+
+if ib_updateok then
+	update t_ver set ver = 826;
+end if
+end if
+/// END VERSION 8.2.6 ///
+/////////////////////////
+if li_curver < 827 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.2.7 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.2.7')
+iw_progressbar.of_max(1)
+iw_progressbar.of_position(0)
+
+ls_sql = "ALTER TABLE t_contact ADD payeur BIT NULL"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+
+if ib_updateok then
+	update t_ver set ver = 827;
+end if
+end if
+/// END VERSION 8.2.7 ///
+/////////////////////////
+if li_curver < 828 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.2.8 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.2.8')
+iw_progressbar.of_max(5)
+iw_progressbar.of_position(0)
+
+ls_sql = "ALTER TABLE traitements MODIFY note varchar(10000)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+
+ls_sql = "ALTER TABLE t_options MODIFY typerapcons integer"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+
+ls_sql = "ALTER TABLE t_fournisseurs MODIFY note1 varchar(32000)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+
+ls_sql = "ALTER TABLE t_rapconsult1 ADD a1 integer null, &
+												ADD a2 integer null, &
+												ADD a3 integer null, &
+												ADD a4 integer null, &
+												ADD b1 integer null, &
+												ADD b2 integer null, &
+												ADD b3 integer null, &
+												ADD b4 integer null, &
+												ADD c1 integer null, &
+												ADD c2 integer null, &
+												ADD c3 integer null, &
+												ADD c4 integer null, &
+												ADD d1 integer null, &
+												ADD d2 integer null, &
+												ADD d3 integer null, &
+												ADD d4 integer null, &
+												ADD e1 integer null, &
+												ADD e2 integer null, &
+												ADD e3 integer null, &
+												ADD e4 integer null"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+
+ls_sql = "ALTER TABLE ortho_id ADD courriel VARCHAR(100) null"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+
+if ib_updateok then
+	update t_ver set ver = 828;
+end if
+end if
+/// END VERSION 8.2.8 ///
+/////////////////////////
+
+if li_curver < 829 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.2.9 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.2.9')
+iw_progressbar.of_max(7)
+iw_progressbar.of_position(0)
+
+ls_sql = "ALTER TABLE traitements MODIFY note varchar(10000)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+
+ls_sql = "ALTER TABLE t_options MODIFY typerapcons integer"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(2)
+
+ls_sql = "ALTER TABLE t_fournisseurs MODIFY note1 varchar(32000)"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(3)
+
+ls_sql = "ALTER TABLE t_rapconsult1 ADD a1 integer null, &
+												ADD a2 integer null, &
+												ADD a3 integer null, &
+												ADD a4 integer null, &
+												ADD b1 integer null, &
+												ADD b2 integer null, &
+												ADD b3 integer null, &
+												ADD b4 integer null, &
+												ADD c1 integer null, &
+												ADD c2 integer null, &
+												ADD c3 integer null, &
+												ADD c4 integer null, &
+												ADD d1 integer null, &
+												ADD d2 integer null, &
+												ADD d3 integer null, &
+												ADD d4 integer null, &
+												ADD e1 integer null, &
+												ADD e2 integer null, &
+												ADD e3 integer null, &
+												ADD e4 integer null"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(4)
+
+ls_sql = "ALTER TABLE ortho_id ADD courriel VARCHAR(100) null"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(5)
+
+ls_sql = "alter table t_options add noboite_inc bit null"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(6)
+ls_sql = "alter table t_options modify recuimpnue integer null"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(7)
+update t_ver set ver = 829;
+end if
+/// END VERSION 8.2.9 ///
+/////////////////////////
+
+if li_curver < 830 or isnull(li_curver) then
+/////////////////////////
+// START VERSION 8.3.0 //
+open(iw_progressbar)
+iw_progressbar.of_tache('Mise à jour version 8.3.0')
+iw_progressbar.of_max(1)
+iw_progressbar.of_position(0)
+
+ls_sql = "alter table t_options modify recuimpnue integer null"
+execute immediate :ls_sql using sqlca;
+if (SQLCA.sqlCode <> 0) then
+	FileWrite(li_FileNum, string(today()) + ',' + string(now()) + ',' + string(li_curver) + "," + SQLCA.SQLErrText)
+	ib_updateok = false
+end if
+iw_progressbar.of_position(1)
+update t_ver set ver = 830;
+end if
+/// END VERSION 8.3.0 ///
+/////////////////////////
+
+close(iw_progressbar)
+FileClose(li_FileNum)
+
+
+////////////////////////////////////
+//
+// Rendu à gf_updatetable
+//
+////////////////////////////////////
+end subroutine
+

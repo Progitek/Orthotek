@@ -1,0 +1,13 @@
+﻿$PBExportHeader$dw_dddw_traitement.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=78690504 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=13 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=89 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes identity=yes name=type_traitement_id dbname="type_de_traitement.type_traitement_id" )
+ column=(type=char(40) updatewhereclause=yes name=nom_traitement dbname="type_de_traitement.nom_traitement" )
+ column=(type=char(2) updatewhereclause=yes name=nip_traitement dbname="type_de_traitement.nip_traitement" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"type_de_traitement~" ) COLUMN(NAME=~"type_de_traitement.type_traitement_id~") COLUMN(NAME=~"type_de_traitement.nom_traitement~") COLUMN(NAME=~"type_de_traitement.nip_traitement~")) " update="type_de_traitement" updatewhere=1 updatekeyinplace=no  sort="nip_traitement A " )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="5" color="0" x="10" y="4" height="77" width="101" format="[general]"  name=nip_traitement edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="5" color="0" x="133" y="4" height="77" width="842" format="[general]"  name=nom_traitement edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

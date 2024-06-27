@@ -1,0 +1,15 @@
+﻿$PBExportHeader$gf_prov.srf
+global type gf_prov from function_object
+end type
+
+forward prototypes
+global function string gf_prov (string as_langue)
+end prototypes
+
+global function string gf_prov (string as_langue);if v_langue = 'an' then
+	return 'Quebec~tQC/Nfld.~tNF/Nova Scotia~tPE/NB~tNB/Ontario~tON/Sask.~tSK/BCNT~tBC/Yukon~tYT/Labrador~tLB/Manitoba~tMB/Alberta~tAB/Alabama~tAL/Arkansas~tAR/Alaska~tAK/California~tCA/Arizona~tAZ/Colorado~tCO/Connecticut~tCT'
+else
+	return 'Québec~tQC/Terre Neuve~tNF/Île-du-Prince-Edward~tPE/Nouveau Brunswick~tNB/Ontario~tON/Saskatchewan.~tSK/Colombie Britanique~tBC/Yukon~tYT/Labrador~tLB/Manitoba~tMB/Alberta~tAB/Alabama~tAL/Arkansas~tAR/Alaska~tAK/California~tCA/Arizona~tAZ/Colorado~tCO/Connecticut~tCT'
+end if
+end function
+

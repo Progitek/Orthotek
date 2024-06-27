@@ -1,0 +1,24 @@
+﻿$PBExportHeader$d_formulaire_normalise_factures1.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=16777215 processing=1 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no grid.lines=0 )
+header(height=104 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=decimal(2) updatewhereclause=yes name=montant dbname="factures_traitements.montant" )
+ column=(type=date updatewhereclause=yes name=date_facture dbname="factures_traitements.date_facture" )
+ column=(type=char(10) updatewhereclause=yes name=t_status_code dbname="t_status.code" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"factures_traitements~" )  TABLE(NAME=~"t_status~" ) COLUMN(NAME=~"factures_traitements.montant~") COLUMN(NAME=~"factures_traitements.date_facture~") COLUMN(NAME=~"t_status.code~")    JOIN (LEFT=~"factures_traitements.status_id~"    OP =~"=~"RIGHT=~"t_status.status_id~" )WHERE(    EXP1 =~"~~~"factures_traitements~~~".~~~"traitement_id~~~"~"   OP =~"=~"    EXP2 =~":ra_traitement_id~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"~~~"factures_traitements~~~".~~~"imp~~~"~"   OP =~"=~"    EXP2 =~"1~" ) ) ARG(NAME = ~"ra_traitement_id~" TYPE = number) " arguments=(("ra_traitement_id", number)) )
+text(band=header alignment="2" text="DATE" border="2" color="0" x="5" y="4" height="96" width="329"  name=factures_traitements_date_facture_t  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Dent" border="2" color="0" x="645" y="4" height="96" width="293"  name=t_1  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="9" y="0" height="76" width="329" format="[general]"  name=montant edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="347" y="0" height="76" width="343" format="[general]"  name=date_facture edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=0 border="0" color="0" x="704" y="0" height="64" width="261"  name=t_status_code  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Code de  l'acte" border="2" color="0" x="338" y="4" height="96" width="302"  name=factures_traitements_montant_t  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Surface" border="2" color="0" x="942" y="4" height="96" width="293"  name=t_2  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Honoraires" border="2" color="0" x="1239" y="4" height="96" width="288"  name=t_3  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Frais de
+laboratoire" border="2" color="0" x="1531" y="4" height="96" width="293"  name=t_status_code_t  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Total des frais" border="2" color="0" x="1829" y="4" height="96" width="288"  name=t_4  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

@@ -1,0 +1,23 @@
+﻿$PBExportHeader$d_modaliteresume.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=0 color="536870912" )
+table(column=(type=decimal(2) updatewhereclause=yes name=montant_recu dbname="paiement.montant_recu" )
+ column=(type=char(20) updatewhereclause=yes name=paiement dbname="paiement.paiement" )
+ retrieve="  SELECT paiement.montant_recu,  
+         paiement.paiement
+    FROM traitements INNER JOIN paiement ON traitements.traitement_id = paiement.traitement_patient_id
+							INNER JOIN patient ON traitements.patient_id = patient.patient_id
+	WHERE patient.no_ortho = :ra_ortho AND
+			paiement.date_paiement BETWEEN :ra_start AND :ra_end
+ORDER BY paiement.paiement" arguments=(("ra_ortho", number),("ra_start", date),("ra_end", date)) )
+group(level=1 header.height=0 trailer.height=80 by=("paiement" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="0" text="Montant" border="0" color="33554432" x="613" y="4" height="64" width="645" html.valueishtml="0"  name=t_montant visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Modalité" border="0" color="33554432" x="18" y="4" height="64" width="585" html.valueishtml="0"  name=t_mod visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="0" expression="sum(montant_recu for group 1)"border="0" color="0" x="613" y="8" height="64" width="645" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=trailer.1 id=2 alignment="0" tabsequence=32766 border="0" color="0" x="18" y="8" height="64" width="585" format="[general]" html.valueishtml="0"  name=paiement visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

@@ -1,0 +1,34 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_srvfilter.sru
+$PBExportComments$(PRO) DataWindow Property - The Filter service tabpage
+forward
+global type pro_u_tabpg_dwproperty_srvfilter from pfc_u_tabpg_dwproperty_srvfilter
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_srvfilter from pfc_u_tabpg_dwproperty_srvfilter
+end type
+global pro_u_tabpg_dwproperty_srvfilter pro_u_tabpg_dwproperty_srvfilter
+
+on pro_u_tabpg_dwproperty_srvfilter.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_srvfilter.destroy
+call super::destroy
+end on
+
+type st_style from pfc_u_tabpg_dwproperty_srvfilter`st_style within pro_u_tabpg_dwproperty_srvfilter
+end type
+
+type cbx_visibleonly from pfc_u_tabpg_dwproperty_srvfilter`cbx_visibleonly within pro_u_tabpg_dwproperty_srvfilter
+end type
+
+type st_excludecols from pfc_u_tabpg_dwproperty_srvfilter`st_excludecols within pro_u_tabpg_dwproperty_srvfilter
+end type
+
+type ddlb_style from pfc_u_tabpg_dwproperty_srvfilter`ddlb_style within pro_u_tabpg_dwproperty_srvfilter
+end type
+
+type lb_excludecols from pfc_u_tabpg_dwproperty_srvfilter`lb_excludecols within pro_u_tabpg_dwproperty_srvfilter
+end type
+

@@ -1,0 +1,18 @@
+﻿$PBExportHeader$d_activites.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=96 color="536870912"  height.autosize=yes)
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=id_activite dbname="t_activites.id_activite" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=activites dbname="t_activites.activites" )
+ column=(type=long update=yes updatewhereclause=yes name=ortho_id dbname="t_activites.ortho_id" )
+ column=(type=number update=yes updatewhereclause=yes name=defo dbname="t_activites.defo" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"t_activites~" ) COLUMN(NAME=~"t_activites.id_activite~") COLUMN(NAME=~"t_activites.activites~") COLUMN(NAME=~"t_activites.ortho_id~") COLUMN(NAME=~"t_activites.defo~")WHERE(    EXP1 =~"~~~"t_activites~~~".~~~"ortho_id~~~"~"   OP =~"=~"    EXP2 =~":ra_ortho~" ) ) ORDER(NAME=~"t_activites.id_activite~" ASC=yes ) ARG(NAME = ~"ra_ortho~" TYPE = number) " update="t_activites" updatewhere=1 updatekeyinplace=no arguments=(("ra_ortho", number)) )
+column(band=detail id=2 alignment="0" tabsequence=10 border="5" color="0" x="123" y="4" height="76" width="946" format="[general]" html.valueishtml="0"  name=activites visible="1" edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="if ( defo = 1 , '<-- Choix par défaut', '' )"border="0" color="0" x="1106" y="4" height="76" width="869" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

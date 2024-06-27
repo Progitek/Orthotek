@@ -1,0 +1,59 @@
+﻿$PBExportHeader$d_cincoutconsolearr.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=68 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes identity=yes name=id_cincout dbname="t_cincout.id_cincout" )
+ column=(type=long updatewhereclause=yes name=patient_id dbname="t_cincout.patient_id" )
+ column=(type=long updatewhereclause=yes name=chaise dbname="t_cincout.chaise" )
+ column=(type=time updatewhereclause=yes name=heure dbname="t_cincout.heure" )
+ column=(type=char(40) updatewhereclause=yes name=traitement dbname="t_cincout.traitement" )
+ column=(type=char(40) updatewhereclause=yes name=t_cincout_traitnom dbname="t_cincout.traitnom" )
+ column=(type=long updatewhereclause=yes name=duree dbname="t_cincout.duree" )
+ column=(type=char(10) updatewhereclause=yes name=status dbname="t_cincout.status" values="En Attente	En Attente/En Retard	En Retard/À temps	À temps/RDV manqué	RDV manqué/Annulé	Annulé/" )
+ column=(type=time updatewhereclause=yes name=checkin dbname="t_cincout.checkin" )
+ column=(type=long updatewhereclause=yes name=id_personnel dbname="t_cincout.id_personnel" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(2) updatewhereclause=yes name=t_personnels_initial dbname="t_personnels.initial" )
+ column=(type=long updatewhereclause=yes name=couleur dbname="couleur" )
+ retrieve="SELECT  DISTINCT t_cincout.id_cincout ,
+           t_cincout.patient_id ,
+           t_cincout.chaise ,
+           t_cincout.heure ,
+           t_cincout.traitement ,
+ 			  t_cincout.traitement as traitnom,
+           t_cincout.duree ,
+           t_cincout.status ,
+           t_cincout.checkin ,
+           t_cincout.id_personnel,
+           patient.patient_nom,
+           patient.patient_prenom,
+           t_personnels.initial,
+			  (select color from t_color inner join type_de_traitement ON type_de_traitement.color_id = t_color.color_id 
+            where type_de_traitement.nom_traitement = traitnom) as couleur  
+ FROM      patient INNER JOIN t_cincout ON t_cincout.patient_id = patient.patient_id
+                  LEFT OUTER JOIN t_personnels On t_cincout.id_personnel = t_personnels .id_personnel
+ORDER BY   t_cincout.heure ASC  " )
+text(band=header alignment="2" text="HeureRDV" border="0" color="33554432" x="855" y="8" height="56" width="247" html.valueishtml="0"  name=heure_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Heure ARR" border="0" color="33554432" x="1115" y="8" height="56" width="247" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Duree" border="0" color="33554432" x="1376" y="8" height="56" width="219" html.valueishtml="0"  name=duree_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Status" border="0" color="33554432" x="1609" y="8" height="56" width="384" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Attente" border="0" color="33554432" x="2007" y="8" height="56" width="183" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Chaise" border="0" color="33554432" x="2203" y="8" height="56" width="183" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Nom" border="0" color="33554432" x="123" y="8" height="56" width="718" html.valueishtml="0"  name=nom_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Personnel" border="0" color="33554432" x="2400" y="8" height="56" width="265" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Traitement" border="0" color="33554432" x="2679" y="8" height="56" width="553" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="2" tabsequence=32766 border="0" color="33554432" x="1115" y="4" height="76" width="247" format="[time]" html.valueishtml="0"  name=checkin visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="2" tabsequence=32766 border="0" color="33554432" x="1376" y="4" height="76" width="219" format="[general]" html.valueishtml="0"  name=duree visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="2" tabsequence=10 border="0" color="33554432" x="1609" y="4" height="76" width="384" format="[general]" html.valueishtml="0"  name=status visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="0" color="33554432" x="2203" y="4" height="76" width="183" format="[general]" html.valueishtml="0"  name=chaise visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=32766 border="0" color="33554432" x="855" y="4" height="76" width="247" format="[time]" html.valueishtml="0"  name=heure visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" patient_patient_prenom +  ' ' + patient_patient_nom "border="0" color="33554432" x="123" y="4" height="76" width="718" format="[GENERAL]" html.valueishtml="0"  name=nom visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="33554432" x="2400" y="4" height="76" width="265" format="[general]" html.valueishtml="0"  name=t_personnels_initial visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="2" expression="int(secondsafter( checkin ,  now()  ) / 60)"border="0" color="33554432" x="2007" y="4" height="76" width="183" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="2679" y="4" height="76" width="553" format="[general]" html.valueishtml="0"  name=traitement visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~t couleur " )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

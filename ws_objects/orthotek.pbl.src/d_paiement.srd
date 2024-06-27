@@ -1,0 +1,65 @@
+﻿$PBExportHeader$d_paiement.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=68 color="536870912" )
+summary(height=4 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=176 color="536870912" height.autosize=yes )
+table(column=(type=decimal(2) update=yes updatewhereclause=yes name=montant_recu dbname="paiement.montant_recu" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=paiement dbname="paiement.paiement" )
+ column=(type=long update=yes updatewhereclause=yes name=traitement_patient_id dbname="paiement.traitement_patient_id" )
+ column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=paiement_id dbname="paiement.paiement_id" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=recu dbname="paiement.recu" )
+ column=(type=date update=yes updatewhereclause=yes name=date_paiement dbname="paiement.date_paiement" validationmsg="'La date doit-être plus petite ou égale à celle d`aujourd`hui.'" )
+ column=(type=date update=yes updatewhereclause=yes name=datedepot dbname="paiement.datedepot" )
+ column=(type=number update=yes updatewhereclause=yes name=affect dbname="paiement.affect" values="	1/	0" )
+ column=(type=number update=yes updatewhereclause=yes name=cache dbname="paiement.cache" )
+ column=(type=long update=yes updatewhereclause=yes name=nocheque dbname="paiement.nocheque" )
+ column=(type=long update=yes updatewhereclause=yes name=id_contact dbname="paiement.id_contact" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=nocarte dbname="paiement.nocarte" )
+ column=(type=date update=yes updatewhereclause=yes name=datecarte dbname="paiement.datecarte" )
+ column=(type=number update=yes updatewhereclause=yes name=taxe dbname="paiement.taxe" values="	1/	0" )
+ column=(type=long update=yes updatewhereclause=yes name=id_satellite dbname="paiement.id_satellite" )
+ retrieve="  SELECT paiement.montant_recu,   
+         paiement.paiement,   
+         paiement.traitement_patient_id,   
+         paiement.paiement_id,   
+         paiement.recu,   
+         paiement.date_paiement,
+			paiement.datedepot,
+         paiement.affect,   
+         paiement.cache,    
+         paiement.nocheque,
+         paiement.id_contact,
+			paiement.nocarte,
+			paiement.datecarte,
+			paiement.taxe,
+			paiement.id_satellite
+    FROM paiement    
+" update="paiement" updatewhere=1 updatekeyinplace=no )
+text(band=header alignment="2" text="Paiement" border="0" color="0" x="27" y="0" height="64" width="544" html.valueishtml="0"  name=paiement_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Date paiement" border="0" color="0" x="599" y="0" height="64" width="434" html.valueishtml="0"  name=date_paiement_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="# Chèque" border="0" color="0" x="1102" y="0" height="64" width="613" html.valueishtml="0"  name=t_cheque visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Responsable" border="0" color="0" x="2505" y="0" height="64" width="818" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Montant reçu" border="0" color="0" x="2107" y="0" height="64" width="443" html.valueishtml="0"  name=montant_recu_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Date d'exp." border="0" color="0" x="1733" y="0" height="64" width="361" html.valueishtml="0"  name=t_date visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Taxable" border="0" color="0" x="3310" y="0" height="64" width="242" html.valueishtml="0"  name=t_taxe visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="2" tabsequence=20 border="5" color="0" x="599" y="8" height="64" width="475" format="[general]" html.valueishtml="0"  name=date_paiement visible="1" edit.name="DD/MM/YYYY" editmask.required=yes editmask.autoskip=yes editmask.ddcalendar=yes editmask.mask="[date]" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=12 alignment="2" tabsequence=32766 border="5" color="0" x="1102" y="8" height="64" width="613" format="[general]" html.valueishtml="0"  name=nocarte visible="0" editmask.mask="#### #### #### ####" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=10 alignment="2" tabsequence=30 border="5" color="0" x="1102" y="8" height="64" width="613" format="[general]" html.valueishtml="0"  name=nocheque visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=11 alignment="0" tabsequence=60 border="5" color="0" x="2510" y="8" height="64" width="823" format="[general]" html.valueishtml="0"  name=id_contact visible="1" dddw.name=dddw_contact dddw.displaycolumn=compute_1 dddw.datacolumn=id_contact dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="1" tabsequence=50 border="5" color="0" x="2112" y="8" height="64" width="379" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=montant_recu visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.required=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=13 alignment="2" tabsequence=40 border="5" color="0" x="1733" y="8" height="64" width="361" format="[general]" html.valueishtml="0"  name=datecarte visible="1" editmask.mask="mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=14 alignment="2" tabsequence=70 border="0" color="0" x="3337" y="4" height="64" width="183" format="[general]" html.valueishtml="0"  name=taxe visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=10 border="5" color="0" x="14" y="8" height="64" width="558" format="[general]" html.valueishtml="0"  name=paiement visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.required=yes ddlb.vscrollbar=yes ddlb.useasborder=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=15 alignment="0" tabsequence=80 border="5" color="0" x="14" y="100" height="64" width="914" format="[general]" html.valueishtml="0"  name=id_satellite visible="1" dddw.name=dddw_satellite dddw.displaycolumn=computelieu dddw.datacolumn=id_satellite dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

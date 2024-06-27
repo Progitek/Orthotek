@@ -1,0 +1,175 @@
+﻿$PBExportHeader$d_exportjour.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=136 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=hora_iden_patient dbname="patient.iden_patient" dbalias=".iden_patient" )
+ column=(type=char(100) updatewhereclause=yes name=doctor_name dbname="doctor_name" )
+ column=(type=date updatewhereclause=yes name=hora_date_appointment dbname="patient.date_appointment" dbalias=".date_appointment" )
+ column=(type=time updatewhereclause=yes name=hora_hour_appointment dbname="patient.hour_appointment" dbalias=".hour_appointment" )
+ column=(type=char(50) updatewhereclause=yes name=patient_last_name dbname="patient.last_name" dbalias="PAT.last_name" )
+ column=(type=char(50) updatewhereclause=yes name=patient_first_name dbname="patient.first_name" dbalias="PAT.first_name" )
+ column=(type=char(20) updatewhereclause=yes name=patient_language dbname="patient.language" dbalias="PAT.language" )
+ column=(type=char(15) updatewhereclause=yes name=telephone_number dbname="telephone_number" )
+ column=(type=char(50) updatewhereclause=yes name=patient_email dbname="email" )
+ column=(type=char(2) updatewhereclause=yes name=status_call dbname="status_call" )
+ retrieve="	SELECT 
+	 hora.patient_id as Iden_Patient,
+    (if OPT.NAMELXPRO <> '' and OPT.NAMELXPRO is not null then
+	 	OPT.NAMELXPRO
+	 else
+		ORT.DR_NOM_COMPLET
+	 endif) as Doctor_Name, 
+    hora.rdvdate as Date_Appointment, 
+    hora.rdvheure as Hour_Appointment, 
+    PAT.PATIENT_NOM as Last_Name, 
+    PAT.PATIENT_PRENOM as First_Name,
+    PAT.LANGUE as Language,
+    trim(ISNULL(
+        if trim(PAT.tel_maison) = '' then
+            null
+        else
+            PAT.tel_maison
+        endif,
+        if trim(PAT.tel_bureau) = '' then
+            null
+        else
+            PAT.tel_bureau
+        endif,
+        if trim(PAT.telcell) = '' then
+            null
+        else
+            PAT.telcell
+        endif,
+        if trim(PAT.telautre) = '' then
+            null
+        else
+            PAT.telautre
+        endif,
+        '')) as telephone_number,
+		(if PAT.email is null then '.' else PAT.email endif) as email,
+		('-1') as status_call
+FROM 
+    PATIENT PAT,
+    Ortho_id ORT,
+	T_OPTIONS OPT,
+    (SELECT
+	hor.rdvdate,
+	hor.rdvheure,
+	hor.ortho_id,
+	hor.patient_id,
+	hor.confirmation
+	FROM
+	t_rdv rdv inner join ((Select patient_id_1 as patient_id, 0 as confirmation, datecal as rdvdate, heure as rdvheure, no_ortho as ortho_id, 1 as colonne
+		From horaire
+		Where duree1 <> 0 and duree1 is not null and (conf1 = 0 or conf1 is null) and datecal = :RA_DATE)
+		UNION
+		(Select patient_id_2 as patient_id, 0 as confirmation, datecal as rdvdate, heure as rdvheure, no_ortho as ortho_id, 2 as colonne
+		From horaire
+		Where duree2 <> 0 and duree2 is not null and (conf2 = 0 or conf2 is null) and datecal = :RA_DATE)
+		UNION
+		(Select patient_id_3 as patient_id, 0 as confirmation, datecal as rdvdate, heure as rdvheure, no_ortho as ortho_id, 3 as colonne
+		From horaire
+		Where duree3 <> 0 and duree3 is not null and (conf3 = 0 or conf3 is null) and datecal = :RA_DATE)
+		UNION
+		(Select patient_id_4 as patient_id, 0 as confirmation, datecal as rdvdate, heure as rdvheure, no_ortho as ortho_id, 4 as colonne
+		From horaire
+		Where duree4 <> 0 and duree4 is not null and (conf4 = 0 or conf4 is null) and datecal = :RA_DATE)
+		UNION
+		(Select patient_id_5 as patient_id, 0 as confirmation, datecal as rdvdate, heure as rdvheure, no_ortho as ortho_id, 5 as colonne
+		From horaire
+		Where duree5 <> 0 and duree5 is not null and (conf5 = 0 or conf5 is null) and datecal = :RA_DATE)
+		UNION
+		(Select patient_id_6 as patient_id, 0 as confirmation, datecal as rdvdate, heure as rdvheure, no_ortho as ortho_id, 6 as colonne
+		From horaire
+		Where duree6 <> 0 and duree6 is not null and (conf6 = 0 or conf6 is null) and datecal = :RA_DATE)
+		UNION
+		(Select patient_id_7 as patient_id, 0 as confirmation, datecal as rdvdate, heure as rdvheure, no_ortho as ortho_id, 7 as colonne
+		From horaire
+		Where duree7 <> 0 and duree7 is not null and (conf7 = 0 or conf7 is null) and datecal = :RA_DATE)
+		UNION
+		(Select patient_id_8 as patient_id, 0 as confirmation, datecal as rdvdate, heure as rdvheure, no_ortho as ortho_id, 8 as colonne
+		From horaire
+		Where duree8 <> 0 and duree8 is not null and (conf8 = 0 or conf8 is null) and datecal = :RA_DATE)
+		UNION
+		(Select patient_id_9 as patient_id, 0 as confirmation, datecal as rdvdate, heure as rdvheure, no_ortho as ortho_id, 9 as colonne
+		From horaire
+		Where duree9 <> 0 and duree9 is not null and (conf9 = 0 or conf9 is null) and datecal = :RA_DATE)
+		UNION
+		(Select patient_id_10 as patient_id, 0 as confirmation, datecal as rdvdate, heure as rdvheure, no_ortho as ortho_id, 10 as colonne
+		From horaire
+		Where duree10 <> 0 and duree10 is not null and (conf10 = 0 or conf10 is null) and datecal = :RA_DATE)) hor on 
+	(hor.rdvdate = rdv.rdvdate and 
+	hor.rdvheure = rdv.rdvheure and 
+	hor.patient_id = rdv.patient_id and 
+	hor.ortho_id = rdv.ortho_id and
+	isnull(rdv.rdvetat, '') not in ('e', 'c','o','m','l')) or 
+	(hor.rdvdate = rdv.rdvdate and 
+	hor.rdvheure = rdv.rdvheure and 
+	hor.patient_id <> rdv.patient_id and
+	hor.colonne = rdv.colonne and
+	(select
+	count(t_rdv.patient_id)
+	from
+	t_rdv
+	where
+	hor.rdvdate = t_rdv.rdvdate and 
+	hor.rdvheure = t_rdv.rdvheure and 
+	hor.colonne = t_rdv.colonne ) = 1)) hora
+WHERE 
+    hora.patient_id IS NOT NULL AND
+    hora.ortho_id = :RA_ORTHO_ID AND
+    hora.ortho_id = ORT.ortho_id AND
+	hora.ortho_id = OPT.ortho_id AND 
+    hora.patient_id = PAT.patient_id AND 
+    telephone_number <> ''
+GROUP BY
+    hora.patient_id,
+    Doctor_Name, 
+    hora.rdvdate, 
+    hora.rdvheure, 
+    PAT.patient_nom, 
+    PAT.patient_prenom,
+    PAT.langue,
+    telephone_number,
+	 email,
+	 status_call" arguments=(("RA_ORTHO_ID", number),("RA_DATE", date)) )
+text(band=header alignment="2" text="Hora
+Iden Patient" border="0" color="33554432" x="5" y="4" height="128" width="329" html.valueishtml="0"  name=hora_iden_patient_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Doctor Name" border="0" color="33554432" x="338" y="4" height="64" width="2770" html.valueishtml="0"  name=doctor_name_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Hora
+Date Appointment" border="0" color="33554432" x="3113" y="4" height="128" width="475" html.valueishtml="0"  name=hora_date_appointment_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Hora
+Hour Appointment" border="0" color="33554432" x="3593" y="4" height="128" width="475" html.valueishtml="0"  name=hora_hour_appointment_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Patient
+Last Name" border="0" color="33554432" x="4073" y="4" height="128" width="1399" html.valueishtml="0"  name=patient_last_name_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Patient
+First Name" border="0" color="33554432" x="5477" y="4" height="128" width="1399" html.valueishtml="0"  name=patient_first_name_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Patient
+Language" border="0" color="33554432" x="6880" y="4" height="128" width="576" html.valueishtml="0"  name=patient_language_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Telephone Number" border="0" color="33554432" x="7465" y="4" height="64" width="494" html.valueishtml="0"  name=telephone_number_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Confirmation" border="0" color="33554432" x="7963" y="4" height="64" width="329" html.valueishtml="0"  name=confirmation_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Iden Appointment" border="0" color="33554432" x="8297" y="4" height="64" width="462" html.valueishtml="0"  name=iden_appointment_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=hora_iden_patient visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="338" y="4" height="76" width="2770" format="[general]" html.valueishtml="0"  name=doctor_name visible="1" edit.limit=100 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="3113" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=hora_date_appointment visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="3593" y="4" height="76" width="274" format="[time]" html.valueishtml="0"  name=hora_hour_appointment visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="4073" y="4" height="76" width="1399" format="[general]" html.valueishtml="0"  name=patient_last_name visible="1" edit.limit=50 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="5477" y="4" height="76" width="1399" format="[general]" html.valueishtml="0"  name=patient_first_name visible="1" edit.limit=50 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="6880" y="4" height="76" width="576" format="[general]" html.valueishtml="0"  name=patient_language visible="1" edit.limit=20 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="7465" y="4" height="76" width="439" format="[general]" html.valueishtml="0"  name=telephone_number visible="1" edit.limit=15 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=0 border="0" color="33554432" x="8759" y="0" height="64" width="1353" html.valueishtml="0"  name=patient_email visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=0 border="0" color="33554432" x="10112" y="0" height="64" width="55" html.valueishtml="0"  name=status_call visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(usetemplate="exportappointment" headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0  template=(comment="" encoding="UTF-16LE" name="exportappointment" xml="<?xml version=~"1.0~" encoding=~"UTF-16LE~" standalone=~"no~"?><Apt><apt_row __pbband=~"detail~"><iden_patient>hora_iden_patient</iden_patient><doctor_name>doctor_name</doctor_name><date_appointment>hora_date_appointment</date_appointment><hour_appointment>hora_hour_appointment</hour_appointment><last_name>patient_last_name</last_name><first_name>patient_first_name</first_name><language>patient_language</language><telephone_number>telephone_number</telephone_number><email>patient_email</email><status_call>status_call</status_call></apt_row></Apt>"))
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

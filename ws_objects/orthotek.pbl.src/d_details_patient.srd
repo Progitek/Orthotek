@@ -1,0 +1,94 @@
+﻿$PBExportHeader$d_details_patient.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=4 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=1328 color="536870912" )
+table(column=(type=char(50) updatewhereclause=yes name=patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(36) updatewhereclause=yes name=adresse dbname="patient.adresse" )
+ column=(type=char(25) updatewhereclause=yes name=ville dbname="patient.ville" )
+ column=(type=char(25) updatewhereclause=yes name=province dbname="patient.province" )
+ column=(type=char(10) updatewhereclause=yes name=code_postale dbname="patient.code_postale" )
+ column=(type=char(15) updatewhereclause=yes name=tel_maison dbname="patient.tel_maison" )
+ column=(type=date updatewhereclause=yes name=date_naissance dbname="patient.date_naissance" )
+ column=(type=char(1) updatewhereclause=yes name=sex dbname="patient.sex" )
+ column=(type=char(15) updatewhereclause=yes name=tel_bureau dbname="patient.tel_bureau" )
+ column=(type=char(20) updatewhereclause=yes name=langue dbname="patient.langue" values="Anglais	A/Français	F/" )
+ column=(type=long updatewhereclause=yes name=no_dossier dbname="patient.no_dossier" )
+ column=(type=long updatewhereclause=yes name=code_recherche dbname="patient.code_recherche" )
+ column=(type=char(20) updatewhereclause=yes name=text1 dbname="patient.text1" )
+ column=(type=char(20) updatewhereclause=yes name=text2 dbname="patient.text2" )
+ column=(type=long updatewhereclause=yes name=no_ortho dbname="patient.no_ortho" )
+ column=(type=long updatewhereclause=yes key=yes identity=yes name=patient_id dbname="patient.patient_id" )
+ column=(type=char(50) updatewhereclause=yes name=patient_nom dbname="patient.patient_nom" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=statut dbname="patient.statut" )
+ column=(type=long updatewhereclause=yes name=retards dbname="patient.retards" )
+ column=(type=long updatewhereclause=yes name=rvmanques dbname="patient.rvmanques" )
+ column=(type=char(10) updatewhereclause=yes name=new_dossier dbname="patient.new_dossier" )
+ column=(type=char(20) updatewhereclause=yes name=no_boite dbname="patient.no_boite" )
+ retrieve="  SELECT ~"patient~".~"patient_prenom~",   
+         ~"patient~".~"adresse~",   
+         ~"patient~".~"ville~",   
+         ~"patient~".~"province~",   
+         ~"patient~".~"code_postale~",   
+         ~"patient~".~"tel_maison~",   
+         ~"patient~".~"date_naissance~",   
+         ~"patient~".~"sex~",   
+         ~"patient~".~"tel_bureau~",   
+         ~"patient~".~"langue~",   
+         ~"patient~".~"no_dossier~",   
+         ~"patient~".~"code_recherche~",   
+         ~"patient~".~"text1~",   
+         ~"patient~".~"text2~",   
+         ~"patient~".~"no_ortho~",   
+         ~"patient~".~"patient_id~",   
+         ~"patient~".~"patient_nom~",   
+         ~"patient~".~"statut~",   
+         ~"patient~".~"retards~",   
+         ~"patient~".~"rvmanques~",   
+         ~"patient~".~"new_dossier~", 
+         ~"patient~".no_boite  
+    FROM ~"patient~"  (index i_pat)
+   WHERE ( patient.patient_id = :ra_nom_patient )    
+" update="patient" updatewhere=1 updatekeyinplace=no arguments=(("ra_nom_patient", number)) )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="4" color="0" x="562" y="884" height="64" width="439" format="[general]" html.valueishtml="0"  name=tel_bureau visible="1" editmask.mask="(###)###-####" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Adresse:" border="0" color="0" x="178" y="348" height="64" width="361" html.valueishtml="0"  name=adresse_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Province:" border="0" color="0" x="215" y="568" height="64" width="325" html.valueishtml="0"  name=province_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Code postal:" border="0" color="0" x="110" y="672" height="64" width="430" html.valueishtml="0"  name=code_postale_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Téléphone (bur):" border="0" color="0" x="14" y="884" height="64" width="526" html.valueishtml="0"  name=tel_bureau_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Sexe:" border="0" color="0" x="311" y="1096" height="64" width="229" html.valueishtml="0"  name=sex_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Téléphone (mai):" border="0" color="0" x="55" y="776" height="64" width="485" html.valueishtml="0"  name=tel_maison_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Nom:" border="0" color="0" x="229" y="136" height="64" width="306" html.valueishtml="0"  name=patient_nom_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Prénom:" border="0" color="0" x="174" y="244" height="64" width="366" html.valueishtml="0"  name=patient_prenom_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="4" color="0" x="562" y="356" height="64" width="1294" format="[general]" html.valueishtml="0"  name=adresse visible="1" edit.limit=36 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Ville:" border="0" color="0" x="283" y="464" height="64" width="256" html.valueishtml="0"  name=ville_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="4" color="0" x="562" y="780" height="64" width="439" format="[general]" html.valueishtml="0"  name=tel_maison visible="1" editmask.mask="(###)###-####" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="4" color="0" x="562" y="676" height="64" width="293" format="[general]" html.valueishtml="0"  name=code_postale visible="1" editmask.mask="!#! #!#" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="4" color="0" x="562" y="572" height="64" width="718" format="[general]" html.valueishtml="0"  name=province visible="1" edit.limit=25 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="4" color="0" x="562" y="464" height="64" width="718" format="[general]" html.valueishtml="0"  name=ville visible="1" edit.limit=25 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="4" color="0" x="562" y="248" height="64" width="658" format="[general]" html.valueishtml="0"  name=patient_prenom visible="1" edit.limit=25 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Langue:" border="0" color="0" x="270" y="1200" height="64" width="270" html.valueishtml="0"  name=langue_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="4" color="0" x="562" y="1200" height="64" width="302" format="[general]" html.valueishtml="0"  name=langue visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="4" color="0" x="562" y="1096" height="64" width="55" format="[general]" html.valueishtml="0"  name=sex visible="1" edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="4" color="0" x="562" y="992" height="64" width="384" format="[general]" html.valueishtml="0"  name=date_naissance visible="1" edit.name="DD/MM/YYYY" editmask.mask="DD/MM/YYYY" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="4" color="0" x="1006" y="780" height="64" width="425" format="[general]" html.valueishtml="0"  name=text1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="4" color="0" x="1006" y="884" height="64" width="430" format="[general]" html.valueishtml="0"  name=text2 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="4" color="0" x="1824" y="248" height="64" width="311" format="[general]" html.valueishtml="0"  name=code_recherche visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="4" color="0" x="553" y="136" height="64" width="677" format="[general]" html.valueishtml="0"  name=patient_nom visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Date de naissance:" border="0" color="0" x="23" y="988" height="64" width="517" html.valueishtml="0"  name=date_naissance_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression=" patient_prenom + ', ' +  patient_nom "border="0" color="0" x="18" y="4" height="64" width="1225" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression=" rvmanques + '-' +  retards "border="0" color="0" x="1833" y="672" height="64" width="265" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Numéro patient:" border="0" color="0" x="1330" y="136" height="64" width="475" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Numéro dossier:" border="0" color="0" x="1317" y="28" height="64" width="489" html.valueishtml="0"  name=no_dossier_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Code de recherche:" border="0" color="0" x="1266" y="244" height="64" width="539" html.valueishtml="0"  name=code_recherche_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Numéro de boîte:" border="0" color="0" x="1326" y="456" height="64" width="480" html.valueishtml="0"  name=no_boite_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Statut en cours:" border="0" color="0" x="1317" y="572" height="64" width="489" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Cote:" border="0" color="0" x="1467" y="672" height="64" width="338" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="4" color="0" x="1824" y="136" height="64" width="311" format="[general]" html.valueishtml="0"  name=no_dossier visible="1" editmask.mask="####-###" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=21 alignment="0" tabsequence=32766 border="4" color="0" x="1824" y="28" height="64" width="311" format="[general]" html.valueishtml="0"  name=new_dossier visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=18 alignment="0" tabsequence=32766 border="4" color="0" x="1829" y="572" height="64" width="315" format="[general]" html.valueishtml="0"  name=statut visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Âge:" border="0" color="0" x="978" y="988" height="64" width="123" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="" border="0" color="0" x="1106" y="988" height="64" width="466" html.valueishtml="0"  name=t_age visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=22 alignment="0" tabsequence=32766 border="4" color="0" x="1829" y="456" height="64" width="315" format="[general]" html.valueishtml="0"  name=no_boite visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

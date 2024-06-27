@@ -1,0 +1,24 @@
+﻿$PBExportHeader$d_dernier_paiement.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=4 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=96 color="536870912" )
+table(column=(type=date updatewhereclause=yes name=date_paiement dbname="paiement.date_paiement" )
+ column=(type=long updatewhereclause=yes name=traitement_patient_id dbname="paiement.traitement_patient_id" )
+ column=(type=decimal(2) updatewhereclause=yes name=montant_recu dbname="paiement.montant_recu" )
+ retrieve="  SELECT ~"paiement~".~"date_paiement~",   
+         ~"paiement~".~"traitement_patient_id~",   
+         ~"paiement~".~"montant_recu~"  
+    FROM ~"paiement~"   (index i_paiement)
+   WHERE ( ~"paiement~".~"traitement_patient_id~" = :id )   
+ORDER BY ~"paiement~".~"date_paiement~" DESC   
+" arguments=(("id", number)) )
+text(band=header alignment="0" text="Dernier paiement reçu" border="0" color="0" x="64" y="8" height="60" width="805"  name=t_1  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=detail alignment="1" text="Date:" border="0" color="0" x="73" y="16" height="64" width="155"  name=date_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="5" color="16777215" x="928" y="16" height="64" width="352" format="#,##0.00 $; (#,##0.00 $)"  name=montant_recu edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="8421504" )
+text(band=detail alignment="0" text="Montant:" border="0" color="0" x="667" y="16" height="64" width="233"  name=t_2  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="5" color="16777215" x="251" y="16" height="64" width="375" format=""  name=date_paiement edit.name="DD/MM/YYYY" editmask.mask="DD/MM/YYYY" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="8421504" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

@@ -1,0 +1,12 @@
+﻿$PBExportHeader$str_paiecredrecur.srs
+global type str_paiecredrecur from structure
+	decimal { 2 }		d_montant
+	string		s_nocarte
+	date		dt_dateexp
+	character		c_unitrecur
+	date		dt_debut
+	integer		i_nbrecur
+	integer		i_periode
+	decimal { 2 }		d_recurmontant
+end type
+

@@ -1,0 +1,51 @@
+﻿$PBExportHeader$gf_weeknumber.srf
+global type gf_weeknumber from function_object
+end type
+
+forward prototypes
+global function integer gf_weeknumber (date adt_current)
+end prototypes
+
+global function integer gf_weeknumber (date adt_current);integer li_day,li_month,li_year,li_nbday
+date ldt_week1a,ldt_week1b,ldt_week2a,ldt_week2b,ldt_week3a,ldt_week3b,ldt_week4a,ldt_week4b,ldt_week5a,ldt_week5b
+
+li_day = day(adt_current)
+li_month = month(adt_current)
+li_year = year(adt_current)
+
+//sem1
+ldt_week1a = date('01-'+string(li_month)+'-'+string(li_year))
+li_nbday = gf_nextsunday(ldt_week1a)
+ldt_week1b = relativedate(ldt_week1a,li_nbday - 1)
+//sem2
+ldt_week2a = relativedate(ldt_week1b,1)
+li_nbday = gf_nextsunday(ldt_week2a)
+ldt_week2b = relativedate(ldt_week2a,li_nbday - 1)
+//sem3
+ldt_week3a = relativedate(ldt_week2b,1)
+li_nbday = gf_nextsunday(ldt_week3a)
+ldt_week3b = relativedate(ldt_week3a,li_nbday - 1)
+//sem4
+ldt_week4a = relativedate(ldt_week3b,1)
+li_nbday = gf_nextsunday(ldt_week4a)
+ldt_week4b = relativedate(ldt_week4a,li_nbday - 1)
+//sem5
+ldt_week5a = relativedate(ldt_week4b,1)
+li_nbday = gf_nextsunday(ldt_week5a)
+ldt_week5b = relativedate(ldt_week5a,li_nbday - 1)
+
+if adt_current >= ldt_week1a and adt_current <= ldt_week1b then
+	return 1
+elseif adt_current >= ldt_week2a and adt_current <= ldt_week2b then
+	return 2
+elseif adt_current >= ldt_week3a and adt_current <= ldt_week3b then
+	return 3
+elseif adt_current >= ldt_week4a and adt_current <= ldt_week4b then
+	return 4
+elseif adt_current >= ldt_week5a and adt_current <= ldt_week5b then
+	return 5
+else
+	return 6
+end if
+end function
+

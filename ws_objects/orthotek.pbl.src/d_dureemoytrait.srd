@@ -1,0 +1,38 @@
+﻿$PBExportHeader$d_dureemoytrait.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="Durée  moyenne des traitements" print.orientation = 2 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 1 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=416 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=92 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=typetraitid dbname="t_rdv.typetraitid" )
+ column=(type=decimal(6) updatewhereclause=yes name=tempsmoy dbname="tempsmoy" )
+ column=(type=char(40) updatewhereclause=yes name=nomtrait dbname="nomtrait" )
+ column=(type=long updatewhereclause=yes name=pres dbname="pres" )
+ retrieve="SELECT   typetraitid,
+         avg(minutes(seated,released)) AS tempsmoy,
+			(select nom_traitement from type_de_traitement where type_traitement_id = t_rdv.typetraitid and ortho_id = :ra_orthoid) as nomtrait, 
+			(select count(*) from type_de_traitement where type_traitement_id = t_rdv.typetraitid and ortho_id = :ra_orthoid) as pres
+FROM     t_rdv 
+WHERE    rdvdate BETWEEN :ra_debut AND :ra_fin AND pres > 0     
+GROUP BY typetraitid
+ORDER BY nomtrait ASC;" arguments=(("ra_debut", date),("ra_fin", date),("ra_orthoid", number)) )
+text(band=header alignment="0" text="Traitement" border="0" color="33554432" x="9" y="324" height="64" width="1531" html.valueishtml="0"  name=typetraitid_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="23" y1="404" x2="3246" y2="404"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Durée moyenne en minute" border="0" color="33554432" x="1554" y="324" height="64" width="695" html.valueishtml="0"  name=tempsmoy_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Durée moyenne des traitements" border="0" color="0" x="23" y="56" height="92" width="1349" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Du" border="0" color="33554432" x="23" y="196" height="64" width="110" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Au" border="0" color="33554432" x="617" y="196" height="64" width="110" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression=" ra_debut "border="0" color="33554432" x="160" y="196" height="64" width="402" format="[SHORTDATE] " html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression=" ra_fin "border="0" color="33554432" x="754" y="196" height="64" width="402" format="[SHORTDATE] " html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="round(tempsmoy,0) "border="0" color="33554432" x="1554" y="4" height="76" width="375" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="9" y="4" height="76" width="1531" format="[general]" html.valueishtml="0"  name=nomtrait visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Imprimé le: " border="0" color="0" x="9" y="8" height="72" width="306" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2711" y="12" height="64" width="562" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="338" y="8" height="72" width="393" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=footer alignment="0" text="Orthotek" border="0" color="0" x="1531" y="8" height="72" width="306" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

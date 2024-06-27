@@ -1,0 +1,8 @@
+﻿$PBExportHeader$s_corrletter.srs
+global type s_corrletter from structure
+	long		patid
+	string		flag
+	string		mode
+	string		letter
+end type
+

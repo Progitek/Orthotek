@@ -1,0 +1,14 @@
+﻿$PBExportHeader$d_prochain_cheque.srd
+release 6;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=4 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=100 color="536870912" )
+table(column=(type=date updatewhereclause=yes name=date_cheque dbname="cheques_postdates.date_cheque" )
+ column=(type=long updatewhereclause=yes name=traitement_patient_id dbname="cheques_postdates.traitement_patient_id" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"cheques_postdates~" ) COLUMN(NAME=~"cheques_postdates.date_cheque~") COLUMN(NAME=~"cheques_postdates.traitement_patient_id~")WHERE(    EXP1 =~"( ~~~"cheques_postdates~~~".~~~"traitement_patient_id~~~"~"   OP =~"=~"    EXP2 =~":id )~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"( ~~~"cheques_postdates~~~".~~~"date_cheque~~~"~"   OP =~">~"    EXP2 =~"today() )~" ) ) ORDER(NAME=~"cheques_postdates.date_cheque~" ASC=yes ) ARG(NAME = ~"id~" TYPE = number) " arguments=(("id", number)) )
+text(band=header alignment="0" text="Prochain chèque postdaté"border="0" color="0" x="50" y="8" height="60" width="658"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=detail alignment="1" text="Date:"border="0" color="0" x="73" y="16" height="64" width="160"  name=date_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="5" color="16777215" x="265" y="20" height="64" width="357" format="[general]"  name=date_cheque edit.name="DD/MM/YYYY" editmask.mask="DD/MM/YYYY" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="8421504" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

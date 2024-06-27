@@ -1,0 +1,117 @@
+﻿$PBExportHeader$d_exportpat-back.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=c dbname="1" )
+ retrieve="select 1
+
+/*
+with pats (ordre, id_pat, id_con, id_pha) as
+ (select p.ord,
+			p.number,
+			c.number,
+			h.number
+	 from list_to_nbrinttbl(:ra_patients) p inner join list_to_nbrinttbl(:ra_contacts) c on c.ord = p.ord
+														 inner join list_to_nbrinttbl(:ra_phases) h on h.ord = p.ord)
+  select isnull(psal.salutation, ''),
+			isnull(patient.patient_nom, ''),
+			isnull(patient.patient_prenom, ''),
+			isnull(patient.adresse, ''),
+			isnull(patient.ville, ''),
+			isnull(patient.province, ''),
+			isnull(patient.code_postale, ''),
+			isnull(patient.sex, 'M'),
+			isnull(patient.new_dossier, ''),
+			isnull(patient.no_dossier, ''),
+			isnull(patient.no_boite, ''),
+			isnull(patient.tel_maison, ''),
+			isnull(patient.tel_bureau, ''),
+			patient.date_naissance,
+			isnull(patient.nom_pere, ''),
+			isnull(patient.no_tel_pere, ''),
+			isnull(patient.nom_mere, ''),
+			isnull(patient.no_tel_mere, ''),
+			isnull(patient.langue, ''),
+			isnull((select det_langue from t_dentists where t_dentists.id_dentist = patient.id_dentist), 'fr'),
+			isnull(csal.salutation, ''),
+			isnull(t_contact.prenom, ''),
+			isnull(t_contact.nom, ''),
+			isnull(t_contact.adresse, ''),
+			isnull(t_contact.ville, ''),
+			isnull(t_contact.province, ''),
+			isnull(t_contact.zip, ''),
+			isnull(t_contact.telres, '')
+			isnull(t_contrats.description,
+			t_contrats.date1,
+			t_contrats.pourcentage,
+			isnull(t_contrats.couttrait, ''),
+			isnull(t_contrats.initial, ''),
+			isnull(t_contrats.cons, ''),
+			isnull(t_contrats.cons2, ''),
+			isnull(t_contrats.diag, ''),
+			isnull(t_contrats.meb, ''),
+			isnull(t_contrats.retfee, ''),
+			t_contrats.mdate1,
+			t_contrats.mmontant,
+			isnull(t_contrats.mqty, ''),
+			t_contrats.paiefinal,
+			t_contrats.duree1,
+			t_contrats.duree2,
+
+
+		
+		ls_mtot = string(dec(ls_mqty) * dec(ls_mmens) + dec(ls_paiefinal),'0.00') + '$'
+		if isnull(ls_mtot) then ls_mtot = ''
+		if isnull(ls_mmens) then 
+			ls_mmens = ''
+		else
+			ls_mmens = ls_mmens + '$'
+		end if
+		if isnull(ls_mqty) then ls_mqty = ''
+		
+		if isnull(ls_paiefinal) then 
+			ls_paiefinal = ''
+		else
+			ls_paiefinal = ls_paiefinal + '$'
+		end if
+		
+		// Calcul de la date de fin des mensualités
+		ll_nbmois = long(ls_mqty)
+		SELECT dateadd( month, :ll_nbmois, :ldt_mdate1) into :ldt_dernpaie from Lock_cheques;
+		ls_dernpaie = string(ldt_dernpaie)
+		if isnull(ls_dernpaie) then ls_dernpaie = ~"~"
+		
+		if isnull(ls_pourcentage) then 
+			ls_pourcentage = ''
+		else
+			ls_pourcentage = ls_pourcentage + ' %'
+		end if
+		if isnull(ls_duree1) then ls_duree1 = ''
+		if isnull(ls_duree2) then ls_duree2 = ''
+
+
+
+	 from patient inner join pats on pats.id_pat = patient.patient_id
+					  left outer join t_contact on t_contact.id_contact = pats.id_con
+					  left outer join t_contrats on t_contrats.id_contact = t_contact.id_contact and t_contrats.id_phase = pats.id_pha and t_contrats.patient_id = patient.patient_id
+					  left outer join t_salutation psal on psal.id_sal = patient.id_sal
+					  left outer join t_salutation csal on csal.id_sal = t_contact.id_sal
+order by pats.ordre asc
+*/
+" )
+text(band=header alignment="2" text="1" border="0" color="33554432" x="5" y="4" height="64" width="329" html.valueishtml="0"  name=c_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=c visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

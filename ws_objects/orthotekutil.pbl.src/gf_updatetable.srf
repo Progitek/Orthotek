@@ -1,0 +1,3530 @@
+﻿$PBExportHeader$gf_updatetable.srf
+global type gf_updatetable from function_object
+end type
+
+forward prototypes
+global subroutine gf_updatetable ()
+end prototypes
+
+global subroutine gf_updatetable ();integer li_FileNum, i
+string ls_sql, ls_tab[], ls_ver, ls_produit, ls_vectsql[], ls_vide[]
+w_progressbar iw_progressbar
+
+SetPointer(HourGlass!)
+
+// Créer le repertoire logs
+
+if not DirectoryExists("C:\ii4net\orthotek\logs\") then
+	createDirectory("C:\ii4net\orthotek\logs\")
+end if
+
+// On va chercher le numéro de la version
+
+select isnull(vertable,'8.2.9') into :ls_ver from t_ver;
+ls_tab = split(ls_ver,".")
+
+// Version 8.3.0
+
+// Premiere niveau...
+If long(ls_tab[1]) <= 8 Then
+	if long(ls_tab[1]) < 8 then ls_tab[2] = "-1"
+	// Deuxième niveau
+	If long(ls_tab[2]) <= 3 Then
+		if long(ls_tab[2]) < 3 then ls_tab[3] = "-1"
+		// Troisième Niveau
+		
+		If long(ls_tab[3]) < 4 Then
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-4.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(1)
+			iw_progressbar.of_position(0)
+			
+			// Enlever la durée du rendez-vous dans l'étiquette rendez-vous
+			ls_sql = "ALTER TABLE traitements ADD etatcompte BIT NULL"
+			update traitements set etatcompte = 1;
+			commit;
+			execute immediate :ls_sql using sqlca;
+			if (SQLCA.sqlCode <> 0) then
+				FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+			end if
+			iw_progressbar.of_position(1)
+			
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.4';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 5 Then
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-5.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(1)
+			iw_progressbar.of_position(0)
+			ls_sql = "CREATE TABLE t_message (id_message integer NOT NULL DEFAULT autoincrement, &
+								dateenvoye timestamp DEFAULT NULL, &
+								priorite char(1) DEFAULT NULL, &
+								message_de varchar(500) DEFAULT NULL, &
+								message_a varchar(500) DEFAULT NULL, &
+								message_cc varchar(500) DEFAULT NULL, &
+								message_cci varchar(500) DEFAULT NULL, &
+								sujet varchar(500) DEFAULT NULL, &
+								message_texte long varchar DEFAULT NULL, &
+								repertoire varchar(500) DEFAULT NULL, &
+								fichier_attache varchar(500) DEFAULT NULL, &
+								source char(1) DEFAULT NULL, &
+								statut char(1) DEFAULT NULL, &
+								statut_lu char(1) DEFAULT NULL , &
+								PRIMARY KEY (id_message)) "
+			execute immediate :ls_sql using sqlca;
+			if (SQLCA.sqlCode <> 0) then
+				FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+			end if
+			iw_progressbar.of_position(1)
+			
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.5';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 6 Then
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-6.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(1)
+			iw_progressbar.of_position(0)
+			ls_sql = "ALTER TABLE patient ADD dateradio date NULL"
+			execute immediate :ls_sql using sqlca;
+			if (SQLCA.sqlCode <> 0) then
+				FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+			end if
+			iw_progressbar.of_position(1)
+			
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.6';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 7 Then
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-7.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(1)
+			iw_progressbar.of_position(0)
+			
+			// Options pour l'object exportation
+			
+			ls_sql = "ALTER TABLE t_options ADD terminaltd VARCHAR(15) NULL, ADD noseqencetd INTEGER NULL, ADD chemintd VARCHAR(255) NULL"
+			execute immediate :ls_sql using sqlca;
+			if (SQLCA.sqlCode <> 0) then
+				FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+			end if
+			iw_progressbar.of_position(1)
+			
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.7';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 8 Then
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-8.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(1)
+			iw_progressbar.of_position(0)
+			
+			// Options pour l'object exportation
+			
+			ls_sql = "ALTER TABLE t_options ADD comptebanque VARCHAR(10) NULL, ADD compterec VARCHAR(10) NULL"
+			execute immediate :ls_sql using sqlca;
+			if (SQLCA.sqlCode <> 0) then
+				FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+			end if
+			iw_progressbar.of_position(1)
+			
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.8';
+			commit using SQLCA;
+		End If
+		
+		if long(ls_tab[3]) < 9 then
+			ls_vectsql = {''}
+			
+			// Dents en restauration
+			ls_vectsql[1] = "alter table t_consultations  add r11 bit null, &
+																		 add r12 bit null, &
+																		 add r13 bit null, &
+																		 add r14 bit null, &
+																		 add r15 bit null, &
+																		 add r16 bit null, &
+																		 add r17 bit null, &
+																		 add r18 bit null, &
+																		 add r21 bit null, &
+																		 add r22 bit null, &
+																		 add r23 bit null, &
+																		 add r24 bit null, &
+																		 add r25 bit null, &
+																		 add r26 bit null, &
+																		 add r27 bit null, &
+																		 add r28 bit null, &
+																		 add r31 bit null, &
+																		 add r32 bit null, &
+																		 add r33 bit null, &
+																		 add r34 bit null, &
+																		 add r35 bit null, &
+																		 add r36 bit null, &
+																		 add r37 bit null, &
+																		 add r38 bit null, &
+																		 add r41 bit null, &
+																		 add r42 bit null, &
+																		 add r43 bit null, &
+																		 add r44 bit null, &
+																		 add r45 bit null, &
+																		 add r46 bit null, &
+																		 add r47 bit null, &
+																		 add r48 bit null, &
+																		 add r51 bit null, &
+																		 add r52 bit null, &
+																		 add r53 bit null, &
+																		 add r54 bit null, &
+																		 add r55 bit null, &
+																		 add r61 bit null, &
+																		 add r62 bit null, &
+																		 add r63 bit null, &
+																		 add r64 bit null, &
+																		 add r65 bit null, &
+																		 add r71 bit null, &
+																		 add r72 bit null, &
+																		 add r73 bit null, &
+																		 add r74 bit null, &
+																		 add r75 bit null, &
+																		 add r81 bit null, &
+																		 add r82 bit null, &
+																		 add r83 bit null, &
+																		 add r84 bit null, &
+																		 add r85 bit null"
+			
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-9.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.9';
+			commit using SQLCA;
+		END IF
+		
+		If long(ls_tab[3]) < 10 Then
+			ls_vectsql = {''}
+			
+			ls_vectsql[1] = "ALTER TABLE traitements ADD etatcompte BIT NULL"
+			
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-10.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.10';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 11 Then
+			ls_vectsql = {''}
+			
+			// Changement dans la table de traitement
+			ls_vectsql[1] = "ALTER TABLE t_cartetrait DROP PRIMARY KEY"
+			ls_vectsql[2] = "ALTER TABLE t_cartetrait ADD id_cartetrait INTEGER NOT NULL DEFAULT autoincrement"
+			ls_vectsql[3] = "ALTER TABLE t_cartetrait ADD PRIMARY KEY(id_cartetrait)"
+			ls_vectsql[4] = "ALTER TABLE t_cartetrait MODIFY ds INTEGER, &
+																	MODIFY cartenote VARCHAR(10000), &
+																	ADD typeds INTEGER NULL"
+			
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-11.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.11';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 12 Then
+			ls_vectsql = {''}
+			
+			ls_vectsql[1] = "CREATE TABLE t_instructapp (id_instructapp integer NOT NULL DEFAULT autoincrement, &
+								instructapp VARCHAR(100) NULL, &
+								PRIMARY KEY (id_instructapp)) "
+			
+			// Changement dans la table de traitement
+			ls_vectsql[2] = "ALTER TABLE t_cartetrait ADD dureegauche VARCHAR(100) NULL, &
+																	ADD dureedroite VARCHAR(100) NULL, &
+																	ADD forcedroite VARCHAR(100) NULL, &
+																	ADD forcegauche VARCHAR(100) NULL"
+			ls_vectsql[3] = "ALTER TABLE t_cartetrait ADD FOREIGN KEY fk_instructapp(id_instructapp) REFERENCES t_instructapp(id_instructapp) ON UPDATE CASCADE ON DELETE SET NULL"
+			
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-12.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.12';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 13 Then
+			ls_vectsql = {''}
+			
+			// Ajuste la table t_assentete
+			ls_vectsql[1] = "alter table t_catplans add catan varchar(1000) null"
+
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-13.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.13';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 15 Then
+			ls_vectsql = {''}
+			
+			ls_vectsql[1] = "DROP TABLE t_cartetrait"
+			// Changer la cle primaire de t_lot
+			ls_vectsql[2] = 	"create table t_cartetrait(  id_cartetrait INTEGER NOT NULL DEFAULT autoincrement, &
+									patient_id INTEGER NOT NULL, &
+									datecarte DATE NOT NULL, &
+									ecarte CHAR(1) NULL, &
+									carteproc VARCHAR(200) NULL, &
+									min VARCHAR(200) NULL, &
+									cartenote VARCHAR(10000) NULL, &
+									filh VARCHAR(200) NULL, &
+									filb VARCHAR(200) NULL, &
+									ceh VARCHAR(200) NULL, &
+									ceb VARCHAR(200) NULL, &
+									el VARCHAR(200) NULL, &
+									pan VARCHAR(200) NULL, &
+									oh VARCHAR(200) NULL, &
+									prv VARCHAR(200) NULL, &
+									oj VARCHAR(50) NULL, &
+									ob VARCHAR(50) NULL, &
+									traitid INTEGER NULL, &
+									duree INTEGER NULL, &
+						    		ds INTEGER NULL, &
+                           tour INTEGER NULL, &
+									cehg1 INTEGER NULL, &
+									cehg2 INTEGER NULL, &
+									cehg3 INTEGER NULL, &
+									cehg4 INTEGER NULL, &
+									cehg5 INTEGER NULL, &
+									cehg6 INTEGER NULL, &
+									cehg7 INTEGER NULL, &
+									cehd1 INTEGER NULL, &
+									cehd2 INTEGER NULL, &
+									cehd3 INTEGER NULL, &
+									cehd4 INTEGER NULL, &
+									cehd5 INTEGER NULL, &
+									cehd6 INTEGER NULL, &
+									cehd7 INTEGER NULL, &
+									cebg1 INTEGER NULL, &
+									cebg2 INTEGER NULL, &
+									cebg3 INTEGER NULL, &
+									cebg4 INTEGER NULL, &
+									cebg5 INTEGER NULL, &
+									cebg6 INTEGER NULL, &
+									cebg7 INTEGER NULL, &
+                           cebd1 INTEGER NULL, &
+									cebd2 INTEGER NULL, &
+									cebd3 INTEGER NULL, &
+									cebd4 INTEGER NULL, &
+									cebd5 INTEGER NULL, &
+									cebd6 INTEGER NULL, &
+									cebd7 INTEGER NULL, &
+                           typeds INTEGER NULL, &
+                           dureegauche VARCHAR(100) NULL, &
+									dureedroite VARCHAR(100) NULL, &
+									forcedroite VARCHAR(100) NULL, &
+									forcegauche VARCHAR(100) NULL, &
+									ortho_id INTEGER NULL, &
+									type_traitement_id INTEGER NULL)"
+
+			ls_vectsql[3] = "ALTER TABLE t_cartetrait ADD PRIMARY KEY(id_cartetrait)"
+			ls_vectsql[4] = "ALTER TABLE t_cartetrait ADD FOREIGN KEY fk_patid (patient_id) REFERENCES patient (patient_id)"
+			ls_vectsql[5] = "ALTER TABLE t_cartetrait ADD FOREIGN KEY fk_idfilstypeh (id_filstypeh) REFERENCES t_filstypes (id_filstype)"
+			ls_vectsql[6] = "ALTER TABLE t_cartetrait ADD FOREIGN KEY fk_idfilstypeb (id_filstypeb) REFERENCES t_filstypes (id_filstype)"
+			ls_vectsql[7] = "ALTER TABLE t_cartetrait ADD FOREIGN KEY fk_idelastypeh (id_elastypeh) REFERENCES t_elastiquestypes (id_elastiquetype)"
+			ls_vectsql[8] = "ALTER TABLE t_cartetrait ADD FOREIGN KEY fk_idelastypeb (id_elastypeb) REFERENCES t_elastiquestypes (id_elastiquetype)"
+			ls_vectsql[9] = "ALTER TABLE t_cartetrait ADD FOREIGN KEY fk_traitid (type_traitement_id,ortho_id) REFERENCES type_de_traitement (type_traitement_id,ortho_id)"
+			ls_vectsql[10] = "ALTER TABLE t_cartetrait ADD FOREIGN KEY fk_idradio (id_radiotype) REFERENCES t_radiotypes (id_radiotype)"
+			ls_vectsql[11] = "ALTER TABLE t_cartetrait ADD FOREIGN KEY fk_instructapp(id_instructapp) REFERENCES t_instructapp(id_instructapp) ON UPDATE CASCADE ON DELETE SET NULL"		
+			ls_vectsql[12] = "ALTER TABLE t_cartetrait ADD FOREIGN KEY fk_idpers(id_personnel) REFERENCES t_personnels(id_personnel) ON UPDATE CASCADE ON DELETE SET NULL"		
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-15.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.15';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 16 Then
+			ls_vectsql = {''}
+			
+			ls_vectsql[1] = "CREATE TABLE t_cartetraitelast(id_cartetraitelast INTEGER NOT NULL DEFAULT AUTOINCREMENT, &
+																			forcegauche VARCHAR(100) NULL, &
+																			forcedroite VARCHAR(100) NULL, &
+																			dureegauche VARCHAR(100) NULL, &
+																			dureedroite VARCHAR(100) NULL, &
+																			id_cartetrait INTEGER NOT NULL, &
+																			PRIMARY KEY(id_cartetraitelast))"
+			ls_vectsql[2] = "ALTER TABLE t_cartetraitelast ADD NOT NULL FOREIGN KEY fk_idcartetrait(id_cartetrait) REFERENCES t_cartetrait(id_cartetrait) ON DELETE CASCADE ON UPDATE CASCADE"
+			ls_vectsql[3] = "ALTER TABLE t_cartetraitelast ADD FOREIGN KEY fk_idelastypeb(id_elastypeb) REFERENCES t_elastiquestypes(id_elastiquetype) ON DELETE SET NULL ON UPDATE SET NULL"
+			ls_vectsql[4] = "ALTER TABLE t_cartetraitelast ADD FOREIGN KEY fk_idelastypeh(id_elastypeh) REFERENCES t_elastiquestypes(id_elastiquetype) ON DELETE SET NULL ON UPDATE SET NULL"
+			ls_vectsql[5] = "ALTER TABLE t_cartetraitelast ADD cebd7 INTEGER NULL, &
+         									  						  ADD cebd6 INTEGER NULL, &
+         															  ADD cebd5 INTEGER NULL, &
+                                                        ADD cebd4 INTEGER NULL, &
+         															  ADD cebd3 INTEGER NULL, &
+																		  ADD cebd2 INTEGER NULL, &
+																		  ADD cebd1 INTEGER NULL, &
+         															  ADD cebg7 INTEGER NULL, &
+         															  ADD cebg6 INTEGER NULL, &
+        																  ADD cebg5 INTEGER NULL, &
+         															  ADD cebg4 INTEGER NULL, &
+         															  ADD cebg3 INTEGER NULL, &
+         															  ADD cebg2 INTEGER NULL, &
+         															  ADD cebg1 INTEGER NULL, &
+         															  ADD cehd7 INTEGER NULL, &
+         															  ADD cehd6 INTEGER NULL, &
+         															  ADD cehd5 INTEGER NULL, &
+         															  ADD cehd4 INTEGER NULL, &
+         															  ADD cehd3 INTEGER NULL, &
+         															  ADD cehd2 INTEGER NULL, &
+         															  ADD cehd1 INTEGER NULL, &
+         															  ADD cehg7 INTEGER NULL, &
+         															  ADD cehg6 INTEGER NULL, &
+         															  ADD cehg5 INTEGER NULL, &
+         															  ADD cehg4 INTEGER NULL, &
+         															  ADD cehg3 INTEGER NULL, &
+         															  ADD cehg2 INTEGER NULL, &
+         															  ADD cehg1 INTEGER NULL"
+			ls_vectsql[6] = "CREATE TABLE t_carteentete(	id_carteentete INTEGER NOT NULL DEFAULT AUTOINCREMENT, &
+																		SNA VARCHAR(50) NULL, &
+																		SNB VARCHAR(50) NULL, &
+																		FMA VARCHAR(50) NULL, &
+																		IMP VARCHAR(50) NULL, &
+																		ABOP VARCHAR(50) NULL, &
+																		LIAPG VARCHAR(50) NULL, &
+																		GNGOME VARCHAR(50) NULL, &
+																		CSTAGE VARCHAR(50) NULL, &
+																		PRIMARY KEY(id_carteentete))"
+			ls_vectsql[7] = "ALTER TABLE t_carteentete ADD NOT NULL FOREIGN KEY fk_idpat(patient_id) REFERENCES patient(patient_id) ON DELETE CASCADE ON UPDATE CASCADE"
+			ls_vectsql[8] = "ALTER TABLE t_cartetrait ADD NOT NULL FOREIGN KEY fk_idcarteentete(id_carteentete) REFERENCES t_carteentete(id_carteentete) ON DELETE CASCADE ON UPDATE CASCADE"
+			ls_vectsql[9] = "ALTER TABLE t_carteentete ADD traitement VARCHAR(10000) NULL"
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-16.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.16';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 17 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "ALTER TABLE assurance_formulaire MODIFY description VARCHAR(5000) NULL, &
+																			  MODIFY commentaire VARCHAR(5000) NULL"
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-17.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.17';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 18 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "ALTER TABLE t_sujets ADD filenamean VARCHAR(255) NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_message ADD statut_affiche char(1) null default 'n' "
+			//MAJ des vieux messages pour pas qu'ils ne pop toute la gang
+			ls_vectsql[upperbound(ls_vectsql)+1] = "UPDATE t_message set statut_affiche = 'o' "			
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-18.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.18';
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 19 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "CREATE TABLE t_categoriephrase (id_categoriephrase integer NOT NULL DEFAULT autoincrement, categoriephrase varchar(100) DEFAULT NULL, couleur integer default null, PRIMARY KEY (id_categoriephrase )) "
+			ls_vectsql[upperbound(ls_vectsql)+1] = "CREATE TABLE t_souscategoriephrase ( id_souscategoriephrase integer NOT NULL DEFAULT autoincrement, souscategoriephrase varchar(100) DEFAULT NULL, demanderargument char(1) DEFAULT NULL, id_categoriephrase integer DEFAULT NULL, id_souscategoriephrasefils integer DEFAULT NULL , couleur integer default null, PRIMARY KEY (id_souscategoriephrase ) , FOREIGN KEY fk_id_categoriephrase (id_id_categoriephrase ) REFERENCES t_categoriephrase ON DELETE RESTRICT , FOREIGN KEY fk_idsouscategoriephrase (id_souscategoriephrasefils ) REFERENCES t_souscategoriephrase ON DELETE RESTRICT )"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_cartetraitelast DROP PRIMARY KEY"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_cartetraitelast ADD PRIMARY KEY(id_cartetraitelast)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_cartetrait ADD datebarre datetime null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_cartetrait ADD id_usersigne integer null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_cartetrait ADD id_orthosigne integer null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE type_de_traitement ADD cincouthide BIT null"
+			li_FileNum = FileOpen("C:\ii4net\orthotek\logs\maj8-3-19.log",LineMode!,Write!,LockReadWrite!,Append!)
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.19';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 20 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "ALTER TABLE t_options ADD modelefacture INTEGER NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE patient ADD email2 VARCHAR(50) NULL, ADD email3 VARCHAR(50) NULL"
+
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.20';
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 21 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_filstypes drop foreign key fk_idfilsmattype"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_filstypes MODIFY id_filsmattype NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_cartetrait ADD id_filsmattypeh integer NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_cartetrait ADD FOREIGN KEY fk_id_filsmattypeh(id_filsmattype) REFERENCES t_filsmattypes(id_filsmattype) ON UPDATE CASCADE ON DELETE SET NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_cartetrait ADD id_filsmattypeb integer NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_cartetrait ADD FOREIGN KEY fk_id_filsmattypeb(id_filsmattype) REFERENCES t_filsmattypes(id_filsmattype) ON UPDATE CASCADE ON DELETE SET NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options ADD message_moniteur varchar(255) null"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.21';
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 22 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_categoriephrase MODIFY categoriephrase varchar(3500)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_souscategoriephrase MODIFY souscategoriephrase varchar(3500)"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.22';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 23 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_phase ADD debute BIT NULL"
+//			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_souscategoriephrase MODIFY souscategoriephrase varchar(3500)"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.23';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 24 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_options ADD mailmessrdv VARCHAR(10000) NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "CREATE TABLE t_histocorr (datehistocorr datetime NOT NULL DEFAULT current time, &
+																											nomdoc VARCHAR(255) NULL, &
+																											intable VARCHAR(100) NULL, &
+																											id_foreignkey INTEGER NULL, &
+																											PRIMARY KEY (datehistocorr))"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.24';
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 25 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_carteentete ADD couleur_texte integer NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.25';
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 26 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_cartetrait ADD couleur_texte integer NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_cartetrait ADD ds2 integer NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.26';
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 27 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_cartetrait ADD id_app integer NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "CREATE TABLE t_forceelastique (id_forceelastique integer NOT NULL DEFAULT autoincrement, " + &
+								"forceelastique VARCHAR(100) NULL, ortho_id integer NOT NULL ) "
+			ls_vectsql[upperbound(ls_vectsql)+1] = "CREATE TABLE t_dureeelastique (id_dureeelastique integer NOT NULL DEFAULT autoincrement, " + &
+								"dureeelastique VARCHAR(100) NULL, ortho_id integer NOT NULL ) "
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_forceelastique ADD PRIMARY KEY (id_forceelastique)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_dureeelastique ADD PRIMARY KEY (id_dureeelastique)"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.27';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 28 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_options ADD newdosscpd integer NULL"
+				
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.28';
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 29 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_carteentete ADD notes_importantes varchar(32000) NULL"
+				
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.29';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 30 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table patient ADD ordre_res integer NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table patient ADD ordre_bur integer NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table patient ADD ordre_cel integer NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table patient ADD ordre_autre integer NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.30';
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 31 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_consultations ADD cancelle bit NULL default 0"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_consultations ADD user_cancelle integer NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_consultations ADD date_cancelle datetime NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE patient DROP FOREIGN KEY fk_idpersonnel"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE patient ADD FOREIGN KEY fk_idpersonnel(id_personnel) REFERENCES t_personnels(id_personnel) ON UPDATE CASCADE ON DELETE SET NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_cincout DROP FOREIGN KEY fk_idpersonnel"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_cincout ADD FOREIGN KEY fk_idpersonnel(id_personnel) REFERENCES t_personnels(id_personnel) ON UPDATE CASCADE ON DELETE SET NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE patient DROP FOREIGN KEY fk_iddentist"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE patient ADD FOREIGN KEY fk_iddentist(id_dentist) REFERENCES t_dentists(id_dentist) ON UPDATE CASCADE ON DELETE SET NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_consultations DROP FOREIGN KEY fk_iddentist"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_consultations ADD FOREIGN KEY fk_iddentist(id_dentist) REFERENCES t_dentists(id_dentist) ON UPDATE CASCADE ON DELETE SET NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.31';
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 32 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_rapconsult1 MODIFY traitsugg VARCHAR(10000)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_rapconsult1 MODIFY archform1 VARCHAR(10000)"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.32';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 33 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "ALTER TABLE t_carteentete ADD date_revision datetime null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_rapconsult1 MODIFY complorthorec VARCHAR(10000)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_rapconsult1 MODIFY evalexo VARCHAR(10000)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_rapconsult1 MODIFY rpe VARCHAR(10000)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_rapconsult1 MODIFY fixedapp VARCHAR(10000)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_rapconsult1 MODIFY other1 VARCHAR(10000)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_cartetrait ADD openbyte varchar(30) null"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.33';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 34 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_options ADD mailmessrdvadultfr varchar(32000) null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options ADD mailmessrdvadulten varchar(32000) null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options ADD mailmessrdvenffr varchar(32000) null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options ADD mailmessrdvenfen varchar(32000) null"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.34';
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 35 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_options ADD texte_sna varchar(255) null default 'SNA'"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options ADD texte_snb varchar(255) null default 'SNB'"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options ADD texte_fma varchar(255) null default 'FMA'"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options ADD texte_imp varchar(255) null default 'I-mp'"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options ADD texte_abop varchar(255) null default 'A-B (OP)'"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options ADD texte_liapg varchar(255) null default 'li-A-Pg'"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table patient ADD dossier_virtuel bit null default 0"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "UPDATE PATIENT set dossier_virtuel = 0"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.35';
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 36 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_options ADD dossier_virtuel_defaut bit null default 0"
+		
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.36';
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 37 Then
+			ls_vectsql = {''}
+			ls_vectsql[1] = "alter table t_printers ADD bac4 integer null, &
+																 ADD bac5 integer null"
+		
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.37';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 38 Then
+			ls_vectsql = {''}
+			
+			// Nouveaux indexes pour accélérer l'horaire et les templates
+			ls_vectsql[1] = "create index idx_col_hyg on t_color (hyg)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create index idx_col_spec on t_color (spec)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create index idx_rdv on t_rdv (patient_id, rdvdate, rdvheure, colonne)"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.38';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 39 Then
+			ls_vectsql = {''}
+			
+			// Nouveaux indexes pour accélérer l'horaire et les templates
+			ls_vectsql[1] = "CREATE TABLE t_biopunch (id_biopunch INTEGER NOT NULL DEFAULT AUTOINCREMENT, &
+																	heureentree DATETIME NOT NULL, &
+																	heuresortie DATETIME NULL, &
+																	primary key(id_biopunch))"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_biopunch ADD FOREIGN KEY fk_idpers(id_personnel) REFERENCES t_personnels(id_personnel) ON DELETE CASCADE ON UPDATE CASCADE"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_biopunch MODIFY id_personnel NOT NULL"
+			
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.39';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 40 Then
+			ls_vectsql = {''}
+			
+			// Nouveaux indexes pour accélérer l'horaire et les templates
+			ls_vectsql[1] = "CREATE TABLE FINGERPRINT (PERSONID numeric (15) not null, &
+							FINGERPRINTID numeric (11) not null, &
+							FINGERTYPE numeric (11) null, &
+							FINGERFEATURE image null, &
+							RESOLUTION numeric(20) not null, &
+							primary key(PERSONID,FINGERPRINTID))"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "CREATE TABLE PERSON (PERSONID numeric (15) not null, &
+						REGISTRATIONNO varchar (100) null, &
+						TYPEID integer not null, &
+						REGISTEREDDATE datetime not null, &
+						STATUS numeric (11) null, &
+						IDPATIENT integer null, &
+						STATUSUSER char(1) null, &
+						IDUSER integer null, &
+						primary key(PERSONID), &
+						FOREIGN KEY t_patients (IDPATIENT ) REFERENCES patient, &
+						FOREIGN KEY t_users (IDUSER) REFERENCES t_personnels)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD utiliser_biometrie BIT NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.40';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 41 Then
+			ls_vectsql = ls_vide
+			
+			// Nouveaux indexes pour accélérer l'exportation Moneris
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create index ixc_cp_1 on cheques_postdates (traitement_patient_id, modalite, indicateur)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create index ixc_cp_2 on cheques_postdates (nocarte, datecarte, paiement, indicateur, modalite)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create index ixc_cp_3 on cheques_postdates (indicateur, date_cheque)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create index ixc_cp_4 on cheques_postdates (modalite, indicateur)"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.41';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 42 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add dimaxis_add_nom_ortho bit null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "CREATE PROCEDURE list_to_nbrinttbl(in list varchar(10000))~r~n" + &
+																"result(ord integer,number integer)~r~n" + &
+																"begin~r~n" + &
+																"declare cpt integer;~r~n" + &
+																"declare pos integer;~r~n" + &
+																"declare nextpos integer;~r~n" + &
+																"declare valuelen integer;~r~n" + &
+																"declare strval varchar(15);~r~n" + &
+																"create table #tbl(~r~n" + &
+																"ord integer not null,~r~n" + &
+																"number integer not null,~r~n" + &
+																");~r~n" + &
+																"set cpt=0;~r~n" + &
+																"set pos=0;~r~n" + &
+																"set nextpos=1;~r~n" + &
+																"while nextpos > 0 loop~r~n" + &
+																"set nextpos=locate(list,',',pos+1);~r~n" + &
+																"set valuelen=(if nextpos > 0 then nextpos else length(list)+1 endif)-pos-1;~r~n" + &
+																"set strval=trim(substring(list,pos+1,valuelen));~r~n" + &
+																"if isnumeric(strval) = 1 then~r~n" + &
+																"set cpt=cpt+1;~r~n" + &
+																"insert into #tbl(ord, number) values(pt,cast(strval as integer))~r~n" + &
+																"end if;~r~n" + &
+																"set pos=nextpos~r~n" + &
+																"end loop;~r~n" + &
+																"select ord,number from #tbl order by ord asc~r~n" + &
+																"end"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.42';
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 43 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table patient add aposter bit null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_carteentete add mid1 integer null,&
+																									add mid2 integer null,&
+																									add mid3 integer null,&
+																									add mid4 integer null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER PROCEDURE list_to_nbrinttbl(in list varchar(10000))~r~n" + &
+															"result(ord integer,number integer)~r~n" + &
+															"begin~r~n" + &
+															"declare cpt integer;~r~n" + &
+															"declare pos integer;~r~n" + &
+															"declare nextpos integer;~r~n" + &
+															"declare valuelen integer;~r~n" + &
+															"declare strval varchar(15);~r~n" + &
+															"create table #tbl(~r~n" + &
+															"ord integer not null,~r~n" + &
+															"number integer not null,~r~n" + &
+															");~r~n" + &
+															"set cpt=0;~r~n" + &
+															"set pos=0;~r~n" + &
+															"set nextpos=1;~r~n" + &
+															"while nextpos > 0 loop~r~n" + &
+															"set nextpos=locate(list,',',pos+1);~r~n" + &
+															"set valuelen=(if nextpos > 0 then nextpos else length(list)+1 endif)-pos-1;~r~n" + &
+															"set strval=trim(substring(list,pos+1,valuelen));~r~n" + &
+															"if isnumeric(strval) = 1 then~r~n" + &
+															"set cpt=cpt+1;~r~n" + &
+															"insert into #tbl(ord, number) values(cpt,cast(strval as integer))~r~n" + &
+															"end if;~r~n" + &
+															"set pos=nextpos~r~n" + &
+															"end loop;~r~n" + &
+															"select ord,number from #tbl order by ord asc~r~n" + &
+															"end"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.43';
+			commit using SQLCA;
+		End If
+
+
+		If long(ls_tab[3]) < 44 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add monvalidexpcarte bit null"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.44';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 45 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add gngome varchar(50) null, &
+																							  add cstage varchar(50) null"
+																							  
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_carteentete add rebond date null, &
+																							  		add debond date null"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.45';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 46 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add liste_trait_par_spec bit null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_appareils add ordre integer null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_elastiquestypes add ordre integer null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_forceelastique add ordre integer null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_filstypes add ordre integer null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_filsmattypes add ordre integer null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_instructapp add ordre integer null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_empreintestypes add ordre integer null"
+						
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.46';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 47 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_categoriephrase add ordre integer null"
+	
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.47'; 
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 48 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_souscategoriephrase add ordre integer null"
+	
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.48'; 
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 49 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add numerolot integer null, add nomarchard VARCHAR(8) NULL"
+			
+			//Choix pour l'exportation des cartes de crédit
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add exportcartecredit char(1) null"
+			
+			//Table des lot de chèques post-datés pour central taxe
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create table t_lotcentraltaxe ( id_lot integer not null default autoincrement, &
+																numero varchar(8) null, &
+																dateenvoi date not null, &
+																id_ortho integer not null, &
+																id_personnel integer not null, &
+																primary key (id_lot), &
+																not null foreign key fk_idortho (id_ortho) references ortho_id (ortho_id), &
+																not null foreign key fk_idpersonnel (id_personnel) references t_personnels (id_personnel))"
+			
+			// Ajout d'un flag pour les cheques postdates sélectionnés pour former un lot
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table cheques_postdates add envoitrait BIT NULL"
+			
+			// Ajout d'un flag pour les lots envoyés
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_lotcentraltaxe add lotenvoye BIT NULL"
+			
+			// Ajout des options pour centraltaxe
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add ctnomcommun varchar(50) null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add ctnomcommunCGI varchar(50) null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add ftpservername varchar(30) null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add ftpusername varchar(30) null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add ftppassword varchar(30) null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add ftpuploadpath varchar(200) null"
+			
+			// Ajout d'un numero de client pour l'utilisation de centraltaxe
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_personnels add numeroclient varchar(8) null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create table t_typeodontogramme ( id_typeodontogramme integer not null default autoincrement, &
+																nom varchar(50) null, &
+																d11 bit null, &
+																d12 bit null, &
+																d13 bit null, &
+																d14 bit null, &
+																d15 bit null, &
+																d16 bit null, &
+																d17 bit null, &
+																d18 bit null, &
+																d21 bit null, &
+																d22 bit null, &
+																d23 bit null, &
+																d24 bit null, &
+																d25 bit null, &
+																d26 bit null, &
+																d27 bit null, &
+																d28 bit null, &
+																d31 bit null, &
+																d32 bit null, &
+																d33 bit null, &
+																d34 bit null, &
+																d35 bit null, &
+																d36 bit null, &
+																d37 bit null, &
+																d38 bit null, &
+																d41 bit null, &
+																d42 bit null, &
+																d43 bit null, &
+																d44 bit null, &
+																d45 bit null, &
+																d46 bit null, &
+																d47 bit null, &
+																d48 bit null, &
+																d51 bit null, &
+																d52 bit null, &
+																d53 bit null, &
+																d54 bit null, &
+																d55 bit null, &
+																d61 bit null, &
+																d62 bit null, &
+																d63 bit null, &
+																d64 bit null, &
+																d65 bit null, &
+																d71 bit null, &
+																d72 bit null, &
+																d73 bit null, &
+																d74 bit null, &
+																d75 bit null, &
+																d81 bit null, &
+																d82 bit null, &
+																d83 bit null, &
+																d84 bit null, &
+																d85 bit null, &
+																description varchar(100) null, &
+																primary key (id_typeodontogramme))"
+																
+			ls_vectsql[upperbound(ls_vectsql)+1] =	"create table t_rdvsequence (id_rdvsequence integer not null default autoincrement, &
+																type_traitement_id integer not null, &
+																ortho_id integer not null, &
+																patient_id integer not null, &
+																duree integer null, &
+																datemax datetime null, &
+																datefixe datetime null, &
+																primary key (id_rdvsequence), &
+																FOREIGN KEY fk_idpatient (patient_id) REFERENCES patient (patient_id), &
+																FOREIGN KEY fk_typetraitementid (type_traitement_id,ortho_id) REFERENCES type_de_traitement (type_traitement_id,ortho_id))"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.49'; 
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 50 Then
+			ls_vectsql = ls_vide
+			
+			//Gestion des MAJ
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create table t_miseajour(version_soft varchar(20),~r~n" + &
+																"executable image)"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "insert into t_miseajour (version_soft) (select '8.3.50.0' where not exists(select 1 from t_miseajour))"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_carteentete add locktraitement bit null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_carteentete add id_usersigne integer null"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.50'; 
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 51 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_carteentete add locktraitement bit null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_carteentete add id_usersigne integer null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table patient add nbcopieform integer null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table cheques_postdates add imp bit null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options  add cincoutchoixt9 VARCHAR(50) NULL, &
+																								add cincoutchoixt10 VARCHAR(50) NULL, &
+																								add cincoutchoixc9 INTEGER NULL, &
+																								add cincoutchoixc10 INTEGER NULL, &
+																								add pret9 UNSIGNED SMALLINT NULL, &
+																								add pret10 UNSIGNED SMALLINT NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.51'; 
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 52 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create table t_histonote(	id_histonote INTEGER NOT NULL DEFAULT autoincrement, &
+																									datehisto datetime NOT NULL, &
+																									histonote VARCHAR(1000) NOT NULL, &
+																									id_personnel INTEGER NOT NULL, &
+																									patient_id INTEGER NOT NULL, &
+																									primary key (id_histonote))"
+																									
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_histonote ADD FOREIGN KEY fk_idpers(id_personnel) REFERENCES t_personnels(id_personnel) ON UPDATE CASCADE ON DELETE CASCADE"
+						
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_histonote ADD FOREIGN KEY fk_patid(patient_id) REFERENCES patient(patient_id) ON UPDATE CASCADE ON DELETE CASCADE"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.52'; 
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 53 Then
+			
+			ls_vectsql = ls_vide
+									
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD signbilletabs BIT NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.53'; 
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 54 Then
+			
+			ls_vectsql = ls_vide
+									
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD masquernumcarte BIT NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_personnels ADD droitvoirnumcarte BIT NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.54'; 
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 55 Then
+			
+			ls_vectsql = ls_vide
+			
+			// Convertir Cartenote en RTF
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_cartetrait modify cartenote long varchar"
+			
+			// Option pour signaler que le patient a un solde lors de la prise d'un RDV
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD signalersolderdv BIT NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.55'; 
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 56 Then
+			
+			ls_vectsql = ls_vide
+			
+			// Convertir Cartenote en RTF
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table patient add typearchive integer null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "update patient set typearchive = if archivedate is null or archivedate = '1900-01-01' then 1 else 2 endif"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.56';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 58 Then
+			
+			ls_vectsql = ls_vide
+			
+			// Table pour le temps docteur dans les rendez-vous
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create table t_hortempsdoc (id_hortempsdoc integer not null default autoincrement,~r~n" + &
+																									 "id_rdv integer not null,~r~n" + &
+																									 "ortho_id integer,~r~n" + &
+																									 "hdeb time not null,~r~n" + &
+																									 "hfin time not null,~r~n" + &
+																									 "primary key (id_hortempsdoc),~r~n" + &
+																									 "not null foreign key fk_horrdv (id_rdv) references t_rdv (id_rdv) on update cascade on delete cascade,~r~n" + &
+																									 "foreign key fk_orthoid (ortho_id) references ortho_id (ortho_id) on update cascade on delete set null)"
+
+			// Table pour le temps docteur dans les traitements
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create table t_tempsdoc (id_tempsdoc integer not null default autoincrement,~r~n" + &
+																								 "type_traitement_id integer not null,~r~n" + &
+																								 "ortho_id integer not null,~r~n" + &
+																								 "debut integer not null,~r~n" + &
+																								 "fin integer not null,~r~n" + &
+																								 "doc bit not null,~r~n" + &
+																								 "primary key (id_tempsdoc),~r~n" + &
+																								 "not null foreign key fk_traitement (type_traitement_id, ortho_id) references type_de_traitement (type_traitement_id, ortho_id) on update cascade on delete cascade)"
+
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.58'; 
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 59 Then
+			ls_vectsql = ls_vide
+			
+			// 4 caractères dans les initiales des employés
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_personnels modify initial varchar(4)"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.59'; 
+			commit using SQLCA;
+		End If
+		
+		
+		If long(ls_tab[3]) < 60 Then
+			ls_vectsql = ls_vide
+			
+			// 4 caractères dans les initiales des employés
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table cheques_postdates add foreign key fk_idlotcentraltaxe(id_lotcentraltaxe) REFERENCES t_lotcentraltaxe(id_lot) ON delete set null on update cascade"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.3.60'; 
+			commit using SQLCA;
+		End If
+		
+	end if
+	
+	If long(ls_tab[2]) <= 4 Then
+		if long(ls_tab[2]) < 4 then ls_tab[3] = "-1"
+		// Troisième Niveau
+		
+		If long(ls_tab[3]) < 0 Then
+			ls_vectsql = ls_vide
+			
+			// cheminvistadent, cheminxray
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD cheminvistadent VARCHAR(255) NULL, ADD cheminxray VARCHAR(255) NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "update t_options set cheminvistadent = pathdolphin, cheminxray = pathdolphin"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.0'; 
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 1 Then
+			ls_vectsql = ls_vide
+			
+			// 4 caractères dans les initiales des employés
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create table t_carterdv (id_carterdv INTEGER NULL DEFAULT AUTOINCREMENT, &
+																								  duree INTEGER NULL, &
+																								  ds INTEGER NULL, &
+																								  ds2 INTEGER NULL, &
+																								  typeds INTEGER NULL, &
+																								  commentaire VARCHAR(10000) NULL, &
+																								  PRIMARY KEY (id_carterdv))"
+																								  
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_carterdv ADD FOREIGN KEY fk_idcartetrait(id_cartetrait) REFERENCES t_cartetrait(id_cartetrait) ON UPDATE CASCADE ON DELETE CASCADE"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_carterdv ADD FOREIGN KEY fk_typetraitid(type_traitement_id,ortho_id) REFERENCES type_de_traitement(type_traitement_id,ortho_id) ON UPDATE CASCADE ON DELETE SET NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "INSERT INTO t_carterdv(duree,ds,ds2,typeds,type_traitement_id,id_cartetrait) select duree,ds,ds2,typeds,type_traitement_id,id_cartetrait FROM t_cartetrait"
+		
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD sonmessage VARCHAR(255) NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD cheminvistadent VARCHAR(255) NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD cheminxray VARCHAR(255) NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD envoicourriel BIT NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.1'; 
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 2 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapconsult1 ADD dent11 CHAR(2) NULL,&
+																									ADD dent12 CHAR(2) NULL,&
+																									ADD dent13 CHAR(2) NULL,&
+																									ADD dent14 CHAR(2) NULL,&
+																									ADD dent15 CHAR(2) NULL,&
+																									ADD dent16 CHAR(2) NULL,&
+																									ADD dent17 CHAR(2) NULL,&
+																									ADD dent18 CHAR(2) NULL,&
+																									ADD dent21 CHAR(2) NULL,&
+																									ADD dent22 CHAR(2) NULL,&
+																									ADD dent23 CHAR(2) NULL,&
+																									ADD dent24 CHAR(2) NULL,&
+																									ADD dent25 CHAR(2) NULL,&
+																									ADD dent26 CHAR(2) NULL,&
+																									ADD dent27 CHAR(2) NULL,&
+																									ADD dent28 CHAR(2) NULL,&
+																									ADD dent31 CHAR(2) NULL,&
+																									ADD dent32 CHAR(2) NULL,&
+																									ADD dent33 CHAR(2) NULL,&
+																									ADD dent34 CHAR(2) NULL,&
+																									ADD dent35 CHAR(2) NULL,&
+																									ADD dent36 CHAR(2) NULL,&
+																									ADD dent37 CHAR(2) NULL,&
+																									ADD dent38 CHAR(2) NULL,&
+																									ADD dent41 CHAR(2) NULL,&
+																									ADD dent42 CHAR(2) NULL,&
+																									ADD dent43 CHAR(2) NULL,&
+																									ADD dent44 CHAR(2) NULL,&
+																									ADD dent45 CHAR(2) NULL,&
+																									ADD dent46 CHAR(2) NULL,&
+																									ADD dent47 CHAR(2) NULL,&
+																									ADD dent48 CHAR(2) NULL,&
+																									ADD dent51 CHAR(2) NULL,&
+																									ADD dent52 CHAR(2) NULL,&
+																									ADD dent53 CHAR(2) NULL,&
+																									ADD dent54 CHAR(2) NULL,&
+																									ADD dent55 CHAR(2) NULL,&
+																									ADD dent61 CHAR(2) NULL,&
+																									ADD dent62 CHAR(2) NULL,&
+																									ADD dent63 CHAR(2) NULL,&
+																									ADD dent64 CHAR(2) NULL,&
+																									ADD dent65 CHAR(2) NULL,&
+																									ADD dent71 CHAR(2) NULL,&
+																									ADD dent72 CHAR(2) NULL,&
+																									ADD dent73 CHAR(2) NULL,&
+																									ADD dent74 CHAR(2) NULL,&
+																									ADD dent75 CHAR(2) NULL,&
+																									ADD dent81 CHAR(2) NULL,&
+																									ADD dent82 CHAR(2) NULL,&
+																									ADD dent83 CHAR(2) NULL,&
+																									ADD dent84 CHAR(2) NULL,&
+																									ADD dent85 CHAR(2) NULL,&
+																									ADD e11 BIT NULL,&
+																									ADD e12 BIT NULL,&
+																									ADD e13 BIT NULL,&
+																									ADD e14 BIT NULL,&
+																									ADD e15 BIT NULL,&
+																									ADD e16 BIT NULL,&
+																									ADD e17 BIT NULL,&
+																									ADD e18 BIT NULL,&
+																									ADD e21 BIT NULL,&
+																									ADD e22 BIT NULL,&
+																									ADD e23 BIT NULL,&
+																									ADD e24 BIT NULL,&
+																									ADD e25 BIT NULL,&
+																									ADD e26 BIT NULL,&
+																									ADD e27 BIT NULL,&
+																									ADD e28 BIT NULL,&
+																									ADD e31 BIT NULL,&
+																									ADD e32 BIT NULL,&
+																									ADD e33 BIT NULL,&
+																									ADD e34 BIT NULL,&
+																									ADD e35 BIT NULL,&
+																									ADD e36 BIT NULL,&
+																									ADD e37 BIT NULL,&
+																									ADD e38 BIT NULL,&
+																									ADD e41 BIT NULL,&
+																									ADD e42 BIT NULL,&
+																									ADD e43 BIT NULL,&
+																									ADD e44 BIT NULL,&
+																									ADD e45 BIT NULL,&
+																									ADD e46 BIT NULL,&
+																									ADD e47 BIT NULL,&
+																									ADD e48 BIT NULL,&
+																									ADD e51 BIT NULL,&
+																									ADD e52 BIT NULL,&
+																									ADD e53 BIT NULL,&
+																									ADD e54 BIT NULL,&
+																									ADD e55 BIT NULL,&
+																									ADD e61 BIT NULL,&
+																									ADD e62 BIT NULL,&
+																									ADD e63 BIT NULL,&
+																									ADD e64 BIT NULL,&
+																									ADD e65 BIT NULL,&
+																									ADD e71 BIT NULL,&
+																									ADD e72 BIT NULL,&
+																									ADD e73 BIT NULL,&
+																									ADD e74 BIT NULL,&
+																									ADD e75 BIT NULL,&
+																									ADD e81 BIT NULL,&
+																									ADD e82 BIT NULL,&
+																									ADD e83 BIT NULL,&
+																									ADD e84 BIT NULL,&
+																									ADD e85 BIT NULL"
+																									
+		ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_dentists MODIFY det_email VARCHAR(100)"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.2'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 3 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_carteentete MODIFY mid1 DECIMAL(4,1) NULL,&
+																									MODIFY mid2 DECIMAL(4,1) NULL,&
+																									MODIFY mid3 DECIMAL(4,1) NULL,&
+																									MODIFY mid4 DECIMAL(4,1) NULL"
+																									
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapconsult1 ADD mid1 DECIMAL(4,1) NULL,&
+																									ADD mid2 DECIMAL(4,1) NULL,&
+																									ADD mid3 DECIMAL(4,1) NULL,&
+																									ADD mid4 DECIMAL(4,1) NULL"
+																									
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.3'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 4 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE horaire ADD patient_id_11 INTEGER NULL,&
+																							ADD patient_id_12 INTEGER NULL,&
+																							ADD patient_id_13 INTEGER NULL,&
+																							ADD patient_id_14 INTEGER NULL,&
+																							ADD patient_id_15 INTEGER NULL,&
+																							ADD traitement_11 INTEGER NULL,&
+																							ADD traitement_12 INTEGER NULL,&
+																							ADD traitement_13 INTEGER NULL,&
+																							ADD traitement_14 INTEGER NULL,&
+																							ADD traitement_15 INTEGER NULL,&
+																							ADD patient_nom_11 VARCHAR(100) NULL,&
+																							ADD patient_nom_12 VARCHAR(100) NULL,&
+																							ADD patient_nom_13 VARCHAR(100) NULL,&
+																							ADD patient_nom_14 VARCHAR(100) NULL,&
+																							ADD patient_nom_15 VARCHAR(100) NULL,&
+																							ADD case_11 CHAR(1) NULL,&
+																							ADD case_12 CHAR(1) NULL,&
+																							ADD case_13 CHAR(1) NULL,&
+																							ADD case_14 CHAR(1) NULL,&
+																							ADD case_15 CHAR(1) NULL,&
+																							ADD couleur_text_11 INTEGER NULL,&
+																							ADD couleur_text_12 INTEGER NULL,&
+																							ADD couleur_text_13 INTEGER NULL,&
+																							ADD couleur_text_14 INTEGER NULL,&
+																							ADD couleur_text_15 INTEGER NULL,&
+																							ADD no_dossier11 VARCHAR(20) NULL,&
+																							ADD no_dossier12 VARCHAR(20) NULL,&
+																							ADD no_dossier13 VARCHAR(20) NULL,&
+																							ADD no_dossier14 VARCHAR(20) NULL,&
+																							ADD no_dossier15 VARCHAR(20) NULL,&
+																							ADD lock11 INTEGER NULL,&
+																							ADD lock12 INTEGER NULL,&
+																							ADD lock13 INTEGER NULL,&
+																							ADD lock14 INTEGER NULL,&
+																							ADD lock15 INTEGER NULL,&
+																							ADD traitementnom11 VARCHAR(40) NULL,&
+																							ADD traitementnom12 VARCHAR(40) NULL,&
+																							ADD traitementnom13 VARCHAR(40) NULL,&
+																							ADD traitementnom14 VARCHAR(40) NULL,&
+																							ADD traitementnom15 VARCHAR(40) NULL,&
+																							ADD traitementid11 INTEGER NULL,&
+																							ADD traitementid12 INTEGER NULL,&
+																							ADD traitementid13 INTEGER NULL,&
+																							ADD traitementid14 INTEGER NULL,&
+																							ADD traitementid15 INTEGER NULL,&
+																							ADD colortemplate11 INTEGER NULL,&
+																							ADD colortemplate12 INTEGER NULL,&
+																							ADD colortemplate13 INTEGER NULL,&
+																							ADD colortemplate14 INTEGER NULL,&
+																							ADD colortemplate15 INTEGER NULL,&
+																							ADD duree11 INTEGER NULL,&
+																							ADD duree12 INTEGER NULL,&
+																							ADD duree13 INTEGER NULL,&
+																							ADD duree14 INTEGER NULL,&
+																							ADD duree15 INTEGER NULL,&
+																							ADD dt11 CHAR(2) NULL,&
+																							ADD dt12 CHAR(2) NULL,&
+																							ADD dt13 CHAR(2) NULL,&
+																							ADD dt14 CHAR(2) NULL,&
+																							ADD dt15 CHAR(2) NULL,&
+																							ADD conf11 BIT NULL,&
+																							ADD conf12 BIT NULL,&
+																							ADD conf13 BIT NULL,&
+																							ADD conf14 BIT NULL,&
+																							ADD conf15 BIT NULL,&
+																							ADD memo11 VARCHAR(1000) NULL,&
+																							ADD memo12 VARCHAR(1000) NULL,&
+																							ADD memo13 VARCHAR(1000) NULL,&
+																							ADD memo14 VARCHAR(1000) NULL,&
+																							ADD memo15 VARCHAR(1000) NULL"
+																									
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD horcol11 VARCHAR(15) NULL,&
+																							  ADD horcol12 VARCHAR(15) NULL,&
+																							  ADD horcol13 VARCHAR(15) NULL,&
+																							  ADD horcol14 VARCHAR(15) NULL,&
+																							  ADD horcol15 VARCHAR(15) NULL"
+																							 
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_templateprog ADD c11 INTEGER NULL,&
+																							  		 ADD c12 INTEGER NULL,&
+																							 		 ADD c13 INTEGER NULL,&
+																							  		 ADD c14 INTEGER NULL,&
+																							  		 ADD c15 INTEGER NULL"
+																										
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD hormodele INTEGER NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] =	"update t_options set hormodele = 1 where hormodele is null"																						
+			ls_vectsql[upperbound(ls_vectsql)+1] =	"update horaire set patient_id_11 = 0 where patient_id_11 is null"
+			ls_vectsql[upperbound(ls_vectsql)+1] =	"update horaire set patient_id_12 = 0 where patient_id_11 is null"
+			ls_vectsql[upperbound(ls_vectsql)+1] =	"update horaire set patient_id_13 = 0 where patient_id_11 is null"
+			ls_vectsql[upperbound(ls_vectsql)+1] =	"update horaire set patient_id_14 = 0 where patient_id_11 is null"
+			ls_vectsql[upperbound(ls_vectsql)+1] =	"update horaire set patient_id_15 = 0 where patient_id_11 is null"
+			ls_vectsql[upperbound(ls_vectsql)+1] =	"update horaire set patient_nom_11 = '' where patient_nom_11 is null"
+			ls_vectsql[upperbound(ls_vectsql)+1] =	"update horaire set patient_nom_12 = '' where patient_nom_12 is null"
+			ls_vectsql[upperbound(ls_vectsql)+1] =	"update horaire set patient_nom_13 = '' where patient_nom_13 is null"
+			ls_vectsql[upperbound(ls_vectsql)+1] =	"update horaire set patient_nom_14 = '' where patient_nom_14 is null"
+			ls_vectsql[upperbound(ls_vectsql)+1] =	"update horaire set patient_nom_15 = '' where patient_nom_15 is null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] =	"ALTER TABLE t_personnels ADD categorie INTEGER NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] =	"update t_personnels set categorie = 0"
+																									
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.4'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 5 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_message ADD typemessagerie CHAR(1) NULL, ADD couleur INTEGER NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "UPDATE t_message SET typemessagerie = 'U'"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_message MODIFY typemessagerie NOT NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_message MODIFY typemessagerie NOT NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "insert into t_etiqchoix(etiqnom,choix,ortho_id,refdw1) &
+															 	 select 'Etiquettes dossier (RDV)', 0, ortho_id, 'd_etiqouvdoss' from ortho_id"
+																																									
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.5'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 6 Then
+			ls_vectsql = ls_vide
+			
+			// Ajout du courriel de l'usager
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_personnels ADD courriel VARCHAR(100) NULL"
+
+			// Ajout des options du SMTP
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD smtpserver VARCHAR(100) NULL, &
+																								 ADD smtpport INTEGER NULL, &
+																								 ADD smtpuserid VARCHAR(100) NULL, &
+																								 ADD smtppassword VARCHAR(100) NULL, &
+																								 ADD smtpauth BIT NULL, &
+																								 ADD logfile BIT NULL"
+																																												
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.6'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 7 Then
+			ls_vectsql = ls_vide
+			
+			// Ajout du courriel de l'usager
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapconsult1 ADD cancelle BIT NULL DEFAULT 0, &
+																									ADD user_cancelle INTEGER NULL, &
+																									ADD date_cancelle TIMESTAMP NULL, &
+																									ADD heurecreer TIME NULL, &
+																									ADD datecreer DATE NULL"
+																									
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_validuser ADD ordinateur VARCHAR(256) NULL"
+																																													
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.7'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 8 Then
+			ls_vectsql = ls_vide
+			
+			// Ajout du courriel de l'usager
+			ls_vectsql[upperbound(ls_vectsql)+1] = "CREATE TABLE t_torque (id_torque INTEGER NOT NULL DEFAULT AUTOINCREMENT, &
+																								torque VARCHAR(500) NOT NULL, &
+																								datetorque DATE NOT NULL DEFAULT current date, &
+																								PRIMARY KEY(id_torque))"
+																									
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_torque ADD FOREIGN KEY fk_patientid(id_patient) REFERENCES patient(patient_id) ON DELETE CASCADE ON UPDATE CASCADE"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_consultations ADD panremispatient BIT NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.8'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 9 Then
+			ls_vectsql = ls_vide
+			
+			// Ajout du courriel de l'usager
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE patient ADD noinstitution VARCHAR(4) NULL, &
+																							ADD nosuccursale VARCHAR(5) NULL, &
+																							ADD nocompte VARCHAR(18) NULL"
+																							
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options 	ADD noclientrbc VARCHAR(10) NULL, &
+																								ADD nofichierrbc VARCHAR(4) NULL, &
+																								ADD nomabregerbc VARCHAR(15) NULL"
+																								
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_torque ADD infosupp VARCHAR(5000) NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_cartetraitelast ADD cro123 BIT NULL, &
+																										 ADD cro223 BIT NULL, &
+																										 ADD cro323 BIT NULL, &
+																										 ADD cro423 BIT NULL"
+																										 
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_cartetrait ADD mid1 DECIMAL(4,1) NULL, &
+																								  ADD mid2 DECIMAL(4,1) NULL, &
+																								  ADD mid3 DECIMAL(4,1) NULL, &
+																								  ADD mid4 DECIMAL(4,1) NULL"
+																								  
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_cartetrait ADD obu CHAR(1) NULL, &
+																								  ADD oju CHAR(1) NULL"
+																								  
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD obu CHAR(1) NOT NULL DEFAULT 't', &
+																							  ADD oju CHAR(1) NOT NULL DEFAULT 'p', &
+																							  MODIFY surveru DEFAULT 'p', &
+																							  MODIFY surhoru DEFAULT 't', &
+																							  MODIFY artouvu DEFAULT 't'"
+																							  
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options MODIFY obu NOT NULL, &
+																							  MODIFY oju NOT NULL"
+																							  
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_torque ADD bonding VARCHAR(5000) NULL, &
+																							 ADD rotation VARCHAR(5000) NULL, &
+																							 ADD hauteur VARCHAR(5000) NULL, &
+																							 ADD tip VARCHAR(5000) NULL, &
+																							 ADD resumetorque VARCHAR(50) NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.9'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 10 Then
+			ls_vectsql = ls_vide
+			
+			// Ajout du courriel de l'usager
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "CREATE TABLE t_carte_plan_trait(id_carte_plan_trait INTEGER NOT NULL DEFAULT autoincrement, &
+																											dateanalyse DATE NULL, &
+																											excesmax12 VARCHAR(50) NULL, &
+																											excesmand12 VARCHAR(50) NULL, &
+																											excesmax6 VARCHAR(50) NULL, &
+																											excesmand6 VARCHAR(50) NULL, &
+																											espdispog DECIMAL(4,1) NULL, &
+																											espdispod DECIMAL(4,1) NULL, &
+																											espnecessaireg DECIMAL(4,1) NULL, &
+																											espnecessaired DECIMAL(4,1) NULL, &
+																											taillemm DECIMAL(4,1) NULL, &
+																											examclinique VARCHAR(20000) NULL, &
+																											examcephalo VARCHAR(15000) NULL, &
+																											exampano VARCHAR(10000) NULL, &
+																											plantrait VARCHAR(20000) NULL, &
+																											id_cartetrait INTEGER NOT NULL, &
+																											PRIMARY KEY(id_carte_plan_trait))"
+																											
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_carte_plan_trait ADD FOREIGN KEY fk_patid(patient_id) REFERENCES patient(patient_id) ON DELETE CASCADE ON UPDATE CASCADE"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_appareils ADD ordre INTEGER NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_radiotypes ADD ordre INTEGER NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_cartetrait MODIFY mid1 VARCHAR(30), &
+																								  MODIFY mid2 VARCHAR(30), &
+																								  MODIFY mid3 VARCHAR(30), &
+																								  MODIFY mid4 VARCHAR(30)"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.10'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 11 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_cartetrait ADD Q1 VARCHAR(30), &
+																								  ADD Q2 VARCHAR(30), &
+																								  ADD Q3 VARCHAR(30), &
+																								  ADD Q4 VARCHAR(30), &
+																								  ADD Qt1 VARCHAR(30), &
+																								  ADD Qt2 VARCHAR(30), &
+																								  ADD Qt3 VARCHAR(30), &
+																								  ADD Qt4 VARCHAR(30)"
+																								  
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_carte_plan_trait ADD analyse VARCHAR(32760)"
+																								  
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.11'; 
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 12 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_categoriephrase ADD FOREIGN KEY fk_orthoid(ortho_id) REFERENCES ortho_id(ortho_id) ON DELETE CASCADE ON UPDATE CASCADE"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "UPDATE t_categoriephrase set ortho_id = 1"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD text1dosspat VARCHAR(100) NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "CREATE TABLE t_notesupppat(id_notesupppat INTEGER NOT NULL DEFAULT AUTOINCREMENT, &
+																									 notesupppat VARCHAR(10000), &
+																									 patient_id INTEGER NOT NULL, &
+																									 PRIMARY KEY(id_notesupppat))"
+																									 
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_notesupppat ADD FOREIGN KEY fk_patid(patient_id) REFERENCES patient(patient_id) ON DELETE CASCADE ON UPDATE CASCADE"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_carteentete ADD datefintx DATE NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.12';
+			commit using SQLCA;
+		End If
+		
+		If long(ls_tab[3]) < 13 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE ortho_id ADD nomcie VARCHAR(100) NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "UPDATE ortho_id set nomcie = cie"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.13';
+			commit using SQLCA;
+		End If
+
+		If long(ls_tab[3]) < 14 Then
+			ls_vectsql = ls_vide
+			
+			// Ajout des options pour déverrouiler les 3 types de correspondance dans le dossier patient
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add debarrer_cons bit null," + &
+																							" add debarrer_rappre bit null," + &
+																							" add debarrer_traitreq bit null"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.14'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 15 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD typeimgutil CHAR(1) NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "UPDATE t_options set typeimgutil = 'o'"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_carteentete ADD traitement1 VARCHAR(10000) NULL, &
+																									ADD traitement2 VARCHAR(10000) NULL, &
+																									ADD traitement3 VARCHAR(10000) NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.15'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 16 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options MODIFY debarrer_cons integer null, &
+																							  MODIFY debarrer_rappre integer null, &
+																							  MODIFY debarrer_traitreq integer null, &
+																							  ADD debarrer_plant integer null, &
+																							  ADD debarrer_anal integer null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_carteentete ADD datecree DATE DEFAULT CURRENT DATE"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_carte_plan_trait ADD datecree DATE DEFAULT CURRENT DATE"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.16'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 17 Then
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rdv ADD envoyermail BIT NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE patient ADD emailvalid BIT NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.17'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 18 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD delaimail INTEGER NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.18'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 19 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_personnels ADD ordre INTEGER NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.19'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 20 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_personneldroit ADD rappcons BIT NULL, &
+																								      ADD traitreq BIT NULL, &
+																									   ADD rapppre BIT NULL, &
+																										ADD feuilleanalyse BIT NULL, &
+																										ADD plantrait BIT NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.20'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 21 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE patient ADD emailvalid2 BIT NULL, &
+																								ADD emailvalid3 BIT NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.21'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 22 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_imagingconf ADD FOREIGN KEY fk_orthoid(ortho_id) REFERENCES ortho_id(ortho_id) ON DELETE CASCADE ON UPDATE CASCADE"
+
+			ls_vectsql[upperbound(ls_vectsql)+1] = "UPDATE t_imagingconf set ortho_id = 1"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_imagingconf DROP PRIMARY KEY" 
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_imagingconf MODIFY ortho_id NOT NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_imagingconf ADD PRIMARY KEY(id_imgconf,ortho_id)"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.22'; 
+			commit using SQLCA; 
+		End If
+		
+		If long(ls_tab[3]) < 23 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_sujets add filename_patient varchar(255) null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_sujets add filename_patient_an varchar(255) null"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table patient add color_cartetraitement integer null"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.23'; 
+			commit using SQLCA; 
+		End If
+		
+		if long(ls_tab[3]) < 24 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add hideinvoiceheader bit null default 0"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add hideabsencevoucherheader bit null default 0"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add hidedepositsheader bit null default 0"
+
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add hideaccountsummaryheader bit null default 0"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.24'; 
+			commit using SQLCA; 
+			
+		end if
+		
+		if long(ls_tab[3]) < 25 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_options add hideinsuranceheader bit null default 0"
+						
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.25'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 26 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "alter table t_personnels add droitmodfactpaie bit null default 0"
+						
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.26'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 27 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create table t_etatcomptepat(id_etatcomptepat integer not null default autoincrement, &
+			                                                                     noteetatcompte VARCHAR(1000) null, &
+																										totfact DECIMAL(8,2) NULL, &
+																										facttot DECIMAL(8,2) NULL, &
+																										paietot DECIMAL(8,2) NULL, &
+																										factc DECIMAL(8,2) NULL, &
+																										paiec DECIMAL(8,2) NULL, &
+																										fact30 DECIMAL(8,2) NULL, &
+																										paie30 DECIMAL(8,2) NULL, &
+																										fact60 DECIMAL(8,2) NULL, &
+																										paie60 DECIMAL(8,2) NULL, &
+																										id_contact INTEGER NULL, &
+																										lastpaie DATE NULL, &
+																										patient_id integer not null, &
+																										primary key(id_etatcomptepat))"
+																										
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_etatcomptepat ADD FOREIGN KEY fk_patid(id_patient) REFERENCES patient(patient_id) ON DELETE CASCADE ON UPDATE CASCADE"			
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.27'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 28 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "create table t_etatcomptepat(id_etatcomptepat integer not null default autoincrement, &
+			                                                                     noteetatcompte VARCHAR(1000) null, &
+																										totfact DECIMAL(8,2) NULL, &
+																										facttot DECIMAL(8,2) NULL, &
+																										paietot DECIMAL(8,2) NULL, &
+																										factc DECIMAL(8,2) NULL, &
+																										paiec DECIMAL(8,2) NULL, &
+																										fact30 DECIMAL(8,2) NULL, &
+																										paie30 DECIMAL(8,2) NULL, &
+																										fact60 DECIMAL(8,2) NULL, &
+																										paie60 DECIMAL(8,2) NULL, &
+																										id_contact INTEGER NULL, &
+																										lastpaie DATE NULL, &
+																										patient_id integer not null, &
+																										primary key(id_etatcomptepat))"
+																										
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_etatcomptepat ADD FOREIGN KEY fk_patid(id_patient) REFERENCES patient(patient_id) ON DELETE CASCADE ON UPDATE CASCADE"			
+			
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "CREATE TABLE t_rapcons_miron (	a1 BIT NULL, &
+														a2 BIT NULL, &
+														a3 BIT NULL, &
+														a4 BIT NULL, &
+														allautre VARCHAR(50) NULL, &
+														allpeni BIT NULL, &
+														allsaison BIT NULL, &
+														asthme BIT NULL, &
+														asymetrie VARCHAR(3) NULL, &
+														atmautre VARCHAR(200) NULL, &
+														b1 BIT NULL, &
+														b2 BIT NULL, &
+														b2x4 BIT NULL, &
+														b3 BIT NULL, &
+														b4 BIT NULL, &
+														bolton VARCHAR(50) NULL, &
+														bondinghb BIT NULL, &
+														bruit VARCHAR(30) NULL, &
+														bruxisme BIT NULL, &
+														c1 BIT NULL, &
+														c2 BIT NULL, &
+														c3 BIT NULL, &
+														c4 BIT NULL, &
+														chevauchdent BIT NULL, &
+														chevinf VARCHAR(30) NULL, &
+														chevsup VARCHAR(30) NULL, &
+														chirort BIT NULL, &
+														clenching BIT NULL, &
+														croissance VARCHAR(200) NULL, &
+														d1 BIT NULL, &
+														d11 BIT NULL,d12 BIT NULL,d13 BIT NULL,d14 BIT NULL,d15 BIT NULL,d16 BIT NULL,d17 BIT NULL,d18 BIT NULL, &
+														d2 BIT NULL, &
+														d21 BIT NULL,d22 BIT NULL,d23 BIT NULL,d24 BIT NULL,d25 BIT NULL,d26 BIT NULL,d27 BIT NULL,d28 BIT NULL, &
+														d3 BIT NULL, &
+														d31 BIT NULL,d32 BIT NULL,d33 BIT NULL,d34 BIT NULL,d35 BIT NULL,d36 BIT NULL,d37 BIT NULL,d38 BIT NULL, &
+														d4 BIT NULL, &
+														d41 BIT NULL,d42 BIT NULL,d43 BIT NULL,d44 BIT NULL,d45 BIT NULL,d46 BIT NULL,d47 BIT NULL,d48 BIT NULL, &
+														datecons DATE NULL, &
+														datecreer DATE NULL, &
+														defat BIT NULL, &
+														dentaire VARCHAR(200) NULL, &
+														dentmanq VARCHAR(50) NULL, &
+														dents VARCHAR(50) NULL, &
+														devinfd VARCHAR(10) NULL, &
+														devinfg VARCHAR(10) NULL, &
+														devmandibul VARCHAR(15) NULL, &
+														devsupd VARCHAR(10) NULL, &
+														devsupg VARCHAR(10) NULL, &
+														douleur VARCHAR(3) NULL, &
+														e1 BIT NULL,e2 BIT NULL,e3 BIT NULL,e4 BIT NULL, &
+														eimandibule VARCHAR(30) NULL, &
+														eimaxsup VARCHAR(30) NULL, &
+														espaceinf BIT NULL, &
+														espacesup BIT NULL, &
+														evaldent BIT NULL, &
+														extracd VARCHAR(50) NULL, &
+														flhinf BIT NULL, &
+														flhsup BIT NULL, &
+														fmask BIT NULL, &
+														freirec VARCHAR(50) NULL, &
+														gamd VARCHAR(50) NULL, &
+														ggrd VARCHAR(50) NULL, &
+														gummy BIT NULL, &
+														h2x4 BIT NULL, &
+														haborautre VARCHAR(200) NULL, &
+														heurecreer TIME NULL, &
+														histautre VARCHAR(200) NULL, &
+														hygiene VARCHAR(30) NULL, &
+														hypertonicite BIT NULL, &
+														hyraxb BIT NULL, &
+														id_rapconsmiron INTEGER NOT NULL DEFAULT AUTOINCREMENT, &
+														incisor VARCHAR(10) NULL, &
+														incline BIT NULL, &
+														incomplab BIT NULL, &
+														infocomp VARCHAR(400) NULL, &
+														liptrap BIT NULL, &
+														lmedinf BIT NULL, &
+														lmedsup BIT NULL, &
+														mandibule VARCHAR(30) NULL, &
+														maxillairesup VARCHAR(10) NULL, &
+														maxsup VARCHAR(30) NULL, &
+														mdent11 CHAR(2) NULL,mdent12 CHAR(2) NULL,mdent13 CHAR(2) NULL,mdent14 CHAR(2) NULL,mdent15 CHAR(2) NULL,mdent16 CHAR(2) NULL,mdent17 CHAR(2) NULL,mdent18 CHAR(2) NULL, &
+														mdent21 CHAR(2) NULL,mdent22 CHAR(2) NULL,mdent23 CHAR(2) NULL,mdent24 CHAR(2) NULL,mdent25 CHAR(2) NULL,mdent26 CHAR(2) NULL,mdent27 CHAR(2) NULL,mdent28 CHAR(2) NULL, &
+														mdent31 CHAR(2) NULL,mdent32 CHAR(2) NULL,mdent33 CHAR(2) NULL,mdent34 CHAR(2) NULL,mdent35 CHAR(2) NULL,mdent36 CHAR(2) NULL,mdent37 CHAR(2) NULL,mdent38 CHAR(2) NULL, &
+														mdent41 CHAR(2) NULL,mdent42 CHAR(2) NULL,mdent43 CHAR(2) NULL,mdent44 CHAR(2) NULL,mdent45 CHAR(2) NULL,mdent46 CHAR(2) NULL,mdent47 CHAR(2) NULL,mdent48 CHAR(2) NULL, &
+														mdenta1 CHAR(2) NULL,mdenta2 CHAR(2) NULL,mdenta3 CHAR(2) NULL,mdenta4 CHAR(2) NULL, &
+														mdentb1 CHAR(2) NULL,mdentb2 CHAR(2) NULL,mdentb3 CHAR(2) NULL,mdentb4 CHAR(2) NULL, &
+														mdentc1 CHAR(2) NULL,mdentc2 CHAR(2) NULL,mdentc3 CHAR(2) NULL,mdentc4 CHAR(2) NULL, &
+														mdentd1 CHAR(2) NULL,mdentd2 CHAR(2) NULL,mdentd3 CHAR(2) NULL,mdentd4 CHAR(2) NULL, &
+														mdente1 CHAR(2) NULL,mdente2 CHAR(2) NULL,mdente3 CHAR(2) NULL,mdente4 CHAR(2) NULL, &
+														medica VARCHAR(200) NULL, &
+														mei BIT NULL, &
+														menarche VARCHAR(3) NULL, &
+														mhaas BIT NULL, &
+														mhyraxb BIT NULL, &
+														monson VARCHAR(50) NULL, &
+														moyers1 varchar(10) NULL, &
+														moyers2 varchar(10) NULL, &
+														moyers3 varchar(10) NULL, &
+														moyers4 varchar(10) NULL, &
+														mpendex BIT NULL, &
+														nance BIT NULL, &
+														normal BIT NULL, &
+														ob VARCHAR(10) NULL, &
+														ocant BIT NULL, &
+														ocbilaterale BIT NULL, &
+														ocdroit BIT NULL, &
+														ocgauche BIT NULL, &
+														ocmandibule VARCHAR(50) NULL, &
+														ocpost BIT NULL, &
+														oj VARCHAR(10) NULL, &
+														onycho BIT NULL, &
+														ouvmax VARCHAR(10) NULL, &
+														patient_id INTEGER NULL, &
+														phaas BIT NULL, &
+														phase VARCHAR(50) NULL, &
+														pipser BIT NULL, &
+														ppautre VARCHAR(200) NULL, &
+														ppendex BIT NULL, &
+														profil VARCHAR(30) NULL, &
+														pronostic VARCHAR(200) NULL, &
+														propling BIT NULL, &
+														rcoc VARCHAR(50) NULL, &
+														relcand VARCHAR(10) NULL, &
+														relcang VARCHAR(10) NULL, &
+														relmold VARCHAR(10) NULL, &
+														relmolg VARCHAR(10) NULL, &
+														relpred VARCHAR(10) NULL, &
+														relpreg VARCHAR(10) NULL, &
+														rendezvous1 VARCHAR(50) NULL, &
+														rendezvous2 VARCHAR(50) NULL, &
+														rendezvous3 VARCHAR(50) NULL, &
+														rendezvous4 VARCHAR(50) NULL, &
+														rendezvous5 VARCHAR(50) NULL, &
+														replilabio BIT NULL, &
+														respiration VARCHAR(30) NULL, &
+														restimport VARCHAR(50) NULL, &
+														rgd VARCHAR(50) NULL, &
+														spee VARCHAR(50) NULL, &
+														squelettique VARCHAR(200), &
+														succpouce VARCHAR(3) NULL, &
+														wilson VARCHAR(50) NULL, &
+														primary key(id_rapconsmiron))"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.28'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 29 Then
+			
+			ls_vectsql = ls_vide
+		   ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapcons_miron ADD hgocc BIT NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapcons_miron ADD hgcer BIT NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapcons_miron ADD menton BIT NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapcons_miron ADD forsus BIT NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapcons_miron ADD diasteme VARCHAR(10) NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.29'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 30 Then
+			
+			ls_vectsql = ls_vide
+		   ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD nomuser VARCHAR(30) NULL, ADD nomfichierbn VARCHAR(30) NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE patient ADD nompayeur VARCHAR(30) NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.30'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 31 Then
+			
+			ls_vectsql = ls_vide
+		   ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_templatedate ADD dateapply datetime NULL DEFAULT current timestamp"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.31'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 32 Then
+			
+			ls_vectsql = ls_vide
+		
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.32'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 33 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_sujets ADD actif BIT NULL"
+         ls_vectsql[upperbound(ls_vectsql)+1] = "UPDATE t_sujets SET actif = 1" 
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_introconcl ADD actif BIT NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "UPDATE t_introconcl SET actif = 1" 
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_introconcl ADD ordre INTEGER NULL"
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_personnels MODIFY droitmodfactpaie INTEGER NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.33'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 34 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD debarrer_corr integer null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_contact ADD nompayeur VARCHAR(30) null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_contact ADD nosuccursale VARCHAR(5) null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_contact ADD nocompte VARCHAR(18) null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_contact ADD noinstitution VARCHAR(4) null"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD debarrer_corr INTEGER NULL"
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.34'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 35 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD hordelrva integer null"
+				open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.35'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 36 Then
+			
+			ls_vectsql = ls_vide
+			
+         ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_message ADD messagecc varchar(500) null"
+				open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.36'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 37 Then
+			
+			ls_vectsql = ls_vide
+			
+         ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD triparheurearrive BIT NULL"
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.37'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 38 Then
+			
+			ls_vectsql = ls_vide
+			
+         ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_printers ADD FOREIGN KEY fk_idpers(id_personnel) REFERENCES t_personnels(id_personnel) ON DELETE CASCADE ON UPDATE CASCADE"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "DELETE FROM t_printers"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_printers DROP PRIMARY KEY"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_printers MODIFY serialnumber VARCHAR(20) NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_printers MODIFY id_personnel NOT NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_printers ADD PRIMARY KEY(serialnumber,id_personnel,pname)"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.38'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 39 Then
+			
+			ls_vectsql = ls_vide
+			
+         ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD nodoscommepatid BIT NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.39'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 40 Then
+			
+			ls_vectsql = ls_vide
+			
+         ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE traitements ADD UNIQUE(paitent_id,phase)"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.40'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 41 Then
+			
+			ls_vectsql = ls_vide
+			
+         ls_vectsql[upperbound(ls_vectsql)+1] = "CREATE TABLE t_signature(id_signature INTEGER NOT NULL DEFAULT autoincrement, &
+			                                                                 signature IMAGE NULL, &
+																								  typesignature INTEGER NOT NULL, &
+																								  id_foreignkey INTEGER NOT NULL, &
+																								  primary key(id_signature))"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.41'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 42 Then
+			
+			ls_vectsql = ls_vide
+			
+			ls_vectsql[upperbound(ls_vectsql)+1] = "CREATE TABLE t_rapcons_miron (	a1 BIT NULL, &
+														a2 BIT NULL, &
+														a3 BIT NULL, &
+														a4 BIT NULL, &
+														allautre VARCHAR(50) NULL, &
+														allpeni BIT NULL, &
+														allsaison BIT NULL, &
+														asthme BIT NULL, &
+														asymetrie VARCHAR(3) NULL, &
+														atmautre VARCHAR(200) NULL, &
+														b1 BIT NULL, &
+														b2 BIT NULL, &
+														b2x4 BIT NULL, &
+														b3 BIT NULL, &
+														b4 BIT NULL, &
+														bolton VARCHAR(50) NULL, &
+														bondinghb BIT NULL, &
+														bruit VARCHAR(30) NULL, &
+														bruxisme BIT NULL, &
+														c1 BIT NULL, &
+														c2 BIT NULL, &
+														c3 BIT NULL, &
+														c4 BIT NULL, &
+														chevauchdent BIT NULL, &
+														chevinf VARCHAR(30) NULL, &
+														chevsup VARCHAR(30) NULL, &
+														chirort BIT NULL, &
+														clenching BIT NULL, &
+														croissance VARCHAR(200) NULL, &
+														d1 BIT NULL, &
+														d11 BIT NULL,d12 BIT NULL,d13 BIT NULL,d14 BIT NULL,d15 BIT NULL,d16 BIT NULL,d17 BIT NULL,d18 BIT NULL, &
+														d2 BIT NULL, &
+														d21 BIT NULL,d22 BIT NULL,d23 BIT NULL,d24 BIT NULL,d25 BIT NULL,d26 BIT NULL,d27 BIT NULL,d28 BIT NULL, &
+														d3 BIT NULL, &
+														d31 BIT NULL,d32 BIT NULL,d33 BIT NULL,d34 BIT NULL,d35 BIT NULL,d36 BIT NULL,d37 BIT NULL,d38 BIT NULL, &
+														d4 BIT NULL, &
+														d41 BIT NULL,d42 BIT NULL,d43 BIT NULL,d44 BIT NULL,d45 BIT NULL,d46 BIT NULL,d47 BIT NULL,d48 BIT NULL, &
+														datecons DATE NULL, &
+														datecreer DATE NULL, &
+														defat BIT NULL, &
+														dentaire VARCHAR(200) NULL, &
+														dentmanq VARCHAR(50) NULL, &
+														dents VARCHAR(50) NULL, &
+														devinfd VARCHAR(10) NULL, &
+														devinfg VARCHAR(10) NULL, &
+														devmandibul VARCHAR(15) NULL, &
+														devsupd VARCHAR(10) NULL, &
+														devsupg VARCHAR(10) NULL, &
+														douleur VARCHAR(3) NULL, &
+														e1 BIT NULL,e2 BIT NULL,e3 BIT NULL,e4 BIT NULL, &
+														eimandibule VARCHAR(30) NULL, &
+														eimaxsup VARCHAR(30) NULL, &
+														espaceinf BIT NULL, &
+														espacesup BIT NULL, &
+														evaldent BIT NULL, &
+														extracd VARCHAR(50) NULL, &
+														flhinf BIT NULL, &
+														flhsup BIT NULL, &
+														fmask BIT NULL, &
+														freirec VARCHAR(50) NULL, &
+														gamd VARCHAR(50) NULL, &
+														ggrd VARCHAR(50) NULL, &
+														gummy BIT NULL, &
+														h2x4 BIT NULL, &
+														haborautre VARCHAR(200) NULL, &
+														heurecreer TIME NULL, &
+														histautre VARCHAR(200) NULL, &
+														hygiene VARCHAR(30) NULL, &
+														hypertonicite BIT NULL, &
+														hyraxb BIT NULL, &
+														id_rapconsmiron INTEGER NOT NULL DEFAULT AUTOINCREMENT, &
+														incisor VARCHAR(10) NULL, &
+														incline BIT NULL, &
+														incomplab BIT NULL, &
+														infocomp VARCHAR(400) NULL, &
+														liptrap BIT NULL, &
+														lmedinf BIT NULL, &
+														lmedsup BIT NULL, &
+														mandibule VARCHAR(30) NULL, &
+														maxillairesup VARCHAR(10) NULL, &
+														maxsup VARCHAR(30) NULL, &
+														mdent11 CHAR(2) NULL,mdent12 CHAR(2) NULL,mdent13 CHAR(2) NULL,mdent14 CHAR(2) NULL,mdent15 CHAR(2) NULL,mdent16 CHAR(2) NULL,mdent17 CHAR(2) NULL,mdent18 CHAR(2) NULL, &
+														mdent21 CHAR(2) NULL,mdent22 CHAR(2) NULL,mdent23 CHAR(2) NULL,mdent24 CHAR(2) NULL,mdent25 CHAR(2) NULL,mdent26 CHAR(2) NULL,mdent27 CHAR(2) NULL,mdent28 CHAR(2) NULL, &
+														mdent31 CHAR(2) NULL,mdent32 CHAR(2) NULL,mdent33 CHAR(2) NULL,mdent34 CHAR(2) NULL,mdent35 CHAR(2) NULL,mdent36 CHAR(2) NULL,mdent37 CHAR(2) NULL,mdent38 CHAR(2) NULL, &
+														mdent41 CHAR(2) NULL,mdent42 CHAR(2) NULL,mdent43 CHAR(2) NULL,mdent44 CHAR(2) NULL,mdent45 CHAR(2) NULL,mdent46 CHAR(2) NULL,mdent47 CHAR(2) NULL,mdent48 CHAR(2) NULL, &
+														mdenta1 CHAR(2) NULL,mdenta2 CHAR(2) NULL,mdenta3 CHAR(2) NULL,mdenta4 CHAR(2) NULL, &
+														mdentb1 CHAR(2) NULL,mdentb2 CHAR(2) NULL,mdentb3 CHAR(2) NULL,mdentb4 CHAR(2) NULL, &
+														mdentc1 CHAR(2) NULL,mdentc2 CHAR(2) NULL,mdentc3 CHAR(2) NULL,mdentc4 CHAR(2) NULL, &
+														mdentd1 CHAR(2) NULL,mdentd2 CHAR(2) NULL,mdentd3 CHAR(2) NULL,mdentd4 CHAR(2) NULL, &
+														mdente1 CHAR(2) NULL,mdente2 CHAR(2) NULL,mdente3 CHAR(2) NULL,mdente4 CHAR(2) NULL, &
+														medica VARCHAR(200) NULL, &
+														mei BIT NULL, &
+														menarche VARCHAR(3) NULL, &
+														mhaas BIT NULL, &
+														mhyraxb BIT NULL, &
+														monson VARCHAR(50) NULL, &
+														moyers1 varchar(10) NULL, &
+														moyers2 varchar(10) NULL, &
+														moyers3 varchar(10) NULL, &
+														moyers4 varchar(10) NULL, &
+														mpendex BIT NULL, &
+														nance BIT NULL, &
+														normal BIT NULL, &
+														ob VARCHAR(10) NULL, &
+														ocant BIT NULL, &
+														ocbilaterale BIT NULL, &
+														ocdroit BIT NULL, &
+														ocgauche BIT NULL, &
+														ocmandibule VARCHAR(50) NULL, &
+														ocpost BIT NULL, &
+														oj VARCHAR(10) NULL, &
+														onycho BIT NULL, &
+														ouvmax VARCHAR(10) NULL, &
+														patient_id INTEGER NULL, &
+														phaas BIT NULL, &
+														phase VARCHAR(50) NULL, &
+														pipser BIT NULL, &
+														ppautre VARCHAR(200) NULL, &
+														ppendex BIT NULL, &
+														profil VARCHAR(30) NULL, &
+														pronostic VARCHAR(200) NULL, &
+														propling BIT NULL, &
+														rcoc VARCHAR(50) NULL, &
+														relcand VARCHAR(10) NULL, &
+														relcang VARCHAR(10) NULL, &
+														relmold VARCHAR(10) NULL, &
+														relmolg VARCHAR(10) NULL, &
+														relpred VARCHAR(10) NULL, &
+														relpreg VARCHAR(10) NULL, &
+														rendezvous1 VARCHAR(50) NULL, &
+														rendezvous2 VARCHAR(50) NULL, &
+														rendezvous3 VARCHAR(50) NULL, &
+														rendezvous4 VARCHAR(50) NULL, &
+														rendezvous5 VARCHAR(50) NULL, &
+														replilabio BIT NULL, &
+														respiration VARCHAR(30) NULL, &
+														restimport VARCHAR(50) NULL, &
+														rgd VARCHAR(50) NULL, &
+														spee VARCHAR(50) NULL, &
+														squelettique VARCHAR(200), &
+														succpouce VARCHAR(3) NULL, &
+														wilson VARCHAR(50) NULL, &
+														primary key(id_rapconsmiron))"
+														
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapcons_miron ADD hgocc BIT NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapcons_miron ADD hgcer BIT NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapcons_miron ADD menton BIT NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapcons_miron ADD forsus BIT NULL"
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapcons_miron ADD diasteme VARCHAR(10) NULL"
+			
+         ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapcons_miron ADD openlocked BIT NULL, &
+																									  ADD closelocked BIT NULL, &
+																									  ADD latedroite DECIMAL(5,2) NULL, &
+																									  ADD lategauche DECIMAL(5,2) NULL, &
+																									  ADD propulsion DECIMAL(5,2) NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.42'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 43 Then
+			
+			ls_vectsql = ls_vide
+			
+	      ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_rapcons_miron MODIFY squelettique VARCHAR(10000), &
+																									  MODIFY dentaire VARCHAR(10000), &
+																									  ADD atmautre2 VARCHAR(200) NULL"
+
+			ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_printers DROP UNIQUE (pname)"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.43'; 
+			commit using SQLCA;
+			
+		end if
+		
+		if long(ls_tab[3]) < 44 Then
+			
+			ls_vectsql = ls_vide
+			
+         ls_vectsql[upperbound(ls_vectsql)+1] = "ALTER TABLE t_options ADD openpat BIT NULL"
+			
+			open(iw_progressbar)
+			iw_progressbar.of_max(upperbound(ls_vectsql))
+			iw_progressbar.of_position(0)
+			for i = 1 to upperbound(ls_vectsql)
+				execute immediate :ls_vectsql[i] using sqlca;
+				if (SQLCA.sqlCode <> 0) then
+					FileWrite(li_FileNum, string(today()) + ',' + string(now()) + "," + SQLCA.SQLErrText)
+				end if
+				iw_progressbar.of_position(i)
+				yield()
+			next
+			close(iw_progressbar)
+			FileClose(li_FileNum)
+			update t_ver set vertable = '8.4.44'; 
+			commit using SQLCA;
+			
+		end if
+	end if
+	
+end if
+
+gf_updatetable2()
+end subroutine
+

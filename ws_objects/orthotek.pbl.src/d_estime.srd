@@ -1,0 +1,52 @@
+﻿$PBExportHeader$d_estime.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=100 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=status_id dbname="t_factest.status_id" )
+ column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=id_fact dbname="t_factest.id_fact" )
+ column=(type=date update=yes updatewhereclause=yes name=factdate dbname="t_factest.factdate" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=prixlab dbname="t_factest.prixlab" )
+ column=(type=long update=yes updatewhereclause=yes name=patient_id dbname="t_factest.patient_id" )
+ column=(type=long update=yes updatewhereclause=yes name=t_factest_id_estime dbname="t_factest.id_estime" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=t_factest_descrip dbname="t_factest.descrip" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=dent dbname="t_factest.dent" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=t_factest_prix dbname="t_factest.prix" )
+ column=(type=number update=yes updatewhereclause=yes name=traiter dbname="t_factest.traiter" values="	1/	0" )
+ column=(type=number update=yes updatewhereclause=yes name=flag dbname="t_factest.flag" )
+ column=(type=number update=yes updatewhereclause=yes name=imprimer dbname="t_factest.imprimer" values="	1/	0" )
+ retrieve="  SELECT t_factest.status_id,   
+         t_factest.id_fact,   
+         t_factest.factdate,   
+         t_factest.prixlab,   
+         t_factest.patient_id,
+         t_factest.id_estime,
+         t_factest.descrip,
+         t_factest.dent,
+         t_factest.prix,
+         t_factest.traiter,
+         t_factest.flag,
+         t_factest.imprimer  
+    FROM t_factest
+   WHERE t_factest.id_estime = :ra_estime  
+" update="t_factest" updatewhere=0 updatekeyinplace=no arguments=(("ra_estime", number)) )
+text(band=header alignment="0" text="Date de l'acte" border="0" color="33554432" x="137" y="4" height="64" width="361" html.valueishtml="0"  name=factdate_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Description" border="0" color="33554432" x="1125" y="0" height="64" width="297" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Dent" border="0" color="33554432" x="526" y="4" height="64" width="183" html.valueishtml="0"  name=dent_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Code d'acte" border="0" color="33554432" x="763" y="0" height="64" width="338" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Matériaux" border="0" color="33554432" x="2606" y="0" height="64" width="288" html.valueishtml="0"  name=prixlab_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Prix" border="0" color="33554432" x="2917" y="0" height="64" width="288" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Imp." border="0" color="0" x="3406" y="0" height="64" width="114" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Traité" border="0" color="33554432" x="3232" y="0" height="64" width="146" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=40 border="5" color="33554432" x="1125" y="4" height="76" width="1458" format="[general]" html.valueishtml="0"  name=t_factest_descrip visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=10 border="5" color="33554432" x="137" y="4" height="76" width="347" format="[general]" html.valueishtml="0"  name=factdate visible="1" editmask.mask="dd/mm/yyyy" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="0" tabsequence=20 border="5" color="33554432" x="503" y="4" height="76" width="242" format="[general]" html.valueishtml="0"  name=dent visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="0" tabsequence=30 border="5" color="33554432" x="763" y="4" height="76" width="338" format="[general]" html.valueishtml="0"  name=status_id visible="1" dddw.name=dddw_status dddw.displaycolumn=code dddw.datacolumn=status_id dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.imemode=0 dddw.vscrollbar=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="1" tabsequence=50 border="5" color="33554432" x="2606" y="4" height="76" width="288" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=prixlab visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=9 alignment="1" tabsequence=60 border="5" color="33554432" x="2917" y="4" height="76" width="288" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=t_factest_prix visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=12 alignment="0" tabsequence=80 border="0" color="33554432" x="3419" y="16" height="48" width="59" format="[general]" html.valueishtml="0"  name=imprimer visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="0" tabsequence=70 border="0" color="33554432" x="3282" y="16" height="44" width="59" format="[general]" html.valueishtml="0"  name=traiter visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

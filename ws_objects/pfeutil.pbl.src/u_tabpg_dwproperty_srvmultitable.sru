@@ -1,0 +1,19 @@
+﻿$PBExportHeader$u_tabpg_dwproperty_srvmultitable.sru
+$PBExportComments$Extension DataWindow Property - The Multitable service tabpage
+forward
+global type u_tabpg_dwproperty_srvmultitable from pro_u_tabpg_dwproperty_srvmultitable
+end type
+end forward
+
+global type u_tabpg_dwproperty_srvmultitable from pro_u_tabpg_dwproperty_srvmultitable
+end type
+global u_tabpg_dwproperty_srvmultitable u_tabpg_dwproperty_srvmultitable
+
+on u_tabpg_dwproperty_srvmultitable.create
+call pro_u_tabpg_dwproperty_srvmultitable::create
+end on
+
+on u_tabpg_dwproperty_srvmultitable.destroy
+call pro_u_tabpg_dwproperty_srvmultitable::destroy
+end on
+

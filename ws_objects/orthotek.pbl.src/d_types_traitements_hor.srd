@@ -1,0 +1,37 @@
+﻿$PBExportHeader$d_types_traitements_hor.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=78690504 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=type_traitement_id dbname="type_de_traitement.type_traitement_id" )
+ column=(type=char(40) updatewhereclause=yes name=nom_traitement dbname="type_de_traitement.nom_traitement" )
+ column=(type=long updatewhereclause=yes name=t_color_color dbname="t_color.color" )
+ column=(type=char(8) updatewhereclause=yes name=type_de_traitement_nip_traitement dbname="type_de_traitement.nip_traitement" )
+ column=(type=long updatewhereclause=yes name=type_de_traitement_ortho_id dbname="type_de_traitement.ortho_id" )
+ column=(type=char(1) updatewhereclause=yes name=type_de_traitement_doctortime1 dbname="type_de_traitement.doctortime1" )
+ column=(type=char(1) updatewhereclause=yes name=type_de_traitement_doctortime2 dbname="type_de_traitement.doctortime2" )
+ column=(type=char(1) updatewhereclause=yes name=type_de_traitement_doctortime3 dbname="type_de_traitement.doctortime3" )
+ column=(type=long updatewhereclause=yes name=type_de_traitement_orderapp dbname="type_de_traitement.orderapp" )
+ column=(type=long updatewhereclause=yes name=type_de_traitement_duree dbname="type_de_traitement.duree" )
+ retrieve="  SELECT type_de_traitement.type_traitement_id,   
+         type_de_traitement.nom_traitement,   
+         t_color.color,   
+         type_de_traitement.nip_traitement,   
+         type_de_traitement.ortho_id,
+			type_de_traitement.doctortime1,
+			type_de_traitement.doctortime2,
+			type_de_traitement.doctortime3,
+			type_de_traitement.orderapp,
+			type_de_traitement.duree
+    FROM type_de_traitement LEFT OUTER JOIN t_color ON t_color.color_id = type_de_traitement.color_id
+   WHERE type_de_traitement.ortho_id = :ra_ortho_id and
+			type_de_traitement.type_traitement_id > :ra_start
+ORDER BY type_de_traitement.orderapp ASC   
+" arguments=(("ra_ortho_id", number),("ra_start", number)) )
+compute(band=detail alignment="0" expression=" nom_traitement  + '( ' +  if ( isnull( type_de_traitement_duree ) , 0 ,  type_de_traitement_duree )+ ' )'"border="0" color="0" x="119" y="0" height="72" width="1810" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~t t_color_color " )
+column(band=detail id=6 alignment="0" tabsequence=10 border="0" color="0" x="1943" y="0" height="76" width="50" format="[general]" html.valueishtml="0"  name=type_de_traitement_doctortime1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=7 alignment="0" tabsequence=20 border="0" color="0" x="1998" y="0" height="76" width="50" format="[general]" html.valueishtml="0"  name=type_de_traitement_doctortime2 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="0" tabsequence=30 border="0" color="0" x="2053" y="0" height="76" width="50" format="[general]" html.valueishtml="0"  name=type_de_traitement_doctortime3 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

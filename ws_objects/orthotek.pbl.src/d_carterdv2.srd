@@ -1,0 +1,72 @@
+﻿$PBExportHeader$d_carterdv2.srd
+release 10.5;
+datawindow(units=2 timer_interval=0 color=1073741824 processing=2 HTMLDW=no print.printername="" print.documentname="Carte rdv" print.orientation = 0 print.margin.left = 0 print.margin.right = 0 print.margin.top = 0 print.margin.bottom = 0 print.paper.source = 8 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=no hidegrayline=no label.name="Laser-A4 Address & 3-1/2 Disk L7164" label.width=4250 label.height=5500 label.rows=1 label.rows.spacing=0 label.columns=1 label.columns.spacing=0 label.topdown=yes label.sheet=yes label.shape=roundrectangle label.ellipse_height=447 label.ellipse_width=447 )
+detail(height=5500 color="536870912" )
+table(column=(type=char(50) update=yes updatewhereclause=yes name=patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(20) updatewhereclause=yes name=patient_langue dbname="patient.langue" )
+ column=(type=date updatewhereclause=yes name=t_rdv_rdvdate dbname="t_rdv.rdvdate" )
+ column=(type=time updatewhereclause=yes name=t_rdv_rdvheure dbname="t_rdv.rdvheure" )
+ column=(type=long updatewhereclause=yes name=t_rdv_duree dbname="t_rdv.duree" )
+ column=(type=long updatewhereclause=yes name=t_rdv_typetraitid dbname="t_rdv.typetraitid" )
+ column=(type=char(100) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=char(15) updatewhereclause=yes name=ortho_id_dr_tel_bur dbname="ortho_id.dr_tel_bur" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_adresse dbname="ortho_id.dr_adresse" )
+ column=(type=char(50) updatewhereclause=yes name=ortho_id_dr_ville_province_code_postale dbname="ortho_id.dr_ville_province_code_postale" )
+ column=(type=char(255) updatewhereclause=yes name=ortho_id_site_web dbname="ortho_id.site_web" )
+ column=(type=long updatewhereclause=yes name=hor_step dbname="hor_step" )
+ column=(type=decimal(0) updatewhereclause=yes name=suppduretiqrdv dbname="suppduretiqrdv" )
+ column=(type=char(50) updatewhereclause=yes name=salutation dbname="salutation" )
+ retrieve="  SELECT patient.patient_nom,   
+         patient.patient_prenom,
+			patient.langue, 
+         t_rdv.rdvdate,   
+         t_rdv.rdvheure,
+			t_rdv.duree,
+			t_rdv.typetraitid,
+			ortho_id.dr_nom_complet,
+			ortho_id.dr_tel_bur,
+			ortho_id.dr_adresse,
+			ortho_id.dr_ville_province_code_postale,
+			ortho_id.site_web,
+			(select hor_step from t_options where ortho_id = ortho_id.ortho_id) as hor_step,
+			(select isnull(suppduretiqrdv, 0) from t_options where ortho_id = ortho_id.ortho_id) as suppduretiqrdv,
+			(select salutation from t_salutation where patient.id_sal = t_salutation.id_sal) as salutation
+    FROM patient inner join t_rdv on patient.patient_id = t_rdv.patient_id
+					  inner join ortho_id on patient.no_ortho = ortho_id.ortho_id
+	WHERE ortho_id.ortho_id = :ra_orthoid AND
+			patient.patient_id = :ra_patient AND  
+         t_rdv.rdvdate > today() AND
+			isnull(t_rdv.rdvetat, '') not in ('c','m')  
+ORDER BY t_rdv.rdvdate ASC,   
+         t_rdv.rdvheure ASC   
+" arguments=(("ra_orthoid", number),("ra_patient", number)) )
+bitmap(band=detail filename="" x="427" y="93" height="1135" width="3052" border="0"  name=p_logo visible="1" )
+compute(band=detail alignment="0" expression="if (  patient_langue = 'A' , 'Phone: ' , 'Tél.: ' )"border="0" color="0" x="208" y="4645" height="166" width="479" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Date:" border="0" color="0" x="250" y="2531" height="166" width="510" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Heure:~tif (  patient_langue = 'F' , ~"Heure:~", ~"Hour:~")" border="0" color="0" x="250" y="2802" height="166" width="510" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Traitement:~tif (  patient_langue = 'F' , ~"Traitement:~", ~"Treatment:~")" border="0" color="0" x="250" y="3364" height="166" width="677" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Durée:~tif (  patient_langue = 'F' , ~"Durée:~", ~"Length:~")" border="0" color="0" x="250" y="3083" height="166" width="510" html.valueishtml="0"  name=t_4 visible="1~t1 - suppduretiqrdv"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="197" y="4010" height="166" width="3062" format="[general]" html.valueishtml="0"  name=ortho_id_dr_nom_complet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="0" font.pitch="0" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="708" y="4656" height="156" width="2541" format="[general]" html.valueishtml="0"  name=ortho_id_dr_tel_bur visible="1" editmask.mask="(XXX) XXX-XXXX" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="0" font.pitch="0" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Carte de rendez-vous~tif (  patient_langue = 'F' , ~"Carte de rendez-vous~", ~"Appointment card~")" border="0" color="0" x="177" y="1625" height="166" width="3218" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="2" background.color="16777215" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="197" y="4197" height="166" width="3239" format="[general]" html.valueishtml="0"  name=ortho_id_dr_adresse visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="0" font.pitch="0" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="197" y="4395" height="166" width="3229" format="[general]" html.valueishtml="0"  name=ortho_id_dr_ville_province_code_postale visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="0" font.pitch="0" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="208" y="4864" height="166" width="3229" format="[general]" html.valueishtml="0"  name=ortho_id_site_web visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="0" font.pitch="0" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="1041" y="2812" height="166" width="750" format="[time]" html.valueishtml="0"  name=t_rdv_rdvheure visible="1" editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="1041" y="3364" height="166" width="2447" format="[general]" html.valueishtml="0"  name=t_rdv_typetraitid visible="1" dddw.name=dddw_typetraitnom dddw.displaycolumn=nom_traitement dddw.datacolumn=type_traitement_id dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="400"  font.family="0" font.pitch="0" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="( t_rdv_duree  *  hor_step ) + ' mins.'"border="0" color="0" x="1041" y="3093" height="166" width="1187" format="[GENERAL]" html.valueishtml="0"  name=compute_5 visible="1~t1 - suppduretiqrdv"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if (  patient_langue = 'F' , case(dayNumber(t_rdv_rdvdate) when 1 then 'Dimanche' when 2 then 'Lundi' when 3 then 'Mardi' when 4 then 'Mercredi' when 5 then 'Jeudi' when 6 then 'Vendredi' when 7 then 'Samedi') + ' ' + string(t_rdv_rdvdate, 'dd') + ' ' + case(month(t_rdv_rdvdate) when 1 then 'janvier' when 2 then 'février' when 3 then 'mars' when 4 then 'avril' when 5 then 'mai' when 6 then 'juin' when 7 then 'juillet' when 8 then 'août' when 9 then 'septembre' when 10 then 'octobre' when 11 then 'novembre' when 12 then 'décembre') + ', ' + string(t_rdv_rdvdate, 'yy'), dayName( t_rdv_rdvdate ) + ', ' + string( t_rdv_rdvdate, 'mmmm' ) + ' ' + day( t_rdv_rdvdate) + ', ' + year( t_rdv_rdvdate ) )"border="0" color="0" x="1041" y="2541" height="166" width="2395" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Patient:" border="0" color="0" x="250" y="2062" height="166" width="510" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression=" patient_nom + ' ' +  patient_patient_prenom "border="0" color="0" x="1041" y="2062" height="197" width="2395" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

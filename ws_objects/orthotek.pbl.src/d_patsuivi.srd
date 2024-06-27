@@ -1,0 +1,61 @@
+﻿$PBExportHeader$d_patsuivi.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=820 color="536870912" )
+summary(height=92 color="536870912" )
+footer(height=64 color="536870912" )
+detail(height=60 color="536870912" )
+table(column=(type=date updatewhereclause=yes name=t_rdv_daterdv dbname="t_rdv.daterdv" )
+ column=(type=long updatewhereclause=yes name=t_rdv_patid dbname="t_rdv.patid" )
+ column=(type=long updatewhereclause=yes name=nbcomm dbname="nbcomm" )
+ column=(type=decimal(2) updatewhereclause=yes name=totfact dbname="totfact" )
+ column=(type=decimal(2) updatewhereclause=yes name=totcouttrait dbname="totcouttrait" )
+ column=(type=decimal(2) updatewhereclause=yes name=totpaie dbname="totpaie" )
+ retrieve="SELECT 	t_rdv.rdvdate AS daterdv,
+			t_rdv.patient_id AS patid,
+			(IF EXISTS(SELECT *  FROM t_rdv INNER JOIN type_de_traitement ON t_rdv.typetraitid = type_de_traitement.type_traitement_id
+										WHERE t_rdv.rdvdate > daterdv AND
+												t_rdv.patient_id = patid AND
+												type_de_traitement.typetrait <> 1) THEN 1 ELSE 0 ENDIF) AS nbcomm,
+			(SELECT sum(montant) from 	factures_traitements INNER JOIN traitements ON factures_traitements.traitement_id = traitements.traitement_id
+																			INNER JOIN patient ON patient.patient_id = traitements.patient_id
+										where date_facture between :ra_debut AND :ra_fin AND
+												patient.no_ortho = :ra_orthoid) as totfact,
+			(SELECT sum(montant_original) FROM 	traitements INNER JOIN patient ON patient.patient_id = traitements.patient_id 
+													WHERE	debut_traitement BETWEEN :ra_debut AND :ra_fin AND
+															patient.no_ortho = :ra_orthoid) AS totcouttrait,
+			(SELECT sum(montant_recu) 	FROM 	paiement 	INNER JOIN traitements ON paiement.traitement_patient_id = traitements.traitement_id
+																	INNER JOIN patient ON patient.patient_id = traitements.patient_id
+												WHERE	date_paiement BETWEEN :ra_debut AND :ra_fin AND
+														patient.no_ortho = :ra_orthoid) as totpaie
+FROM 		t_rdv INNER JOIN type_de_traitement ON t_rdv.typetraitid = type_de_traitement.type_traitement_id
+WHERE 	t_rdv.rdvdate BETWEEN :ra_debut AND :ra_fin AND
+			type_de_traitement.typetrait = 1 AND
+			type_de_traitement.ortho_id = :ra_orthoid;
+" arguments=(("ra_orthoid", number),("ra_debut", date),("ra_fin", date)) )
+compute(band=header alignment="0" expression="sum( nbcomm for all)"border="0" color="0" x="905" y="448" height="64" width="311" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Du" border="0" color="0" x="14" y="188" height="64" width="101" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=header alignment="0" expression="ra_debut"border="0" color="0" x="137" y="188" height="64" width="338" format="[shortdate]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="au" border="0" color="0" x="512" y="188" height="64" width="101" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=header alignment="0" expression="ra_fin"border="0" color="0" x="635" y="188" height="64" width="338" format="[shortdate]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Suivi des patients" border="0" color="8388608" x="9" y="24" height="92" width="3182" html.valueishtml="0"  name=t_title visible="1"  font.face="Arial" font.height="-14" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Procédure" border="0" color="8388608" x="5" y="732" height="64" width="841" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Nb. de patient" border="0" color="8388608" x="841" y="732" height="64" width="841" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Nb. de consultation:" border="0" color="8388608" x="37" y="340" height="64" width="841" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Nb. de consultation commencé:" border="0" color="8388608" x="37" y="448" height="64" width="841" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="count(t_rdv_patid for all)"border="0" color="0" x="905" y="340" height="64" width="311" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Total facturé:" border="0" color="8388608" x="1522" y="340" height="64" width="745" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Total du coût de traitement:" border="0" color="8388608" x="1522" y="452" height="64" width="745" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Total encaissé:" border="0" color="8388608" x="1522" y="552" height="64" width="745" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Imprimé le: " border="0" color="0" x="9" y="4" height="56" width="320" html.valueishtml="0"  name=t_printon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="343" y="4" height="56" width="343" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=footer alignment="2" text="© Orthotek" border="0" color="0" x="1298" y="4" height="56" width="599" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2519" y="4" height="56" width="686" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=header id=4 alignment="1" tabsequence=32766 border="0" color="0" x="2290" y="340" height="64" width="311" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=totfact visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=header id=5 alignment="1" tabsequence=32766 border="0" color="0" x="2290" y="452" height="64" width="311" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=totcouttrait visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=header id=6 alignment="1" tabsequence=32766 border="0" color="0" x="2290" y="552" height="64" width="311" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=totpaie visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

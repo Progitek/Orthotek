@@ -1,0 +1,46 @@
+﻿$PBExportHeader$d_listenoboite.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.printername="" print.documentname="Liste des numeros dossiers" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=252 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=56 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=date updatewhereclause=yes name=patient_date_naissance dbname="patient.date_naissance" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(20) updatewhereclause=yes name=patient_numret dbname="patient.numret" )
+ column=(type=long updatewhereclause=yes identity=yes name=patient_patient_id dbname="patient.patient_id" )
+ column=(type=char(15) updatewhereclause=yes name=noboite dbname="patient.no_boite" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ retrieve="  SELECT patient.date_naissance ,
+		   patient.patient_nom ,
+		   patient.patient_prenom ,
+		   patient.numret ,
+		   patient.patient_id ,
+		   patient.no_boite ,
+			ortho_id.dr_nom_complet    
+	 FROM ortho_id INNER JOIN patient ON ortho_id.ortho_id = patient.no_ortho   
+	WHERE	ortho_id.ortho_id = :ra_no_ortho and
+			patient.no_boite is not null
+ORDER BY patient.patient_nom ASC,
+		   patient.patient_prenom ASC  " arguments=(("ra_no_ortho", number)) )
+text(band=header alignment="0" text="Liste des numéro de boîte pour :" border="0" color="8388608" x="261" y="20" height="80" width="1239" html.valueishtml="0"  name=t_title visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=7 alignment="0" tabsequence=32766 border="0" color="8388608" x="1504" y="20" height="80" width="1851" format="[general]" html.valueishtml="0"  name=ortho_id_dr_nom_complet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="# ret" border="0" color="0" x="2789" y="184" height="64" width="562" html.valueishtml="0"  name=t_numret visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="# boîte" border="0" color="0" x="2217" y="184" height="64" width="562" html.valueishtml="0"  name=t_noboite visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+button(band=header text="# ret" filename="" enabled=yes action="0" border="0" color="0" x="2779" y="180" height="72" width="585" vtextalign="0" htextalign="0"  name=b_numret visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Nom du patient" border="0" color="0" x="37" y="184" height="64" width="2181" html.valueishtml="0"  name=t_patnom visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+button(band=header text="Nom du patient" filename="" enabled=yes action="0" border="0" color="0" x="23" y="180" height="72" width="2194" vtextalign="0" htextalign="0"  name=b_patnom visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=header text="# boîte" filename="" enabled=yes action="0" border="0" color="0" x="2217" y="180" height="72" width="562" vtextalign="0" htextalign="0"  name=b_noboite visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="2784" y="0" height="68" width="571" format="[general]" html.valueishtml="0"  name=patient_numret visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+column(band=detail id=6 alignment="2" tabsequence=32766 border="0" color="0" x="2217" y="0" height="68" width="567" format="[general]" html.valueishtml="0"  name=noboite visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+compute(band=detail alignment="0" expression="patient_patient_nom + ' ' + patient_patient_prenom "border="0" color="0" x="23" y="0" height="68" width="2194" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( mod( getrow() , 2 ) = 0 , rgb(220,220,220) , -1 )" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="247" y="0" height="56" width="334" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="© Orthotek" border="0" color="0" x="1545" y="0" height="56" width="270" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Imprimé le " border="0" color="0" x="9" y="0" height="56" width="229" html.valueishtml="0"  name=t_printedon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2587" y="0" height="56" width="773" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

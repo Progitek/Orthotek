@@ -1,0 +1,15 @@
+﻿$PBExportHeader$d_comptes_clients1.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=char(25) updatewhereclause=yes name=patient_patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(25) updatewhereclause=yes name=patient_patient_nom dbname="patient.patient_nom" )
+ column=(type=long updatewhereclause=yes key=yes identity=yes name=traitements_traitement_id dbname="traitements.traitement_id" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=traitements_montant_du_periode dbname="traitements.montant_du_periode" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"patient~" )  TABLE(NAME=~"traitements~" ) COLUMN(NAME=~"patient.patient_prenom~") COLUMN(NAME=~"patient.patient_nom~") COLUMN(NAME=~"traitements.traitement_id~") COLUMN(NAME=~"traitements.montant_du_periode~")    JOIN (LEFT=~"patient.patient_id~"    OP =~"=~"RIGHT=~"traitements.patient_id~" )WHERE(    EXP1 =~"( ~~~"patient~~~".~~~"no_ortho~~~"~"   OP =~"=~"    EXP2 =~":ra_ortho_id )~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"( ~~~"traitements~~~".~~~"frais~~~"~"   OP =~">~"    EXP2 =~"0 )~" ) ) ORDER(NAME=~"patient.patient_nom~" ASC=yes )  ORDER(NAME=~"patient.patient_prenom~" ASC=yes ) ARG(NAME = ~"ra_ortho_id~" TYPE = number) " update="traitements" updatewhere=1 updatekeyinplace=no arguments=(("ra_ortho_id", number)) )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="0" x="27" y="12" height="64" width="366" format="#,##0.00 $; (#,##0.00 $)"  name=traitements_montant_du_periode edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="411" y="12" height="64" width="791" format="[general]"  name=traitements_traitement_id edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

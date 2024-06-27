@@ -1,0 +1,40 @@
+﻿$PBExportHeader$d_lettrefusimp.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=2448 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=lligne1 dbname="lligne1" )
+ column=(type=long updatewhereclause=yes name=lligne2 dbname="lligne2" )
+ column=(type=long updatewhereclause=yes name=lligne3 dbname="lligne3" )
+ column=(type=long updatewhereclause=yes name=lligne4 dbname="lligne4" )
+ column=(type=long updatewhereclause=yes name=lligne5 dbname="lligne5" )
+ column=(type=long updatewhereclause=yes name=lligne6 dbname="lligne6" )
+ column=(type=long updatewhereclause=yes name=lligne7 dbname="lligne7" )
+ column=(type=long updatewhereclause=yes name=lligne8 dbname="lligne8" )
+ column=(type=long updatewhereclause=yes name=lligne9 dbname="lligne9" )
+ column=(type=long updatewhereclause=yes name=lligne10 dbname="lligne10" )
+ retrieve="select 
+    (select ligne1 from t_lettrepat where id_lettre = :ra_idlettre) as lligne1,
+    (select ligne2 from t_lettrepat where id_lettre = :ra_idlettre) as lligne2,
+    (select ligne3 from t_lettrepat where id_lettre = :ra_idlettre) as lligne3,
+	 (select ligne4 from t_lettrepat where id_lettre = :ra_idlettre) as lligne4,
+	 (select ligne5 from t_lettrepat where id_lettre = :ra_idlettre) as lligne5,
+	 (select ligne6 from t_lettrepat where id_lettre = :ra_idlettre) as lligne6,
+	 (select ligne7 from t_lettrepat where id_lettre = :ra_idlettre) as lligne7,
+	 (select ligne8 from t_lettrepat where id_lettre = :ra_idlettre) as lligne8,
+	 (select ligne9 from t_lettrepat where id_lettre = :ra_idlettre) as lligne9,
+	 (select ligne10 from t_lettrepat where id_lettre = :ra_idlettre) as lligne10
+from t_lettrepat" arguments=(("ra_idlettre", number)) )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="14" y="4" height="76" width="1586" format="[general]" html.valueishtml="0"  name=lligne1 visible="1" dddw.name=dddw_ligne dddw.displaycolumn=texte dddw.datacolumn=id_ligne dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="14" y="220" height="76" width="1586" format="[general]" html.valueishtml="0"  name=lligne2 visible="1" dddw.name=dddw_ligne dddw.displaycolumn=texte dddw.datacolumn=id_ligne dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="14" y="368" height="76" width="1586" format="[general]" html.valueishtml="0"  name=lligne3 visible="1" dddw.name=dddw_ligne dddw.displaycolumn=texte dddw.datacolumn=id_ligne dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="14" y="664" height="308" width="2373" format="[general]" html.valueishtml="0"  name=lligne5 visible="1" dddw.name=dddw_ligne dddw.displaycolumn=texte dddw.datacolumn=id_ligne dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="14" y="984" height="308" width="2373" format="[general]" html.valueishtml="0"  name=lligne6 visible="1" dddw.name=dddw_ligne dddw.displaycolumn=texte dddw.datacolumn=id_ligne dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="14" y="1304" height="308" width="2373" format="[general]" html.valueishtml="0"  name=lligne7 visible="1" dddw.name=dddw_ligne dddw.displaycolumn=texte dddw.datacolumn=id_ligne dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="33554432" x="14" y="1624" height="308" width="2373" format="[general]" html.valueishtml="0"  name=lligne8 visible="1" dddw.name=dddw_ligne dddw.displaycolumn=texte dddw.datacolumn=id_ligne dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="33554432" x="14" y="516" height="76" width="1586" format="[general]" html.valueishtml="0"  name=lligne4 visible="1" dddw.name=dddw_ligne dddw.displaycolumn=texte dddw.datacolumn=id_ligne dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="33554432" x="23" y="1976" height="76" width="1586" format="[general]" html.valueishtml="0"  name=lligne9 visible="1" dddw.name=dddw_ligne dddw.displaycolumn=texte dddw.datacolumn=id_ligne dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="33554432" x="23" y="2084" height="76" width="1586" format="[general]" html.valueishtml="0"  name=lligne10 visible="1" dddw.name=dddw_ligne dddw.displaycolumn=texte dddw.datacolumn=id_ligne dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

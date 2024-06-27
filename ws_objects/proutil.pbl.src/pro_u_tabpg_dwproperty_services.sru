@@ -1,0 +1,40 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_services.sru
+$PBExportComments$(PRO) DataWindow Property - The services tabpage
+forward
+global type pro_u_tabpg_dwproperty_services from pfc_u_tabpg_dwproperty_services
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_services from pfc_u_tabpg_dwproperty_services
+end type
+global pro_u_tabpg_dwproperty_services pro_u_tabpg_dwproperty_services
+
+on pro_u_tabpg_dwproperty_services.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_services.destroy
+call super::destroy
+end on
+
+type dw_services from pfc_u_tabpg_dwproperty_services`dw_services within pro_u_tabpg_dwproperty_services
+end type
+
+type st_servicesavailable from pfc_u_tabpg_dwproperty_services`st_servicesavailable within pro_u_tabpg_dwproperty_services
+end type
+
+type cb_property from pfc_u_tabpg_dwproperty_services`cb_property within pro_u_tabpg_dwproperty_services
+end type
+
+type cb_enable from pfc_u_tabpg_dwproperty_services`cb_enable within pro_u_tabpg_dwproperty_services
+end type
+
+type cb_disable from pfc_u_tabpg_dwproperty_services`cb_disable within pro_u_tabpg_dwproperty_services
+end type
+
+type mle_description from pfc_u_tabpg_dwproperty_services`mle_description within pro_u_tabpg_dwproperty_services
+end type
+
+type gb_description from pfc_u_tabpg_dwproperty_services`gb_description within pro_u_tabpg_dwproperty_services
+end type
+

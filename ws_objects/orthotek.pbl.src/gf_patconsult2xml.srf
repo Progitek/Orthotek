@@ -1,0 +1,211 @@
+﻿$PBExportHeader$gf_patconsult2xml.srf
+global type gf_patconsult2xml from function_object
+end type
+
+forward prototypes
+global subroutine gf_patconsult2xml (long al_patid, long al_sujet, string as_intro, string as_concl, integer ai_type)
+end prototypes
+
+global subroutine gf_patconsult2xml (long al_patid, long al_sujet, string as_intro, string as_concl, integer ai_type);integer i, j, li_nbdentscad, li_FileNum,li_result,li_pos
+string ls_plandesc,ls_plantraitdesc,ls_catplanscat,ls_catplanscatprec = ''
+string ls_texte,ls_imgpath,ls_tmp, ls_fontline, ls_odonto, ls_descav, ls_descap
+string ls_dent[8, 8], ls_fontname, ls_langue
+long ll_fontsize, ll_idcontact,ll_iddentist, ll_pos1, ll_pos2
+ls_texte = ""
+n_cst_fusion luo_fusion
+
+if al_patid > 0 then
+	// Obtenir le numéro du contact
+	select id_contact, patient.id_dentist into :ll_idcontact, :ll_iddentist from patient where patient_id = :al_patid;
+	if ai_type = 1 then
+		select ucase(left(det_langue,1)) into :ls_langue from t_dentists where t_dentists.id_dentist = :ll_iddentist;
+	else
+		select ucase(left(langue,1)) into :ls_langue from patient where patient.patient_id = :al_patid;		
+	end if
+	
+	li_FileNum = FileOpen("C:\ii4net\orthotek\img.html",LineMode!, Write!, LockWrite!, Replace!)
+	
+	select fontname, fontsize into :ls_fontname, :ll_fontsize from t_options where ortho_id = :v_no_ortho;
+	
+	ls_fontline = "<font face=~""
+	if isnull(ls_fontname) or ls_fontname = "" then 
+		ls_fontline += "Times New Roman~" size=~""
+	else
+		ls_fontline += ls_fontname + "~" size=~""
+	end if
+	if isnull(ll_fontsize) then ll_fontsize = 3
+	if ll_fontsize < 1 or ll_fontsize > 7 then
+		ls_fontline += "3~">"
+	else
+		ls_fontline += string(ll_fontsize) + "~">"
+	end if
+	
+	ls_texte += "<!DOCTYPE html PUBLIC ~"-//IETF//DTD HTML 2.0//EN~">~r~n"
+	ls_texte += "<html>~r~n<head>~r~n</head>~r~n<body>~r~n" + ls_fontline + "~r~n<dl>"
+	// introduction
+	ls_tmp = as_intro
+	do while match(ls_tmp,'~r~n')
+		li_pos = pos(ls_tmp,'~r~n')
+		ls_tmp = replace(ls_tmp,li_pos,2,'<br>')
+	loop
+	ls_texte += ls_tmp + '<br>'
+	ls_tmp = ''
+	
+	// fetch
+
+	DECLARE listdesc CURSOR FOR
+		select if :ls_langue = 'A' then 
+				 	 if :ai_type = 1 then 
+						 isnull(t_plans.descriptionan,'') 
+					 else
+						 isnull(t_plans.descruseran,'')
+					 endif
+				 else 
+					if :ai_type = 1 then
+						isnulL(t_plans.description,'') 
+					else
+						isnull(t_plans.descruserfr,'')
+					endif
+			    endif,
+			 	 isnull(t_plantrait.description,''),
+			 	 if :ls_langue = 'A' then t_catplans.catan else t_catplans.categorie endif
+	  from t_plans INNER JOIN t_plantrait ON t_plans.id_plan = t_plantrait.id_plan
+						INNER JOIN t_catplans ON t_plans.id_catplan = t_catplans.id_catplan,
+			 t_catplans INNER JOIN t_sujets ON t_catplans.id_sujet = t_sujets.id_sujet,
+			 patient INNER JOIN t_plantrait ON t_plantrait.patient_id = patient.patient_id
+	 where t_catplans.id_sujet = :al_sujet and
+			 t_plantrait.patient_id = :al_patid and
+			 t_plantrait.present = 1 and
+			 t_catplans.word = 1
+	order by t_catplans.ordre asc, t_plans.ordre asc;
+	
+	OPEN listdesc;
+	
+	FETCH  listdesc into  :ls_plandesc,
+								 :ls_plantraitdesc,
+								 :ls_catplanscat;
+	
+	DO WHILE SQLCA.SQLCode = 0
+			
+		if ls_catplanscatprec <> ls_catplanscat then
+			// inscrire la nouvelle categorie
+			ls_texte += "<br><dt><b>"+luo_fusion.of_fusion(ls_catplanscat, ll_idcontact, 0)+"</b></dt>"
+			ls_catplanscatprec = ls_catplanscat
+		end if
+		if isnull(ls_plandesc) then ls_plandesc = ""
+		if isnull(ls_plantraitdesc) then ls_plantraitdesc = ""
+		if match(ls_plantraitdesc, "<<[0-9 ,]+>>") then
+			ll_pos1 = pos(ls_plantraitdesc, "<<")
+			ll_pos2 = pos(ls_plantraitdesc, ">>", ll_pos1)
+			
+			ls_odonto = mid(ls_plantraitdesc, ll_pos1 + 2, (ll_pos2 - ll_pos1) - 2)
+			
+			ls_descav = left(ls_plantraitdesc, ll_pos1 - 1)
+			ls_descap = mid(ls_plantraitdesc, ll_pos2 + 2)
+			
+			ls_texte += "<dd>"+luo_fusion.of_fusion(ls_plandesc, ll_idcontact, 0) + " "
+			
+			// Description avant
+			if ls_descav <> "" then
+				ls_texte += ls_descav
+			end if
+			
+			// Liste des dents présentes dand l'odontogramme
+			for i = 1 to 8
+				if i <= 4 then li_nbdentscad = 8 else li_nbdentscad = 5
+				for j = 1 to li_nbdentscad
+					if match(ls_odonto, string(i) + string(j)) then ls_dent[i, j] = string(i) + string(j) else ls_dent[i, j] = ''
+				next
+			next
+			
+			ls_texte += "<br><table border=0><tr><td>"+ls_dent[1,8]+ &
+													"</td><td>"+ls_dent[1,7]+ &
+													"</td><td>"+ls_dent[1,6]+ &
+													"</td><td>"+ls_dent[1,5]+ &
+													"</td><td>"+ls_dent[1,4]+ &
+													"</td><td>"+ls_dent[1,3]+ &
+													"</td><td>"+ls_dent[1,2]+ &
+													"</td><td>"+ls_dent[1,1]+ &
+													"</td><td>"+ls_dent[2,1]+ &
+													"</td><td>"+ls_dent[2,2]+ &
+													"</td><td>"+ls_dent[2,3]+ &
+													"</td><td>"+ls_dent[2,4]+ &
+													"</td><td>"+ls_dent[2,5]+ &
+													"</td><td>"+ls_dent[2,6]+ &
+													"</td><td>"+ls_dent[2,7]+ &
+													"</td><td>"+ls_dent[2,8]+ &
+						"</td></tr>~r~n<tr><td colspan=16><hr></td></tr><tr><td>"+ls_dent[4,8]+ &
+													"</td><td>"+ls_dent[4,7]+ &
+													"</td><td>"+ls_dent[4,6]+ &
+													"</td><td>"+ls_dent[4,5]+ &
+													"</td><td>"+ls_dent[4,4]+ &
+													"</td><td>"+ls_dent[4,3]+ &
+													"</td><td>"+ls_dent[4,2]+ &
+													"</td><td>"+ls_dent[4,1]+ &
+													"</td><td>"+ls_dent[3,1]+ &
+													"</td><td>"+ls_dent[3,2]+ &
+													"</td><td>"+ls_dent[3,3]+ &
+													"</td><td>"+ls_dent[3,4]+ &
+													"</td><td>"+ls_dent[3,5]+ &
+													"</td><td>"+ls_dent[3,6]+ &
+													"</td><td>"+ls_dent[3,7]+ &
+													"</td><td>"+ls_dent[3,8]+"</td></tr>"
+			
+			if pos(ls_odonto,',') > 0 then
+				ls_texte += "<tr><td><br></td></tr><tr><td></td><td></td><td></td><td>"+ls_dent[5,5]+ &
+															"</td><td>"+ls_dent[5,4]+ &
+															"</td><td>"+ls_dent[5,3]+ &
+															"</td><td>"+ls_dent[5,2]+ &
+															"</td><td>"+ls_dent[5,1]+ &
+															"</td><td>"+ls_dent[6,1]+ &
+															"</td><td>"+ls_dent[6,2]+ &
+															"</td><td>"+ls_dent[6,3]+ &
+															"</td><td>"+ls_dent[6,4]+ &
+															"</td><td>"+ls_dent[6,5]+ &
+						"</td><td></td><td></td><td></td></tr>~r~n<tr><td></td><td></td><td></td><td colspan=10><hr></td></tr>"+ &
+						"<tr><td></td><td></td><td></td><td>"+ls_dent[8,5]+ &
+															"</td><td>"+ls_dent[8,4]+ &
+															"</td><td>"+ls_dent[8,3]+ &
+															"</td><td>"+ls_dent[8,2]+ &
+															"</td><td>"+ls_dent[8,1]+ &
+															"</td><td>"+ls_dent[7,1]+ &
+															"</td><td>"+ls_dent[7,2]+ &
+															"</td><td>"+ls_dent[7,3]+ &
+															"</td><td>"+ls_dent[7,4]+ &
+															"</td><td>"+ls_dent[7,5]+"</td><td></td><td></td><td></td></tr>"
+			end if
+			ls_texte += "</table>"
+			
+			// Description après
+			if ls_descap <> "" then
+				ls_texte += "<br>" + ls_descap
+			end if
+			
+			ls_texte += "</dd>"
+		else
+			ls_texte += "<dd>"+luo_fusion.of_fusion(ls_plandesc, ll_idcontact, 0)+ " " +ls_plantraitdesc+"</dd>"
+		end if
+		FETCH  listdesc into  :ls_plandesc,
+									 :ls_plantraitdesc,
+									 :ls_catplanscat;
+	LOOP
+	
+	CLOSE listdesc;
+
+	// conclusion 
+	ls_tmp = as_concl
+	do while match(ls_tmp,'~r~n')
+		li_pos = pos(ls_tmp,'~r~n')
+		ls_tmp = replace(ls_tmp,li_pos,2,'<br>')
+	loop
+	ls_texte += "</dl><br>"+ls_tmp+"~r~n</font>~r~n</body>~r~n</html>"
+	ls_tmp = ''
+	// write file
+	li_result = FileWrite(li_FileNum, ls_texte)
+	if not li_result > 0 then
+		error_type(0)
+	end if
+	FileClose(li_FileNum)
+end if
+end subroutine
+

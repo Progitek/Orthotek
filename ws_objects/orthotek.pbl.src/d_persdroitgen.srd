@@ -1,0 +1,39 @@
+﻿$PBExportHeader$d_persdroitgen.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=1780 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=id_personnel dbname="t_personneldroit.id_personnel" )
+ column=(type=number update=yes updatewhereclause=yes name=contacts dbname="t_personneldroit.contacts" values="Désactiver la liste des contacts	1/Désactiver la liste des contacts	0" )
+ column=(type=number update=yes updatewhereclause=yes name=horaire dbname="t_personneldroit.horaire" values="Désactiver la grille des rendez vous	1/Désactiver la grille des rendez vous	0" )
+ column=(type=number update=yes updatewhereclause=yes name=typetrait dbname="t_personneldroit.typetrait" values="Désactiver type de traitement	1/Désactiver type de traitement	0" )
+ column=(type=number update=yes updatewhereclause=yes name=gestpers dbname="t_personneldroit.gestpers" values="Désactiver la gestion du personnel	1/Désactiver la gestion du personnel	0" )
+ column=(type=number update=yes updatewhereclause=yes name=expacomba dbname="t_personneldroit.expacomba" values="Désactiver l'exportation vers acomba	1/Désactiver l'exportation vers acomba	0" )
+ column=(type=number update=yes updatewhereclause=yes name=logsm dbname="t_personneldroit.logsm" values="Désactiver l'accès au logs	1/Désactiver l'accès au logs	0" )
+ column=(type=number update=yes updatewhereclause=yes name=optionsm dbname="t_personneldroit.optionsm" values="Désactiver l'accès au options	1/Désactiver l'accès au options	0" )
+ column=(type=number update=yes updatewhereclause=yes name=supprpaie dbname="t_personneldroit.supprpaie" values="Désactiver la suppression de paiements	1/Désactiver la suppression de paiements	0" )
+ retrieve="  SELECT t_personneldroit.id_personnel,   
+         t_personneldroit.contacts,   
+         t_personneldroit.horaire,   
+         t_personneldroit.typetrait,   
+         t_personneldroit.gestpers,   
+         t_personneldroit.expacomba,
+			t_personneldroit.logsm,
+			t_personneldroit.optionsm,
+			t_personneldroit.supprpaie
+    FROM t_personneldroit
+	WHERE t_personneldroit.id_personnel = :ra_persid" update="t_personneldroit" updatewhere=0 updatekeyinplace=yes arguments=(("ra_persid", number)) )
+column(band=detail id=2 alignment="1" tabsequence=10 border="0" color="33554432" x="41" y="4" height="76" width="2226" format="[general]" html.valueishtml="0"  name=contacts visible="1" checkbox.text="Désactiver la liste des contacts" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=20 border="0" color="33554432" x="41" y="84" height="76" width="2226" format="[general]" html.valueishtml="0"  name=horaire visible="1" checkbox.text="Désactiver la grille des rendez vous" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=30 border="0" color="33554432" x="41" y="164" height="76" width="2226" format="[general]" html.valueishtml="0"  name=typetrait visible="1" checkbox.text="Désactiver type de traitement" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=40 border="0" color="33554432" x="41" y="244" height="76" width="2226" format="[general]" html.valueishtml="0"  name=gestpers visible="1" checkbox.text="Désactiver la gestion du personnel" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=50 border="0" color="33554432" x="41" y="324" height="76" width="2226" format="[general]" html.valueishtml="0"  name=expacomba visible="1" checkbox.text="Désactiver l'exportation vers acomba" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=60 border="0" color="33554432" x="41" y="404" height="76" width="2226" format="[general]" html.valueishtml="0"  name=logsm visible="1" checkbox.text="Désactiver l'accès au logs" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=70 border="0" color="33554432" x="41" y="484" height="76" width="2226" format="[general]" html.valueishtml="0"  name=optionsm visible="1" checkbox.text="Désactiver l'accès au options" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=80 border="0" color="33554432" x="41" y="564" height="76" width="2226" html.valueishtml="0"  name=supprpaie visible="1" checkbox.text="Désactiver la suppression de paiements" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

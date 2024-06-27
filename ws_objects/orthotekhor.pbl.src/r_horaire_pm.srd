@@ -1,0 +1,135 @@
+﻿$PBExportHeader$r_horaire_pm.srd
+release 8;
+datawindow(units=2 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="Horaire" print.orientation = 2 print.margin.left = 0 print.margin.right = 0 print.margin.top = 250 print.margin.bottom = 250 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=291 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=260 color="536870912" )
+table(column=(type=date updatewhereclause=yes name=datecal dbname="horaire.datecal" )
+ column=(type=time updatewhereclause=yes name=heure dbname="horaire.heure" )
+ column=(type=char(100) updatewhereclause=yes name=patient_nom_1 dbname="horaire.patient_nom_1" )
+ column=(type=char(100) updatewhereclause=yes name=patient_nom_2 dbname="horaire.patient_nom_2" )
+ column=(type=char(100) updatewhereclause=yes name=patient_nom_3 dbname="horaire.patient_nom_3" )
+ column=(type=char(100) updatewhereclause=yes name=patient_nom_4 dbname="horaire.patient_nom_4" )
+ column=(type=char(100) updatewhereclause=yes name=horaire_patient_nom_5 dbname="horaire.patient_nom_5" )
+ column=(type=long updatewhereclause=yes name=horaire_patient_id_1 dbname="horaire.patient_id_1" )
+ column=(type=long updatewhereclause=yes name=horaire_patient_id_2 dbname="horaire.patient_id_2" )
+ column=(type=long updatewhereclause=yes name=horaire_patient_id_3 dbname="horaire.patient_id_3" )
+ column=(type=long updatewhereclause=yes name=horaire_patient_id_4 dbname="horaire.patient_id_4" )
+ column=(type=long updatewhereclause=yes name=horaire_patient_id_5 dbname="horaire.patient_id_5" )
+ column=(type=char(30) updatewhereclause=yes name=ortho_id_dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=char(20) updatewhereclause=yes name=horaire_no_dossier1 dbname="horaire.no_dossier1" )
+ column=(type=char(20) updatewhereclause=yes name=horaire_no_dossier2 dbname="horaire.no_dossier2" )
+ column=(type=char(20) updatewhereclause=yes name=horaire_no_dossier3 dbname="horaire.no_dossier3" )
+ column=(type=char(20) updatewhereclause=yes name=horaire_no_dossier4 dbname="horaire.no_dossier4" )
+ column=(type=char(20) updatewhereclause=yes name=horaire_no_dossier5 dbname="horaire.no_dossier5" )
+ column=(type=long updatewhereclause=yes name=horaire_duree1 dbname="horaire.duree1" )
+ column=(type=long updatewhereclause=yes name=horaire_duree2 dbname="horaire.duree2" )
+ column=(type=long updatewhereclause=yes name=horaire_duree3 dbname="horaire.duree3" )
+ column=(type=long updatewhereclause=yes name=horaire_duree4 dbname="horaire.duree4" )
+ column=(type=long updatewhereclause=yes name=horaire_duree5 dbname="horaire.duree5" )
+ column=(type=char(40) updatewhereclause=yes name=horaire_traitementnom1 dbname="horaire.traitementnom1" )
+ column=(type=char(40) updatewhereclause=yes name=horaire_traitementnom2 dbname="horaire.traitementnom2" )
+ column=(type=char(40) updatewhereclause=yes name=horaire_traitementnom3 dbname="horaire.traitementnom3" )
+ column=(type=char(40) updatewhereclause=yes name=horaire_traitementnom4 dbname="horaire.traitementnom4" )
+ column=(type=char(40) updatewhereclause=yes name=horaire_traitementnom5 dbname="horaire.traitementnom5" )
+ column=(type=long updatewhereclause=yes name=horaire_couleur_text_1 dbname="horaire.couleur_text_1" )
+ column=(type=long updatewhereclause=yes name=horaire_couleur_text_2 dbname="horaire.couleur_text_2" )
+ column=(type=long updatewhereclause=yes name=horaire_couleur_text_3 dbname="horaire.couleur_text_3" )
+ column=(type=long updatewhereclause=yes name=horaire_couleur_text_4 dbname="horaire.couleur_text_4" )
+ column=(type=long updatewhereclause=yes name=horaire_couleur_text_5 dbname="horaire.couleur_text_5" )
+ column=(type=long updatewhereclause=yes name=horaire_colortemplate1 dbname="horaire.colortemplate1" )
+ column=(type=long updatewhereclause=yes name=horaire_colortemplate2 dbname="horaire.colortemplate2" )
+ column=(type=long updatewhereclause=yes name=horaire_colortemplate3 dbname="horaire.colortemplate3" )
+ column=(type=long updatewhereclause=yes name=horaire_colortemplate4 dbname="horaire.colortemplate4" )
+ column=(type=long updatewhereclause=yes name=horaire_colortemplate5 dbname="horaire.colortemplate5" )
+ column=(type=number updatewhereclause=yes name=v_arrow dbname="v_arrow" )
+ column=(type=number updatewhereclause=yes name=horcolor dbname="horcolor" )
+ column=(type=long updatewhereclause=yes name=v_color dbname="v_color" )
+ retrieve="SELECT  horaire.datecal,
+		  horaire.heure,
+		  horaire.patient_nom_1,
+		  horaire.patient_nom_2,
+		  horaire.patient_nom_3,
+		  horaire.patient_nom_4,
+		  horaire.patient_nom_5,
+        horaire.patient_id_1,
+        horaire.patient_id_2,
+        horaire.patient_id_3,
+        horaire.patient_id_4,
+        horaire.patient_id_5,
+		  ortho_id.dr_nom_complet,
+		  horaire.no_dossier1,
+		  horaire.no_dossier2,
+		  horaire.no_dossier3,
+		  horaire.no_dossier4,
+		  horaire.no_dossier5,
+		  horaire.duree1,
+		  horaire.duree2,
+		  horaire.duree3,
+		  horaire.duree4,
+		  horaire.duree5,
+		  horaire.traitementnom1,
+		  horaire.traitementnom2,
+		  horaire.traitementnom3,
+		  horaire.traitementnom4,
+		  horaire.traitementnom5, 
+		  horaire.couleur_text_1,
+		  horaire.couleur_text_2,
+		  horaire.couleur_text_3,
+		  horaire.couleur_text_4,
+		  horaire.couleur_text_5,
+		  horaire.colortemplate1,
+		  horaire.colortemplate2,
+		  horaire.colortemplate3,
+		  horaire.colortemplate4,
+		  horaire.colortemplate5,
+		  (select horarrow from t_options where ortho_id = :f_ortho) as v_arrow,
+		  (select horcolor from t_options where ortho_id = :f_ortho) as horcolor,
+		  (select fond_horaire from couleurs where ortho_id = :f_ortho) as v_color       
+   FROM horaire INNER JOIN ortho_id ON  horaire.no_ortho = ortho_id.ortho_id
+  WHERE horaire.datecal = :f_date and    
+		  ortho_id.ortho_id = :f_ortho and    
+		  horaire.heure >= :ra_heures 
+ORDER BY horaire.datecal ASC,   
+         horaire.heure ASC " arguments=(("f_date", date),("f_ortho", number),("ra_heures", time)) )
+line(band=header x1="0" y1="291" x2="7968" y2="291"  name=l_1 visible="1" pen.style="0" pen.width="10" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Horaire pour :" border="0" color="0" x="0" y="0" height="156" width="1229" html.valueishtml="0"  name=t_squedfor visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=13 alignment="0" tabsequence=32766 border="0" color="0" x="1239" y="0" height="156" width="4427" format="[general]" html.valueishtml="0"  name=ortho_id_dr_nom_complet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="1" text="date" border="0" color="0" x="5843" y="0" height="156" width="2135" html.valueishtml="0"  name=t_date visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Chaise 1" border="0" color="0" x="458" y="166" height="125" width="1479" html.valueishtml="0"  name=t_c1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127"  height.autosize=yes)
+text(band=header alignment="2" text="Chaise 2" border="0" color="0" x="1968" y="166" height="125" width="1479" html.valueishtml="0"  name=t_c2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127"  height.autosize=yes)
+text(band=header alignment="2" text="Chaise 3" border="0" color="0" x="3479" y="166" height="125" width="1479" html.valueishtml="0"  name=t_c3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127"  height.autosize=yes)
+text(band=header alignment="2" text="Chaise 4" border="0" color="0" x="4989" y="166" height="125" width="1479" html.valueishtml="0"  name=t_c4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127"  height.autosize=yes)
+text(band=header alignment="2" text="Chaise 5" border="0" color="0" x="6500" y="166" height="125" width="1479" html.valueishtml="0"  name=t_c5 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127"  height.autosize=yes)
+compute(band=detail alignment="0" expression="if ( patient_nom_1 =  horaire_traitementnom1[-1] , 'X' , patient_nom_1 )"border="0" color="0~tif ( (patient_nom_1 = 'X' or patient_nom_1 = 'XX') and  v_arrow = 1 ,  rgb(255,255,255)  , rgb(0,0,0) )" x="458" y="0" height="125" width="1479" format="[GENERAL]" html.valueishtml="0"  name=c1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif (  horcolor = 1 , if ( patient_nom_1 = '' , if ( isnull(horaire_colortemplate1) , rgb(255,255,255) , horaire_colortemplate1 ) , horaire_couleur_text_1 ) , rgb(255,255,255) )" )
+compute(band=detail alignment="0" expression="if(isNull( horaire_traitementnom1 ), if (  horaire_duree1 > 0 , horaire_no_dossier1, '' ), horaire_traitementnom1 + '  ' + if (  horaire_duree1 > 0 , if ( isnull ( horaire_no_dossier1 ), '' , horaire_no_dossier1 )  , '' ) )"border="0" color="0" x="458" y="136" height="114" width="1479" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="0" background.color="553648127~tif (  horcolor = 1 , if ( patient_nom_1 = '' , if ( isnull(horaire_colortemplate1) , rgb(255,255,255) , horaire_colortemplate1 ) , horaire_couleur_text_1 ) , rgb(255,255,255) )" )
+compute(band=detail alignment="0" expression="if ( patient_nom_2 =  horaire_traitementnom2[-1] , 'X' , patient_nom_2 )"border="0" color="0~tif ( (patient_nom_2 = 'X' or patient_nom_2 = 'XX') and  v_arrow = 1 ,  rgb(255,255,255)  , rgb(0,0,0) )" x="1968" y="0" height="125" width="1479" format="[GENERAL]" html.valueishtml="0"  name=c2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif (  horcolor = 1 , if ( patient_nom_2 = '' , if ( isnull(horaire_colortemplate2) , rgb(255,255,255) , horaire_colortemplate2 ) , horaire_couleur_text_2 ) , rgb(255,255,255) )" )
+compute(band=detail alignment="0" expression="if(isNull( horaire_traitementnom2 ), if (  horaire_duree2 > 0 , horaire_no_dossier2, '' ), horaire_traitementnom2 + '  ' + if (  horaire_duree2 > 0 , if ( isnull ( horaire_no_dossier2 ), '' , horaire_no_dossier2 )  , '' ) )"border="0" color="0" x="1968" y="136" height="114" width="1479" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="0" background.color="553648127~tif (  horcolor = 1 , if ( patient_nom_2 = '' , if ( isnull(horaire_colortemplate2) , rgb(255,255,255) , horaire_colortemplate2 ) , horaire_couleur_text_2 ) , rgb(255,255,255) )" )
+compute(band=detail alignment="0" expression="if ( patient_nom_3 =  horaire_traitementnom3[-1] , 'X' , patient_nom_3 )"border="0" color="0~tif ( (patient_nom_3 = 'X' or patient_nom_3 = 'XX') and  v_arrow = 1 ,  rgb(255,255,255)  , rgb(0,0,0) )" x="3479" y="0" height="125" width="1479" format="[GENERAL]" html.valueishtml="0"  name=c3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif (  horcolor = 1 , if ( patient_nom_3 = '' , if ( isnull(horaire_colortemplate3) , rgb(255,255,255) , horaire_colortemplate3 ) , horaire_couleur_text_3 ) , rgb(255,255,255) )" )
+compute(band=detail alignment="0" expression="if(isNull( horaire_traitementnom3 ), if (  horaire_duree3 > 0 , horaire_no_dossier3, '' ), horaire_traitementnom3 + '  ' + if (  horaire_duree3 > 0 , if ( isnull ( horaire_no_dossier3 ), '' , horaire_no_dossier3 )  , '' ) )"border="0" color="0" x="3479" y="136" height="114" width="1479" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="0" background.color="553648127~tif (  horcolor = 1 , if ( patient_nom_3 = '' , if ( isnull(horaire_colortemplate3) , rgb(255,255,255) , horaire_colortemplate3 ) , horaire_couleur_text_3 ) , rgb(255,255,255) )" )
+compute(band=detail alignment="0" expression="if ( patient_nom_4  =  horaire_traitementnom4[-1] , 'X' , patient_nom_4  )"border="0" color="0~tif ( (patient_nom_4 = 'X' or patient_nom_4 = 'XX') and  v_arrow = 1 ,  rgb(255,255,255)  , rgb(0,0,0) )" x="4989" y="0" height="125" width="1479" format="[GENERAL]" html.valueishtml="0"  name=c4 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif (  horcolor = 1 , if ( patient_nom_4 = '' , if ( isnull(horaire_colortemplate4) , rgb(255,255,255) , horaire_colortemplate4 ) , horaire_couleur_text_4 ) , rgb(255,255,255) )" )
+compute(band=detail alignment="0" expression="if(isNull( horaire_traitementnom4 ), if (  horaire_duree4 > 0 , horaire_no_dossier4, '' ), horaire_traitementnom4 + '  ' + if (  horaire_duree4 > 0 , if ( isnull ( horaire_no_dossier4 ), '' , horaire_no_dossier4 )  , '' ) )"border="0" color="0" x="4989" y="136" height="114" width="1479" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="0" background.color="553648127~tif (  horcolor = 1 , if ( patient_nom_4 = '' , if ( isnull(horaire_colortemplate4) , rgb(255,255,255) , horaire_colortemplate4 ) , horaire_couleur_text_4 ) , rgb(255,255,255) )" )
+compute(band=detail alignment="0" expression="if ( horaire_patient_nom_5 =  horaire_traitementnom5[-1] , 'X' , horaire_patient_nom_5 )"border="0" color="0~tif (  (horaire_patient_nom_5 = 'X' or  horaire_patient_nom_5 = 'XX') and  v_arrow = 1 ,  rgb(255,255,255)  , rgb(0,0,0) )" x="6500" y="0" height="125" width="1479" format="[GENERAL]" html.valueishtml="0"  name=c5 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tif (  horcolor = 1 , if (  horaire_patient_nom_5 = '' , if ( isnull(horaire_colortemplate5) , rgb(255,255,255) , horaire_colortemplate5 ) , horaire_couleur_text_5 ) , rgb(255,255,255) )" )
+compute(band=detail alignment="0" expression="if(isNull( horaire_traitementnom5 ), if (  horaire_duree5 > 0 , horaire_no_dossier5, '' ), horaire_traitementnom5 + '  ' + if (  horaire_duree5 > 0 , if ( isnull ( horaire_no_dossier5 ), '' , horaire_no_dossier5 )  , '' ) )"border="0" color="0" x="6500" y="136" height="114" width="1479" format="[GENERAL]" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="0" background.color="553648127~tif (  horcolor = 1 , if (  horaire_patient_nom_5 = '' , if ( isnull(horaire_colortemplate5) , rgb(255,255,255) , horaire_colortemplate5 ) , horaire_couleur_text_5 ) , rgb(255,255,255) )" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="20" y="32" height="166" width="395" format="[time]" html.valueishtml="0"  name=heure visible="1" height.autosize=yes editmask.mask="HH:MM" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=detail x1="6479" y1="0" x2="6479" y2="261"  name=l_4 visible="1" pen.style="0" pen.width="10" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=detail x1="7989" y1="11" x2="7989" y2="271"  name=l_8 visible="1" pen.style="0" pen.width="10" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=detail x1="427" y1="0" x2="427" y2="261"  name=l_3 visible="1" pen.style="0" pen.width="10" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=detail x1="3458" y1="0" x2="3458" y2="261"  name=l_5 visible="1" pen.style="0" pen.width="10" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=detail x1="4968" y1="0" x2="4968" y2="261"  name=l_6 visible="1" pen.style="0" pen.width="10" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=detail x1="1947" y1="0" x2="1947" y2="261"  name=l_7 visible="1" pen.style="0" pen.width="10" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=detail x1="1187" y1="0" x2="1187" y2="250"  name=l_13 visible="1~tif ( patient_nom_1 = 'X' and  v_arrow = 1 , 1 , 0 )" pen.style="0" pen.width="31" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="5750" y1="0" x2="5750" y2="250"  name=l_9 visible="1~tif ( patient_nom_4 = 'X' and  v_arrow = 1 , 1 , 0 )" pen.style="0" pen.width="31" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="4229" y1="0" x2="4229" y2="250"  name=l_10 visible="1~tif ( patient_nom_3 = 'X' and  v_arrow = 1 , 1 , 0 )" pen.style="0" pen.width="31" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2718" y1="0" x2="2718" y2="250"  name=l_11 visible="1~tif ( patient_nom_2 = 'X' and  v_arrow = 1 , 1 , 0 )" pen.style="0" pen.width="31" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="7291" y1="0" x2="7291" y2="250"  name=l_12 visible="1~tif (  horaire_patient_nom_5 = 'X' and  v_arrow = 1 , 1 , 0 )" pen.style="0" pen.width="31" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="10" y1="250" x2="7979" y2="250"  name=l_2 visible="1" pen.style="0" pen.width="10~tif (  integer( mid ( string(  heure ) , 4 , 2 ) ) >= 45  , 3 , 1 )" pen.color="0"  background.mode="1" background.color="553648127" )
+bitmap(band=detail filename="C:\ii4net\orthotek\images\arrow.gif" x="1052" y="0" height="239" width="302" border="0"  name=p_1 visible="1~tif ( patient_nom_1 = 'XX' and  v_arrow = 1 , 1 , 0 )" )
+bitmap(band=detail filename="C:\ii4net\orthotek\images\arrow.gif" x="2572" y="0" height="239" width="291" border="0"  name=p_2 visible="1~tif ( patient_nom_2 = 'XX' and  v_arrow = 1 , 1 , 0 )" )
+bitmap(band=detail filename="C:\ii4net\orthotek\images\arrow.gif" x="4083" y="0" height="239" width="291" border="0"  name=p_3 visible="1~tif ( patient_nom_3 = 'XX' and  v_arrow = 1 , 1 , 0 )" )
+bitmap(band=detail filename="C:\ii4net\orthotek\images\arrow.gif" x="5614" y="0" height="239" width="291" border="0"  name=p_4 visible="1~tif ( patient_nom_4 = 'XX' and  v_arrow = 1 , 1 , 0 )" )
+bitmap(band=detail filename="C:\ii4net\orthotek\images\arrow.gif" x="7156" y="0" height="239" width="291" border="0"  name=p_5 visible="1~tif (  horaire_patient_nom_5 = 'XX' and  v_arrow = 1 , 1 , 0 )" )
+line(band=detail x1="10" y1="240" x2="7979" y2="240"  name=l_14 visible="1~tif (  minute (  heure )  >= 45  , 1 , 0 )" pen.style="0" pen.width="20" pen.color="0"  background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

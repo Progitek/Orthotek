@@ -1,0 +1,104 @@
+﻿$PBExportHeader$d_paiement_souffrance1.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.printername="" print.documentname="Liste des paiements en souffran" print.orientation = 0 print.margin.left = 101 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=520 color="536870912" )
+summary(height=116 color="536870912" )
+footer(height=64 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=t_contact_id_contact dbname="t_contact.id_contact" )
+ column=(type=char(50) updatewhereclause=yes name=t_contact_nom dbname="t_contact.nom" )
+ column=(type=char(50) updatewhereclause=yes name=t_contact_prenom dbname="t_contact.prenom" )
+ column=(type=long updatewhereclause=yes name=patient_patient_id dbname="patient.patient_id" )
+ column=(type=char(50) updatewhereclause=yes name=patient_nom dbname="patient.patient_nom" )
+ column=(type=char(50) updatewhereclause=yes name=patient_prenom dbname="patient.patient_prenom" )
+ column=(type=long updatewhereclause=yes name=id_satellite dbname="patient.id_satellite" )
+ column=(type=char(20) updatewhereclause=yes name=patient_langue dbname="patient.langue" )
+ column=(type=char(100) updatewhereclause=yes name=dr_nom_complet dbname="ortho_id.dr_nom_complet" )
+ column=(type=decimal(0) updatewhereclause=yes name=etat dbname="etat" values="	1/	0" )
+ column=(type=decimal(2) updatewhereclause=yes name=traitements_montorig dbname="traitements.montorig" )
+ column=(type=long updatewhereclause=yes name=traitements_traitement_id dbname="traitements.traitement_id" )
+ column=(type=decimal(2) updatewhereclause=yes name=montantpaye dbname="montantpaye" )
+ column=(type=decimal(2) updatewhereclause=yes name=montantfacture dbname="montantfacture" )
+ column=(type=decimal(2) updatewhereclause=yes name=montantfactglob dbname="montantfactglob" )
+ column=(type=decimal(2) updatewhereclause=yes name=montantpayepat dbname="montantpayepat" )
+ column=(type=decimal(2) updatewhereclause=yes name=montantfacturepat dbname="montantfacturepat" )
+ column=(type=date updatewhereclause=yes name=dernpaie dbname="dernpaie" )
+ retrieve="select t_contact.id_contact,
+		 t_contact.nom,
+       t_contact.prenom,
+		 patient.patient_id,
+       patient.patient_nom,
+       patient.patient_prenom,
+       patient.id_satellite,
+		 patient.langue,
+       ortho_id.dr_nom_complet,
+       isnull(traitements.etatcompte,0) as etat,
+       traitements.montant_original as montorig,
+		 traitements.traitement_id,
+       (select isnull(sum(isnull(montant_recu,0)),0) FROM paiement WHERE traitement_patient_id = traitements.traitement_id and id_contact = t_contact.id_contact) as montantpaye,
+       (select isnull(sum(isnull(montant,0)),0) FROM factures_traitements WHERE traitement_id = traitements.traitement_id and id_contact = t_contact.id_contact and date_facture <= today())as montantfacture, 
+       (select isnull(sum(isnull(montant,0)),0) FROM factures_traitements WHERE traitement_id = traitements.traitement_id and id_contact = t_contact.id_contact)as montantfactglob,
+		 (select isnull(sum(isnull(montant_recu,0)),0) FROM paiement WHERE traitement_patient_id = traitements.traitement_id) as montantpayepat,
+       (select isnull(sum(isnull(montant,0)),0) FROM factures_traitements WHERE traitement_id = traitements.traitement_id and date_facture <= today())as montantfacturepat, 
+       (select max(date_paiement) FROM paiement WHERE traitement_patient_id = traitements.traitement_id and id_contact = t_contact.id_contact) as dernpaie   
+from t_contact INNER JOIN patient ON patient.patient_id = t_contact.patient_id
+               INNER JOIN traitements ON traitements.patient_id = patient.patient_id
+               INNER JOIN ortho_id ON ortho_id.ortho_id = patient.no_ortho
+ WHERE   ortho_id.ortho_id = :ra_orthoid AND 
+	      (montantfacture - montantpaye) > 0
+group by t_contact.nom,
+       	t_contact.prenom,
+         patient.patient_nom,
+         patient.patient_prenom,
+         patient.id_satellite,
+       	ortho_id.dr_nom_complet,
+         traitements.etatcompte,
+         traitements.traitement_id,
+        	t_contact.id_contact,
+         montorig,
+			patient.patient_id,
+			patient.langue,
+			traitements.traitement_id
+ORDER BY patient.patient_nom          ASC,
+	      patient.patient_prenom       ASC" arguments=(("ra_orthoid", number)) )
+text(band=header alignment="2" text="Etat" border="0" color="0" x="3351" y="444" height="56" width="119" html.valueishtml="0"  name=t_etat visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Dernier paiement" border="0" color="0" x="2971" y="444" height="56" width="375" html.valueishtml="0"  name=t_dernpaiement visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="516" x2="3479" y2="516"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Nom du responsable" border="0" color="0" x="9" y="444" height="56" width="635" html.valueishtml="0"  name=t_nom visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Nom du patient" border="0" color="0" x="649" y="444" height="56" width="635" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Coût traitement" border="0" color="0" x="1289" y="444" height="56" width="357" html.valueishtml="0"  name=t_couttot visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Coût global" border="0" color="0" x="1650" y="444" height="56" width="357" html.valueishtml="0"  name=t_montantfact visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Montant payé" border="0" color="0" x="2011" y="444" height="56" width="315" html.valueishtml="0"  name=t_montantpaye visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Montant dû" border="0" color="0" x="2331" y="444" height="56" width="315" html.valueishtml="0"  name=t_montantdu visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Balance" border="0" color="0" x="2651" y="444" height="56" width="315" html.valueishtml="0"  name=t_balance visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=10 border="0" color="0" x="3365" y="12" height="56" width="64" format="[general]" html.valueishtml="0"  name=etat visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=yes checkbox.threed=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=18 alignment="2" tabsequence=32766 border="0" color="0" x="2971" y="4" height="64" width="375" format="[general]" html.valueishtml="0"  name=dernpaie visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="  t_contact_nom + ',  ' +   t_contact_prenom "border="0" color="0" x="9" y="4" height="64" width="635" format="[GENERAL]" html.valueishtml="0"  name=compute_10 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" patient_nom + ',  ' +  patient_prenom "border="0" color="0" x="649" y="4" height="64" width="635" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="0" x="1289" y="4" height="64" width="357" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=traitements_montorig visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="1" tabsequence=32766 border="0" color="0" x="1650" y="4" height="64" width="357" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=montantfactglob visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="1" tabsequence=32766 border="0" color="0" x="2011" y="4" height="64" width="315" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=montantpaye visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="montantfacture -   montantpaye"border="0" color="0~tif( (montantfacturepat -  montantpayepat ) <> (montantfacture -  montantpaye ), rgb(255,0,0),rgb(0,0,0))" x="2331" y="4" height="64" width="315" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression=" montantfactglob -   montantpaye"border="0" color="0" x="2651" y="4" height="64" width="315" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_7 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="count( patient_nom + ',  ' +  patient_prenom  for all)"border="0" color="0" x="5" y="32" height="64" width="384" format="[GENERAL]" html.valueishtml="0"  name=compute_9 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="1275" y1="12" x2="2985" y2="12"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=summary alignment="1" expression="sum(  traitements_montorig for all)"border="0" color="0" x="1289" y="32" height="64" width="357" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression=" sum( montantfactglob  for all)"border="0" color="0" x="1650" y="32" height="64" width="357" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum( montantpaye  for all)"border="0" color="0" x="2011" y="32" height="64" width="315" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum ( compute_2  for all)"border="0" color="0" x="2331" y="32" height="64" width="315" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum( compute_7  for all)"border="0" color="0" x="2651" y="32" height="64" width="315" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_8 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="1" text="Imprimé le " border="0" color="0" x="0" y="4" height="56" width="229" html.valueishtml="0"  name=t_printedon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="242" y="4" height="56" width="466" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2807" y="4" height="56" width="686" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Liste des paiements en souffrance " border="0" color="0" x="9" y="68" height="80" width="3461" html.valueishtml="0"  name=t_titre visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=9 alignment="2" tabsequence=30 border="0" color="0" x="9" y="196" height="76" width="3461" format="[general]" html.valueishtml="0"  name=dr_nom_complet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

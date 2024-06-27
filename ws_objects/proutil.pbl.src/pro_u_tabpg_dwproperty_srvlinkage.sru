@@ -1,0 +1,55 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_srvlinkage.sru
+$PBExportComments$(PRO) DataWindow Property - The Linkage service tabpage 1
+forward
+global type pro_u_tabpg_dwproperty_srvlinkage from pfc_u_tabpg_dwproperty_srvlinkage
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_srvlinkage from pfc_u_tabpg_dwproperty_srvlinkage
+end type
+global pro_u_tabpg_dwproperty_srvlinkage pro_u_tabpg_dwproperty_srvlinkage
+
+on pro_u_tabpg_dwproperty_srvlinkage.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_srvlinkage.destroy
+call super::destroy
+end on
+
+type st_label_masterdw from pfc_u_tabpg_dwproperty_srvlinkage`st_label_masterdw within pro_u_tabpg_dwproperty_srvlinkage
+end type
+
+type st_masterdw from pfc_u_tabpg_dwproperty_srvlinkage`st_masterdw within pro_u_tabpg_dwproperty_srvlinkage
+end type
+
+type st_label_detaldw from pfc_u_tabpg_dwproperty_srvlinkage`st_label_detaldw within pro_u_tabpg_dwproperty_srvlinkage
+end type
+
+type st_label_style from pfc_u_tabpg_dwproperty_srvlinkage`st_label_style within pro_u_tabpg_dwproperty_srvlinkage
+end type
+
+type st_style from pfc_u_tabpg_dwproperty_srvlinkage`st_style within pro_u_tabpg_dwproperty_srvlinkage
+end type
+
+type st_label_masterarg from pfc_u_tabpg_dwproperty_srvlinkage`st_label_masterarg within pro_u_tabpg_dwproperty_srvlinkage
+end type
+
+type dw_arguments from pfc_u_tabpg_dwproperty_srvlinkage`dw_arguments within pro_u_tabpg_dwproperty_srvlinkage
+end type
+
+type st_label_rootdw from pfc_u_tabpg_dwproperty_srvlinkage`st_label_rootdw within pro_u_tabpg_dwproperty_srvlinkage
+end type
+
+type st_rootdw from pfc_u_tabpg_dwproperty_srvlinkage`st_rootdw within pro_u_tabpg_dwproperty_srvlinkage
+end type
+
+type mle_detaildw from pfc_u_tabpg_dwproperty_srvlinkage`mle_detaildw within pro_u_tabpg_dwproperty_srvlinkage
+end type
+
+type st_label_currentdw from pfc_u_tabpg_dwproperty_srvlinkage`st_label_currentdw within pro_u_tabpg_dwproperty_srvlinkage
+end type
+
+type st_currentdw from pfc_u_tabpg_dwproperty_srvlinkage`st_currentdw within pro_u_tabpg_dwproperty_srvlinkage
+end type
+

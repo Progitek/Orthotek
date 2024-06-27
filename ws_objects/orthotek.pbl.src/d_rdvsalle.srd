@@ -1,0 +1,48 @@
+﻿$PBExportHeader$d_rdvsalle.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=280 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=84 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=char(15) updatewhereclause=yes name=nomcol dbname="nomcol" )
+ column=(type=char(40) updatewhereclause=yes name=type_de_traitement_nom_traitement dbname="type_de_traitement.nom_traitement" )
+ column=(type=long updatewhereclause=yes name=cnt dbname="cnt" )
+ column=(type=decimal(6) updatewhereclause=yes name=tempmoy dbname="tempmoy" )
+ retrieve="select  	argn(t_rdv.colonne,t_options.horcol1,t_options.horcol2,t_options.horcol3,t_options.horcol4,t_options.horcol5,
+                          t_options.horcol6,t_options.horcol7,t_options.horcol8,t_options.horcol9,t_options.horcol10) as nomcol,
+        	type_de_traitement.nom_traitement,
+        	count(*) as cnt,
+        	avg(seconds(t_rdv.seated,t_rdv.released)) / 60 as tempmoy
+from   	t_rdv INNER JOIN t_options ON t_rdv.ortho_id = t_options.ortho_id
+            	LEFT OUTER JOIN type_de_traitement ON  type_de_traitement.type_traitement_id = t_rdv.typetraitid and type_de_traitement.ortho_id = t_rdv.ortho_id
+where		t_rdv.rdvdate between :ra_debut and :ra_fin and
+			t_rdv.ortho_id = :ra_orthoid	
+group by nomcol, nom_traitement
+order by nomcol, nom_traitement" arguments=(("ra_debut", date),("ra_fin", date),("ra_orthoid", number)) )
+group(level=1 header.height=84 trailer.height=0 by=("nomcol" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="2" text="Liste des rendez-vous par salle" border="0" color="0" x="14" y="36" height="76" width="3433" html.valueishtml="0"  name=t_title visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Nom de la colonne" border="0" color="33554432" x="9" y="184" height="64" width="1216" html.valueishtml="0"  name=nomcol_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="9" y1="268" x2="3470" y2="268"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Quantité" border="0" color="33554432" x="2747" y="184" height="64" width="329" html.valueishtml="0"  name=cnt_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Nom du traitement" border="0" color="33554432" x="1239" y="184" height="64" width="1495" html.valueishtml="0"  name=nom_traitement_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Moyenne (Min)" border="0" color="33554432" x="3090" y="184" height="64" width="393" html.valueishtml="0"  name=tempmoy_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="9" y="4" height="76" width="1216" format="[general]" html.valueishtml="0"  name=nomcol visible="1" edit.limit=15 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="0" color="33554432" x="2747" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=cnt visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="1239" y="4" height="76" width="1495" format="[general]" html.valueishtml="0"  name=type_de_traitement_nom_traitement visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=32766 border="0" color="33554432" x="3090" y="4" height="76" width="393" format="0.00" html.valueishtml="0"  name=tempmoy visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="2" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2903" y="8" height="68" width="549" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=footer alignment="2" text="Orthotek" border="0" color="0" x="1358" y="8" height="68" width="805" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="0" expression="today()"border="0" color="0" x="279" y="8" height="68" width="334" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=footer alignment="0" text="Imprimé le:" border="0" color="0" x="14" y="8" height="68" width="247" html.valueishtml="0"  name=t_printedon visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

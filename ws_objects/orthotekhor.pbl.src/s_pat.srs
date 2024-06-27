@@ -1,0 +1,27 @@
+﻿$PBExportHeader$s_pat.srs
+global type s_pat from structure
+	long		patid
+	string		patnom
+	string		patprenom
+	string		patnodos
+	string		pattelres
+	date		patdatenais
+	integer		duree
+	long		backcolor
+	long		traitid
+	string		dt1
+	string		dt2
+	string		dt3
+	character		dt[]
+	string		l[]
+	string		l30
+	long		idvist
+	string		memo
+	integer		col
+	time		heure
+	date		datecal
+	integer		idspec
+	integer		idpers
+	long		rv
+end type
+

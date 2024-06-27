@@ -1,0 +1,23 @@
+﻿$PBExportHeader$d_famille.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=patient_id dbname="patient.patient_id" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=patient_nom dbname="patient.patient_nom" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=tel_maison dbname="patient.tel_maison" )
+ column=(type=long update=yes updatewhereclause=yes name=id_famille dbname="patient.id_famille" )
+ retrieve="  SELECT patient.patient_id,   
+         patient.patient_prenom,   
+         patient.patient_nom,   
+         patient.tel_maison,   
+         patient.id_famille  
+    FROM patient
+	WHERE patient.id_famille = :ra_idfamille
+" update="patient" updatewhere=1 updatekeyinplace=no arguments=(("ra_idfamille", number)) )
+compute(band=detail alignment="0" expression=" patient_prenom  + ' ' +  patient_nom "border="0" color="33554432" x="9" y="4" height="64" width="969" format="[GENERAL]" html.valueishtml="0"  name=compute_1 pointer="HyperLink!" visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="992" y="4" height="64" width="663" format="[general]" html.valueishtml="0"  name=tel_maison pointer="HyperLink!" visible="1" editmask.mask="(XXX) XXX-XXXX" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

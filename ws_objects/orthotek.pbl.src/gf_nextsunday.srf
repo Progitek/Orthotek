@@ -1,0 +1,39 @@
+﻿$PBExportHeader$gf_nextsunday.srf
+global type gf_nextsunday from function_object
+end type
+
+forward prototypes
+global function integer gf_nextsunday (date adt_current)
+end prototypes
+
+global function integer gf_nextsunday (date adt_current);/////////////////////////////////////////////////////
+//
+// Créé par			: Eric Vezina
+//	Date				: 21-06-2005
+//
+// Description		:	Retourne le nombre de jour jusqu'au prochain dimanche.
+//
+/////////////////////////////////////////////////////
+
+
+choose case dayname(adt_current)
+	case 'Sunday'
+		return 7
+	case 'Monday'
+		return 6
+	case 'Tuesday'
+		return 5
+	case 'Wednesday'
+		return 4
+	case 'Thursday'
+		return 3
+	case 'Friday'
+		return 2
+	case 'Saturday'
+		return 1
+	case else
+		error_type(0)
+		return 0
+end choose
+end function
+

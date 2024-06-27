@@ -1,0 +1,20 @@
+﻿$PBExportHeader$gf_sqlerr.srf
+global type gf_sqlerr from function_object
+end type
+
+forward prototypes
+global function boolean gf_sqlerr ()
+end prototypes
+
+global function boolean gf_sqlerr ();if (SQLCA.sqlCode <> 0) then
+	CHOOSE CASE SQLCA.SQLDBCode
+		CASE -210
+		CASE ELSE	
+			messagebox(string(today()) + ',' + string(now()) + string(SQLCA.SQLDBCode) ,SQLCA.SQLErrText)
+	END CHOOSE
+	return false
+else
+	return true
+end if
+end function
+

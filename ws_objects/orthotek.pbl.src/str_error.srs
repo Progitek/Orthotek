@@ -1,0 +1,9 @@
+﻿$PBExportHeader$str_error.srs
+global type str_error from structure
+	long		sqldbcode
+	string		sqlerrtext
+	string		sqlsyntax
+	dwbuffer		buffer
+	long		row
+end type
+

@@ -1,0 +1,28 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_srvcalculator.sru
+$PBExportComments$(PRO) DataWindow Property - The Calculator service tabpage
+forward
+global type pro_u_tabpg_dwproperty_srvcalculator from pfc_u_tabpg_dwproperty_srvcalculator
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_srvcalculator from pfc_u_tabpg_dwproperty_srvcalculator
+end type
+global pro_u_tabpg_dwproperty_srvcalculator pro_u_tabpg_dwproperty_srvcalculator
+
+on pro_u_tabpg_dwproperty_srvcalculator.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_srvcalculator.destroy
+call super::destroy
+end on
+
+type cbx_initialvalue from pfc_u_tabpg_dwproperty_srvcalculator`cbx_initialvalue within pro_u_tabpg_dwproperty_srvcalculator
+end type
+
+type cbx_closeonclick from pfc_u_tabpg_dwproperty_srvcalculator`cbx_closeonclick within pro_u_tabpg_dwproperty_srvcalculator
+end type
+
+type dw_register from pfc_u_tabpg_dwproperty_srvcalculator`dw_register within pro_u_tabpg_dwproperty_srvcalculator
+end type
+

@@ -1,0 +1,27 @@
+﻿$PBExportHeader$d_rapport_annuel_statuts8.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=char(10) updatewhereclause=yes name=t_status_code dbname="t_status.code" )
+ column=(type=long updatewhereclause=yes name=compute_0002 dbname="compute_0002" )
+ retrieve="  SELECT ~"t_status~".~"code~",   
+         count(~"factures_traitements~".~"status_id~")  
+    FROM ~"factures_traitements~",   
+         ~"t_status~",   
+         ~"traitements~",   
+         ~"patient~"  
+
+   WHERE ( ~"factures_traitements~".~"status_id~" = ~"t_status~".~"status_id~" ) and  
+         ( ~"factures_traitements~".~"traitement_id~" = ~"traitements~".~"traitement_id~" ) and  
+         ( ~"traitements~".~"patient_id~" = ~"patient~".~"patient_id~" ) and  
+         ( ( ~"patient~".~"no_ortho~" = :ra_ortho_id ) AND  
+         ( year(~"factures_traitements~".~"date_facture~") = :ra_year ) and
+			( month(~"factures_traitements~".~"date_facture~") = 8 ) )
+   
+GROUP BY ~"t_status~".~"code~",  
+			~"factures_traitements~".~"status_id~"" arguments=(("ra_ortho_id", number),("ra_year", number)) )
+column(band=detail id=2 alignment="2" tabsequence=32766 border="0" color="0" x="5" y="0" height="64" width="197" format="[general]"  name=compute_0002 edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

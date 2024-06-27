@@ -1,0 +1,34 @@
+﻿$PBExportHeader$pro_u_tabpg_dwproperty_srvquerymode.sru
+$PBExportComments$(PRO) DataWindow Property - The QueryMode service tabpage
+forward
+global type pro_u_tabpg_dwproperty_srvquerymode from pfc_u_tabpg_dwproperty_srvquerymode
+end type
+end forward
+
+global type pro_u_tabpg_dwproperty_srvquerymode from pfc_u_tabpg_dwproperty_srvquerymode
+end type
+global pro_u_tabpg_dwproperty_srvquerymode pro_u_tabpg_dwproperty_srvquerymode
+
+on pro_u_tabpg_dwproperty_srvquerymode.create
+call super::create
+end on
+
+on pro_u_tabpg_dwproperty_srvquerymode.destroy
+call super::destroy
+end on
+
+type cbx_enabled from pfc_u_tabpg_dwproperty_srvquerymode`cbx_enabled within pro_u_tabpg_dwproperty_srvquerymode
+end type
+
+type st_columns from pfc_u_tabpg_dwproperty_srvquerymode`st_columns within pro_u_tabpg_dwproperty_srvquerymode
+end type
+
+type lb_cols from pfc_u_tabpg_dwproperty_srvquerymode`lb_cols within pro_u_tabpg_dwproperty_srvquerymode
+end type
+
+type cbx_resetcriteria from pfc_u_tabpg_dwproperty_srvquerymode`cbx_resetcriteria within pro_u_tabpg_dwproperty_srvquerymode
+end type
+
+type cbx_retrieveondisabled from pfc_u_tabpg_dwproperty_srvquerymode`cbx_retrieveondisabled within pro_u_tabpg_dwproperty_srvquerymode
+end type
+

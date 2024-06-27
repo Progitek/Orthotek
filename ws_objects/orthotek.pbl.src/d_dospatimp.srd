@@ -1,0 +1,377 @@
+﻿$PBExportHeader$d_dospatimp.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="Dossier patient" print.documentname="Dossier patient" print.orientation = 2 print.margin.left = 0 print.margin.right = 0 print.margin.top = 0 print.margin.bottom = 0 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=56 color="536870912" )
+detail(height=3800 color="536870912" )
+table(column=(type=char(50) update=yes updatewhereclause=yes name=ville dbname="patient.ville" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=province dbname="patient.province" values="Québec	PQ/Ontario	Ontario/Manitoba	Manitoba/Saskatchewan	Saskatchewan/Alberta	Alberta/Colombie-Britannique	Colombie-Britannique/Nouveau-Brunswick	Nouveau-Brunswick/Nouvelle-Écosse	Nouvelle-Écosse/Terre-Neuve	Terre-Neuve/Île-du-Prince-Edward	Île-du-Prince-Edward/Territoire-du-Nord-Ouest	Territoire-du-Nord-Ouest/" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=code_postale dbname="patient.code_postale" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=tel_maison dbname="patient.tel_maison" )
+ column=(type=date update=yes updatewhereclause=yes name=date_naissance dbname="patient.date_naissance" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=sex dbname="patient.sex" values="M	M/F	F/" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=nomresp1 dbname="patient.nomresp1" )
+ column=(type=char(35) update=yes updatewhereclause=yes name=addresp1 dbname="patient.addresp1" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=cityresp1 dbname="patient.cityresp1" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=zipresp1 dbname="patient.zipresp1" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=telresp1 dbname="patient.telresp1" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=nomresp2 dbname="patient.nomresp2" )
+ column=(type=char(35) update=yes updatewhereclause=yes name=addresp2 dbname="patient.addresp2" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=cityresp2 dbname="patient.cityresp2" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=zipresp2 dbname="patient.zipresp2" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=telresp2 dbname="patient.telresp2" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=nomresp3 dbname="patient.nomresp3" )
+ column=(type=char(35) update=yes updatewhereclause=yes name=addresp3 dbname="patient.addresp3" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=cityresp3 dbname="patient.cityresp3" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=zipresp3 dbname="patient.zipresp3" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=telresp3 dbname="patient.telresp3" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=tel_bureau dbname="patient.tel_bureau" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=patient_telcell dbname="patient.telcell" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=patient_telautre dbname="patient.telautre" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=langue dbname="patient.langue" values="Français	F/Anglais	A/" )
+ column=(type=long update=yes updatewhereclause=yes name=no_dossier dbname="patient.no_dossier" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=no_tel_mere dbname="patient.no_tel_mere" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=no_tel_pere dbname="patient.no_tel_pere" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=statut dbname="patient.statut" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=assurance dbname="patient.assurance" values="Oui	oui/Non	non/" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=recu_automatique dbname="patient.recu_automatique" values="Oui	1/Non	0/" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=collection dbname="patient.collection" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=alerte_medical dbname="patient.alerte_medical" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=text1 dbname="patient.text1" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=text2 dbname="patient.text2" )
+ column=(type=char(150) update=yes updatewhereclause=yes name=empl_photo dbname="patient.empl_photo" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=medical dbname="patient.medical" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=recherche dbname="patient.recherche" )
+ column=(type=char(27) update=yes updatewhereclause=yes name=nom_mere dbname="patient.nom_mere" )
+ column=(type=char(27) update=yes updatewhereclause=yes name=nom_pere dbname="patient.nom_pere" )
+ column=(type=char(36) update=yes updatewhereclause=yes name=adresse dbname="patient.adresse" )
+ column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=patient_id dbname="patient.patient_id" )
+ column=(type=date update=yes updatewhereclause=yes name=date_exp_nas dbname="patient.date_exp_nas" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=nas dbname="patient.nas" )
+ column=(type=long update=yes updatewhereclause=yes name=check_cpd dbname="patient.check_cpd" values="	1/	0" )
+ column=(type=long update=yes updatewhereclause=yes name=no_ortho dbname="patient.no_ortho" validation="isNull( no_ortho )" validationmsg="~"Le patient doit être associé a un orthodontiste~"" )
+ column=(type=long update=yes updatewhereclause=yes name=code_recherche dbname="patient.code_recherche" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=text3 dbname="patient.text3" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=text4 dbname="patient.text4" )
+ column=(type=long update=yes updatewhereclause=yes name=referant_nom dbname="patient.referant_nom" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=email dbname="patient.email" )
+ column=(type=long update=yes updatewhereclause=yes name=retards dbname="patient.retards" )
+ column=(type=long update=yes updatewhereclause=yes name=rvmanques dbname="patient.rvmanques" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=new_dossier dbname="patient.new_dossier" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=no_boite dbname="patient.no_boite" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=patient_prenom dbname="patient.patient_prenom" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=patient_nom dbname="patient.patient_nom" )
+ column=(type=char(500) update=yes updatewhereclause=yes name=note dbname="patient.note" )
+ column=(type=number update=yes updatewhereclause=yes name=recuresp dbname="patient.recuresp" values="Reçu responsable (R1)	1/Reçu responsable (R1)	0" )
+ column=(type=long update=yes updatewhereclause=yes name=id_personnel dbname="patient.id_personnel" )
+ column=(type=date update=yes updatewhereclause=yes name=archivedate dbname="patient.archivedate" )
+ column=(type=date update=yes updatewhereclause=yes name=patient_opendoss dbname="patient.opendoss" )
+ column=(type=char(30) updatewhereclause=yes name=t_dentists_det_prenom dbname="t_dentists.det_prenom" )
+ column=(type=char(30) updatewhereclause=yes name=t_dentists_det_nom dbname="t_dentists.det_nom" )
+ column=(type=char(50) updatewhereclause=yes name=t_dentists_det_add dbname="t_dentists.det_add" )
+ column=(type=char(50) updatewhereclause=yes name=t_dentists_det_ville dbname="t_dentists.det_ville" )
+ column=(type=char(20) updatewhereclause=yes name=t_dentists_det_prov dbname="t_dentists.det_prov" )
+ column=(type=char(15) updatewhereclause=yes name=t_dentists_det_zip dbname="t_dentists.det_zip" )
+ column=(type=char(15) updatewhereclause=yes name=t_dentists_det_telbur dbname="t_dentists.det_telbur" )
+ column=(type=char(25) updatewhereclause=yes name=t_referents_ref_prenom dbname="t_referents.ref_prenom" )
+ column=(type=char(25) updatewhereclause=yes name=t_referents_ref_nom dbname="t_referents.ref_nom" )
+ column=(type=char(50) updatewhereclause=yes name=t_referents_ref_adresse dbname="t_referents.ref_adresse" )
+ column=(type=char(50) updatewhereclause=yes name=t_referents_ref_ville dbname="t_referents.ref_ville" )
+ column=(type=char(40) updatewhereclause=yes name=t_referents_ref_province dbname="t_referents.ref_province" )
+ column=(type=char(20) updatewhereclause=yes name=t_referents_ref_zip dbname="t_referents.ref_zip" )
+ column=(type=char(20) updatewhereclause=yes name=t_referents_ref_tel_bur dbname="t_referents.ref_tel_bur" )
+ column=(type=char(50) updatewhereclause=yes name=t_salutation_salutation dbname="t_salutation.salutation" )
+ column=(type=char(30) updatewhereclause=yes name=t_patstatus_nom dbname="t_patstatus.nom" )
+ retrieve="SELECT  patient.ville ,
+		  patient.province ,
+		  patient.code_postale ,
+		  patient.tel_maison ,
+		  patient.date_naissance ,
+		  patient.sex ,
+		  patient.nomresp1 ,
+		  patient.addresp1 ,
+		  patient.cityresp1 ,
+		  patient.zipresp1 ,
+		  patient.telresp1 ,
+		  patient.nomresp2 ,
+		  patient.addresp2 ,
+		  patient.cityresp2 ,
+		  patient.zipresp2 ,
+		  patient.telresp2 ,
+		  patient.nomresp3 ,
+		  patient.addresp3 ,
+		  patient.cityresp3 ,
+		  patient.zipresp3 ,
+		  patient.telresp3 ,
+		  patient.tel_bureau ,
+		  patient.telcell ,
+		  patient.telautre ,
+		  patient.langue ,
+		  patient.no_dossier ,
+		  patient.no_tel_mere ,
+		  patient.no_tel_pere ,
+		  patient.statut ,
+		  patient.assurance ,
+		  patient.recu_automatique ,
+		  patient.collection ,
+		  patient.alerte_medical ,
+		  patient.text1 ,
+		  patient.text2 ,
+		  patient.empl_photo ,
+		  patient.medical ,
+		  patient.recherche ,
+		  patient.nom_mere ,
+		  patient.nom_pere ,
+		  patient.adresse ,
+		  patient.patient_id ,
+		  patient.date_exp_nas ,
+		  patient.nas ,
+		  patient.check_cpd ,
+		  patient.no_ortho ,
+		  patient.code_recherche ,
+		  patient.text3 ,
+		  patient.text4 ,
+		  patient.referant_nom ,
+		  patient.email ,
+		  patient.retards ,
+		  patient.rvmanques ,
+		  patient.new_dossier ,
+		  patient.no_boite ,
+		  patient.patient_prenom ,
+		  patient.patient_nom ,
+		  patient.note,
+		  patient.recuresp,
+		  patient.id_personnel,
+		  patient.archivedate,
+		  patient.opendoss,
+		  t_dentists.det_prenom,
+		  t_dentists.det_nom,
+		  t_dentists.det_add,
+		  t_dentists.det_ville,
+		  t_dentists.det_prov,
+		  t_dentists.det_zip,
+		  t_dentists.det_telbur,
+		  t_referents.ref_prenom,
+		  t_referents.ref_nom,
+		  t_referents.ref_adresse,
+		  t_referents.ref_ville,
+		  t_referents.ref_province,
+		  t_referents.ref_zip,
+		  t_referents.ref_tel_bur,
+		  t_salutation.salutation,
+		  t_patstatus.nom
+	FROM patient LEFT OUTER JOIN t_dentists ON patient.id_dentist = t_dentists.id_dentist   
+					 LEFT OUTER JOIN t_patstatus ON patient.id_patstatus = t_patstatus.id_patstatus
+					 LEFT OUTER JOIN t_referents ON patient.referant_nom = t_referents.id
+					 LEFT OUTER JOIN t_salutation ON t_referents.id_sal = t_salutation.id_sal
+ WHERE  patient.patient_id = :ra_dossier_patient    " update="patient" updatewhere=0 updatekeyinplace=no arguments=(("ra_dossier_patient", number)) )
+text(band=detail alignment="0" text="NEXT VISIT :      RECORDS__________ RECALL__________" border="0" color="0" x="18" y="3736" height="56" width="3465" html.valueishtml="0"  name=t_85 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+rectangle(band=detail x="14" y="3096" height="500" width="3470"  name=r_1 visible="1" brush.hatch="6" brush.color="16777215" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="TRAITEMENT SUGGÉRÉ: " border="0" color="0" x="14" y="3128" height="56" width="576" html.valueishtml="0"  name=t_78 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Recall___ Full Tx___ Phase 1___ Partial Tx : Upper___ Lower___ Remov. App.___" border="0" color="0" x="649" y="3128" height="56" width="2542" html.valueishtml="0"  name=t_77 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="1. Complete ortho records___" border="0" color="0" x="105" y="3196" height="56" width="3086" html.valueishtml="0"  name=t_79 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="2. Evaluate for exo's of ________" border="0" color="0" x="105" y="3256" height="56" width="3086" html.valueishtml="0"  name=t_80 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="3. RPE___ Cetlin___ Tongue Crib___ Blue Grass___ Spring Aligner___ Frankel___ Bionator___ Schwarz___ Split plate___ Sagittal___" border="0" color="0" x="105" y="3316" height="56" width="3086" html.valueishtml="0"  name=t_81 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="4. Fixed appliance upper/lower ___ Fixed appliance upper/lower (2x4) ___" border="0" color="0" x="105" y="3376" height="56" width="3086" html.valueishtml="0"  name=t_82 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="5. Estimated treatment time____________months" border="0" color="0" x="105" y="3436" height="56" width="3086" html.valueishtml="0"  name=t_83 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="6. Other : ________________________________________________________________________" border="0" color="0" x="105" y="3496" height="56" width="3086" html.valueishtml="0"  name=t_84 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression=" t_salutation_salutation + ' ' + t_referents_ref_prenom + ' ' + t_referents_ref_nom "border="0" color="0" x="9" y="828" height="64" width="1207" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Nom:" border="0" color="0" x="0" y="112" height="56" width="421" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=57 alignment="0" tabsequence=32766 border="0" color="0" x="434" y="112" height="56" width="914" format="[general]" html.valueishtml="0"  name=patient_nom visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Prenom:" border="0" color="0" x="0" y="172" height="56" width="421" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=56 alignment="0" tabsequence=32766 border="0" color="0" x="434" y="172" height="56" width="914" format="[general]" html.valueishtml="0"  name=patient_prenom visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Adresse:" border="0" color="0" x="0" y="232" height="56" width="421" html.valueishtml="0"  name=adresse_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=41 alignment="0" tabsequence=30 border="0" color="0" x="434" y="232" height="56" width="914" format="[general]" html.valueishtml="0"  name=adresse visible="1" edit.limit=36 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Ville:" border="0" color="0" x="0" y="292" height="56" width="421" html.valueishtml="0"  name=ville_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=40 border="0" color="0" x="434" y="292" height="56" width="713" format="[general]" html.valueishtml="0"  name=ville visible="1" edit.limit=25 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Province:" border="0" color="0" x="0" y="352" height="56" width="421" html.valueishtml="0"  name=province_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=50 border="0" color="0" x="434" y="352" height="56" width="713" format="[general]" html.valueishtml="0"  name=province visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Code postal:" border="0" color="0" x="0" y="412" height="56" width="421" html.valueishtml="0"  name=code_postale_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=60 border="0" color="0" x="434" y="412" height="56" width="352" format="[general]" html.valueishtml="0"  name=code_postale visible="1" edit.name="Code_Postale" editmask.autoskip=yes editmask.mask="!#! #!#" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Âge:" border="0" color="0" x="814" y="412" height="56" width="123" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="" border="0" color="0" x="942" y="412" height="56" width="407" html.valueishtml="0"  name=t_age visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Tél. (mai):" border="0" color="0" x="0" y="472" height="56" width="421" html.valueishtml="0"  name=tel_maison_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=70 border="0" color="0" x="434" y="472" height="56" width="439" format="[general]" html.valueishtml="0"  name=tel_maison visible="1" editmask.autoskip=yes editmask.mask="(###)###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=34 alignment="0" tabsequence=80 border="0" color="0" x="896" y="472" height="56" width="453" format="[general]" html.valueishtml="0"  name=text1 visible="1" edit.limit=20 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Tél. (bur):" border="0" color="0" x="0" y="532" height="56" width="421" html.valueishtml="0"  name=tel_bureau_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=22 alignment="0" tabsequence=90 border="0" color="0" x="434" y="532" height="56" width="439" format="[general]" html.valueishtml="0"  name=tel_bureau visible="1" editmask.autoskip=yes editmask.mask="(###)###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=35 alignment="0" tabsequence=100 border="0" color="0" x="896" y="532" height="56" width="453" format="[general]" html.valueishtml="0"  name=text2 visible="1" edit.limit=20 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Tél. (cell):" border="0" color="0" x="0" y="592" height="56" width="421" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=23 alignment="0" tabsequence=32766 border="0" color="0" x="434" y="592" height="56" width="439" format="[general]" html.valueishtml="0"  name=patient_telcell visible="1" editmask.mask="(XXX) XXX-XXXX" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Tél. (autre):" border="0" color="0" x="0" y="652" height="56" width="421" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=24 alignment="0" tabsequence=32766 border="0" color="0" x="434" y="652" height="56" width="439" format="[general]" html.valueishtml="0"  name=patient_telautre visible="1" editmask.mask="(XXX) XXX-XXXX" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Note:" border="0" color="0" x="0" y="712" height="56" width="142" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Référent" border="0" color="0" x="9" y="772" height="56" width="1207" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=58 alignment="0" tabsequence=240 border="0" color="0" x="155" y="712" height="56" width="2112" format="[general]" html.valueishtml="0"  name=note visible="1" edit.limit=0 edit.case=any edit.autoselect=no edit.hscrollbar=yes edit.vscrollbar=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Naissance:" border="0" color="0" x="1353" y="112" height="56" width="434" html.valueishtml="0"  name=date_naissance_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=150 border="0" color="0" x="1801" y="112" height="56" width="466" format="[general]" html.valueishtml="0"  name=date_naissance visible="1" edit.name="DD/MM/YYYY" editmask.autoskip=yes editmask.mask="DD/MM/YYYY" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Sexe:" border="0" color="0" x="1353" y="172" height="56" width="434" html.valueishtml="0"  name=sex_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=110 border="0" color="0" x="1801" y="172" height="56" width="466" format="[general]" html.valueishtml="0"  name=sex visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Langue:" border="0" color="0" x="1353" y="232" height="56" width="434" html.valueishtml="0"  name=langue_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=25 alignment="0" tabsequence=130 border="0" color="0" x="1801" y="232" height="56" width="466" format="[general]" html.valueishtml="0"  name=langue visible="1" ddlb.limit=2 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Dentiste" border="0" color="0" x="1353" y="352" height="60" width="914" html.valueishtml="0"  name=t_27 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression=" t_dentists_det_prenom  + ' ' +  t_dentists_det_nom "border="0" color="0" x="1353" y="412" height="56" width="914" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=65 alignment="0" tabsequence=32766 border="0" color="0" x="1353" y="472" height="56" width="914" format="[general]" html.valueishtml="0"  name=t_dentists_det_add visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="t_dentists_det_ville + ' ' +   t_dentists_det_prov "border="0" color="0" x="1353" y="532" height="56" width="914" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=68 alignment="0" tabsequence=32766 border="0" color="0" x="1353" y="592" height="56" width="914" format="[general]" html.valueishtml="0"  name=t_dentists_det_zip visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=69 alignment="0" tabsequence=32766 border="0" color="0" x="1353" y="652" height="56" width="914" format="[general]" html.valueishtml="0"  name=t_dentists_det_telbur visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Responsable" border="0" color="0" x="2272" y="100" height="60" width="1207" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=390 border="0" color="0" x="2272" y="164" height="64" width="1207" format="[general]" html.valueishtml="0"  name=nomresp1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="0" tabsequence=400 border="0" color="0" x="2272" y="232" height="56" width="1207" format="[general]" html.valueishtml="0"  name=addresp1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=9 alignment="0" tabsequence=410 border="0" color="0" x="2272" y="292" height="56" width="1207" format="[general]" html.valueishtml="0"  name=cityresp1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=10 alignment="0" tabsequence=420 border="0" color="0" x="2272" y="352" height="56" width="1207" format="[general]" html.valueishtml="0"  name=zipresp1 visible="1" editmask.autoskip=yes editmask.mask="!#! #!#" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=11 alignment="0" tabsequence=430 border="0" color="0" x="2272" y="412" height="56" width="1207" format="[general]" html.valueishtml="0"  name=telresp1 visible="1" editmask.autoskip=yes editmask.mask="(###)###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=12 alignment="0" tabsequence=440 border="0" color="0" x="2272" y="472" height="56" width="1207" format="[general]" html.valueishtml="0"  name=nomresp2 visible="1~t0" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=13 alignment="0" tabsequence=450 border="0" color="0" x="2272" y="532" height="56" width="1207" format="[general]" html.valueishtml="0"  name=addresp2 visible="1~t0" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=14 alignment="0" tabsequence=460 border="0" color="0" x="2272" y="592" height="56" width="1207" format="[general]" html.valueishtml="0"  name=cityresp2 visible="1~t0" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=15 alignment="0" tabsequence=470 border="0" color="0" x="2272" y="652" height="56" width="1207" format="[general]" html.valueishtml="0"  name=zipresp2 visible="1~t0" editmask.autoskip=yes editmask.mask="!#! #!#" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=16 alignment="0" tabsequence=480 border="0" color="0" x="2272" y="712" height="56" width="1207" format="[general]" html.valueishtml="0"  name=telresp2 visible="1~t0" editmask.autoskip=yes editmask.mask="(###)###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="DOSSIER PATIENT" border="0" color="0" x="0" y="0" height="80" width="3479" html.valueishtml="0"  name=t_titre visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Déviation vers la droite___" border="0" color="0" x="261" y="2660" height="56" width="777" html.valueishtml="0"  name=t_47 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Déviation vers la gauche___" border="0" color="0" x="261" y="2720" height="56" width="777" html.valueishtml="0"  name=t_48 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Normal___" border="0" color="0" x="261" y="2780" height="56" width="777" html.valueishtml="0"  name=t_49 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Aucune___ 
+Propulsion linguale___ 
+Respirateur buccal___ 
+Deglutition infantile___ 
+Suce pouce / doigt___" border="0" color="0" x="261" y="2308" height="288" width="777" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Classe Squelettique : I___  II___  III___" border="2" color="0" x="14" y="1408" height="56" width="1152" html.valueishtml="0"  name=t_32 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Mandibule : normale___ retrusive___ pro___" border="2" color="0" x="14" y="1468" height="56" width="1152" html.valueishtml="0"  name=t_33 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Maxilaire : normal___ retrusif___ pro___" border="2" color="0" x="14" y="1528" height="56" width="1152" html.valueishtml="0"  name=t_34 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Contraction maxillaire : oui___ non___" border="2" color="0" x="14" y="1588" height="56" width="1152" html.valueishtml="0"  name=t_17 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Apparance : ouvert___ fermé___ normal___" border="2" color="0" x="14" y="1648" height="56" width="1152" html.valueishtml="0"  name=t_35 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Profil : cv___ cc___ droit___ normal___" border="2" color="0" x="14" y="1708" height="56" width="1152" html.valueishtml="0"  name=t_36 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Lèvres : fermées___ ouvertes___ courte___" border="2" color="0" x="14" y="1768" height="56" width="1152" html.valueishtml="0"  name=t_37 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Menton : normal___retrusif ___ protrusif___" border="2" color="0" x="14" y="1828" height="56" width="1152" html.valueishtml="0"  name=t_38 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Nez : normal___ long___ court___" border="2" color="0" x="14" y="1888" height="56" width="1152" html.valueishtml="0"  name=t_39 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Dentition : permanente___ mixte___ prim___" border="2" color="0" x="14" y="1948" height="56" width="1152" html.valueishtml="0"  name=t_40 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Adénoïdes : aucune___ larges___ normales___" border="2" color="0" x="14" y="2008" height="56" width="1152" html.valueishtml="0"  name=t_41 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Hygiène : bonne___ acceptable___ pauvre___" border="2" color="0" x="14" y="2068" height="56" width="1152" html.valueishtml="0"  name=t_42 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Récession de gencive : Oui___ Non___" border="2" color="0" x="14" y="2128" height="56" width="1152" html.valueishtml="0"  name=t_43 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Tonus musculaire : Norm___ Fort___ Faible___" border="2" color="0" x="14" y="2188" height="56" width="1152" html.valueishtml="0"  name=t_44 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Habitudes : " border="2" color="0" x="14" y="2248" height="348" width="1152" html.valueishtml="0"  name=t_45 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Symétrie :" border="2" color="0" x="14" y="2600" height="236" width="1152" html.valueishtml="0"  name=t_46 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Attitude : Coopérative___ Difficile___" border="2" color="0" x="14" y="2840" height="56" width="1152" html.valueishtml="0"  name=t_50 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Autre :" border="2" color="0" x="14" y="2900" height="56" width="1152" html.valueishtml="0"  name=t_51 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Ovoïd___ 
+Vshape___ 
+Narrow___" border="0" color="0" x="1600" y="2308" height="180" width="672" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="6's :                 R                         L" border="2" color="0" x="1170" y="1408" height="56" width="1152" html.valueishtml="0"  name=t_19 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="3's :                 R                         L" border="2" color="0" x="1170" y="1468" height="56" width="1152" html.valueishtml="0"  name=t_20 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Overbite :                Openbite :" border="2" color="0" x="1170" y="1528" height="56" width="1152" html.valueishtml="0"  name=t_21 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Overjet :" border="2" color="0" x="1170" y="1588" height="56" width="1152" html.valueishtml="0"  name=t_22 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="ALD upper :        mild___  mod___  sev___" border="2" color="0" x="1170" y="1648" height="56" width="1152" html.valueishtml="0"  name=t_28 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="ALD lower :        mild___  mod___  sev___" border="2" color="0" x="1170" y="1708" height="56" width="1152" html.valueishtml="0"  name=t_52 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="ALE upper :        mild___  mod___  sev___" border="2" color="0" x="1170" y="1768" height="56" width="1152" html.valueishtml="0"  name=t_53 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="ALE lower :        mild___  mod___  sev___" border="2" color="0" x="1170" y="1828" height="56" width="1152" html.valueishtml="0"  name=t_54 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Rotations :" border="2" color="0" x="1170" y="1888" height="56" width="1152" html.valueishtml="0"  name=t_30 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Cross bites :" border="2" color="0" x="1170" y="1948" height="56" width="1152" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Midline upper : R___  L___  Centered___" border="2" color="0" x="1170" y="2008" height="56" width="1152" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Midline lower : R___  L___  Centered___" border="2" color="0" x="1170" y="2068" height="56" width="1152" html.valueishtml="0"  name=t_55 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Curve of Spee : 
+Mild___ Mod___ Severe___ Flat___" border="2" color="0" x="1170" y="2128" height="116" width="1152" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Arch Form upper :" border="2" color="0" x="1170" y="2248" height="56" width="1152" html.valueishtml="0"  name=t_58 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Tooth Size Discrepency (Bolton):" border="2" color="0" x="1170" y="2600" height="236" width="1152" html.valueishtml="0"  name=t_18 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Caries:" border="2" color="0" x="1170" y="2840" height="56" width="1152" html.valueishtml="0"  name=t_56 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Autre :" border="2" color="0" x="1170" y="2900" height="56" width="1152" html.valueishtml="0"  name=t_59 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Root resorption :" border="2" color="0" x="2327" y="1408" height="56" width="1152" html.valueishtml="0"  name=t_57 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Supernum :" border="2" color="0" x="2327" y="1468" height="56" width="1152" html.valueishtml="0"  name=t_60 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Abscesses :" border="2" color="0" x="2327" y="1528" height="56" width="1152" html.valueishtml="0"  name=t_61 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Devitalized :" border="2" color="0" x="2327" y="1588" height="56" width="1152" html.valueishtml="0"  name=t_62 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Ankylosed :" border="2" color="0" x="2327" y="1648" height="56" width="1152" html.valueishtml="0"  name=t_63 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Cong missing :" border="2" color="0" x="2327" y="1708" height="56" width="1152" html.valueishtml="0"  name=t_64 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Early loss :" border="2" color="0" x="2327" y="1768" height="56" width="1152" html.valueishtml="0"  name=t_65 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Prolonged retention :" border="2" color="0" x="2327" y="1828" height="56" width="1152" html.valueishtml="0"  name=t_66 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Perm teeth loss :" border="2" color="0" x="2327" y="1888" height="56" width="1152" html.valueishtml="0"  name=t_67 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Migrated :" border="2" color="0" x="2327" y="1948" height="56" width="1152" html.valueishtml="0"  name=t_68 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Transposed :" border="2" color="0" x="2327" y="2008" height="56" width="1152" html.valueishtml="0"  name=t_69 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Axial incl :" border="2" color="0" x="2327" y="2068" height="56" width="1152" html.valueishtml="0"  name=t_70 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Impacted teeth :" border="2" color="0" x="2327" y="2128" height="116" width="1152" html.valueishtml="0"  name=t_71 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Blocked erupt. Path :" border="2" color="0" x="2327" y="2248" height="56" width="1152" html.valueishtml="0"  name=t_72 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Required Space : 
+Available Space : 
+Difference :" border="2" color="0" x="2327" y="2308" height="288" width="1152" html.valueishtml="0"  name=t_73 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="3 rd molars : 
+absentes/extraites___ 
+en bouche___ 
+à venir___ possible inclusion___" border="2" color="0" x="2327" y="2600" height="236" width="1152" html.valueishtml="0"  name=t_74 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Couronnes/Ponts :" border="2" color="0" x="2327" y="2840" height="56" width="1152" html.valueishtml="0"  name=t_75 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Autre :" border="2" color="0" x="2327" y="2900" height="56" width="1152" html.valueishtml="0"  name=t_76 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Radiographie Panorex" border="2" color="0" x="2327" y="1340" height="64" width="1152" html.valueishtml="0"  name=t_31 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text="OBSERVATIONS CLINIQUES" border="0" color="0" x="14" y="1260" height="64" width="3465" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Modèles" border="2" color="0" x="1170" y="1340" height="64" width="1152" html.valueishtml="0"  name=t_29 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Squelettique-tissus mous" border="2" color="0" x="14" y="1340" height="64" width="1152" html.valueishtml="0"  name=t_26 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="1" text="Imprimer le " border="0" color="0" x="9" y="0" height="56" width="247" html.valueishtml="0"  name=t_24 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="2" expression="today()"border="0" color="0" x="261" y="0" height="56" width="293" format="[general]" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=footer alignment="1" text="© ORTHOTEK" border="0" color="0" x="1682" y="0" height="56" width="338" html.valueishtml="0"  name=t_25 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' / ' + pageCount()"border="0" color="0" x="2912" y="0" height="56" width="562" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="62" border="0" color="0" x="2875" y="1052" height="64" width="78" html.valueishtml="0"  name=t_128 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="72" border="0" color="0" x="2875" y="1152" height="64" width="78" html.valueishtml="0"  name=t_135 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="63" border="0" color="0" x="2994" y="1052" height="64" width="78" html.valueishtml="0"  name=t_129 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="73" border="0" color="0" x="2994" y="1152" height="64" width="78" html.valueishtml="0"  name=t_136 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="64" border="0" color="0" x="3113" y="1052" height="64" width="78" html.valueishtml="0"  name=t_130 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="74" border="0" color="0" x="3113" y="1152" height="64" width="78" html.valueishtml="0"  name=t_132 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="65" border="0" color="0" x="3227" y="1052" height="64" width="78" html.valueishtml="0"  name=t_131 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="75" border="0" color="0" x="3227" y="1152" height="64" width="78" html.valueishtml="0"  name=t_133 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+line(band=detail x1="2117" y1="1132" x2="3319" y2="1132"  name=l_6 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2720" y1="1028" x2="2720" y2="1228"  name=l_5 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="61" border="0" color="0" x="2757" y="1052" height="64" width="78" html.valueishtml="0"  name=t_127 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="71" border="0" color="0" x="2757" y="1152" height="64" width="78" html.valueishtml="0"  name=t_134 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="51" border="0" color="0" x="2610" y="1052" height="64" width="78" html.valueishtml="0"  name=t_105 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="81" border="0" color="0" x="2610" y="1152" height="64" width="78" html.valueishtml="0"  name=t_110 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="52" border="0" color="0" x="2491" y="1052" height="64" width="78" html.valueishtml="0"  name=t_104 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="82" border="0" color="0" x="2491" y="1152" height="64" width="78" html.valueishtml="0"  name=t_109 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="53" border="0" color="0" x="2373" y="1052" height="64" width="78" html.valueishtml="0"  name=t_103 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="83" border="0" color="0" x="2373" y="1152" height="64" width="78" html.valueishtml="0"  name=t_108 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="54" border="0" color="0" x="2254" y="1052" height="64" width="78" html.valueishtml="0"  name=t_102 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="84" border="0" color="0" x="2254" y="1152" height="64" width="78" html.valueishtml="0"  name=t_107 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="55" border="0" color="0" x="2135" y="1052" height="64" width="78" html.valueishtml="0"  name=t_101 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="85" border="0" color="0" x="2135" y="1152" height="64" width="78" html.valueishtml="0"  name=t_106 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+line(band=detail x1="2514" y1="800" x2="2514" y2="1000"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="26" border="0" color="0" x="3141" y="820" height="64" width="78" html.valueishtml="0"  name=t_111 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="27" border="0" color="0" x="3259" y="820" height="64" width="78" html.valueishtml="0"  name=t_113 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="28" border="0" color="0" x="3378" y="820" height="64" width="78" html.valueishtml="0"  name=t_112 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="36" border="0" color="0" x="3141" y="920" height="64" width="78" html.valueishtml="0"  name=t_124 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="37" border="0" color="0" x="3259" y="920" height="64" width="78" html.valueishtml="0"  name=t_125 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="38" border="0" color="0" x="3378" y="920" height="64" width="78" html.valueishtml="0"  name=t_126 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="21" border="0" color="0" x="2551" y="820" height="64" width="78" html.valueishtml="0"  name=t_118 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="31" border="0" color="0" x="2551" y="920" height="64" width="78" html.valueishtml="0"  name=t_119 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="22" border="0" color="0" x="2670" y="820" height="64" width="78" html.valueishtml="0"  name=t_117 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="32" border="0" color="0" x="2670" y="920" height="64" width="78" html.valueishtml="0"  name=t_120 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="23" border="0" color="0" x="2789" y="820" height="64" width="78" html.valueishtml="0"  name=t_116 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="33" border="0" color="0" x="2789" y="920" height="64" width="78" html.valueishtml="0"  name=t_121 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="24" border="0" color="0" x="2907" y="820" height="64" width="78" html.valueishtml="0"  name=t_115 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="34" border="0" color="0" x="2907" y="920" height="64" width="78" html.valueishtml="0"  name=t_122 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="25" border="0" color="0" x="3022" y="820" height="64" width="78" html.valueishtml="0"  name=t_114 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="35" border="0" color="0" x="3022" y="920" height="64" width="78" html.valueishtml="0"  name=t_123 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+line(band=detail x1="1554" y1="900" x2="3474" y2="900"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="11" border="0" color="0" x="2405" y="820" height="64" width="78" html.valueishtml="0"  name=t_23 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="41" border="0" color="0" x="2405" y="920" height="64" width="78" html.valueishtml="0"  name=t_100 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="12" border="0" color="0" x="2286" y="820" height="64" width="78" html.valueishtml="0"  name=t_86 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="42" border="0" color="0" x="2286" y="920" height="64" width="78" html.valueishtml="0"  name=t_99 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="13" border="0" color="0" x="2167" y="820" height="64" width="78" html.valueishtml="0"  name=t_87 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="43" border="0" color="0" x="2167" y="920" height="64" width="78" html.valueishtml="0"  name=t_98 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="14" border="0" color="0" x="2048" y="820" height="64" width="78" html.valueishtml="0"  name=t_88 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="44" border="0" color="0" x="2048" y="920" height="64" width="78" html.valueishtml="0"  name=t_97 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="15" border="0" color="0" x="1929" y="820" height="64" width="78" html.valueishtml="0"  name=t_89 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="45" border="0" color="0" x="1929" y="920" height="64" width="78" html.valueishtml="0"  name=t_96 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="16" border="0" color="0" x="1810" y="820" height="64" width="78" html.valueishtml="0"  name=t_90 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="46" border="0" color="0" x="1810" y="920" height="64" width="78" html.valueishtml="0"  name=t_95 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="17" border="0" color="0" x="1691" y="820" height="64" width="78" html.valueishtml="0"  name=t_91 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="47" border="0" color="0" x="1691" y="920" height="64" width="78" html.valueishtml="0"  name=t_94 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="18" border="0" color="0" x="1573" y="820" height="64" width="78" html.valueishtml="0"  name=t_92 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="48" border="0" color="0" x="1573" y="920" height="64" width="78" html.valueishtml="0"  name=t_93 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Plainte Principale :__________________________________________________" border="0" color="0" x="14" y="1152" height="56" width="1851" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Date de consultation:________________________  Panorex___   Céphalo___" border="0" color="0" x="14" y="1060" height="56" width="1851" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

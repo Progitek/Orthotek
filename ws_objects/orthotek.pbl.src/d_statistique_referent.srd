@@ -1,0 +1,20 @@
+﻿$PBExportHeader$d_statistique_referent.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=80269524 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes identity=yes name=refid dbname="t_referents.refid" )
+ column=(type=char(50) updatewhereclause=yes name=ref_nom_complet dbname="t_referents.ref_nom_complet" )
+ column=(type=long updatewhereclause=yes name=qte dbname="qte" )
+ retrieve="SELECT      id as refid,
+            ref_nom_complet,
+           (SELECT  count(*)
+            FROM    patient INNER JOIN traitements ON traitements.patient_id = patient.patient_id
+            WHERE   patient.referant_nom = refid AND
+                    years(debut_traitement) >= years(today())-2) as qte
+FROM        t_referents
+WHERE       t_referents.ortho_id = :ra_orthoid" arguments=(("ra_orthoid", number)) )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

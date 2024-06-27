@@ -1,0 +1,18 @@
+﻿$PBExportHeader$d_migrate_referents.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=4 color="536870912" )
+footer(height=84 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=char(25) updatewhereclause=yes name=back_referant_nom dbname="patient.back_referant_nom" )
+ column=(type=long update=yes updatewhereclause=yes name=referant_nom dbname="patient.referant_nom" )
+ column=(type=long updatewhereclause=yes key=yes name=patient_id dbname="patient.patient_id" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"patient~" ) COLUMN(NAME=~"patient.back_referant_nom~") COLUMN(NAME=~"patient.referant_nom~") COLUMN(NAME=~"patient.patient_id~")) " update="patient" updatewhere=0 updatekeyinplace=no )
+text(band=header alignment="2" text="Back Referant Nom" border="0" color="0" x="5" y="4" height="64" width="713"  name=back_referant_nom_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Referant Nom" border="0" color="0" x="722" y="4" height="64" width="361"  name=referant_nom_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="5" y="4" height="76" width="713" format="[general]"  name=back_referant_nom edit.limit=25 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="722" y="4" height="76" width="329" format="[general]"  name=referant_nom edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="1" expression="sum(referant_nom for all)"border="2" color="0" x="709" y="4" height="76" width="329" format="[general]"  name=compute_1  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

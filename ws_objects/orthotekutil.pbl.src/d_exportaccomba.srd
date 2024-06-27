@@ -1,0 +1,38 @@
+﻿$PBExportHeader$d_exportaccomba.srd
+release 9;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=yes )
+header(height=92 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=id dbname="id" )
+ column=(type=date updatewhereclause=yes name=datetrans dbname="datetrans" )
+ column=(type=decimal(2) updatewhereclause=yes name=montantfp dbname="montantfp" )
+ column=(type=char(0) updatewhereclause=yes name=descrip dbname="descrip" )
+ column=(type=char(0) updatewhereclause=yes name=typefp dbname="typefp" values="Facture	F/Paiement	P/" )
+ retrieve="  SELECT 0 as id,   
+         cast ('1900-01-01' as date) as datetrans,   
+         CAST(0 as DECIMAL(8,2)) as montantfp,   
+        	'' as descrip,
+			'' as typefp   
+    FROM factures_traitements" )
+group(level=1 header.height=72 trailer.height=96 by=("typefp" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="0" text="Date" border="0" color="33554432" x="357" y="4" height="64" width="475" html.valueishtml="0"  name=t_visites_visitdate_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="59" y1="80" x2="2423" y2="80"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Description" border="0" color="33554432" x="837" y="4" height="64" width="1221" html.valueishtml="0"  name=compte_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="No" border="0" color="33554432" x="59" y="4" height="64" width="293" html.valueishtml="0"  name=t_visites_id_visit_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Montant" border="0" color="33554432" x="2062" y="4" height="64" width="361" html.valueishtml="0"  name=credit_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="59" y="4" height="64" width="1161" format="[general]" html.valueishtml="0"  name=typefp visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="837" y="0" height="76" width="1221" format="[general]" html.valueishtml="0"  name=descrip visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="0" color="33554432" x="59" y="0" height="72" width="293" format="[general]" html.valueishtml="0"  name=id visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="357" y="0" height="72" width="475" format="[general]" html.valueishtml="0"  name=datetrans visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="2062" y="0" height="72" width="361" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=montantfp visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(montantfp for group 1)"border="0" color="33554432" x="2062" y="12" height="72" width="361" format="#,##0.00 $; (#,##0.00 $)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="59" y1="0" x2="2427" y2="0"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="1073741824" )
+compute(band=summary alignment="0" expression="sum(if( typefp = 'P',  montantfp, 0) for all)"border="0" color="0" x="891" y="20" height="76" width="256" format="[GENERAL]" html.valueishtml="0"  name=monttotpaie visible="0"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=summary alignment="0" expression="sum(if( typefp = 'F',  montantfp, 0) for all)"border="0" color="0" x="1289" y="28" height="76" width="256" format="[GENERAL]" html.valueishtml="0"  name=monttotfact visible="0"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

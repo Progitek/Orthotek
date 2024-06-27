@@ -1,0 +1,136 @@
+﻿$PBExportHeader$gf_pat2xml.srf
+global type gf_pat2xml from function_object
+end type
+
+forward prototypes
+global subroutine gf_pat2xml (long al_patid)
+end prototypes
+
+global subroutine gf_pat2xml (long al_patid);integer i,li_FileNum,li_result
+string ls_seq,ls_frontsmile,ls_lateral,ls_frontal,ls_leftoccl,ls_rightoccl,ls_anterior,ls_upper,ls_lower,ls_xray31,ls_logo
+string ls_texte,ls_imgpath,ls_imgtype,ls_imgfolder
+ls_texte = ""
+if al_patid > 0 then
+	select chemphoto,imgfolder into :ls_imgpath,:ls_imgtype from t_options where ortho_id = :v_no_ortho;
+	choose case ls_imgtype
+		case 'p'
+			ls_imgfolder = string(al_patid)
+		case 'd'
+			select new_dossier into :ls_imgfolder from patient where patient_id = :al_patid;
+		case 'v'
+			select idvistadent into :ls_imgfolder from patient where patient_id = :al_patid;
+	end choose
+	
+	li_FileNum = FileOpen("C:\ii4net\orthotek\img.xml",LineMode!, Write!, LockWrite!, Replace!)
+	if ls_imgtype = 'v' then
+		// vistadent
+		ls_seq = '1'
+		ls_anterior = '1006Anterior Occlusion-Initial.jpe'
+		ls_frontsmile = '1002Frontal Smile-Initial.jpe'
+		ls_frontal = '1001Frontal-Initial.jpe'
+		ls_lateral = '1000Lateral-Initial.jpe'
+		ls_leftoccl = '1007Left Occlusion-Initial.jpe'
+		ls_lower = '1004Lower Occlusal-Initial.jpe'
+		ls_rightoccl = '1005Right Occlusion-Initial.jpe'
+		ls_upper = '1003Upper Occlusal-Initial.jpe'
+		setnull(ls_xray31)
+		setnull(ls_logo)
+		ls_texte += "<"+ls_seq+">"+"~r~n"
+//		if isnull(ls_frontsmile) = false then
+			ls_texte += "<frontalsmile>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_frontsmile+"</frontalsmile>"+"~r~n"
+//		end if
+//		if isnull(ls_lateral) = false then
+			ls_texte += "<lateral>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_lateral+"</lateral>"+"~r~n"
+//		end if
+//		if isnull(ls_frontal) = false then
+			ls_texte += "<frontal>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_frontal+"</frontal>"+"~r~n"
+//		end if
+//		if isnull(ls_frontsmile) = false then
+			ls_texte += "<leftoccl>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_leftoccl+"</leftoccl>"+"~r~n"
+//		end if
+//		if isnull(ls_rightoccl) = false then
+			ls_texte += "<rightoccl>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_rightoccl+"</rightoccl>"+"~r~n"
+//		end if
+//		if isnull(ls_anterior) = false then
+			ls_texte += "<anterior>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_anterior+"</anterior>"+"~r~n"
+//		end if
+//		if isnull(ls_upper) = false then
+			ls_texte += "<upper>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_upper+"</upper>"+"~r~n"
+//		end if
+//		if isnull(ls_lower) = false then
+			ls_texte += "<lower>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_lower+"</lower>"+"~r~n"
+//		end if
+		if isnull(ls_xray31) = false then
+			ls_texte += "<pan>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_xray31+"</pan>"+"~r~n"
+		end if
+		if isnull(ls_logo) = false then
+			ls_texte += "<logo>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_logo+"</logo>"+"~r~n"
+		end if
+		ls_texte += "</"+ls_seq+">"+"~r~n"
+	else
+		// orthotek
+		if li_FileNum > 0 then
+			for i = 1 to 99
+				setnull(ls_seq)
+				setnull(ls_frontsmile)
+				setnull(ls_lateral)
+				setnull(ls_frontal)
+				setnull(ls_leftoccl)
+				setnull(ls_rightoccl)
+				setnull(ls_anterior)
+				setnull(ls_upper)
+				setnull(ls_lower)
+				setnull(ls_xray31)
+				setnull(ls_logo)
+				select sequence,front_smile,"lateral",frontal,leftoccl,rightoccl,anterioroccl,upperoccl,loweroccl,xray3_1,logo
+				into :ls_seq,:ls_frontsmile,:ls_lateral,:ls_frontal,:ls_leftoccl,:ls_rightoccl,:ls_anterior,:ls_upper,:ls_lower,:ls_xray31,:ls_logo
+				from t_imagerie
+				where patient_id = :al_patid and sequence = :i;
+				if isnull(ls_seq) = false then
+					ls_texte += "<"+ls_seq+">"+"~r~n"
+					if isnull(ls_frontsmile) = false then
+						ls_texte += "<frontalsmile>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_seq+"\"+ls_frontsmile+"</frontalsmile>"+"~r~n"
+					end if
+					if isnull(ls_lateral) = false then
+						ls_texte += "<lateral>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_seq+"\"+ls_lateral+"</lateral>"+"~r~n"
+					end if
+					if isnull(ls_frontal) = false then
+						ls_texte += "<frontal>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_seq+"\"+ls_frontal+"</frontal>"+"~r~n"
+					end if
+					if isnull(ls_leftoccl) = false then
+						ls_texte += "<leftoccl>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_seq+"\"+ls_leftoccl+"</leftoccl>"+"~r~n"
+					end if
+					if isnull(ls_rightoccl) = false then
+						ls_texte += "<rightoccl>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_seq+"\"+ls_rightoccl+"</rightoccl>"+"~r~n"
+					end if
+					if isnull(ls_anterior) = false then
+						ls_texte += "<anterior>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_seq+"\"+ls_anterior+"</anterior>"+"~r~n"
+					end if
+					if isnull(ls_upper) = false then
+						ls_texte += "<upper>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_seq+"\"+ls_upper+"</upper>"+"~r~n"
+					end if
+					if isnull(ls_lower) = false then
+						ls_texte += "<lower>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_seq+"\"+ls_lower+"</lower>"+"~r~n"
+					end if
+					if isnull(ls_xray31) = false then
+						ls_texte += "<pan>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_seq+"\"+ls_xray31+"</pan>"+"~r~n"
+					end if
+					if isnull(ls_logo) = false then
+						ls_texte += "<logo>"+ls_imgpath+"\"+ls_imgfolder+"\"+ls_seq+"\"+ls_logo+"</logo>"+"~r~n"
+					end if
+					ls_texte += "</"+ls_seq+">"+"~r~n"
+				end if
+			next
+		end if
+	end if
+	// write file
+	if len(ls_texte) > 0 then
+		li_result = FileWrite(li_FileNum, ls_texte)
+		if not li_result > 0 then
+			error_type(65)
+		end if
+	end if
+	FileClose(li_FileNum)
+end if
+end subroutine
+
